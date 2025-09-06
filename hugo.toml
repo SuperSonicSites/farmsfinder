@@ -2,3 +2,14 @@ theme = "farmsfinder-theme"
 baseURL = "http://farmfinders.ca"
 languageCode = "en-ca"
 title = "Farms Finder"
+
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = '0.146.0'
