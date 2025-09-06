@@ -1,0 +1,4 @@
+theme = "farmsfinder-theme"
+baseURL = "http://farmfinders.ca"
+languageCode = "en-ca"
+title = "Farms Finder"
