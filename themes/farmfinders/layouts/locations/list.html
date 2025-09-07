@@ -1,0 +1,34 @@
+{{ define "main" }}
+  <h1>{{ .Title | title }} Farms</h1>
+  {{ .Content }}
+  
+  {{ $currentTerm := .Title }}
+  
+  <!-- Show child locations if this is a parent category -->
+  {{ $childLocations := slice }}
+  {{ range .Site.Taxonomies.locations }}
+    {{ if and (hasPrefix .Page.Title (printf "%s/" $currentTerm)) (not (in .Page.Title "/" (add (len $currentTerm) 1))) }}
+      {{ $childLocations = $childLocations | append . }}
+    {{ end }}
+  {{ end }}
+  
+  {{ if $childLocations }}
+    <h2>Browse by Location</h2>
+    {{ range $childLocations }}
+      {{ $displayName := strings.TrimPrefix .Page.Title (printf "%s/" $currentTerm) }}
+      <h3><a href="/{{ .Page.Title | urlize }}/">{{ $displayName | title }}</a></h3>
+      <p>{{ .Count }} farm{{ if ne .Count 1 }}s{{ end }}</p>
+    {{ end }}
+  {{ end }}
+  
+  <!-- Show farms in this location -->
+  <h2>Farms</h2>
+  {{ range .Pages }}
+    <div>
+      <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+      {{ if .Summary }}
+        <p>{{ .Summary }}</p>
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}

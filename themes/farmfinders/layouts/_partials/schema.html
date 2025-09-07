@@ -1,0 +1,264 @@
+<script type="application/ld+json">
+{{ if eq .RelPermalink "/" }}
+  {{/* Homepage Schema */}}
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{ .Site.Title }}",
+      "url": "{{ .Site.BaseURL }}",
+      "description": "Find local farms across Canada offering Christmas trees, apple orchards, pumpkin patches, berry picking and more. Connect directly with family-owned farms for fresh seasonal produce and authentic farm experiences.",
+      "inLanguage": "en-CA",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ .Site.BaseURL }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{ .Site.Title }}",
+      "url": "{{ .Site.BaseURL }}",
+      "logo": "{{ .Site.BaseURL }}/images/farmfinders.webp",
+      "description": "Canadian farm directory connecting consumers with local farms across Canada",
+      "foundingDate": "2025",
+      "areaServed": "Canada",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CA"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "areaServed": "CA",
+        "availableLanguage": "English"
+      }
+    }
+  ]
+{{ else if eq .Section "farms" }}
+  {{/* Farm Page Schema */}}
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "{{ .Title }}",
+    "url": "{{ .Permalink }}",
+    {{ if .Params.categories }}
+    "category": [{{ range $index, $category := .Params.categories }}{{ if $index }}, {{ end }}"{{ $category | title }}"{{ end }}],
+    {{ end }}
+    {{ if or .Params.city .Params.province }}
+    "address": {
+      "@type": "PostalAddress",
+      {{ if .Params.city }}"addressLocality": "{{ .Params.city }}",{{ end }}
+      {{ if .Params.province }}"addressRegion": "{{ .Params.province }}",{{ end }}
+      "addressCountry": "CA"
+    },
+    {{ end }}
+    {{ if .Content }}
+    "description": "{{ .Summary | plainify }}",
+    {{ end }}
+    "isAccessibleForFree": true,
+    "publicAccess": true
+  }
+{{ else if eq .Kind "section" }}
+  {{/* Section Pages - Category/Province/City Schema */}}
+  {{ $currentPath := .RelPermalink }}
+  {{ $pathParts := split (trim $currentPath "/") "/" }}
+  {{ if gt (len $pathParts) 0 }}
+    {{ $category := index $pathParts 0 }}
+    {{ $categoryPage := site.GetPage (printf "/%s/" $category) }}
+    {{ $categoryTitle := "" }}
+    {{ if $categoryPage }}{{ $categoryTitle = $categoryPage.Title }}{{ else }}{{ $categoryTitle = $category | replace "-" " " | title }}{{ end }}
+    
+    {{ if eq (len $pathParts) 1 }}
+      {{/* Category Page Schema - Optimized for SEO */}}
+      {{ $farms := where site.RegularPages "Section" "farms" }}
+      {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
+      {{ $provinces := slice }}
+      {{ range $categoryFarms }}
+        {{ if .Params.province }}
+          {{ if not (in $provinces .Params.province) }}
+            {{ $provinces = $provinces | append .Params.province }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Find {{ $categoryTitle }} Farms Near You",
+          "headline": "Find {{ $categoryTitle }} Farms Near You",
+          "url": "{{ .Permalink }}",
+          "description": "Explore our {{ $categoryTitle | lower }} farms directory. Browse to find farms near your location.",
+          "keywords": "{{ $categoryTitle | lower }} farms, {{ $categoryTitle | lower }} farm near me, Canadian {{ $categoryTitle | lower }} farms",
+          "inLanguage": "en-CA",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "{{ .Site.Title }}",
+            "url": "{{ .Site.BaseURL }}"
+          },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "{{ .Site.BaseURL }}"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "{{ $categoryTitle }} Farms",
+                "item": "{{ .Permalink }}"
+              }
+            ]
+          },
+          "about": {
+            "@type": "Thing",
+            "name": "{{ $categoryTitle }} Farming in Canada",
+            "description": "{{ $categoryTitle }} agricultural businesses and farms across Canadian provinces"
+          },
+          "mainEntity": {
+            "@type": "ItemList",
+            "name": "{{ $categoryTitle }} Farms Directory",
+            "description": "Complete directory of {{ $categoryTitle | lower }} farms across Canada with location-based filtering",
+            "numberOfItems": {{ len $categoryFarms }},
+            "itemListElement": [
+              {{ range $index, $farm := $categoryFarms }}
+              {{ if $index }},{{ end }}
+              {
+                "@type": "LocalBusiness",
+                "name": "{{ $farm.Title }}",
+                "url": "{{ $farm.Permalink }}",
+                "category": "{{ $categoryTitle }} Farm",
+                {{ if $farm.Params.city }}"addressLocality": "{{ $farm.Params.city }}",{{ end }}
+                {{ if $farm.Params.province }}"addressRegion": "{{ $farm.Params.province }}",{{ end }}
+                "addressCountry": "CA",
+                "isAccessibleForFree": true
+              }
+              {{ end }}
+            ]
+          }
+        }
+      ]
+    {{ else if eq (len $pathParts) 2 }}
+      {{/* Province Page Schema */}}
+      {{ $province := index $pathParts 1 }}
+      {{ $provincePage := site.GetPage (printf "/%s/%s/" (index $pathParts 0) $province) }}
+      {{ $provinceTitle := "" }}
+      {{ if $provincePage }}{{ $provinceTitle = $provincePage.Title }}{{ else }}{{ $provinceTitle = $province | replace "-" " " | title }}{{ end }}
+      {{ $farms := where site.RegularPages "Section" "farms" }}
+      {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
+      {{ $provinceFarms := slice }}
+      {{ range $categoryFarms }}
+        {{ if eq (.Params.province | lower) ($province | lower) }}
+          {{ $provinceFarms = $provinceFarms | append . }}
+        {{ end }}
+      {{ end }}
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Find {{ $categoryTitle }} Farms In {{ $provinceTitle }}",
+        "url": "{{ .Permalink }}",
+        "description": "Find {{ $categoryTitle | lower }} farms in {{ $provinceTitle }}, Canada. Browse farms or filter by city.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "{{ .Site.Title }}",
+          "url": "{{ .Site.BaseURL }}"
+        },
+        "about": [
+          {
+            "@type": "Thing",
+            "name": "{{ $categoryTitle }} Farming",
+            "description": "{{ $categoryTitle }} farms and agricultural businesses"
+          },
+          {
+            "@type": "Place",
+            "name": "{{ $provinceTitle }}",
+            "addressCountry": "CA"
+          }
+        ],
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "{{ $categoryTitle }} Farms in {{ $provinceTitle }}",
+          "numberOfItems": {{ len $provinceFarms }},
+          "itemListElement": [
+            {{ range $index, $farm := $provinceFarms }}
+            {{ if $index }},{{ end }}
+            {
+              "@type": "LocalBusiness",
+              "name": "{{ $farm.Title }}",
+              "url": "{{ $farm.Permalink }}",
+              "addressLocality": "{{ $farm.Params.city }}",
+              "addressRegion": "{{ $farm.Params.province }}",
+              "addressCountry": "CA"
+            }
+            {{ end }}
+          ]
+        }
+      }
+    {{ else if eq (len $pathParts) 3 }}
+      {{/* City Page Schema */}}
+      {{ $province := index $pathParts 1 }}
+      {{ $city := index $pathParts 2 }}
+      {{ $provincePage := site.GetPage (printf "/%s/%s/" (index $pathParts 0) $province) }}
+      {{ $cityPage := site.GetPage (printf "/%s/%s/%s/" (index $pathParts 0) $province $city) }}
+      {{ $provinceTitle := "" }}{{ if $provincePage }}{{ $provinceTitle = $provincePage.Title }}{{ else }}{{ $provinceTitle = $province | replace "-" " " | title }}{{ end }}
+      {{ $cityTitle := "" }}{{ if $cityPage }}{{ $cityTitle = $cityPage.Title }}{{ else }}{{ $cityTitle = $city | replace "-" " " | title }}{{ end }}
+      {{ $farms := where site.RegularPages "Section" "farms" }}
+      {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
+      {{ $cityFarms := slice }}
+      {{ range $categoryFarms }}
+        {{ if and (eq (.Params.province | lower) ($province | lower)) (eq (.Params.city | lower) ($city | lower)) }}
+          {{ $cityFarms = $cityFarms | append . }}
+        {{ end }}
+      {{ end }}
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Find A {{ $categoryTitle }} Farm In {{ $cityTitle }}, {{ $provinceTitle }}",
+        "url": "{{ .Permalink }}",
+        "description": "Find {{ $categoryTitle | lower }} farms in {{ $cityTitle }}, {{ $provinceTitle }}, Canada.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "{{ .Site.Title }}",
+          "url": "{{ .Site.BaseURL }}"
+        },
+        "about": [
+          {
+            "@type": "Thing",
+            "name": "{{ $categoryTitle }} Farming",
+            "description": "{{ $categoryTitle }} farms"
+          },
+          {
+            "@type": "Place",
+            "name": "{{ $cityTitle }}, {{ $provinceTitle }}",
+            "addressLocality": "{{ $cityTitle }}",
+            "addressRegion": "{{ $provinceTitle }}",
+            "addressCountry": "CA"
+          }
+        ],
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "{{ $categoryTitle }} Farms in {{ $cityTitle }}, {{ $provinceTitle }}",
+          "numberOfItems": {{ len $cityFarms }},
+          "itemListElement": [
+            {{ range $index, $farm := $cityFarms }}
+            {{ if $index }},{{ end }}
+            {
+              "@type": "LocalBusiness",
+              "name": "{{ $farm.Title }}",
+              "url": "{{ $farm.Permalink }}",
+              "addressLocality": "{{ $farm.Params.city }}",
+              "addressRegion": "{{ $farm.Params.province }}",
+              "addressCountry": "CA"
+            }
+            {{ end }}
+          ]
+        }
+      }
+    {{ end }}
+  {{ end }}
+{{ end }}
+</script>

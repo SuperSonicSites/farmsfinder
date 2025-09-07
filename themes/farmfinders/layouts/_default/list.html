@@ -1,0 +1,55 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  
+  {{ $currentPath := .RelPermalink }}
+  {{ $pathParts := split (trim $currentPath "/") "/" }}
+  
+  {{ $farms := where site.RegularPages "Section" "farms" }}
+  {{ $filteredFarms := slice }}
+  
+  <!-- Debug: Show what we're looking for -->
+  <p><strong>Debug:</strong> Current path: {{ $currentPath }}, Path parts: {{ $pathParts }}</p>
+  <p><strong>Debug:</strong> Total farms found: {{ len $farms }}</p>
+  
+  {{ if eq (len $pathParts) 1 }}
+    <!-- /christmas-trees/ - show farms with "christmas-trees" in categories -->
+    {{ $category := index $pathParts 0 }}
+    <p><strong>Debug:</strong> Looking for category: {{ $category }}</p>
+    {{ $filteredFarms = where $farms "Params.categories" "intersect" (slice $category) }}
+  {{ else if eq (len $pathParts) 2 }}
+    <!-- /christmas-trees/ontario/ - show farms with "christmas-trees" category AND "ontario" province -->
+    {{ $category := index $pathParts 0 }}
+    {{ $province := index $pathParts 1 }}
+    <p><strong>Debug:</strong> Looking for category: {{ $category }}, province: {{ $province }}</p>
+    {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
+    {{ $filteredFarms = where $categoryFarms "Params.province" "eq" (title $province) }}
+  {{ else if eq (len $pathParts) 3 }}
+    <!-- /christmas-trees/ontario/ottawa/ - show farms with category AND province AND city -->
+    {{ $category := index $pathParts 0 }}
+    {{ $province := index $pathParts 1 }}
+    {{ $city := index $pathParts 2 }}
+    <p><strong>Debug:</strong> Looking for category: {{ $category }}, province: {{ $province }}, city: {{ $city }}</p>
+    {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
+    {{ $provinceFarms := where $categoryFarms "Params.province" "eq" (title $province) }}
+    {{ $filteredFarms = where $provinceFarms "Params.city" "eq" (title $city) }}
+  {{ end }}
+  
+  <p><strong>Debug:</strong> Filtered farms count: {{ len $filteredFarms }}</p>
+  
+  <!-- Debug: Show all farms and their params -->
+  {{ range $farms }}
+    <p><strong>Debug Farm:</strong> {{ .Title }} - Categories: {{ .Params.categories }}, Province: {{ .Params.province }}, City: {{ .Params.city }}</p>
+  {{ end }}
+  
+  <h2>Farms</h2>
+  {{ range $filteredFarms }}
+    <div>
+      <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+      <p>Location: {{ .Params.city }}, {{ .Params.province }}</p>
+      {{ if .Summary }}
+        <p>{{ .Summary }}</p>
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}

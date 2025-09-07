@@ -1,0 +1,27 @@
+{{ $currentPath := .RelPermalink }}
+{{ $pathParts := split (trim $currentPath "/") "/" }}
+
+{{ if gt (len $pathParts) 0 }}
+<nav aria-label="breadcrumb">
+  <ol style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem; align-items: center;">
+    <li style="position: relative;"><a href="/">Home</a><span style="margin-left: 0.5rem;">></span></li>
+    
+    {{ if eq (len $pathParts) 1 }}
+      <li aria-current="page">{{ .Title }}</li>
+    {{ else if eq (len $pathParts) 2 }}
+      {{ $parentPath := printf "/%s/" (index $pathParts 0) }}
+      {{ $parentPage := site.GetPage $parentPath }}
+      <li style="position: relative;"><a href="{{ $parentPath }}">{{ if $parentPage }}{{ $parentPage.Title }}{{ else }}{{ index $pathParts 0 | title }}{{ end }}</a><span style="margin-left: 0.5rem;">></span></li>
+      <li aria-current="page">{{ .Title }}</li>
+    {{ else if eq (len $pathParts) 3 }}
+      {{ $grandparentPath := printf "/%s/" (index $pathParts 0) }}
+      {{ $parentPath := printf "/%s/%s/" (index $pathParts 0) (index $pathParts 1) }}
+      {{ $grandparentPage := site.GetPage $grandparentPath }}
+      {{ $parentPage := site.GetPage $parentPath }}
+      <li style="position: relative;"><a href="{{ $grandparentPath }}">{{ if $grandparentPage }}{{ $grandparentPage.Title }}{{ else }}{{ index $pathParts 0 | title }}{{ end }}</a><span style="margin-left: 0.5rem;">></span></li>
+      <li style="position: relative;"><a href="{{ $parentPath }}">{{ if $parentPage }}{{ $parentPage.Title }}{{ else }}{{ index $pathParts 1 | title }}{{ end }}</a><span style="margin-left: 0.5rem;">></span></li>
+      <li aria-current="page">{{ .Title }}</li>
+    {{ end }}
+  </ol>
+</nav>
+{{ end }}

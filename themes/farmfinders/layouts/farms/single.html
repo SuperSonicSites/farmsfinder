@@ -1,0 +1,81 @@
+{{ define "title" }}
+  {{ .Title }} | 
+  {{ if .Params.categories }}
+    {{ $firstCategory := index .Params.categories 0 }}
+    {{ $categoryPath := printf "/%s/" ($firstCategory | urlize) }}
+    {{ $categoryPage := site.GetPage $categoryPath }}
+    {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $firstCategory | replace "-" " " | title }}{{ end }} farm
+  {{ else }}
+    Farm
+  {{ end }}
+  {{ if or .Params.city .Params.province }} in {{ end }}
+  {{ if .Params.city }}{{ .Params.city }}{{ end }}
+  {{ if and .Params.city .Params.province }}, {{ end }}
+  {{ if .Params.province }}{{ .Params.province }}{{ end }}
+{{ end }}
+
+{{ define "main" }}
+  <article itemscope itemtype="https://schema.org/LocalBusiness">
+    <nav aria-label="breadcrumb">
+      <ol style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem; align-items: center;">
+        <li style="position: relative;"><a href="/">Home</a><span style="margin-left: 0.5rem;">></span></li>
+        {{ if .Params.categories }}
+          {{ $firstCategory := index .Params.categories 0 }}
+          {{ $categoryPath := printf "/%s/" ($firstCategory | urlize) }}
+          {{ $categoryPage := site.GetPage $categoryPath }}
+          <li style="position: relative;"><a href="{{ $categoryPath }}">{{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $firstCategory | title }}{{ end }}</a><span style="margin-left: 0.5rem;">></span></li>
+          
+          {{ if .Params.province }}
+            {{ $provincePath := printf "/%s/%s/" ($firstCategory | urlize) (.Params.province | urlize) }}
+            {{ $provincePage := site.GetPage $provincePath }}
+            <li style="position: relative;"><a href="{{ $provincePath }}">{{ if $provincePage }}{{ $provincePage.Title }}{{ else }}{{ .Params.province }}{{ end }}</a><span style="margin-left: 0.5rem;">></span></li>
+            
+            {{ if .Params.city }}
+              {{ $cityPath := printf "/%s/%s/%s/" ($firstCategory | urlize) (.Params.province | urlize) (.Params.city | urlize) }}
+              {{ $cityPage := site.GetPage $cityPath }}
+              <li style="position: relative;"><a href="{{ $cityPath }}">{{ if $cityPage }}{{ $cityPage.Title }}{{ else }}{{ .Params.city }}{{ end }}</a><span style="margin-left: 0.5rem;">></span></li>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        <li aria-current="page">{{ .Title }}</li>
+      </ol>
+    </nav>
+    
+    <header>
+      <h1 itemprop="name">{{ .Title }}</h1>
+      
+      {{ if .Params.categories }}
+        <div>
+          <strong>Categories:</strong> 
+          {{ $categoryLinks := slice }}
+          {{ range .Params.categories }}
+            {{ $categoryPath := printf "/%s/" (. | urlize) }}
+            {{ $categoryPage := site.GetPage $categoryPath }}
+            {{ $categoryTitle := "" }}
+            {{ if $categoryPage }}
+              {{ $categoryTitle = $categoryPage.Title }}
+            {{ else }}
+              {{ $categoryTitle = . | title }}
+            {{ end }}
+            {{ $categoryLinks = $categoryLinks | append (printf "<a href=\"%s\">%s</a>" $categoryPath $categoryTitle) }}
+          {{ end }}
+          <span itemprop="category">{{ delimit $categoryLinks ", " | safeHTML }}</span>
+        </div>
+      {{ end }}
+      
+      {{ if or .Params.city .Params.province }}
+        <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <strong>Location:</strong> 
+          <span itemprop="addressLocality">{{ .Params.city }}</span>{{ if and .Params.city .Params.province }}, {{ end }}<span itemprop="addressRegion">{{ .Params.province }}</span>
+          <meta itemprop="addressCountry" content="CA">
+        </address>
+      {{ end }}
+    </header>
+    
+    <div itemprop="description">
+      {{ .Content }}
+    </div>
+    
+    <meta itemprop="url" content="{{ .Permalink }}">
+  </article>
+{{ end }}

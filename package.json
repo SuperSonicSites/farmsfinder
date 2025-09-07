@@ -1,0 +1,14 @@
+{
+  "name": "farmsfinder",
+  "version": "1.0.0",
+  "description": "Canadian Farm Directory",
+  "scripts": {
+    "prebuild": "node themes/farmfinders/assets/js/generate-categories.js",
+    "build": "hugo",
+    "dev": "npm run prebuild && hugo server",
+    "generate": "node themes/farmfinders/assets/js/generate-categories.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
