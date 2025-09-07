@@ -1,0 +1,25 @@
+{{ define "main" }}
+  {{ if eq .Section "christmas-tree-farms" }}
+    {{ if eq .Kind "section" }}
+      {{ $ancestors := .Ancestors.Reverse }}
+      {{ if eq (len $ancestors) 1 }}
+        <h1>Christmas Tree Farms in Canada</h1>
+      {{ else if eq (len $ancestors) 2 }}
+        <h1>Christmas Tree Farms in {{ .Title }}</h1>
+      {{ else if eq (len $ancestors) 3 }}
+        {{ $province := (index $ancestors 2).Title }}
+        <h1>Christmas Tree Farms in {{ .Title }}, {{ $province }}</h1>
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    <h1>{{ .Title }}</h1>
+  {{ end }}
+  
+  {{ .Content }}
+  
+  <ul>
+  {{ range .Pages }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+  </ul>
+{{ end }}
