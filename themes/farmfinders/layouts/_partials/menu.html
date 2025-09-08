@@ -12,7 +12,7 @@ Renders a menu for the given menu ID.
 
 {{- with index site.Menus $menuID }}
   <nav>
-    <ul>
+    <ul class="flex items-center space-x-6 mt-4">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
   </nav>
@@ -22,10 +22,15 @@ Renders a menu for the given menu ID.
   {{- $page := .page }}
   {{- range .menuEntries }}
     {{- $attrs := dict "href" .URL }}
+    {{- $classes := "text-gray-600 hover:text-gray-900 transition-colors font-light" }}
     {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+      {{- $classes = "text-gray-900 font-medium" }}
+      {{- $attrs = merge $attrs (dict "class" $classes "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu .}}
-      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+      {{- $classes = "text-gray-700 font-medium" }}
+      {{- $attrs = merge $attrs (dict "class" $classes "aria-current" "true") }}
+    {{- else }}
+      {{- $attrs = merge $attrs (dict "class" $classes) }}
     {{- end }}
     {{- $name := .Name }}
     {{- with .Identifier }}
@@ -42,7 +47,7 @@ Renders a menu for the given menu ID.
         {{- end -}}
       >{{ $name }}</a>
       {{- with .Children }}
-        <ul>
+        <ul class="absolute top-full left-0 mt-4 bg-white border border-gray-200 rounded-lg shadow-lg py-2 min-w-48 hidden group-hover:block">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         </ul>
       {{- end }}

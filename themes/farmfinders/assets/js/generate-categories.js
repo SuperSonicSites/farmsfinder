@@ -13,6 +13,11 @@ function ensureDirectoryExists(dirPath) {
   }
 }
 
+function formatTitle(text) {
+  // Convert hyphens to spaces and capitalize each word
+  return text.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
 function createIndexFile(filePath, title) {
   if (!fs.existsSync(filePath)) {
     const content = `---
@@ -35,21 +40,37 @@ function generateCategoryStructure() {
 
   const structures = new Set();
 
+  console.log(`Processing ${farms.length} farms...`);
+
   farms.forEach(farm => {
-    if (farm.categories && farm.province && farm.city) {
+    // Updated to use nested address structure
+    if (farm.categories && farm.address && farm.address.province && farm.address.city) {
+      console.log(`Processing farm: ${farm.title} - ${farm.address.city}, ${farm.address.province}`);
+      
       farm.categories.forEach(category => {
-        // Use the category name as-is for folder names (with spaces)
+        // Use the category name as-is for folder names
         const categoryFolder = category;
-        const provinceFolder = farm.province;
-        const cityFolder = farm.city;
+        const provinceFolder = farm.address.province.toLowerCase().replace(/\s+/g, '-');
+        const cityFolder = farm.address.city.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '-');
 
         // Add to structures set
         structures.add(`${categoryFolder}`);
         structures.add(`${categoryFolder}/${provinceFolder}`);
         structures.add(`${categoryFolder}/${provinceFolder}/${cityFolder}`);
+        
+        console.log(`  Added: ${categoryFolder}/${provinceFolder}/${cityFolder}`);
       });
+    } else {
+      console.log(`Skipping farm: ${farm.title || 'Unknown'} - missing required data`);
+      if (!farm.categories) console.log(`    Missing categories`);
+      if (!farm.address) console.log(`    Missing address object`);
+      if (farm.address && !farm.address.province) console.log(`    Missing address.province`);
+      if (farm.address && !farm.address.city) console.log(`    Missing address.city`);
     }
   });
+
+  console.log(`\nGenerated ${structures.size} unique structures:`);
+  structures.forEach(structure => console.log(`  ${structure}`));
 
   // Create directories and index files
   structures.forEach(structure => {
@@ -60,14 +81,14 @@ function generateCategoryStructure() {
     ensureDirectoryExists(dirPath);
 
     if (parts.length === 1) {
-      // Category level
-      createIndexFile(indexPath, parts[0].replace(/\b\w/g, l => l.toUpperCase()));
+      // Category level - use formatTitle to handle hyphens properly
+      createIndexFile(indexPath, formatTitle(parts[0]));
     } else if (parts.length === 2) {
       // Province level
-      createIndexFile(indexPath, parts[1].replace(/\b\w/g, l => l.toUpperCase()));
+      createIndexFile(indexPath, formatTitle(parts[1]));
     } else if (parts.length === 3) {
       // City level
-      createIndexFile(indexPath, parts[2].replace(/\b\w/g, l => l.toUpperCase()));
+      createIndexFile(indexPath, formatTitle(parts[2]));
     }
   });
 

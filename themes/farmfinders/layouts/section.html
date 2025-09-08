@@ -1,121 +1,138 @@
 {{ define "title" }}{{ .Title }}{{ if .Parent }} - {{ .Parent.Title }}{{ end }} | {{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-  <article>
-    {{ partial "breadcrumb.html" . }}
-    
-    <header>
-      {{ $currentPath := .RelPermalink }}
-      {{ $pathParts := split (trim $currentPath "/") "/" }}
-      {{ $category := "" }}
-      {{ $h1Text := "" }}
+  <div class="max-w-3xl mx-auto py-16">
+    <article class="space-y-16">
+      {{ partial "breadcrumb.html" . }}
       
-      {{ if gt (len $pathParts) 0 }}
-        {{ $category = index $pathParts 0 }}
-        {{ $categoryPath := printf "/%s/" $category }}
-        {{ $categoryPage := site.GetPage $categoryPath }}
-        {{ if $categoryPage }}
-          {{ $category = $categoryPage.Title }}
-        {{ else }}
-          {{ $category = $category | replace "-" " " | title }}
+      <header class="text-left space-y-8">
+        {{ $currentPath := .RelPermalink }}
+        {{ $pathParts := split (trim $currentPath "/") "/" }}
+        {{ $category := "" }}
+        {{ $h1Text := "" }}
+        
+        {{ if gt (len $pathParts) 0 }}
+          {{ $category = index $pathParts 0 }}
+          {{ $categoryPath := printf "/%s/" $category }}
+          {{ $categoryPage := site.GetPage $categoryPath }}
+          {{ if $categoryPage }}
+            {{ $category = $categoryPage.Title }}
+          {{ else }}
+            {{ $category = $category | replace "-" " " | title }}
+          {{ end }}
+          
+          {{ if eq (len $pathParts) 1 }}
+            {{ $h1Text = printf "Find a %s farm near you" $category }}
+          {{ else if eq (len $pathParts) 2 }}
+            {{ $province := index $pathParts 1 }}
+            {{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}
+            {{ $provincePage := site.GetPage $provincePath }}
+            {{ if $provincePage }}
+              {{ $province = $provincePage.Title }}
+            {{ else }}
+              {{ $province = $province | replace "-" " " | title }}
+            {{ end }}
+            {{ $h1Text = printf "Find a %s farm in %s" $category $province }}
+          {{ else if eq (len $pathParts) 3 }}
+            {{ $province := index $pathParts 1 }}
+            {{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}
+            {{ $provincePage := site.GetPage $provincePath }}
+            {{ if $provincePage }}
+              {{ $province = $provincePage.Title }}
+            {{ else }}
+              {{ $province = $province | replace "-" " " | title }}
+            {{ end }}
+            {{ $city := index $pathParts 2 }}
+            {{ $cityPath := printf "/%s/%s/%s/" (index $pathParts 0) (index $pathParts 1) $city }}
+            {{ $cityPage := site.GetPage $cityPath }}
+            {{ if $cityPage }}
+              {{ $city = $cityPage.Title }}
+            {{ else }}
+              {{ $city = $city | replace "-" " " | title }}
+            {{ end }}
+            {{ $h1Text = printf "Find a %s farm in %s, %s" $category $city $province }}
+          {{ end }}
         {{ end }}
         
-        {{ if eq (len $pathParts) 1 }}
-          {{ $h1Text = printf "Find a %s farm near you" $category }}
-        {{ else if eq (len $pathParts) 2 }}
-          {{ $province := index $pathParts 1 }}
-          {{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}
-          {{ $provincePage := site.GetPage $provincePath }}
-          {{ if $provincePage }}
-            {{ $province = $provincePage.Title }}
-          {{ else }}
-            {{ $province = $province | replace "-" " " | title }}
+        <h1 class="text-6xl font-light text-gray-900 tracking-tight capitalize">{{ $h1Text }}</h1>
+        <div class="prose prose-xl prose-gray">
+          {{ .Content }}
+        </div>
+      </header>
+      
+      {{ $farms := where site.RegularPages "Section" "farms" }}
+      {{ $filteredFarms := slice }}
+      
+      {{ if eq (len $pathParts) 1 }}
+        {{ $categorySlug := index $pathParts 0 }}
+        {{ $filteredFarms = where $farms "Params.categories" "intersect" (slice $categorySlug) }}
+      {{ else if eq (len $pathParts) 2 }}
+        {{ $categorySlug := index $pathParts 0 }}
+        {{ $province := index $pathParts 1 }}
+        {{ $province = $province | lower }}
+        {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
+        {{ range $categoryFarms }}
+          {{ if eq (.Params.address.province | lower) $province }}
+            {{ $filteredFarms = $filteredFarms | append . }}
           {{ end }}
-          {{ $h1Text = printf "Find a %s farm in %s" $category $province }}
-        {{ else if eq (len $pathParts) 3 }}
-          {{ $province := index $pathParts 1 }}
-          {{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}
-          {{ $provincePage := site.GetPage $provincePath }}
-          {{ if $provincePage }}
-            {{ $province = $provincePage.Title }}
-          {{ else }}
-            {{ $province = $province | replace "-" " " | title }}
+        {{ end }}
+      {{ else if eq (len $pathParts) 3 }}
+        {{ $categorySlug := index $pathParts 0 }}
+        {{ $province := index $pathParts 1 }}
+        {{ $province = $province | lower }}
+        {{ $city := index $pathParts 2 }}
+        {{ $city = $city | lower }}
+        {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
+        {{ range $categoryFarms }}
+          {{ if and (eq (.Params.address.province | lower) $province) (eq (.Params.address.city | lower) $city) }}
+            {{ $filteredFarms = $filteredFarms | append . }}
           {{ end }}
-          {{ $city := index $pathParts 2 }}
-          {{ $cityPath := printf "/%s/%s/%s/" (index $pathParts 0) (index $pathParts 1) $city }}
-          {{ $cityPage := site.GetPage $cityPath }}
-          {{ if $cityPage }}
-            {{ $city = $cityPage.Title }}
-          {{ else }}
-            {{ $city = $city | replace "-" " " | title }}
-          {{ end }}
-          {{ $h1Text = printf "Find a %s farm in %s, %s" $category $city $province }}
         {{ end }}
       {{ end }}
       
-      <h1 style="text-transform: capitalize;">{{ $h1Text }}</h1>
-      {{ .Content }}
-    </header>
-    
-    {{ $farms := where site.RegularPages "Section" "farms" }}
-    {{ $filteredFarms := slice }}
-    
-    {{ if eq (len $pathParts) 1 }}
-      {{ $categorySlug := index $pathParts 0 }}
-      {{ $filteredFarms = where $farms "Params.categories" "intersect" (slice $categorySlug) }}
-    {{ else if eq (len $pathParts) 2 }}
-      {{ $categorySlug := index $pathParts 0 }}
-      {{ $province := index $pathParts 1 }}
-      {{ $province = $province | lower }}
-      {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
-      {{ range $categoryFarms }}
-        {{ if eq (.Params.province | lower) $province }}
-          {{ $filteredFarms = $filteredFarms | append . }}
-        {{ end }}
+      {{ if .Pages }}
+        <section aria-labelledby="locations-heading" class="space-y-12">
+          <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
+          <nav aria-label="Location filters" class="flex justify-center">
+            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl w-full">
+              {{ range .Pages }}
+                <li>
+                  <a href="{{ .RelPermalink }}" 
+                     class="block p-8 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
+                    <span class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide">
+                      {{ .LinkTitle }}
+                    </span>
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          </nav>
+        </section>
       {{ end }}
-    {{ else if eq (len $pathParts) 3 }}
-      {{ $categorySlug := index $pathParts 0 }}
-      {{ $province := index $pathParts 1 }}
-      {{ $province = $province | lower }}
-      {{ $city := index $pathParts 2 }}
-      {{ $city = $city | lower }}
-      {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
-      {{ range $categoryFarms }}
-        {{ if and (eq (.Params.province | lower) $province) (eq (.Params.city | lower) $city) }}
-          {{ $filteredFarms = $filteredFarms | append . }}
+      
+      <section aria-labelledby="farms-heading" class="space-y-12">
+        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
+        {{ if $filteredFarms }}
+          <div class="flex">
+            <ul style="padding-left: 0;" class="grid grid-cols-1 gap-4 max-w-4xl w-full">
+              {{ range $filteredFarms }}
+                <li>
+                  <article class="block p-2 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
+                    <h3 class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide mb-2">
+                      <a href="{{ .RelPermalink }}" class="hover:text-gray-700 transition-colors">{{ .LinkTitle }}</a>
+                    </h3>
+                    <p class="text-gray-600 font-light">{{ .Params.address.city }}, {{ .Params.address.province }}</p>
+                  </article>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ else }}
+          <div class="text-center py-12">
+            <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
+          </div>
         {{ end }}
-      {{ end }}
-    {{ end }}
-    
-    {{ if .Pages }}
-      <section aria-labelledby="locations-heading">
-        <h2 id="locations-heading">Filter by Location</h2>
-        <nav aria-label="Location filters">
-          <ul>
-          {{ range .Pages }}
-            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-          {{ end }}
-          </ul>
-        </nav>
       </section>
-    {{ end }}
-    
-    <section aria-labelledby="farms-heading">
-      <h2 id="farms-heading">Farms</h2>
-      {{ if $filteredFarms }}
-        <ul>
-        {{ range $filteredFarms }}
-          <li>
-            <article>
-              <p><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a> - {{ .Params.city }}, {{ .Params.province }}</p>
-              {{ with .Summary }}<p>{{ . }}</p>{{ end }}
-            </article>
-          </li>
-        {{ end }}
-        </ul>
-      {{ else }}
-        <p>No farms found in this category/location.</p>
-      {{ end }}
-    </section>
-  </article>
+    </article>
+  </div>
 {{ end }}

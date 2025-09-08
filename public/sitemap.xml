@@ -2,30 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/privacy/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/about/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/contact/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/farms/briggs-trees/</loc>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/christmas-tree/</loc>
   </url><url>
+    <loc>http://localhost:1313/farms/dunns-tree-farm/</loc>
+  </url><url>
     <loc>http://localhost:1313/farms/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:1313/christmas-tree/ontario/guelph-eramosa/</loc>
+  </url><url>
+    <loc>http://localhost:1313/farms/hillcrest-tree-farm/</loc>
+  </url><url>
+    <loc>http://localhost:1313/farms/madeira-farm/</loc>
+  </url><url>
+    <loc>http://localhost:1313/farms/marks-christmas-trees/</loc>
+  </url><url>
+    <loc>http://localhost:1313/christmas-tree/ontario/millgrove/</loc>
+  </url><url>
+    <loc>http://localhost:1313/christmas-tree/ontario/navan/</loc>
+  </url><url>
+    <loc>http://localhost:1313/christmas-tree/ontario/north-gower/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/</loc>
   </url><url>
-    <loc>http://localhost:1313/tulip/ontario/</loc>
-  </url><url>
-    <loc>http://localhost:1313/christmas-tree/ontario/ottawa/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tulip/ontario/ottawa/</loc>
-  </url><url>
-    <loc>http://localhost:1313/farms/test-farm-1/</loc>
+    <loc>http://localhost:1313/christmas-tree/ontario/springford/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/tulip/</loc>
+    <loc>http://localhost:1313/farms/the-perfect-christmas-tree-farm/</loc>
   </url><url>
-    <loc>http://localhost:1313/tulip/</loc>
+    <loc>http://localhost:1313/christmas-tree/ontario/troy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/farms/tuffords-tree-farm/</loc>
+  </url><url>
+    <loc>http://localhost:1313/christmas-tree/ontario/whitchurch-stouffville/</loc>
   </url>
 </urlset>

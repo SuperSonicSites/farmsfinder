@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tulip on Farm Finders - Canadian Farm Directory</title>
+    <title>Tulip on Farms Finder</title>
     <link>http://localhost:1313/categories/tulip/</link>
-    <description>Recent content in Tulip on Farm Finders - Canadian Farm Directory</description>
+    <description>Recent content in Tulip on Farms Finder</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
+    <language>en-ca</language>
     <atom:link href="http://localhost:1313/categories/tulip/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Santa&#39;s Farm</title>

@@ -2,8 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Title and Description -->
-{{ $pageTitle := partial "page-title.html" . }}
-<title>{{ $pageTitle }}</title>
+<title>{{ if eq .Section "farms" }}Find Local Farms in Canada | {{ .Site.Title }}{{ else }}{{ partial "page-title.html" . }}{{ end }}</title>
 {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
 {{ with .Params.keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
 
@@ -11,7 +10,7 @@
 <link rel="canonical" href="{{ .Permalink }}">
 
 <!-- Open Graph -->
-<meta property="og:title" content="{{ $pageTitle }}">
+<meta property="og:title" content="{{ if eq .Section "farms" }}Find Local Farms in Canada | {{ .Site.Title }}{{ else }}{{ partial "page-title.html" . }}{{ end }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
@@ -19,7 +18,7 @@
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ $pageTitle }}">
+<meta name="twitter:title" content="{{ if eq .Section "farms" }}Find Local Farms in Canada | {{ .Site.Title }}{{ else }}{{ partial "page-title.html" . }}{{ end }}">
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
 {{ partial "schema.html" . }}

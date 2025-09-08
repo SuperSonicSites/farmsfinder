@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-ca" dir="ltr">
 <head>
 	<meta name="generator" content="Hugo 0.149.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-
-<title>Find Local Farms Near You! | Farm Finders - Canadian Farm Directory</title>
+<title>Find Local Farms Near You! | Farms Finder</title>
 
 
 
@@ -15,15 +14,15 @@
 <link rel="canonical" href="http://localhost:1313/">
 
 
-<meta property="og:title" content="Find Local Farms Near You! | Farm Finders - Canadian Farm Directory">
+<meta property="og:title" content="Find Local Farms Near You! | Farms Finder">
 <meta property="og:description" content="">
 <meta property="og:type" content="website">
 <meta property="og:url" content="http://localhost:1313/">
-<meta property="og:site_name" content="Farm Finders - Canadian Farm Directory">
+<meta property="og:site_name" content="Farms Finder">
 
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Find Local Farms Near You! | Farm Finders - Canadian Farm Directory">
+<meta name="twitter:title" content="Find Local Farms Near You! | Farms Finder">
 <meta name="twitter:description" content="">
 
 <script type="application/ld+json">
@@ -33,7 +32,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Farm Finders - Canadian Farm Directory",
+      "name": "Farms Finder",
       "url": "http:\/\/localhost:1313\/",
       "description": "Find local farms across Canada offering Christmas trees, apple orchards, pumpkin patches, berry picking and more. Connect directly with family-owned farms for fresh seasonal produce and authentic farm experiences.",
       "inLanguage": "en-CA",
@@ -46,7 +45,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Farm Finders - Canadian Farm Directory",
+      "name": "Farms Finder",
       "url": "http:\/\/localhost:1313\/",
       "logo": "http:\/\/localhost:1313\//images/farmfinders.webp",
       "description": "Canadian farm directory connecting consumers with local farms across Canada",
@@ -72,38 +71,122 @@
 <meta name="robots" content="index, follow">
 
 
-<meta name="language" content="en-us">
+<meta name="language" content="en-ca">
 
 
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/output.css">
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
       <script src="/js/main.js"></script>
 
 
 </head>
-<body>
-  <header>
-    <a href="/"><img width="100px" height="100px" src="/images/farmfinders.webp" alt="Farm Finders - Canadian Farm Directory Logo" style="max-width: 200px; height: auto;"></a>
+<body class="bg-white text-gray-900 font-light mx-auto px-2">
+  <header class="border-b border-gray-100">
+    <div class="max-w-3xl mx-auto py-6">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <a href="/" class="flex items-center justify-center space-x-3 hover:opacity-80 transition-opacity">
+        <img width="40" height="40" src="/images/farmfinders.webp" alt="Farms Finder Logo" class="rounded-lg">
+        <span class="text-xl font-light text-gray-900">Farms Finder</span>
+      </a>
+    </div>
+    
+    <nav class="hidden md:flex items-center space-x-8">
+      
+  <nav>
+    <ul class="flex items-center space-x-6 mt-4">
+    <li>
+      <a class="text-gray-600 hover:text-gray-900 transition-colors font-light" href="/">Home</a>
+    </li>
+    <li>
+      <a class="text-gray-600 hover:text-gray-900 transition-colors font-light" href="/about/">About</a>
+    </li>
+    <li>
+      <a class="text-gray-600 hover:text-gray-900 transition-colors font-light" href="/contact/">Contact</a>
+    </li>
+    </ul>
+  </nav>
 
+    </nav>
+    
+    
+    <button id="mobile-menu-button" class="md:hidden p-2 text-gray-600 hover:text-gray-900" aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+  
+  
+  <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
+    <nav class="pt-4">
+      
+  <ul class="space-y-4">
+    <li>
+      <a class="block py-2 text-lg text-gray-600 hover:text-gray-900 transition-colors font-light" href="/">Home</a>
+    </li>
+    <li>
+      <a class="block py-2 text-lg text-gray-600 hover:text-gray-900 transition-colors font-light" href="/about/">About</a>
+    </li>
+    <li>
+      <a class="block py-2 text-lg text-gray-600 hover:text-gray-900 transition-colors font-light" href="/contact/">Contact</a>
+    </li>
+  </ul>
 
+    </nav>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    
+    document.addEventListener('click', function(event) {
+      if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  }
+});
+</script>
 
   </header>
-  <main>
+  <main class="flex-1 mx-6">
     
-  <article>
-    <header>
-      <h1>Find Local Farms Near You!</h1>
-      <p>Discover fresh, local farms across Canada offering everything from Christmas trees and apple orchards to pumpkin patches and berry picking. Connect directly with family-owned farms in your area for the freshest seasonal produce, pick-your-own experiences, and authentic farm-to-table goodness.</p>
+  <div class="max-w-3xl mx-auto py-16">
+    <article class="space-y-16">
+      <header class="text-left space-y-8">
+        <h1 class="text-6xl font-light text-gray-900 tracking-tight">Find Local Farms Near You!</h1>
+        <div class="prose prose-xl prose-gray">
+          <p>Discover fresh, local farms across Canada offering everything from Christmas trees and apple orchards to pumpkin patches and berry picking. Connect directly with family-owned farms in your area for the freshest seasonal produce, pick-your-own experiences, and authentic farm-to-table goodness.</p>
 <p>Start exploring by category or search by your location to find the perfect farm experience for your family.</p>
 
-    </header>
-    
-    <section aria-labelledby="categories-heading">
-      <h2 id="categories-heading">Browse by Category</h2>
+        </div>
+      </header>
       
-      
-      
+      <section aria-labelledby="categories-heading" class="space-y-12">
+        <h2 id="categories-heading" class="text-3xl font-light text-gray-800 tracking-wide">Browse by Category</h2>
+        
+        
+        
+          
+            
+              
+            
+          
+        
+          
+            
+          
         
           
             
@@ -113,31 +196,38 @@
             
           
         
-      
-      
-      <nav aria-label="Farm categories">
-        <ul>
+          
+            
+          
         
           
+            
           
-          <li>
-            <a href="/christmas-tree/">
-              Christmas Tree
-            </a>
-          </li>
         
           
+            
           
-          <li>
-            <a href="/tulip/">
-              Tulip
-            </a>
-          </li>
         
-        </ul>
-      </nav>
-    </section>
-  </article>
+        
+        <nav aria-label="Farm categories" class="flex justify-center">
+          <ul style="padding-left: 0;"class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl w-full">
+            
+              
+              
+              <li>
+                <a href="/christmas-tree/" 
+                   class="block p-8 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
+                  <span class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide">
+                    Christmas Tree
+                  </span>
+                </a>
+              </li>
+            
+          </ul>
+        </nav>
+      </section>
+    </article>
+  </div>
 
   <script type="application/ld+json">
 
@@ -146,7 +236,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Farm Finders - Canadian Farm Directory",
+      "name": "Farms Finder",
       "url": "http:\/\/localhost:1313\/",
       "description": "Find local farms across Canada offering Christmas trees, apple orchards, pumpkin patches, berry picking and more. Connect directly with family-owned farms for fresh seasonal produce and authentic farm experiences.",
       "inLanguage": "en-CA",
@@ -159,7 +249,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Farm Finders - Canadian Farm Directory",
+      "name": "Farms Finder",
       "url": "http:\/\/localhost:1313\/",
       "logo": "http:\/\/localhost:1313\//images/farmfinders.webp",
       "description": "Canadian farm directory connecting consumers with local farms across Canada",
@@ -182,8 +272,18 @@
 
 
   </main>
-  <footer>
-    <p>Copyright 2025. All rights reserved.</p>
+  <footer class="border-t border-gray-100 mt-auto">
+    <div class="max-w-6xl mx-auto px-6 py-8">
+  <div class="text-center space-y-4">
+    <div class="text-sm text-gray-500">
+      <p>&copy; 2025 Farms Finder. All rights reserved.</p>
+      <p><a href="/privacy/" class="hover:text-gray-700 underline">Privacy Policy</a></p>
+    </div>
+    <div class="text-xs text-gray-400">
+      <p>Find farms across Canada</p>
+    </div>
+  </div>
+</div>
 
   </footer>
 </body>

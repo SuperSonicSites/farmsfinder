@@ -46,11 +46,11 @@
     {{ if .Params.categories }}
     "category": [{{ range $index, $category := .Params.categories }}{{ if $index }}, {{ end }}"{{ $category | title }}"{{ end }}],
     {{ end }}
-    {{ if or .Params.city .Params.province }}
+    {{ if or .Params.address.city .Params.address.province }}
     "address": {
       "@type": "PostalAddress",
-      {{ if .Params.city }}"addressLocality": "{{ .Params.city }}",{{ end }}
-      {{ if .Params.province }}"addressRegion": "{{ .Params.province }}",{{ end }}
+      {{ if .Params.address.city }}"addressLocality": "{{ .Params.address.city }}",{{ end }}
+      {{ if .Params.address.province }}"addressRegion": "{{ .Params.address.province }}",{{ end }}
       "addressCountry": "CA"
     },
     {{ end }}
@@ -76,9 +76,9 @@
       {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
       {{ $provinces := slice }}
       {{ range $categoryFarms }}
-        {{ if .Params.province }}
-          {{ if not (in $provinces .Params.province) }}
-            {{ $provinces = $provinces | append .Params.province }}
+        {{ if .Params.address.province }}
+          {{ if not (in $provinces .Params.address.province) }}
+            {{ $provinces = $provinces | append .Params.address.province }}
           {{ end }}
         {{ end }}
       {{ end }}
@@ -132,8 +132,8 @@
                 "name": "{{ $farm.Title }}",
                 "url": "{{ $farm.Permalink }}",
                 "category": "{{ $categoryTitle }} Farm",
-                {{ if $farm.Params.city }}"addressLocality": "{{ $farm.Params.city }}",{{ end }}
-                {{ if $farm.Params.province }}"addressRegion": "{{ $farm.Params.province }}",{{ end }}
+                {{ if $farm.Params.address.city }}"addressLocality": "{{ $farm.Params.address.city }}",{{ end }}
+                {{ if $farm.Params.address.province }}"addressRegion": "{{ $farm.Params.address.province }}",{{ end }}
                 "addressCountry": "CA",
                 "isAccessibleForFree": true
               }
@@ -152,7 +152,7 @@
       {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
       {{ $provinceFarms := slice }}
       {{ range $categoryFarms }}
-        {{ if eq (.Params.province | lower) ($province | lower) }}
+        {{ if eq (.Params.address.province | lower) ($province | lower) }}
           {{ $provinceFarms = $provinceFarms | append . }}
         {{ end }}
       {{ end }}
@@ -190,8 +190,8 @@
               "@type": "LocalBusiness",
               "name": "{{ $farm.Title }}",
               "url": "{{ $farm.Permalink }}",
-              "addressLocality": "{{ $farm.Params.city }}",
-              "addressRegion": "{{ $farm.Params.province }}",
+              "addressLocality": "{{ $farm.Params.address.city }}",
+              "addressRegion": "{{ $farm.Params.address.province }}",
               "addressCountry": "CA"
             }
             {{ end }}
@@ -210,7 +210,7 @@
       {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $category) }}
       {{ $cityFarms := slice }}
       {{ range $categoryFarms }}
-        {{ if and (eq (.Params.province | lower) ($province | lower)) (eq (.Params.city | lower) ($city | lower)) }}
+        {{ if and (eq (.Params.address.province | lower) ($province | lower)) (eq (.Params.address.city | lower) ($city | lower)) }}
           {{ $cityFarms = $cityFarms | append . }}
         {{ end }}
       {{ end }}
@@ -250,8 +250,8 @@
               "@type": "LocalBusiness",
               "name": "{{ $farm.Title }}",
               "url": "{{ $farm.Permalink }}",
-              "addressLocality": "{{ $farm.Params.city }}",
-              "addressRegion": "{{ $farm.Params.province }}",
+              "addressLocality": "{{ $farm.Params.address.city }}",
+              "addressRegion": "{{ $farm.Params.address.province }}",
               "addressCountry": "CA"
             }
             {{ end }}

@@ -1,0 +1,401 @@
+{{ define "main" }}
+  <div class="max-w-3xl mx-auto py-16">
+    <article class="space-y-16">
+      {{ partial "breadcrumb.html" . }}
+      
+      <header class="text-center space-y-8">
+        <h1 class="text-6xl font-light text-gray-900 tracking-tight">Find Farms Near You In Canada</h1>
+        <div class="prose prose-xl prose-gray max-w-3xl mx-auto">
+          {{ .Content }}
+        </div>
+      </header>
+      
+      <!-- Step-by-Step Filters -->
+      <section class="space-y-8">
+        <!-- Step 1: Farm Type -->
+        <div class="max-w-md mx-auto">
+          <div class="relative">
+            <label for="farm-type" class="block text-lg font-medium text-gray-700 mb-3 text-center">Step 1: Choose a type of farm</label>
+            <div class="relative">
+              <input type="text" id="farm-type" placeholder="Type to search farm types..." 
+                     class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-center"
+                     oninput="handleFarmTypeSearch(this.value)" autocomplete="off">
+              <div id="farm-type-suggestions" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg hidden max-h-48 overflow-y-auto">
+                {{ $categories := slice }}
+                {{ range site.Sections }}
+                  {{ if and .Title (ne .Section "farms") (ne .Section "") }}
+                    {{ $categories = $categories | append (dict "title" .Title "section" .Section) }}
+                  {{ end }}
+                {{ end }}
+                {{ $sortedCategories := sort $categories "title" }}
+                {{ range $sortedCategories }}
+                  <div class="farm-type-option px-4 py-3 hover:bg-gray-100 cursor-pointer" data-value="{{ .section }}">{{ .title }}</div>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Province -->
+        <div id="province-step" class="max-w-md mx-auto hidden">
+          <div class="relative">
+            <label for="province" class="block text-lg font-medium text-gray-700 mb-3 text-center">Step 2: Choose a province</label>
+            <div class="relative">
+              <input type="text" id="province" placeholder="Type to search provinces..." 
+                     class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-center"
+                     oninput="handleProvinceSearch(this.value)" autocomplete="off">
+              <div id="province-suggestions" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg hidden max-h-48 overflow-y-auto">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: City -->
+        <div id="city-step" class="max-w-md mx-auto hidden">
+          <div class="relative">
+            <label for="city" class="block text-lg font-medium text-gray-700 mb-3 text-center">Step 3: Choose a city</label>
+            <div class="relative">
+              <input type="text" id="city" placeholder="Type to search cities..." 
+                     class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-center"
+                     oninput="handleCitySearch(this.value)" autocomplete="off">
+              <div id="city-suggestions" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg hidden max-h-48 overflow-y-auto">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clear Filters Button -->
+        <div id="clear-filters" class="text-center hidden">
+          <button onclick="clearAllFilters()" class="px-6 py-2 text-sm text-gray-600 hover:text-gray-800 underline">
+            Clear all filters
+          </button>
+        </div>
+      </section>
+      
+      <!-- List.js Container -->
+      <div id="farm-list">
+        <section aria-labelledby="farms-heading" class="space-y-12">
+          <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide text-center">
+            <span id="farms-count">0</span> Farms Found
+          </h2>
+          
+          <div class="list grid grid-cols-1 gap-2">
+            {{ range where site.RegularPages "Section" "farms" }}
+              <article class="farm-card bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-200 transition-all duration-200 overflow-hidden"
+                       data-categories="{{ delimit .Params.categories "," }}"
+                       data-province="{{ .Params.address.province | lower }}"
+                       data-city="{{ .Params.address.city | lower }}">
+                <!-- Card Header -->
+                <div class="pb-2">
+                  <h3 class="name text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                    <a href="{{ .RelPermalink }}" class="hover:text-blue-600 transition-colors">{{ .Title }}</a>
+                  </h3>
+                  
+                  <!-- Location Info -->
+                  <div class="space-y-2 mb-4">
+                    {{ if .Params.address.city }}
+                      <div class="location text-sm text-gray-600">
+                        {{ .Params.address.city }}, {{ .Params.address.province }}
+                      </div>
+                    {{ end }}
+                    
+                    {{ if .Params.established }}
+                      <div class="established text-sm text-gray-500">
+                        Established {{ .Params.established }}
+                      </div>
+                    {{ end }}
+                  </div>
+                  
+                  
+                  
+                  <!-- Hidden searchable content -->
+                  <div class="hidden">
+                    <span class="amenities">{{ delimit .Params.amenities " " }}</span>
+                    <span class="varieties">{{ delimit .Params.varieties " " }}</span>
+                    <span class="description">{{ .Summary }}</span>
+                  </div>
+                </div>
+                
+                <!-- Card Footer -->
+                <div class="">
+                  <a href="{{ .RelPermalink }}" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                    View Details
+                  </a>
+                </div>
+              </article>
+            {{ end }}
+          </div>
+          
+          <div id="no-farms-message" class="text-center py-12 hidden">
+            <p class="text-lg font-light text-gray-600">No farms match your current filters.</p>
+          </div>
+        </section>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    let currentFilters = {
+      farmType: '',
+      province: '',
+      city: ''
+    };
+
+    // Initialize List.js
+    const options = {
+      valueNames: [
+        'name',
+        'location', 
+        'category',
+        'amenities',
+        'varieties',
+        'description',
+        'established'
+      ],
+      searchClass: 'search',
+      listClass: 'list'
+    };
+
+    const farmList = new List('farm-list', options);
+
+    // Update farm count
+    function updateFarmCount() {
+      const visibleItems = farmList.visibleItems.length;
+      document.getElementById('farms-count').textContent = visibleItems;
+      
+      const noFarmsMessage = document.getElementById('no-farms-message');
+      if (visibleItems === 0) {
+        noFarmsMessage.classList.remove('hidden');
+      } else {
+        noFarmsMessage.classList.add('hidden');
+      }
+    }
+
+    // Listen for List.js updates
+    farmList.on('updated', updateFarmCount);
+
+    // Get available provinces for current farm type
+    function getAvailableProvinces() {
+      const provinces = new Set();
+      
+      farmList.items.forEach(item => {
+        const categories = item.elm.dataset.categories.split(',');
+        if (!currentFilters.farmType || categories.some(cat => cat.toLowerCase() === currentFilters.farmType.toLowerCase())) {
+          const province = item.elm.dataset.province;
+          if (province) {
+            provinces.add(province);
+          }
+        }
+      });
+      
+      return Array.from(provinces).sort();
+    }
+
+    // Get available cities for current province
+    function getAvailableCities() {
+      const cities = new Set();
+      
+      farmList.items.forEach(item => {
+        const categories = item.elm.dataset.categories.split(',');
+        const province = item.elm.dataset.province;
+        
+        const matchesFarmType = !currentFilters.farmType || categories.some(cat => cat.toLowerCase() === currentFilters.farmType.toLowerCase());
+        const matchesProvince = !currentFilters.province || province === currentFilters.province.toLowerCase();
+        
+        if (matchesFarmType && matchesProvince) {
+          const city = item.elm.dataset.city;
+          if (city) {
+            cities.add(city);
+          }
+        }
+      });
+      
+      return Array.from(cities).sort();
+    }
+
+    // Update province options
+    function updateProvinceOptions() {
+      const provinceOptions = document.getElementById('province-suggestions');
+      const provinces = getAvailableProvinces();
+      
+      provinceOptions.innerHTML = '';
+      provinces.forEach(province => {
+        const displayName = province.charAt(0).toUpperCase() + province.slice(1);
+        provinceOptions.innerHTML += `<div class="province-option px-4 py-3 hover:bg-gray-100 cursor-pointer" data-value="${province}">${displayName}</div>`;
+      });
+    }
+
+    // Update city options
+    function updateCityOptions() {
+      const cityOptions = document.getElementById('city-suggestions');
+      const cities = getAvailableCities();
+      
+      cityOptions.innerHTML = '';
+      cities.forEach(city => {
+        const displayName = city.charAt(0).toUpperCase() + city.slice(1);
+        cityOptions.innerHTML += `<div class="city-option px-4 py-3 hover:bg-gray-100 cursor-pointer" data-value="${city}">${displayName}</div>`;
+      });
+    }
+
+    // Apply filters using List.js
+    function applyFilters() {
+      farmList.filter(function(item) {
+        const categories = item.elm.dataset.categories.split(',');
+        const province = item.elm.dataset.province;
+        const city = item.elm.dataset.city;
+        
+        const matchesFarmType = !currentFilters.farmType || 
+          categories.some(cat => cat.toLowerCase() === currentFilters.farmType.toLowerCase());
+        const matchesProvince = !currentFilters.province || 
+          province === currentFilters.province.toLowerCase();
+        const matchesCity = !currentFilters.city || 
+          city === currentFilters.city.toLowerCase();
+        
+        return matchesFarmType && matchesProvince && matchesCity;
+      });
+    }
+
+    // Clear all filters
+    function clearAllFilters() {
+      currentFilters = { farmType: '', province: '', city: '' };
+      
+      // Clear inputs
+      document.getElementById('farm-type').value = '';
+      document.getElementById('province').value = '';
+      document.getElementById('city').value = '';
+      
+      // Hide steps
+      document.getElementById('province-step').classList.add('hidden');
+      document.getElementById('city-step').classList.add('hidden');
+      document.getElementById('clear-filters').classList.add('hidden');
+      
+      // Clear List.js filters
+      farmList.filter();
+    }
+
+    // Handle farm type search
+    function handleFarmTypeSearch(searchValue) {
+      const suggestions = document.getElementById('farm-type-suggestions');
+      const options = suggestions.querySelectorAll('.farm-type-option');
+      
+      options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        const matches = text.includes(searchValue.toLowerCase());
+        option.style.display = matches ? 'block' : 'none';
+      });
+      
+      if (searchValue) {
+        suggestions.classList.remove('hidden');
+      } else {
+        suggestions.classList.add('hidden');
+      }
+    }
+
+    // Handle province search
+    function handleProvinceSearch(searchValue) {
+      const suggestions = document.getElementById('province-suggestions');
+      const options = suggestions.querySelectorAll('.province-option');
+      
+      options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        const matches = text.includes(searchValue.toLowerCase());
+        option.style.display = matches ? 'block' : 'none';
+      });
+      
+      if (searchValue) {
+        suggestions.classList.remove('hidden');
+      } else {
+        suggestions.classList.add('hidden');
+      }
+    }
+
+    // Handle city search
+    function handleCitySearch(searchValue) {
+      const suggestions = document.getElementById('city-suggestions');
+      const options = suggestions.querySelectorAll('.city-option');
+      
+      options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        const matches = text.includes(searchValue.toLowerCase());
+        option.style.display = matches ? 'block' : 'none';
+      });
+      
+      if (searchValue) {
+        suggestions.classList.remove('hidden');
+      } else {
+        suggestions.classList.add('hidden');
+      }
+    }
+
+    // Handle suggestion clicks
+    function handleSuggestionClick(type, value, displayText) {
+      const input = document.getElementById(type);
+      const suggestions = document.getElementById(`${type}-suggestions`);
+      
+      input.value = displayText;
+      suggestions.classList.add('hidden');
+      
+      if (type === 'farm-type') {
+        currentFilters.farmType = value;
+        document.getElementById('province-step').classList.remove('hidden');
+        document.getElementById('clear-filters').classList.remove('hidden');
+        updateProvinceOptions();
+        attachProvinceListeners();
+      } else if (type === 'province') {
+        currentFilters.province = value;
+        document.getElementById('city-step').classList.remove('hidden');
+        updateCityOptions();
+        attachCityListeners();
+      } else if (type === 'city') {
+        currentFilters.city = value;
+      }
+      
+      applyFilters();
+    }
+
+    // Attach event listeners for farm type options
+    function attachFarmTypeListeners() {
+      document.querySelectorAll('.farm-type-option').forEach(option => {
+        option.addEventListener('click', function() {
+          handleSuggestionClick('farm-type', this.dataset.value, this.textContent);
+        });
+      });
+    }
+
+    // Attach event listeners for province options
+    function attachProvinceListeners() {
+      document.querySelectorAll('.province-option').forEach(option => {
+        option.addEventListener('click', function() {
+          handleSuggestionClick('province', this.dataset.value, this.textContent);
+        });
+      });
+    }
+
+    // Attach event listeners for city options
+    function attachCityListeners() {
+      document.querySelectorAll('.city-option').forEach(option => {
+        option.addEventListener('click', function() {
+          handleSuggestionClick('city', this.dataset.value, this.textContent);
+        });
+      });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      // Close suggestions when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.relative')) {
+          document.querySelectorAll('[id$="-suggestions"]').forEach(d => d.classList.add('hidden'));
+        }
+      });
+      
+      // Initialize farm type listeners
+      attachFarmTypeListeners();
+      
+      // Initial count update
+      updateFarmCount();
+    });
+  </script>
+{{ end }}

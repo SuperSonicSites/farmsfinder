@@ -1,20 +1,22 @@
-<<<<<<< HEAD
-baseURL = 'https://farmfinders.ca/'
-languageCode = 'en-us'
-title = 'Farm Finders - Canadian Farm Directory'
-theme = 'farmfinders'
-=======
-theme = "farmsfinder-theme"
 baseURL = "http://farmfinders.ca"
 languageCode = "en-ca"
 title = "Farms Finder"
+theme= "farmfinders"
 
-[menus]
-  [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
-    weight = 10
->>>>>>> 7e8546b933e11fb47dc51e68e31024d3b7bc8dea
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 2
+
+[[menu.main]]
+  name = "Contact"
+  url = "/contact/"
+  weight = 3
 
 [module]
   [module.hugoVersion]

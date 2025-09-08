@@ -1,39 +1,46 @@
 {{ define "title" }}{{ .Site.Title }} - Find Farms Across Canada{{ end }}
 
 {{ define "main" }}
-  <article>
-    <header>
-      <h1>{{ .Title }}</h1>
-      {{ .Content }}
-    </header>
-    
-    <section aria-labelledby="categories-heading">
-      <h2 id="categories-heading">Browse by Category</h2>
+  <div class="max-w-3xl mx-auto py-16">
+    <article class="space-y-16">
+      <header class="text-left space-y-8">
+        <h1 class="text-6xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
+        <div class="prose prose-xl prose-gray">
+          {{ .Content }}
+        </div>
+      </header>
       
-      {{ $categories := slice }}
-      {{ range where site.RegularPages "Section" "farms" }}
-        {{ range .Params.categories }}
-          {{ if not (in $categories .) }}
-            {{ $categories = $categories | append . }}
+      <section aria-labelledby="categories-heading" class="space-y-12">
+        <h2 id="categories-heading" class="text-3xl font-light text-gray-800 tracking-wide">Browse by Category</h2>
+        
+        {{ $categories := slice }}
+        {{ range where site.RegularPages "Section" "farms" }}
+          {{ range .Params.categories }}
+            {{ if not (in $categories .) }}
+              {{ $categories = $categories | append . }}
+            {{ end }}
           {{ end }}
         {{ end }}
-      {{ end }}
-      
-      <nav aria-label="Farm categories">
-        <ul>
-        {{ range $categories }}
-          {{ $categoryPath := printf "/%s/" (. | urlize) }}
-          {{ $categoryPage := site.GetPage $categoryPath }}
-          <li>
-            <a href="{{ $categoryPath }}">
-              {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ . | title }}{{ end }}
-            </a>
-          </li>
-        {{ end }}
-        </ul>
-      </nav>
-    </section>
-  </article>
+        
+        <nav aria-label="Farm categories" class="flex justify-center">
+          <ul style="padding-left: 0;"class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl w-full">
+            {{ range $categories }}
+              {{ $categoryPath := printf "/%s/" (. | urlize) }}
+              {{ $categoryPage := site.GetPage $categoryPath }}
+              <li>
+                <a href="{{ $categoryPath }}" 
+                   class="block p-8 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
+                  <span class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide">
+                    {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ . | title }}{{ end }}
+                  </span>
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </section>
+    </article>
+  </div>
 
   {{ partial "schema.html" . }}
 {{ end }}

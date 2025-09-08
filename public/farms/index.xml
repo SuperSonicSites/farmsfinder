@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Farms on Farm Finders - Canadian Farm Directory</title>
+    <title>Farms on Farms Finder</title>
     <link>http://localhost:1313/farms/</link>
-    <description>Recent content in Farms on Farm Finders - Canadian Farm Directory</description>
+    <description>Recent content in Farms on Farms Finder</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
+    <language>en-ca</language>
     <atom:link href="http://localhost:1313/farms/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Santa&#39;s Farm</title>
-      <link>http://localhost:1313/farms/test-farm-1/</link>
+      <title>Briggs Trees</title>
+      <link>http://localhost:1313/farms/briggs-trees/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/farms/test-farm-1/</guid>
-      <description></description>
+      <guid>http://localhost:1313/farms/briggs-trees/</guid>
+      <description>&lt;p&gt;Briggs Trees is a family-owned and operated Christmas tree farm that has been serving the Ottawa area for 35 years. Spanning 100 acres of woods, the farm offers a variety of tree species including spruce, balsam, and Scotch pine for customers to cut their own. Visitors can enjoy a peaceful walk through the scenic property and select the perfect natural tree for their holiday celebrations. In addition to the cut-your-own experience, the farm also provides natural Christmas wreaths for purchase. With its long history and commitment to providing a high-quality, authentic Christmas tree experience, Briggs Trees is a beloved destination for families in the region.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dunns Tree Farm</title>
+      <link>http://localhost:1313/farms/dunns-tree-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/dunns-tree-farm/</guid>
+      <description>&lt;p&gt;Dunn&amp;rsquo;s Christmas Tree Farm is a family-owned operation that has been providing the community with high-quality Christmas trees for over 50 years. Visitors can choose from a variety of tree species, including Scotch pine, White pine, White and Norway spruce, and Balsam fir. The farm offers both pre-cut trees and the opportunity for customers to select and cut their own tree, providing a unique and memorable holiday experience.&lt;/p&gt;&#xA;&lt;p&gt;In addition to the tree selection, Dunn&amp;rsquo;s Tree Farm features several amenities to enhance the visit. Guests can enjoy a warm bonfire to ward off the chill, and for those who arrive after a snowfall, a safe toboggan hill is available for sledding. The farm&amp;rsquo;s peaceful, rural setting offers a refreshing escape from the hustle and bustle of the holiday season, allowing visitors to immerse themselves in the natural beauty of the surroundings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hillcrest Tree Farm</title>
+      <link>http://localhost:1313/farms/hillcrest-tree-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/hillcrest-tree-farm/</guid>
+      <description>&lt;p&gt;Hillcrest Tree Farm is situated on a 100-acre former dairy farm dating back to the 1800s. The farm consists of a white clapboard farmhouse, gambrel roof dairy barn, milk house, drive shed, henhouse, and pigsty. Visitors can choose from a selection of Scotch pine, white pine, white and Norway spruce, and balsam fir trees. The farm offers the option to cut your own tree or purchase a pre-cut tree. Guests can enjoy a pleasant walk through the woods to reach the tree fields. The property features a safe toboggan hill for winter fun, and a warm bonfire is available for visitors to gather around. Hillcrest Tree Farm has been preserving this family tradition since it was purchased in 1987, when the buildings were in poor condition and the fields were overgrown. The farm has since been restored and continues to offer a unique, non-commercial Christmas tree experience.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Madeira Farm</title>
+      <link>http://localhost:1313/farms/madeira-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/madeira-farm/</guid>
+      <description>&lt;p&gt;Madeira Farms offers a variety of locally-grown Christmas trees, including Scotch pine, White pine, White and Norway Spruce, and Balsam fir. Customers can choose to cut their own tree from the farm&amp;rsquo;s selection or purchase a pre-cut tree. The farm provides saws and sleds to assist with transporting trees from the field. In addition to trees, Madeira Farms sells sturdy tree stands and handcrafted wreaths. The farm&amp;rsquo;s ribbon color system helps customers easily identify the type of tree they are looking for. Madeira Farms provides a straightforward, no-frills Christmas tree shopping experience in a peaceful, rural setting.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mark&#39;s Christmas Trees</title>
+      <link>http://localhost:1313/farms/marks-christmas-trees/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/marks-christmas-trees/</guid>
+      <description>&lt;p&gt;Mark&amp;rsquo;s Christmas Trees offers a selection of fresh, pesticide-free Christmas trees grown through hard work and sustainable practices. Established in the local community, the farm provides a variety of tree types, including Scotch Pine, White Pine, White Spruce, and Balsam Fir. Customers can choose to cut their own tree or select a pre-cut option, enjoying the peaceful, natural setting as they search for the perfect addition to their holiday celebrations. The farm&amp;rsquo;s commitment to environmental responsibility is evident in its herbicide and pesticide-free tree maintenance, allowing families to create cherished memories while supporting local, eco-friendly business practices.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Perfect Christmas Tree Farm</title>
+      <link>http://localhost:1313/farms/the-perfect-christmas-tree-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/the-perfect-christmas-tree-farm/</guid>
+      <description>&lt;p&gt;The Perfect Christmas Tree Farm offers a variety of real Christmas trees for purchase. Located in Burlington, the farm has two convenient locations - the main farm and a Dairy Queen lot. Customers can choose from a selection of Balsam, Spruce, Fraser Fir, and Pine trees. No reservations are required to visit the scenic farm, and customers are welcome to bring their family, friends, and pets to enjoy the day. The farm also offers delivery service to the Greater Toronto Area. Payment is accepted in cash only.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Tufford&#39;s Tree Farm</title>
+      <link>http://localhost:1313/farms/tuffords-tree-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/tuffords-tree-farm/</guid>
+      <description>&lt;p&gt;Since 1965, Tufford&amp;rsquo;s Tree Farm has been offering the perfect, non-commercial experience of picking out and cutting your own Christmas tree. In a quiet, rural setting with no lineups or crowds, a pleasant, short walk through the woods takes you to the large selection of trees to be cut fresh and brought home. The farm offers Scotch pine, White pine, White and Norway Spruce, and Balsam fir. Should there be a snowfall before your visit, you can enjoy a safe toboggan hill to slide down on, and afterwards warm up by a cozy bonfire.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

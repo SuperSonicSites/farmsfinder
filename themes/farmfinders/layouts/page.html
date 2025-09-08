@@ -1,10 +1,281 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+  <div class="max-w-3xl mx-auto pt-16 pb-32">
+    {{ if eq .Section "farms" }}
+      {{ partial "breadcrumb.html" . }}
+    {{ end }}
 
-  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-  {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    <article{{ if eq .Section "farms" }} itemscope itemtype="https://schema.org/LocalBusiness"{{ end }} class="space-y-4">
+      {{ if eq .Section "farms" }}
+        <!-- Title -->
+        <header class="text-left space-y-6">
+          <h1 itemprop="name" class="text-6xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
+          <!-- Category -->
+           
+          {{ if .Params.categories }}
+            <div class="text-xl text-gray-600">
+              {{ range $i, $category := .Params.categories }}
+                {{ if gt $i 0 }}, {{ end }}
+                {{ $categoryPath := printf "/%s/" ($category | urlize) }}
+                {{ $categoryPage := site.GetPage $categoryPath }}
+                <a href="{{ $categoryPath }}" class="text-blue-600 hover:text-blue-800 font-light">
+                  {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $category | title }}{{ end }}
+                </a>
+              {{ end }}
+              <!-- Established -->
+        {{ if .Params.established }}
+        Farm Established in {{ .Params.established }}
+      {{ end }}
+            </div>
+          {{ end }}
+          <!-- Opening Date -->
+        {{ if .Params.opening_date }}
+          <section class="space-y-4">
+            <p class="text-xl text-gray-700"><span class="font-bold">Opening Date:</span> {{ .Params.opening_date }}</p>
+          </section>
+        {{ end }}
+           <!-- Additional Content -->
+            
+        {{ if .Content }}
+        <section class="pt-8 border-t botder-b border-gray-200">
+          <h2 class="text-2xl font-light text-gray-800">About The Farm</h2>
+          <div class="prose prose-xl prose-gray max-w-none">
+            {{ .Content }}
+          </div>
+        </section>
+      {{ end }}
+          
+        </header>
 
-  {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        <!-- Hours -->
+        {{ if or .Params.hours.friday .Params.hours.saturday .Params.hours.sunday .Params.hours.monday .Params.hours.tuesday .Params.hours.wednesday .Params.hours.thursday }}
+          <section class="space-y-2">
+            <h2 class="text-2xl font-light text-gray-800">Hours</h2>
+            
+            <!-- Desktop Table (horizontal) -->
+            <div class="hidden md:block">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="border-b border-gray-200">
+                    <th class="text-left py-3 px-0 font-medium text-gray-700">Monday</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-700">Tuesday</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-700">Wednesday</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-700">Thursday</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-700">Friday</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-700">Saturday</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-700">Sunday</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="py-3 px-0 text-gray-600">{{ .Params.hours.monday }}</td>
+                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.tuesday }}</td>
+                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.wednesday }}</td>
+                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.thursday }}</td>
+                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.friday }}</td>
+                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.saturday }}</td>
+                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.sunday }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Mobile Table (vertical) -->
+            <div class="md:hidden">
+              <div class="space-y-2">
+                
+                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+                    <span class="font-medium text-gray-700">Monday</span>
+                    <span class="text-gray-600">{{ .Params.hours.monday }}</span>
+                  </div>
+                
+                
+                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+                    <span class="font-medium text-gray-700">Tuesday</span>
+                    <span class="text-gray-600">{{ .Params.hours.tuesday }}</span>
+                  </div>
+               
+                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+                    <span class="font-medium text-gray-700">Wednesday</span>
+                    <span class="text-gray-600">{{ .Params.hours.wednesday }}</span>
+                  </div>
+                
+                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+                    <span class="font-medium text-gray-700">Thursday</span>
+                    <span class="text-gray-600">{{ .Params.hours.thursday }}</span>
+                  </div>
+                
+                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+                    <span class="font-medium text-gray-700">Friday</span>
+                    <span class="text-gray-600">{{ .Params.hours.friday }}</span>
+                  </div>
+               
+                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+                    <span class="font-medium text-gray-700">Saturday</span>
+                    <span class="text-gray-600">{{ .Params.hours.saturday }}</span>
+                  </div>
+                
+                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+                    <span class="font-medium text-gray-700">Sunday</span>
+                    <span class="text-gray-600">{{ .Params.hours.sunday }}</span>
+                  </div>
+                
+              </div>
+            </div>
+          </section>
+        {{ end }}
+
+        <!-- Amenities -->
+        {{ if .Params.amenities }}
+          <section class="space-y-4">
+            <h2 class="text-2xl font-light text-gray-800">Amenities</h2>
+            <div class="flex flex-wrap gap-2">
+              {{ range .Params.amenities }}
+                <span class="inline-block px-4 py-2 text-sm bg-blue-50 text-blue-700 rounded-full border border-blue-200">{{ . }}</span>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+
+        <!-- Varieties -->
+        {{ if .Params.varieties }}
+          <section class="space-y-4">
+            <h2 class="text-2xl font-light text-gray-800">Varieties</h2>
+            <div class="flex flex-wrap gap-2">
+              {{ range .Params.varieties }}
+                <span class="inline-block px-4 py-2 text-sm bg-green-50 rounded-full border border-green-200">{{ . }}</span>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+
+        <!-- Social Media -->
+        {{ if or .Params.social.facebook .Params.social.instagram .Params.social.twitter }}
+          <section class="space-y-4">
+            <h2 class="text-2xl font-light text-gray-800">Connect on Social Media</h2>
+            <div class="flex items-center space-x-6">
+              {{ if .Params.social.facebook }}
+                <a href="{{ .Params.social.facebook }}" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  <span>Facebook</span>
+                </a>
+              {{ end }}
+              {{ if .Params.social.instagram }}
+                <a href="{{ .Params.social.instagram }}" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-600 hover:text-pink-600 transition-colors">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.875 2.026-1.297 3.323-1.297s2.448.422 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.404h-1.297V6.287h1.297v1.297zm-1.297 2.594c-.875-.875-2.026-1.297-3.323-1.297s-2.448.422-3.323 1.297c-.928.875-1.418 2.026-1.418 3.323s.49 2.448 1.418 3.244c.875.807 2.026 1.297 3.323 1.297s2.448-.49 3.323-1.297c.928-.796 1.418-1.947 1.418-3.244s-.49-2.448-1.418-3.323z"/></svg>
+                  <span>Instagram</span>
+                </a>
+              {{ end }}
+              {{ if .Params.social.twitter }}
+                <a href="{{ .Params.social.twitter }}" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-600 hover:text-blue-400 transition-colors">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                  <span>Twitter</span>
+                </a>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+
+        
+        
+          <section class="pt-12">
+            <!-- Google Maps Embed -->
+            {{ if .Params.place_id }}
+              <div class="mb-6">
+                <h2 class="text-2xl font-light text-gray-800 mb-4">Location</h2>
+                <div class="w-full rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    width="100%"
+                    height="500px"
+                    frameborder="0"
+                    style="border:0"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE&q=place_id:{{ .Params.place_id }}"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+            {{ end }}
+          
+          </section>
+        
+
+        <!-- Nearby Farms Recommendations -->
+        {{ if and .Params.coordinates.latitude .Params.coordinates.longitude }}
+          <section class="pt-12 border-t border-gray-200">
+            <h2 class="text-2xl font-light text-gray-800 mb-6">Other Farms Nearby</h2>
+            
+            {{ $currentLat := .Params.coordinates.latitude }}
+            {{ $currentLng := .Params.coordinates.longitude }}
+            {{ $currentSlug := .Slug }}
+            {{ $nearbyFarms := slice }}
+            
+            {{ range where site.RegularPages "Section" "farms" }}
+              {{ if and (ne .Slug $currentSlug) .Params.coordinates.latitude .Params.coordinates.longitude }}
+                {{ $farmLat := .Params.coordinates.latitude }}
+                {{ $farmLng := .Params.coordinates.longitude }}
+                
+                <!-- Haversine formula for distance calculation -->
+                {{ $dLat := math.Abs (sub $farmLat $currentLat) }}
+                {{ $dLng := math.Abs (sub $farmLng $currentLng) }}
+                {{ $a := add (math.Pow (math.Sin (div (mul $dLat 0.017453292519943295) 2)) 2) (mul (math.Cos (mul $currentLat 0.017453292519943295)) (math.Cos (mul $farmLat 0.017453292519943295)) (math.Pow (math.Sin (div (mul $dLng 0.017453292519943295) 2)) 2)) }}
+                {{ $c := mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (sub 1 $a))) }}
+                {{ $distance := mul 6371 $c }}
+                
+                {{ $nearbyFarms = $nearbyFarms | append (dict "farm" . "distance" $distance) }}
+              {{ end }}
+            {{ end }}
+            
+            <!-- Sort by distance and take first 3 -->
+            {{ $sortedFarms := sort $nearbyFarms "distance" }}
+            {{ $topThree := first 3 $sortedFarms }}
+            
+            {{ if $topThree }}
+              <div class="grid grid-cols-1 gap-2">
+                {{ range $topThree }}
+                  {{ $farm := .farm }}
+                  {{ $dist := .distance }}
+                  <div class="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-200 px-4 py-4 transition-all duration-200 overflow-hidden">
+                    <!-- Card Header -->
+                    <div class="py-2">
+                      <h3 class="text-lg font-semibold text-gray-900 mb-3 leading-tight">
+                        <a href="{{ $farm.RelPermalink }}" class="hover:text-blue-600 transition-colors">{{ $farm.Title }}</a>
+                      </h3>
+                      
+                      <!-- Location & Distance Info -->
+                      <div class="space-y-2 mb-2">
+                        {{ if $farm.Params.address.city }}
+                          <div class="text-sm text-gray-600">
+                            {{ $farm.Params.address.city }}, {{ $farm.Params.address.province }}
+                          </div>
+                        {{ end }}
+                        
+                        <div class="text-sm text-blue-600 font-medium">
+                          {{ printf "%.1f km away" $dist }}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Card Footer -->
+                    <div class="">
+                      <a href="{{ $farm.RelPermalink }}" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                        View Details
+                      </a>
+                    </div>
+                  </div>
+                {{ end }}
+              </div>
+            {{ else }}
+              <p class="text-gray-600">No other farms found in the area.</p>
+            {{ end }}
+          </section>
+        {{ end }}
+
+        <meta itemprop="url" content="{{ .Permalink }}">
+      {{ else }}
+        <div class="prose prose-xl prose-gray max-w-none">
+          {{ .Content }}
+        </div>
+        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+      {{ end }}
+    </article>
+  </div>
 {{ end }}

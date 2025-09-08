@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Restore natural heading styles */
+@layer base {
+  h1 {
+    @apply text-3xl font-light mb-4;
+  }
+  
+  h2 {
+    @apply text-2xl font-light mb-3;
+  }
+  
+  h3 {
+    @apply text-xl font-light mb-2;
+  }
+  
+  h4 {
+    @apply text-lg font-light mb-2;
+  }
+  
+  p {
+    @apply mb-4 font-light;
+  }
+  
+  ul, ol {
+    @apply mb-4 pl-6;
+  }
+  
+  li {
+    @apply mb-1;
+  }
+  
+  a {
+    @apply text-blue-600 hover:text-blue-800 underline;
+  }
+}
+
+/* Prose-specific font-light styling */
+@layer components {
+  .prose h1,
+  .prose h2, 
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply font-light;
+  }
+  
+  .prose p {
+    @apply font-light;
+  }
+  
+  /* Remove underlines from button-style and image links with higher specificity */
+  a.block,
+  a[class*="border"],
+  a[class*="rounded"],
+  a[class*="p-"],
+  header a,
+  nav a.block,
+  .group a {
+    text-decoration: none !important;
+  }
+  
+  .breadcrumb {
+    @apply flex items-center space-x-2 text-sm text-gray-600 mb-4;
+  }
+  
+  .breadcrumb li {
+    @apply flex items-center;
+  }
+  
+  .breadcrumb li:not(:last-child)::after {
+    content: ">";
+    @apply ml-2 text-gray-400;
+  }
+  
+  .breadcrumb a {
+    @apply text-blue-600 hover:text-blue-800 hover:underline;
+  }
+  
+  .breadcrumb [aria-current="page"] {
+    @apply text-gray-900 font-medium;
+  }
+  
+  .farm-card {
+    @apply border border-gray-200 rounded-lg p-6 mb-4 shadow-sm hover:shadow-md transition-shadow;
+  }
+  
+  .farm-detail {
+    @apply mb-3;
+  }
+  
+  .farm-detail strong {
+    @apply font-semibold text-gray-700;
+  }
+}
