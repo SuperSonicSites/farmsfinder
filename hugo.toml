@@ -3,6 +3,9 @@ languageCode = "en-ca"
 title = "Farms Finder"
 theme= "farmfinders"
 
+[params]
+  googleMapsApiKey = "AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE"
+
 [[menu.main]]
   name = "Home"
   url = "/"
@@ -11,12 +14,12 @@ theme= "farmfinders"
 [[menu.main]]
   name = "About"
   url = "/about/"
-  weight = 2
+  weight = 10
 
 [[menu.main]]
   name = "Contact"
   url = "/contact/"
-  weight = 3
+  weight = 20
 
 [module]
   [module.hugoVersion]
