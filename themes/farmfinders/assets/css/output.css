@@ -1737,6 +1737,10 @@ a.block,
   margin-bottom: 1.5rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -1783,10 +1787,6 @@ a.block,
 
 .h-6 {
   height: 1.5rem;
-}
-
-.h-64 {
-  height: 16rem;
 }
 
 .max-h-48 {
@@ -1859,6 +1859,10 @@ a.block,
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-6 {
@@ -2081,12 +2085,20 @@ a.block,
   padding-bottom: 8rem;
 }
 
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
 .pt-12 {
   padding-top: 3rem;
 }
 
 .pt-16 {
   padding-top: 4rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .pt-8 {

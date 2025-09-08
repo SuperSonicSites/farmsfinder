@@ -6,6 +6,7 @@
     "prebuild": "node themes/farmfinders/assets/js/generate-farms.js && node themes/farmfinders/assets/js/generate-categories.js",
     "build": "npm run build:css && hugo",
     "dev": "npm run prebuild && npm run build:css && hugo server",
+    "deploy": "npm run prebuild && npm run build:css && hugo --minify",
     "generate": "node themes/farmfinders/assets/js/generate-categories.js",
     "build:css": "tailwindcss -i ./themes/farmfinders/assets/css/input.css -o ./themes/farmfinders/assets/css/output.css",
     "watch:css": "tailwindcss -i ./themes/farmfinders/assets/css/input.css -o ./themes/farmfinders/assets/css/output.css --watch"
@@ -15,8 +16,12 @@
     "csv-parser": "^3.0.0"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.0",
-    "@tailwindcss/typography": "^0.5.10",
-    "@tailwindcss/forms": "^0.5.7"
+    "tailwindcss": "^3.4.13",
+    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/forms": "^0.5.9"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }
