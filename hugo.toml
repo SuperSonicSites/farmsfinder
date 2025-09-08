@@ -3,8 +3,12 @@ languageCode = "en-ca"
 title = "Farms Finder"
 theme= "farmfinders"
 
+# Disable unused taxonomies
+disableKinds = ["taxonomy", "term"]
+
 [params]
   googleMapsApiKey = "AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE"
+  googleAnalytics = "G-L59ST3D8JW"
 
 [[menu.main]]
   name = "Home"

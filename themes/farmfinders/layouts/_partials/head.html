@@ -29,5 +29,17 @@
 <!-- Language -->
 <meta name="language" content="{{ .Site.Language.LanguageCode }}">
 
+<!-- Google Analytics -->
+{{ if .Site.Params.googleAnalytics }}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
+{{ end }}
+
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}
