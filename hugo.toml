@@ -1,10 +1,10 @@
-baseURL = "http://farmfinders.ca"
+baseURL = "https://farmfinders.ca"
 languageCode = "en-ca"
 title = "Farms Finder"
 theme= "farmfinders"
 
 # Disable unused taxonomies
-disableKinds = ["taxonomy", "term"]
+disableKinds = ["taxonomy", "term", "category"]
 
 [params]
   googleMapsApiKey = "AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE"
