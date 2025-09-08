@@ -8,8 +8,8 @@
     "dev": "npm run prebuild && npm run build:css && hugo server",
     "deploy": "npm run prebuild && npm run build:css && hugo --minify",
     "generate": "node themes/farmfinders/assets/js/generate-categories.js",
-    "build:css": "tailwindcss -i ./themes/farmfinders/assets/css/input.css -o ./themes/farmfinders/assets/css/output.css",
-    "watch:css": "tailwindcss -i ./themes/farmfinders/assets/css/input.css -o ./themes/farmfinders/assets/css/output.css --watch"
+    "build:css": "npx tailwindcss -i ./themes/farmfinders/assets/css/input.css -o ./themes/farmfinders/assets/css/output.css",
+    "watch:css": "npx tailwindcss -i ./themes/farmfinders/assets/css/input.css -o ./themes/farmfinders/assets/css/output.css --watch"
   },
   "dependencies": {
     "csv-parser": "3.0.0",
