@@ -50,7 +50,7 @@
             {{ else }}
               {{ $city = $city | replace "-" " " | title }}
             {{ end }}
-            {{ $h1Text = printf "Find a %s farm in %s, %s" $category $city $province }}
+            {{ $h1Text = printf "Find a %s farm near %s, %s" $category $city $province }}
           {{ end }}
         {{ end }}
         
@@ -76,6 +76,10 @@
             {{ $filteredFarms = $filteredFarms | append . }}
           {{ end }}
         {{ end }}
+        
+        <!-- Regional Map for Provincial Pages -->
+        {{ partial "regional-map.html" (dict "page" . "region" $province "category" $categorySlug) }}
+        
       {{ else if eq (len $pathParts) 3 }}
         {{ $categorySlug := index $pathParts 0 }}
         {{ $province := index $pathParts 1 }}
@@ -88,18 +92,21 @@
             {{ $filteredFarms = $filteredFarms | append . }}
           {{ end }}
         {{ end }}
+        
+        <!-- Regional Map for City Pages -->
+        {{ partial "regional-map.html" (dict "page" . "region" $province "category" $categorySlug "city" $city) }}
+        
       {{ end }}
       
       {{ if .Pages }}
         <section aria-labelledby="locations-heading" class="space-y-12">
           <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
           <nav aria-label="Location filters" class="flex justify-center">
-            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl w-full">
+            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
               {{ range .Pages }}
                 <li>
-                  <a href="{{ .RelPermalink }}" 
-                     class="block p-8 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
-                    <span class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide">
+                  <a href="{{ .RelPermalink }}">
+                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
                       {{ .LinkTitle }}
                     </span>
                   </a>
@@ -114,15 +121,13 @@
         <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
         {{ if $filteredFarms }}
           <div class="flex">
-            <ul style="padding-left: 0;" class="grid grid-cols-1 gap-4 max-w-4xl w-full">
+            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
               {{ range $filteredFarms }}
                 <li>
-                  <article class="block p-2 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
-                    <h3 class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide mb-2">
                       <a href="{{ .RelPermalink }}" class="hover:text-gray-700 transition-colors">{{ .LinkTitle }}</a>
-                    </h3>
+                    
                     <p class="text-gray-600 font-light">{{ .Params.address.city }}, {{ .Params.address.province }}</p>
-                  </article>
+                  
                 </li>
               {{ end }}
             </ul>
