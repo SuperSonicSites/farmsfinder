@@ -54,7 +54,7 @@
           {{ end }}
         {{ end }}
         
-        <h1 class="text-6xl font-light text-gray-900 tracking-tight capitalize">{{ $h1Text }}</h1>
+        <h1 class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight capitalize">{{ $h1Text }}</h1>
         <div class="prose prose-xl prose-gray">
           {{ .Content }}
         </div>
@@ -86,11 +86,56 @@
         {{ $province = $province | lower }}
         {{ $city := index $pathParts 2 }}
         {{ $city = $city | lower }}
+        
+        {{- /* Get city center coordinates - same logic as regional-map.html */ -}}
+        {{- $cityLat := 0.0 }}
+        {{- $cityLng := 0.0 }}
+        {{- /* First try current page coordinates */ -}}
+        {{- if and .Params.coordinates .Params.location_type }}
+          {{- $cityLat = .Params.coordinates.latitude }}
+          {{- $cityLng = .Params.coordinates.longitude }}
+        {{- else }}
+          {{- /* Fallback: get coordinates from any farm in that city */ -}}
+          {{- range site.Pages }}
+            {{- if and (eq .Section "farms") .Params.coordinates .Params.address }}
+              {{- if eq (lower .Params.address.city) $city }}
+                {{- $cityLat = .Params.coordinates.latitude }}
+                {{- $cityLng = .Params.coordinates.longitude }}
+                {{- break }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+        
+        {{- /* Filter farms using same logic as regional-map.html */ -}}
         {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
         {{ range $categoryFarms }}
-          {{ if and (eq (.Params.address.province | lower) $province) (eq (.Params.address.city | lower) $city) }}
-            {{ $filteredFarms = $filteredFarms | append . }}
-          {{ end }}
+          {{- if and .Params.coordinates .Params.address }}
+            {{- $farmRegion := lower .Params.address.province }}
+            {{- $farmLat := .Params.coordinates.latitude }}
+            {{- $farmLng := .Params.coordinates.longitude }}
+            
+            {{- $matchesCategory := in .Params.categories $categorySlug }}
+            {{- $matchesRegion := eq $farmRegion $province }}
+            
+            {{- $matchesCity := true }}
+            {{- /* Calculate distance using Haversine formula */ -}}
+            {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
+            {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
+            {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
+            {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+            
+            {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+            {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+            {{- $distance := math.Mul 6371 $c }}
+            
+            {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
+            {{- $matchesCity = le $distance 80 }}
+            
+            {{- if and $matchesCategory $matchesRegion $matchesCity }}
+              {{ $filteredFarms = $filteredFarms | append . }}
+            {{- end }}
+          {{- end }}
         {{ end }}
         
         <!-- Regional Map for City Pages -->

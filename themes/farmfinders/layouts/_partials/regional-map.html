@@ -35,12 +35,11 @@ Renders a Google Map with farm pins for a specific region
 {{- range site.Pages }}
   {{- if and (eq .Section "farms") .Params.coordinates }}
     {{- if and .Params.categories .Params.address }}
-      {{- $farmCategory := index .Params.categories 0 }}
       {{- $farmRegion := lower .Params.address.province }}
       {{- $farmLat := .Params.coordinates.latitude }}
       {{- $farmLng := .Params.coordinates.longitude }}
       
-      {{- $matchesCategory := eq $farmCategory $category }}
+      {{- $matchesCategory := in .Params.categories $category }}
       {{- $matchesRegion := eq $farmRegion $region }}
       
       {{- $matchesCity := true }}
@@ -100,7 +99,7 @@ function initRegionalMap() {
   // Use city center for city searches
   const centerLat = {{ $cityLat }};
   const centerLng = {{ $cityLng }};
-  const initialZoom = 10;
+  const initialZoom = 8;
   {{- else }}
   // Calculate center point for regional searches
   const centerLat = farms.reduce((sum, farm) => sum + farm.lat, 0) / farms.length;

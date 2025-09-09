@@ -8,7 +8,7 @@
       {{ if eq .Section "farms" }}
         <!-- Title -->
         <header class="text-left space-y-6">
-          <h1 itemprop="name" class="text-6xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
+          <h1 itemprop="name" class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
           <!-- Category -->
            
           {{ if .Params.categories }}
@@ -29,14 +29,26 @@
           {{ end }}
           <!-- Opening Date -->
         {{ if .Params.opening_date }}
-          <section class="space-y-4">
+          <section class="">
             <p class="text-xl text-gray-700"><span class="font-bold">Opening Date:</span> {{ .Params.opening_date }}</p>
+          
+        {{ end }}
+          <!-- Website URL-->
+        {{ if .Params.website }}
+          <section class="space-y-2">
+            <div>
+            <a href="{{ .Params.website }}" target="_blank" rel="noopener" class="text-xl text-blue-600 hover:text-blue-800 font-light">🔗 <span class="underline">Visit Website</span></a><br>
+          </div>
+          <div>
+            <a href="{{ .Params.location | urlize }}" target="_blank" rel="noopener" class="text-xl text-blue-600 hover:text-blue-800 font-light">📍 <span class="underline">Get directions</span></a>
+          </div>
           </section>
         {{ end }}
+
            <!-- Additional Content -->
             
         {{ if .Content }}
-        <section class="pt-8 border-t botder-b border-gray-200">
+        <section class="py-4 border-t botder-b border-gray-200">
           <h2 class="text-2xl font-light text-gray-800">About The Farm</h2>
           <div class="prose prose-xl prose-gray max-w-none">
             {{ .Content }}
@@ -48,32 +60,32 @@
 
         <!-- Hours -->
         {{ if or .Params.hours.friday .Params.hours.saturday .Params.hours.sunday .Params.hours.monday .Params.hours.tuesday .Params.hours.wednesday .Params.hours.thursday }}
-          <section class="space-y-2">
+          <section class="space-y-2 border-t border-gray-200 py-4">
             <h2 class="text-2xl font-light text-gray-800">Hours</h2>
             
             <!-- Desktop Table (horizontal) -->
             <div class="hidden md:block">
               <table class="w-full border-collapse">
                 <thead>
-                  <tr class="border-b border-gray-200">
-                    <th class="text-left py-3 px-0 font-medium text-gray-700">Monday</th>
-                    <th class="text-left py-3 px-4 font-medium text-gray-700">Tuesday</th>
-                    <th class="text-left py-3 px-4 font-medium text-gray-700">Wednesday</th>
-                    <th class="text-left py-3 px-4 font-medium text-gray-700">Thursday</th>
-                    <th class="text-left py-3 px-4 font-medium text-gray-700">Friday</th>
-                    <th class="text-left py-3 px-4 font-medium text-gray-700">Saturday</th>
-                    <th class="text-left py-3 px-4 font-medium text-gray-700">Sunday</th>
+                  <tr class="border-b border-gray-200 bg-blue-50">
+                    <th class="text-left py-3 px-2 font-medium text-gray-700">Monday</th>
+                    <th class="text-left py-3 px-2 font-medium text-gray-700">Tuesday</th>
+                    <th class="text-left py-3 px-2 font-medium text-gray-700">Wednesday</th>
+                    <th class="text-left py-3 px-2 font-medium text-gray-700">Thursday</th>
+                    <th class="text-left py-3 px-2 font-medium text-gray-700">Friday</th>
+                    <th class="text-left py-3 px-2 font-medium text-gray-700">Saturday</th>
+                    <th class="text-left py-3 px-2 font-medium text-gray-700">Sunday</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="py-3 px-0 text-gray-600">{{ .Params.hours.monday }}</td>
-                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.tuesday }}</td>
-                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.wednesday }}</td>
-                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.thursday }}</td>
-                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.friday }}</td>
-                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.saturday }}</td>
-                    <td class="py-3 px-4 text-gray-600">{{ .Params.hours.sunday }}</td>
+                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.monday }}</td>
+                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.tuesday }}</td>
+                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.wednesday }}</td>
+                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.thursday }}</td>
+                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.friday }}</td>
+                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.saturday }}</td>
+                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.sunday }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -126,7 +138,7 @@
 
         <!-- Amenities -->
         {{ if .Params.amenities }}
-          <section class="space-y-4">
+          <section class="space-y-4 border-t border-gray-200 py-4">
             <h2 class="text-2xl font-light text-gray-800">Amenities</h2>
             <div class="flex flex-wrap gap-2">
               {{ range .Params.amenities }}
@@ -138,7 +150,7 @@
 
         <!-- Varieties -->
         {{ if .Params.varieties }}
-          <section class="space-y-4">
+          <section class="space-y-4 border-t border-gray-200 py-4">
             <h2 class="text-2xl font-light text-gray-800">Varieties</h2>
             <div class="flex flex-wrap gap-2">
               {{ range .Params.varieties }}
@@ -150,7 +162,7 @@
 
         <!-- Social Media -->
         {{ if or .Params.social.facebook .Params.social.instagram .Params.social.twitter }}
-          <section class="space-y-4">
+          <section class="space-y-4 border-t border-gray-200 py-4">
             <h2 class="text-2xl font-light text-gray-800">Connect on Social Media</h2>
             <div class="flex items-center space-x-6">
               {{ if .Params.social.facebook }}
@@ -177,7 +189,7 @@
 
         
         
-          <section class="pt-12">
+          <section class="border-t border-gray-200 py-4">
             <!-- Google Maps Embed -->
             {{ if .Params.place_id }}
               <div class="mb-6">
