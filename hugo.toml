@@ -6,6 +6,18 @@ theme= "farmfinders"
 # Disable unused taxonomies
 disableKinds = ["taxonomy", "term", "category"]
 
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  lastmod = ["lastmod", ":git", "date", "publishDate"]
+  publishDate = ["publishDate", "date"]
+  expiryDate = ["expiryDate"]
+
+[build]
+  writeStats = true
+
+[build]
+  writeStats = true
+
 [params]
   googleMapsApiKey = "AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE"
   googleAnalytics = "G-L59ST3D8JW"

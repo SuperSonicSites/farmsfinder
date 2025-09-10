@@ -46,31 +46,37 @@
       
       
         
-          
+      
         
       
         
-          
+      
         
       
         
-          
+      
         
       
         
-          
+      
         
       
         
-          
+      
         
       
         
-          
+      
         
       
         
-          
+      
+        
+      
+        
+      
+        
+      
         
       
       {
@@ -99,78 +105,8 @@
         "mainEntity": {
           "@type": "ItemList",
           "name": "Christmas Tree Farms in Ontario",
-          "numberOfItems":  7 ,
+          "numberOfItems":  0 ,
           "itemListElement": [
-            
-            
-            {
-              "@type": "LocalBusiness",
-              "name": "Briggs Trees",
-              "url": "http:\/\/localhost:1313\/farms\/briggs-trees\/",
-              "addressLocality": "Navan",
-              "addressRegion": "Ontario",
-              "addressCountry": "CA"
-            }
-            
-            ,
-            {
-              "@type": "LocalBusiness",
-              "name": "Dunns Tree Farm",
-              "url": "http:\/\/localhost:1313\/farms\/dunns-tree-farm\/",
-              "addressLocality": "Springford",
-              "addressRegion": "Ontario",
-              "addressCountry": "CA"
-            }
-            
-            ,
-            {
-              "@type": "LocalBusiness",
-              "name": "Hillcrest Tree Farm",
-              "url": "http:\/\/localhost:1313\/farms\/hillcrest-tree-farm\/",
-              "addressLocality": "North Gower",
-              "addressRegion": "Ontario",
-              "addressCountry": "CA"
-            }
-            
-            ,
-            {
-              "@type": "LocalBusiness",
-              "name": "Madeira Farm",
-              "url": "http:\/\/localhost:1313\/farms\/madeira-farm\/",
-              "addressLocality": "Guelph-Eramosa",
-              "addressRegion": "Ontario",
-              "addressCountry": "CA"
-            }
-            
-            ,
-            {
-              "@type": "LocalBusiness",
-              "name": "Mark\u0027s Christmas Trees",
-              "url": "http:\/\/localhost:1313\/farms\/marks-christmas-trees\/",
-              "addressLocality": "Millgrove",
-              "addressRegion": "Ontario",
-              "addressCountry": "CA"
-            }
-            
-            ,
-            {
-              "@type": "LocalBusiness",
-              "name": "The Perfect Christmas Tree Farm",
-              "url": "http:\/\/localhost:1313\/farms\/the-perfect-christmas-tree-farm\/",
-              "addressLocality": "Troy",
-              "addressRegion": "Ontario",
-              "addressCountry": "CA"
-            }
-            
-            ,
-            {
-              "@type": "LocalBusiness",
-              "name": "Tufford\u0027s Tree Farm",
-              "url": "http:\/\/localhost:1313\/farms\/tuffords-tree-farm\/",
-              "addressLocality": "Whitchurch-Stouffville",
-              "addressRegion": "Ontario",
-              "addressCountry": "CA"
-            }
             
           ]
         }
@@ -354,174 +290,42 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
           
-            
+        
           
         
           
-            
+        
           
         
           
-            
+        
           
         
           
-            
+        
           
         
           
-            
+        
+          
+        
           
         
           
-            
+        
+          
+        
           
         
           
-            
+        
+          
+        
           
         
         
         
         
-<div class="mb-8">
-  <h2 class="text-2xl font-light text-gray-800 mb-4">
-      Farm Locations
-  </h2>
-  <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
-</div>
-
-<script>
-function initRegionalMap() {
-  
-  const farms = [
-    {
-      name: "\"Briggs Trees\"",
-      lat:  45.4100519 ,
-      lng:  -75.3803301 ,
-      url: "\"/farms/briggs-trees/\"",
-      address: "\"Navan, Ontario\"",
-      phone: "\"+1 613-835-2955\""
-    },
-    {
-      name: "\"Dunns Tree Farm\"",
-      lat:  42.9180461 ,
-      lng:  -80.6577387 ,
-      url: "\"/farms/dunns-tree-farm/\"",
-      address: "\"Springford, Ontario\"",
-      phone: "\"+1 519-550-3739\""
-    },
-    {
-      name: "\"Hillcrest Tree Farm\"",
-      lat:  45.093368 ,
-      lng:  -75.668356 ,
-      url: "\"/farms/hillcrest-tree-farm/\"",
-      address: "\"North Gower, Ontario\"",
-      phone: "\"+1 613-489-2994\""
-    },
-    {
-      name: "\"Madeira Farm\"",
-      lat:  43.6447004 ,
-      lng:  -80.180834 ,
-      url: "\"/farms/madeira-farm/\"",
-      address: "\"Guelph-Eramosa, Ontario\"",
-      phone: "\"+1 519-856-1009\""
-    },
-    {
-      name: "\"Mark's Christmas Trees\"",
-      lat:  43.3539491 ,
-      lng:  -80.0758786 ,
-      url: "\"/farms/marks-christmas-trees/\"",
-      address: "\"Millgrove, Ontario\"",
-      phone: "\"+1 905-659-7046\""
-    },
-    {
-      name: "\"The Perfect Christmas Tree Farm\"",
-      lat:  43.3122646 ,
-      lng:  -80.102313 ,
-      url: "\"/farms/the-perfect-christmas-tree-farm/\"",
-      address: "\"Troy, Ontario\"",
-      phone: "\"+1 905-510-3907\""
-    },
-    {
-      name: "\"Tufford's Tree Farm\"",
-      lat:  44.0607806 ,
-      lng:  -79.2912618 ,
-      url: "\"/farms/tuffords-tree-farm/\"",
-      address: "\"Whitchurch-Stouffville, Ontario\"",
-      phone: "\"+1 905-640-2548\""
-    },
-  ];
-
-  if (farms.length === 0) return;
-  
-  const centerLat = farms.reduce((sum, farm) => sum + farm.lat, 0) / farms.length;
-  const centerLng = farms.reduce((sum, farm) => sum + farm.lng, 0) / farms.length;
-  const initialZoom = farms.length === 1 ? 14 : 9;
-
-  
-  const map = new google.maps.Map(document.getElementById('regional-map'), {
-    zoom: initialZoom,
-    center: { lat: centerLat, lng: centerLng },
-    mapTypeId: 'roadmap'
-  });
-
-  
-  farms.forEach(farm => {
-    const marker = new google.maps.Marker({
-      position: { lat: farm.lat, lng: farm.lng },
-      map: map,
-      title: farm.name
-    });
-
-    
-    const infoContent = `
-      <div class="p-2">
-        <h3 class="font-medium text-lg mb-1">
-          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
-        </h3>
-        <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
-        ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
-        <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
-      </div>
-    `;
-
-    const infoWindow = new google.maps.InfoWindow({
-      content: infoContent
-    });
-
-    marker.addListener('click', () => {
-      infoWindow.open(map, marker);
-    });
-  });
-  
-  if (farms.length > 1) {
-    const bounds = new google.maps.LatLngBounds();
-    farms.forEach(farm => {
-      bounds.extend(new google.maps.LatLng(farm.lat, farm.lng));
-    });
-    map.fitBounds(bounds);
-    
-    
-    google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
-      if (map.getZoom() > 12) {
-        map.setZoom(12);
-      }
-    });
-  }
-}
-
-
-if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE&callback=initRegionalMap`;
-  script.async = true;
-  script.defer = true;
-  document.head.appendChild(script);
-} else {
-  initRegionalMap();
-}
-</script>
 
         
       
@@ -596,59 +400,8 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
       <section aria-labelledby="farms-heading" class="space-y-12">
         <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
         
-          <div class="flex">
-            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
-              
-                <li>
-                      <a href="/farms/briggs-trees/" class="hover:text-gray-700 transition-colors">Briggs Trees</a>
-                    
-                    <p class="text-gray-600 font-light">Navan, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/dunns-tree-farm/" class="hover:text-gray-700 transition-colors">Dunns Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Springford, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/hillcrest-tree-farm/" class="hover:text-gray-700 transition-colors">Hillcrest Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">North Gower, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/madeira-farm/" class="hover:text-gray-700 transition-colors">Madeira Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Guelph-Eramosa, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/marks-christmas-trees/" class="hover:text-gray-700 transition-colors">Mark&#39;s Christmas Trees</a>
-                    
-                    <p class="text-gray-600 font-light">Millgrove, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/the-perfect-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">The Perfect Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Troy, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/tuffords-tree-farm/" class="hover:text-gray-700 transition-colors">Tufford&#39;s Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Whitchurch-Stouffville, Ontario</p>
-                  
-                </li>
-              
-            </ul>
+          <div class="text-center py-12">
+            <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
           </div>
         
       </section>
@@ -668,6 +421,10 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode:"3347bc66e2a13fcb75dd374897af470d1d5c090166b53b5de2f8a4cb71218097", values:{},ready:function(){$zoho.salesiq.floatbutton.visible('hide');}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zohocloud.ca/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);
+  </script>
 
   </footer>
 </body>

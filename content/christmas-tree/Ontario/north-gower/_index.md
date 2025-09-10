@@ -1,3 +1,0 @@
----
-title: "North Gower"
----
