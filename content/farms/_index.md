@@ -1,3 +1,3 @@
 ---
-title: Farms in Canada
+title: Farms
 ---
