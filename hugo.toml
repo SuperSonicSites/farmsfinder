@@ -15,9 +15,6 @@ disableKinds = ["taxonomy", "term", "category"]
 [build]
   writeStats = true
 
-[build]
-  writeStats = true
-
 [params]
   googleMapsApiKey = "AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE"
   googleAnalytics = "G-L59ST3D8JW"
