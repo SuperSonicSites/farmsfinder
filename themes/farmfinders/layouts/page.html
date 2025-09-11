@@ -21,10 +21,18 @@
                   {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $category | title }}{{ end }}
                 </a>
               {{ end }}
+              {{ if and .Params.address .Params.address.city }}
+                Farm in 
+                {{ $province := .Params.address.province | lower }}
+                {{ $city := .Params.address.city | lower }}
+                {{ $categorySlug := index .Params.categories 0 }}
+                {{ $cityPath := printf "/%s/%s/%s/" $categorySlug $province $city }}
+                <a href="{{ $cityPath }}" class="text-blue-600 hover:text-blue-800 font-light">{{ .Params.address.city }}</a>
+              {{ end }}
               <!-- Established -->
-        {{ if .Params.established }}
-        Farm Established in {{ .Params.established }}
-      {{ end }}
+              {{ if .Params.established }}
+                {{ if and .Params.address .Params.address.city }} • {{ end }}Established in {{ .Params.established }}
+              {{ end }}
             </div>
           {{ end }}
           <!-- Opening Date -->

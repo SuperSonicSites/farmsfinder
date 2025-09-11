@@ -16,6 +16,8 @@
   </url><url>
     <loc>http://localhost:1313/christmas-tree/alberta/</loc>
   </url><url>
+    <loc>http://localhost:1313/farms/blitzen-estate/</loc>
+  </url><url>
     <loc>http://localhost:1313/farms/blue-harvest-farm/</loc>
   </url><url>
     <loc>http://localhost:1313/farms/bois-brabant/</loc>
@@ -43,6 +45,8 @@
     <loc>http://localhost:1313/christmas-tree/ontario/greater-napanee/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/nova-scotia/guysborough/</loc>
+  </url><url>
+    <loc>http://localhost:1313/christmas-tree/ontario/jasper/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/navan/</loc>
   </url><url>

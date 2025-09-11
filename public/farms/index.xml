@@ -8,6 +8,13 @@
     <language>en-ca</language>
     <atom:link href="http://localhost:1313/farms/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Blitzen Estate</title>
+      <link>http://localhost:1313/farms/blitzen-estate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/blitzen-estate/</guid>
+      <description>&lt;p&gt;Blitzen Estate is a Christmas tree farm and Morgan horse farm located in Jasper, Ontario, just minutes from Smiths Falls and 40 minutes from Ottawa. The farm offers both &amp;lsquo;cut your own&amp;rsquo; and pre-cut Christmas trees, including a variety of fir, spruce, and pine varieties. Customers can explore the 95-acre property to find their perfect tree, or choose from the pre-cut selection. In addition to Christmas trees, Blitzen Estate is home to a herd of foundation-bred Morgan horses, and offers trick horse training clinics, lessons, and demonstrations. The farm also features a variety of family-friendly activities, including a scavenger hunt, reindeer games, a letters to Santa box, and complimentary hot chocolate. Blitzen Estate is a unique destination that combines the traditional Christmas tree experience with the opportunity to interact with and learn about Morgan horses.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Blue Harvest Farm</title>
       <link>http://localhost:1313/farms/blue-harvest-farm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

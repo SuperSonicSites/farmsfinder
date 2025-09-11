@@ -54,6 +54,10 @@
         
       
         
+          
+        
+      
+        
       
         
           
@@ -91,10 +95,20 @@
         "mainEntity": {
           "@type": "ItemList",
           "name": "Christmas Tree Farms in Ontario",
-          "numberOfItems":  4 ,
+          "numberOfItems":  5 ,
           "itemListElement": [
             
             
+            {
+              "@type": "LocalBusiness",
+              "name": "Blitzen Estate",
+              "url": "http:\/\/localhost:1313\/farms\/blitzen-estate\/",
+              "addressLocality": "Jasper",
+              "addressRegion": "Ontario",
+              "addressCountry": "CA"
+            }
+            
+            ,
             {
               "@type": "LocalBusiness",
               "name": "Blue Harvest Farm",
@@ -324,6 +338,10 @@ document.addEventListener('DOMContentLoaded', function() {
           
         
           
+            
+          
+        
+          
         
           
             
@@ -349,6 +367,14 @@ document.addEventListener('DOMContentLoaded', function() {
 function initRegionalMap() {
   
   const farms = [
+    {
+      name: "\"Blitzen Estate\"",
+      lat:  44.8301506 ,
+      lng:  -75.9749634 ,
+      url: "\"/farms/blitzen-estate/\"",
+      address: "\"Jasper, Ontario\"",
+      phone: "\"+1 613-880-4110\""
+    },
     {
       name: "\"Blue Harvest Farm\"",
       lat:  42.8655976 ,
@@ -471,6 +497,14 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 </li>
               
                 <li>
+                  <a href="/christmas-tree/ontario/jasper/">
+                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Jasper
+                    </span>
+                  </a>
+                </li>
+              
+                <li>
                   <a href="/christmas-tree/ontario/navan/">
                     <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
                       Navan
@@ -504,6 +538,13 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         
           <div class="flex">
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+              
+                <li>
+                      <a href="/farms/blitzen-estate/" class="hover:text-gray-700 transition-colors">Blitzen Estate</a>
+                    
+                    <p class="text-gray-600 font-light">Jasper, Ontario</p>
+                  
+                </li>
               
                 <li>
                       <a href="/farms/blue-harvest-farm/" class="hover:text-gray-700 transition-colors">Blue Harvest Farm</a>

@@ -53,6 +53,10 @@
       
         
           
+        
+      
+        
+          
             
           
         
@@ -112,10 +116,22 @@
             "@type": "ItemList",
             "name": "Christmas Tree Farms Directory",
             "description": "Complete directory of christmas tree farms across Canada with location-based filtering",
-            "numberOfItems":  6 ,
+            "numberOfItems":  7 ,
             "itemListElement": [
               
               
+              {
+                "@type": "LocalBusiness",
+                "name": "Blitzen Estate",
+                "url": "http:\/\/localhost:1313\/farms\/blitzen-estate\/",
+                "category": "Christmas Tree Farm",
+                "addressLocality": "Jasper",
+                "addressRegion": "Ontario",
+                "addressCountry": "CA",
+                "isAccessibleForFree": true
+              }
+              
+              ,
               {
                 "@type": "LocalBusiness",
                 "name": "Blue Harvest Farm",
@@ -395,6 +411,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
           <div class="flex">
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+              
+                <li>
+                      <a href="/farms/blitzen-estate/" class="hover:text-gray-700 transition-colors">Blitzen Estate</a>
+                    
+                    <p class="text-gray-600 font-light">Jasper, Ontario</p>
+                  
+                </li>
               
                 <li>
                       <a href="/farms/blue-harvest-farm/" class="hover:text-gray-700 transition-colors">Blue Harvest Farm</a>
