@@ -2,17 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Farms on Farms Finder</title>
-    <link>https://farmfinders.ca/farms/</link>
+    <link>http://localhost:1313/farms/</link>
     <description>Recent content in Farms on Farms Finder</description>
     <generator>Hugo</generator>
     <language>en-ca</language>
-    <atom:link href="https://farmfinders.ca/farms/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/farms/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Briggs Trees</title>
-      <link>https://farmfinders.ca/farms/briggs-trees/</link>
+      <title>Carole&#39;s Christmas Tree Farm</title>
+      <link>http://localhost:1313/farms/caroles-christmas-tree-farm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://farmfinders.ca/farms/briggs-trees/</guid>
-      <description>&lt;p&gt;Briggs Trees is a family-owned and operated Christmas tree farm that has been serving the Ottawa area for 35 years. Spanning 100 acres of woods, the farm offers a variety of tree species including spruce, balsam, and Scotch pine for customers to cut their own. Visitors can enjoy a peaceful walk through the scenic property and select the perfect natural tree for their holiday celebrations. In addition to the cut-your-own experience, the farm also provides natural Christmas wreaths for purchase. With its long history and commitment to providing a high-quality, authentic Christmas tree experience, Briggs Trees is a beloved destination for families in the region.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/farms/caroles-christmas-tree-farm/</guid>
+      <description>&lt;p&gt;Carole’s Christmas Tree Farm has been family-owned and operated for more than 25 years, continuing a cherished tradition of offering a natural and memorable Christmas tree experience. Now in its ninth season under the current generation, the farm was built on the idea of recreating the timeless tradition of families strolling through forests in search of the perfect Christmas tree.&lt;/p&gt;&#xA;&lt;p&gt;In 2023, Carole’s Christmas Tree Farm made the difficult decision to suspend its cut-your-own service. This change allows the farm to rehabilitate, while also addressing liability concerns and the increase in vandalism experienced during the 2022 season.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Carr Family Christmas Tree Farm</title>
+      <link>http://localhost:1313/farms/carr-family-christmas-tree-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/carr-family-christmas-tree-farm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Catfish Creek Christmas Tree Farm</title>
+      <link>http://localhost:1313/farms/catfish-creek-christmas-tree-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/catfish-creek-christmas-tree-farm/</guid>
+      <description>&lt;p&gt;Catfish Creek Christmas Tree Farm is a family-owned operation that has been in business since 1974. The farm was originally purchased by Gordon&amp;rsquo;s parents, and he spent his childhood selling eggs, chicken, and caring for horses. In 2002, Gordon took over the farm and started making changes, and in 2009 he married Corinne. Together, they began planting and maintaining 500 Christmas tree seedlings, and now they work with their son to run both the traditional farm and the Christmas tree farm.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

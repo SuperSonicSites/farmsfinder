@@ -21,7 +21,8 @@ Renders a Google Map with farm pins for a specific region
 {{- if $city }}
   {{- range site.Pages }}
     {{- if and (eq .Section "farms") .Params.coordinates .Params.address }}
-      {{- if eq (lower .Params.address.city) $city }}
+      {{- $farmCity := lower .Params.address.city }}
+      {{- if eq $farmCity $city | or (eq (replace $farmCity " " "-") $city) }}
         {{- $cityLat = .Params.coordinates.latitude }}
         {{- $cityLng = .Params.coordinates.longitude }}
         {{- break }}

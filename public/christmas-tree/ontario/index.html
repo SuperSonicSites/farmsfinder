@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-ca" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -10,13 +10,13 @@
 
 
 
-<link rel="canonical" href="https://farmfinders.ca/christmas-tree/ontario/">
+<link rel="canonical" href="http://localhost:1313/christmas-tree/ontario/">
 
 
 <meta property="og:title" content="Find Christmas Tree Farms In Ontario">
 <meta property="og:description" content="">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://farmfinders.ca/christmas-tree/ontario/">
+<meta property="og:url" content="http://localhost:1313/christmas-tree/ontario/">
 <meta property="og:site_name" content="Farms Finder">
 
 
@@ -49,16 +49,22 @@
           
         
       
+        
+      
+        
+          
+        
+      
       {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         "name": "Find Christmas Tree Farms In Ontario",
-        "url": "https:\/\/farmfinders.ca\/christmas-tree\/ontario\/",
+        "url": "http:\/\/localhost:1313\/christmas-tree\/ontario\/",
         "description": "Find christmas tree farms in Ontario, Canada. Browse farms or filter by city.",
         "isPartOf": {
           "@type": "WebSite",
           "name": "Farms Finder",
-          "url": "https:\/\/farmfinders.ca\/"
+          "url": "http:\/\/localhost:1313\/"
         },
         "about": [
           {
@@ -75,15 +81,25 @@
         "mainEntity": {
           "@type": "ItemList",
           "name": "Christmas Tree Farms in Ontario",
-          "numberOfItems":  1 ,
+          "numberOfItems":  2 ,
           "itemListElement": [
             
             
             {
               "@type": "LocalBusiness",
-              "name": "Briggs Trees",
-              "url": "https:\/\/farmfinders.ca\/farms\/briggs-trees\/",
-              "addressLocality": "Navan",
+              "name": "Carole\u0027s Christmas Tree Farm",
+              "url": "http:\/\/localhost:1313\/farms\/caroles-christmas-tree-farm\/",
+              "addressLocality": "Greater Napanee",
+              "addressRegion": "Ontario",
+              "addressCountry": "CA"
+            }
+            
+            ,
+            {
+              "@type": "LocalBusiness",
+              "name": "Catfish Creek Christmas Tree Farm",
+              "url": "http:\/\/localhost:1313\/farms\/catfish-creek-christmas-tree-farm\/",
+              "addressLocality": "St Thomas",
               "addressRegion": "Ontario",
               "addressCountry": "CA"
             }
@@ -116,11 +132,11 @@
 
 
 
-      <link rel="stylesheet" href="/css/output.min.47832f5822a3d90f8bb78fa12363dcd7dc68a06405b75ab8a0d383fd3585f114.css" integrity="sha256-R4MvWCKj2Q&#43;Lt4&#43;hI2Pc19xooGQFt1q4oNOD/TWF8RQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/output.css">
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
-        <script src="/js/main.23cd0c7d837263b9eaeb96ee2d9ccfa2969daa3fa00fa1c1fe8701a9b87251a1.js" integrity="sha256-I80MfYNyY7nq65buLZzPopadqj&#43;gD6HB/ocBqbhyUaE=" crossorigin="anonymous"></script>
+      <script src="/js/main.js"></script>
 
 
 </head>
@@ -273,6 +289,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
           
         
+          
+        
+          
+            
+          
+        
         
         
         
@@ -288,12 +310,20 @@ function initRegionalMap() {
   
   const farms = [
     {
-      name: "\"Briggs Trees\"",
-      lat:  45.4100519 ,
-      lng:  -75.3803301 ,
-      url: "\"/farms/briggs-trees/\"",
-      address: "\"Navan, Ontario\"",
-      phone: "\"+1 613-835-2955\""
+      name: "\"Carole's Christmas Tree Farm\"",
+      lat:  44.2452624 ,
+      lng:  -76.8968722 ,
+      url: "\"/farms/caroles-christmas-tree-farm/\"",
+      address: "\"Greater Napanee, Ontario\"",
+      phone: "\"+1 613-532-9627\""
+    },
+    {
+      name: "\"Catfish Creek Christmas Tree Farm\"",
+      lat:  42.7505572 ,
+      lng:  -81.0563934 ,
+      url: "\"/farms/catfish-creek-christmas-tree-farm/\"",
+      address: "\"St Thomas, Ontario\"",
+      phone: "\"+1 226-240-0343\""
     },
   ];
 
@@ -377,9 +407,17 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
               
                 <li>
-                  <a href="/christmas-tree/ontario/navan/">
+                  <a href="/christmas-tree/ontario/greater-napanee/">
                     <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                      Navan
+                      Greater Napanee
+                    </span>
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="/christmas-tree/ontario/st-thomas/">
+                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      St Thomas
                     </span>
                   </a>
                 </li>
@@ -396,9 +434,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
               
                 <li>
-                      <a href="/farms/briggs-trees/" class="hover:text-gray-700 transition-colors">Briggs Trees</a>
+                      <a href="/farms/caroles-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Carole&#39;s Christmas Tree Farm</a>
                     
-                    <p class="text-gray-600 font-light">Navan, Ontario</p>
+                    <p class="text-gray-600 font-light">Greater Napanee, Ontario</p>
+                  
+                </li>
+              
+                <li>
+                      <a href="/farms/catfish-creek-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Catfish Creek Christmas Tree Farm</a>
+                    
+                    <p class="text-gray-600 font-light">St Thomas, Ontario</p>
                   
                 </li>
               

@@ -112,25 +112,29 @@
         {{ range $categoryFarms }}
           {{- if and .Params.coordinates .Params.address }}
             {{- $farmRegion := lower .Params.address.province }}
+            {{- $farmCity := lower .Params.address.city }}
             {{- $farmLat := .Params.coordinates.latitude }}
             {{- $farmLng := .Params.coordinates.longitude }}
             
             {{- $matchesCategory := in .Params.categories $categorySlug }}
             {{- $matchesRegion := eq $farmRegion $province }}
             
-            {{- $matchesCity := true }}
-            {{- /* Calculate distance using Haversine formula */ -}}
-            {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
-            {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
-            {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
-            {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+            {{- /* Check for exact city match first */ -}}
+            {{- $exactCityMatch := eq $farmCity $city | or (eq (replace $farmCity " " "-") $city) }}
             
-            {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
-            {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
-            {{- $distance := math.Mul 6371 $c }}
-            
-            {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
-            {{- $matchesCity = le $distance 80 }}
+            {{- /* Calculate distance for nearby farms */ -}}
+            {{- $matchesCity := $exactCityMatch }}
+            {{- if and (not $exactCityMatch) (gt $cityLat 0) (gt $cityLng 0) }}
+              {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
+              {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
+              {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
+              {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+              {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+              {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+              {{- $distance := math.Mul 6371 $c }}
+              {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
+              {{- $matchesCity = le $distance 80 }}
+            {{- end }}
             
             {{- if and $matchesCategory $matchesRegion $matchesCity }}
               {{ $filteredFarms = $filteredFarms | append . }}

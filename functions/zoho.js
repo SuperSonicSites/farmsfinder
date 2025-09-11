@@ -87,6 +87,7 @@ class FarmWebhookHandler {
     if (Array.isArray(arrayData)) {
       return arrayData.map(item => String(item).trim()).filter(item => item);
     }
+    // Split by comma and trim each item
     return String(arrayData).split(',').map(item => item.trim()).filter(item => item);
   }
 
