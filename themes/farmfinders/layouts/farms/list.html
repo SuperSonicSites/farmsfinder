@@ -112,8 +112,8 @@
                   
                   <!-- Hidden searchable content -->
                   <div class="hidden">
-                    <span class="amenities">{{ delimit .Params.amenities " " }}</span>
-                    <span class="varieties">{{ delimit .Params.varieties " " }}</span>
+                    <span class="amenities">{{ delimit (.Params.amenities | default slice) " " }}</span>
+                    <span class="varieties">{{ delimit (.Params.varieties | default slice) " " }}</span>
                     <span class="description">{{ .Summary }}</span>
                   </div>
                 </div>
