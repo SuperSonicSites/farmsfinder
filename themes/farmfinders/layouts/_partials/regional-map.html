@@ -41,7 +41,10 @@ Renders a Google Map with farm pins for a specific region
       {{- $farmLng := .Params.coordinates.longitude }}
       
       {{- $matchesCategory := in .Params.categories $category }}
-      {{- $matchesRegion := eq $farmRegion $region }}
+      {{- $matchesRegion := true }}
+      {{- if ne $region "canada" }}
+        {{- $matchesRegion = eq $farmRegion $region }}
+      {{- end }}
       
       {{- $matchesCity := true }}
       {{- if $city }}

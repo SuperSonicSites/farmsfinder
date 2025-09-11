@@ -23,6 +23,11 @@
           
           {{ if eq (len $pathParts) 1 }}
             {{ $h1Text = printf "Find a %s farm near you" $category }}
+            
+            <!-- Canada-wide Map for Category Pages -->
+            {{ $categorySlug := index $pathParts 0 }}
+            {{ partial "regional-map.html" (dict "page" . "region" "canada" "category" $categorySlug) }}
+            
           {{ else if eq (len $pathParts) 2 }}
             {{ $province := index $pathParts 1 }}
             {{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}
@@ -66,6 +71,7 @@
       {{ if eq (len $pathParts) 1 }}
         {{ $categorySlug := index $pathParts 0 }}
         {{ $filteredFarms = where $farms "Params.categories" "intersect" (slice $categorySlug) }}
+        
       {{ else if eq (len $pathParts) 2 }}
         {{ $categorySlug := index $pathParts 0 }}
         {{ $province := index $pathParts 1 }}

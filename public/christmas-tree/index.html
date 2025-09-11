@@ -53,6 +53,16 @@
       
         
           
+            
+          
+        
+      
+        
+          
+        
+      
+        
+          
         
       
         
@@ -116,7 +126,7 @@
             "@type": "ItemList",
             "name": "Christmas Tree Farms Directory",
             "description": "Complete directory of christmas tree farms across Canada with location-based filtering",
-            "numberOfItems":  7 ,
+            "numberOfItems":  9 ,
             "itemListElement": [
               
               
@@ -138,6 +148,30 @@
                 "url": "http:\/\/localhost:1313\/farms\/blue-harvest-farm\/",
                 "category": "Christmas Tree Farm",
                 "addressLocality": "Simcoe",
+                "addressRegion": "Ontario",
+                "addressCountry": "CA",
+                "isAccessibleForFree": true
+              }
+              
+              ,
+              {
+                "@type": "LocalBusiness",
+                "name": "Boat Harbour Farm Nanaimo - Closed till 2025 Christmas season!",
+                "url": "http:\/\/localhost:1313\/farms\/boat-harbour-farm-nanaimo-closed-till-2025-christmas-season\/",
+                "category": "Christmas Tree Farm",
+                "addressLocality": "Nanaimo",
+                "addressRegion": "British Columbia",
+                "addressCountry": "CA",
+                "isAccessibleForFree": true
+              }
+              
+              ,
+              {
+                "@type": "LocalBusiness",
+                "name": "Boisé Brabant",
+                "url": "http:\/\/localhost:1313\/farms\/bois-brabant\/",
+                "category": "Christmas Tree Farm",
+                "addressLocality": "Casselman",
                 "addressRegion": "Ontario",
                 "addressCountry": "CA",
                 "isAccessibleForFree": true
@@ -354,6 +388,166 @@ document.addEventListener('DOMContentLoaded', function() {
           
           
             
+            
+            
+            
+            
+<div class="mb-8">
+  <h2 class="text-2xl font-light text-gray-800 mb-4">
+      Farm Locations
+  </h2>
+  <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
+</div>
+
+<script>
+function initRegionalMap() {
+  
+  const farms = [
+    {
+      name: "\"Blitzen Estate\"",
+      lat:  44.8301506 ,
+      lng:  -75.9749634 ,
+      url: "\"/farms/blitzen-estate/\"",
+      address: "\"Jasper, Ontario\"",
+      phone: "\"+1 613-880-4110\""
+    },
+    {
+      name: "\"Blue Harvest Farm\"",
+      lat:  42.8655976 ,
+      lng:  -80.1835812 ,
+      url: "\"/farms/blue-harvest-farm/\"",
+      address: "\"Simcoe, Ontario\"",
+      phone: "\"+1 519-410-6766\""
+    },
+    {
+      name: "\"Boat Harbour Farm Nanaimo - Closed till 2025 Christmas season!\"",
+      lat:  49.097616 ,
+      lng:  -123.805292 ,
+      url: "\"/farms/boat-harbour-farm-nanaimo-closed-till-2025-christmas-season/\"",
+      address: "\"Nanaimo, British Columbia\"",
+      phone: "\"+1 250-722-2177\""
+    },
+    {
+      name: "\"Boisé Brabant\"",
+      lat:  45.3636898 ,
+      lng:  -75.1224471 ,
+      url: "\"/farms/bois-brabant/\"",
+      address: "\"Casselman, Ontario\"",
+      phone: "\"+1 613-913-6576\""
+    },
+    {
+      name: "\"Briggs Trees\"",
+      lat:  45.4100519 ,
+      lng:  -75.3803301 ,
+      url: "\"/farms/briggs-trees/\"",
+      address: "\"Navan, Ontario\"",
+      phone: "\"+1 613-835-2955\""
+    },
+    {
+      name: "\"Calgary Christmas Tree\"",
+      lat:  50.9423826 ,
+      lng:  -114.047266 ,
+      url: "\"/farms/calgary-christmas-tree/\"",
+      address: "\"Calgary, Alberta\"",
+      phone: "\"\""
+    },
+    {
+      name: "\"Carole's Christmas Tree Farm\"",
+      lat:  44.2452624 ,
+      lng:  -76.8968722 ,
+      url: "\"/farms/caroles-christmas-tree-farm/\"",
+      address: "\"Greater Napanee, Ontario\"",
+      phone: "\"+1 613-532-9627\""
+    },
+    {
+      name: "\"Carr Family Christmas Tree Farm\"",
+      lat:  45.4619343 ,
+      lng:  -61.6470153 ,
+      url: "\"/farms/carr-family-christmas-tree-farm/\"",
+      address: "\"Guysborough, Nova Scotia\"",
+      phone: "\"+1 902-318-3666\""
+    },
+    {
+      name: "\"Catfish Creek Christmas Tree Farm\"",
+      lat:  42.7505572 ,
+      lng:  -81.0563934 ,
+      url: "\"/farms/catfish-creek-christmas-tree-farm/\"",
+      address: "\"St Thomas, Ontario\"",
+      phone: "\"+1 226-240-0343\""
+    },
+  ];
+
+  if (farms.length === 0) return;
+  
+  const centerLat = farms.reduce((sum, farm) => sum + farm.lat, 0) / farms.length;
+  const centerLng = farms.reduce((sum, farm) => sum + farm.lng, 0) / farms.length;
+  const initialZoom = farms.length === 1 ? 14 : 9;
+
+  
+  const map = new google.maps.Map(document.getElementById('regional-map'), {
+    zoom: initialZoom,
+    center: { lat: centerLat, lng: centerLng },
+    mapTypeId: 'roadmap'
+  });
+
+  
+  farms.forEach(farm => {
+    const marker = new google.maps.Marker({
+      position: { lat: farm.lat, lng: farm.lng },
+      map: map,
+      title: farm.name
+    });
+
+    
+    const infoContent = `
+      <div class="p-2">
+        <h3 class="font-medium text-lg mb-1">
+          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
+        </h3>
+        <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
+        ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
+        <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
+      </div>
+    `;
+
+    const infoWindow = new google.maps.InfoWindow({
+      content: infoContent
+    });
+
+    marker.addListener('click', () => {
+      infoWindow.open(map, marker);
+    });
+  });
+  
+  if (farms.length > 1) {
+    const bounds = new google.maps.LatLngBounds();
+    farms.forEach(farm => {
+      bounds.extend(new google.maps.LatLng(farm.lat, farm.lng));
+    });
+    map.fitBounds(bounds);
+    
+    
+    google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+      if (map.getZoom() > 12) {
+        map.setZoom(12);
+      }
+    });
+  }
+}
+
+
+if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+  const script = document.createElement('script');
+  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE&callback=initRegionalMap`;
+  script.async = true;
+  script.defer = true;
+  document.head.appendChild(script);
+} else {
+  initRegionalMap();
+}
+</script>
+
+            
           
         
         
@@ -369,6 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
         
         
+        
       
       
       
@@ -381,6 +576,14 @@ document.addEventListener('DOMContentLoaded', function() {
                   <a href="/christmas-tree/alberta/">
                     <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
                       Alberta
+                    </span>
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="/christmas-tree/british-columbia/">
+                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      British Columbia
                     </span>
                   </a>
                 </li>
@@ -423,6 +626,20 @@ document.addEventListener('DOMContentLoaded', function() {
                       <a href="/farms/blue-harvest-farm/" class="hover:text-gray-700 transition-colors">Blue Harvest Farm</a>
                     
                     <p class="text-gray-600 font-light">Simcoe, Ontario</p>
+                  
+                </li>
+              
+                <li>
+                      <a href="/farms/boat-harbour-farm-nanaimo-closed-till-2025-christmas-season/" class="hover:text-gray-700 transition-colors">Boat Harbour Farm Nanaimo - Closed till 2025 Christmas season!</a>
+                    
+                    <p class="text-gray-600 font-light">Nanaimo, British Columbia</p>
+                  
+                </li>
+              
+                <li>
+                      <a href="/farms/bois-brabant/" class="hover:text-gray-700 transition-colors">Boisé Brabant</a>
+                    
+                    <p class="text-gray-600 font-light">Casselman, Ontario</p>
                   
                 </li>
               

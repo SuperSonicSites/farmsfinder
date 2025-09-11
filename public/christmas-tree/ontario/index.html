@@ -54,6 +54,12 @@
         
       
         
+      
+        
+          
+        
+      
+        
           
         
       
@@ -95,7 +101,7 @@
         "mainEntity": {
           "@type": "ItemList",
           "name": "Christmas Tree Farms in Ontario",
-          "numberOfItems":  5 ,
+          "numberOfItems":  6 ,
           "itemListElement": [
             
             
@@ -114,6 +120,16 @@
               "name": "Blue Harvest Farm",
               "url": "http:\/\/localhost:1313\/farms\/blue-harvest-farm\/",
               "addressLocality": "Simcoe",
+              "addressRegion": "Ontario",
+              "addressCountry": "CA"
+            }
+            
+            ,
+            {
+              "@type": "LocalBusiness",
+              "name": "Boisé Brabant",
+              "url": "http:\/\/localhost:1313\/farms\/bois-brabant\/",
+              "addressLocality": "Casselman",
               "addressRegion": "Ontario",
               "addressCountry": "CA"
             }
@@ -338,6 +354,12 @@ document.addEventListener('DOMContentLoaded', function() {
           
         
           
+        
+          
+            
+          
+        
+          
             
           
         
@@ -382,6 +404,14 @@ function initRegionalMap() {
       url: "\"/farms/blue-harvest-farm/\"",
       address: "\"Simcoe, Ontario\"",
       phone: "\"+1 519-410-6766\""
+    },
+    {
+      name: "\"Boisé Brabant\"",
+      lat:  45.3636898 ,
+      lng:  -75.1224471 ,
+      url: "\"/farms/bois-brabant/\"",
+      address: "\"Casselman, Ontario\"",
+      phone: "\"+1 613-913-6576\""
     },
     {
       name: "\"Briggs Trees\"",
@@ -489,6 +519,14 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
               
                 <li>
+                  <a href="/christmas-tree/ontario/casselman/">
+                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Casselman
+                    </span>
+                  </a>
+                </li>
+              
+                <li>
                   <a href="/christmas-tree/ontario/greater-napanee/">
                     <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
                       Greater Napanee
@@ -550,6 +588,13 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                       <a href="/farms/blue-harvest-farm/" class="hover:text-gray-700 transition-colors">Blue Harvest Farm</a>
                     
                     <p class="text-gray-600 font-light">Simcoe, Ontario</p>
+                  
+                </li>
+              
+                <li>
+                      <a href="/farms/bois-brabant/" class="hover:text-gray-700 transition-colors">Boisé Brabant</a>
+                    
+                    <p class="text-gray-600 font-light">Casselman, Ontario</p>
                   
                 </li>
               

@@ -20,9 +20,13 @@
   </url><url>
     <loc>http://localhost:1313/farms/blue-harvest-farm/</loc>
   </url><url>
+    <loc>http://localhost:1313/farms/boat-harbour-farm-nanaimo-closed-till-2025-christmas-season/</loc>
+  </url><url>
     <loc>http://localhost:1313/farms/bois-brabant/</loc>
   </url><url>
     <loc>http://localhost:1313/farms/briggs-trees/</loc>
+  </url><url>
+    <loc>http://localhost:1313/christmas-tree/british-columbia/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/alberta/calgary/</loc>
   </url><url>
@@ -32,13 +36,13 @@
   </url><url>
     <loc>http://localhost:1313/farms/carr-family-christmas-tree-farm/</loc>
   </url><url>
-    <loc>http://localhost:1313/christmas-tree-sugar-shack/ontario/casselman/</loc>
+    <loc>http://localhost:1313/christmas-tree/ontario/casselman/</loc>
+  </url><url>
+    <loc>http://localhost:1313/sugar-shack/ontario/casselman/</loc>
   </url><url>
     <loc>http://localhost:1313/farms/catfish-creek-christmas-tree-farm/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/</loc>
-  </url><url>
-    <loc>http://localhost:1313/christmas-tree-sugar-shack/</loc>
   </url><url>
     <loc>http://localhost:1313/farms/</loc>
   </url><url>
@@ -48,16 +52,20 @@
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/jasper/</loc>
   </url><url>
+    <loc>http://localhost:1313/christmas-tree/british-columbia/nanaimo/</loc>
+  </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/navan/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/nova-scotia/</loc>
   </url><url>
-    <loc>http://localhost:1313/christmas-tree-sugar-shack/ontario/</loc>
-  </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/</loc>
+  </url><url>
+    <loc>http://localhost:1313/sugar-shack/ontario/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/simcoe/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/st-thomas/</loc>
+  </url><url>
+    <loc>http://localhost:1313/sugar-shack/</loc>
   </url>
 </urlset>
