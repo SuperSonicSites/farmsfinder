@@ -8,6 +8,27 @@
     <language>en-ca</language>
     <atom:link href="http://localhost:1313/farms/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Blue Harvest Farm</title>
+      <link>http://localhost:1313/farms/blue-harvest-farm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/blue-harvest-farm/</guid>
+      <description>&lt;p&gt;Blue Harvest Farm is a family-owned Christmas tree farm located in Simcoe, Ontario. Established by Lara and David Norman, the farm has been growing memories for generations, offering a picturesque setting for families to select their perfect Christmas tree. Visitors can choose from a variety of fresh-cut tree types, including Balsam Fir, Canaan Fir, Fraser Fir, and Koreana Fir, ranging from 6 to 10 feet tall. In addition to the Christmas trees, the farm offers a wide range of holiday decor, including fresh wreaths, porch planters, and rustic birch ornaments and gifts. Guests can enjoy festive activities like Santa visits, crafts, and Christmas photos, as well as warm up by the cozy campfire with a cup of hot chocolate. The farm is also committed to giving back to the local community, with 100% of sales from their Giving Tree Ornaments going towards supporting families in need during the holiday season.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Boisé Brabant</title>
+      <link>http://localhost:1313/farms/bois-brabant/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/bois-brabant/</guid>
+      <description>&lt;p&gt;To enjoy the experience of cutting your own Christmas tree at Boisé Brabant, visitors are asked to book a date in advance at 721 Martel Rd. This system helps manage demand, reduce crowding, and ensure a safe, enjoyable visit for everyone, while also protecting the long-term sustainability of the tree plantation. Please note that the season is shorter this year, and trees will only be available while supplies last.&lt;/p&gt;&#xA;&lt;p&gt;Boisé Brabant was founded in 2002 when Sylvie and Yvon embraced the chance to build something new as retirement approached. What began as a small Christmas tree venture has blossomed into both a family tradition and a local destination, where three generations now work together to welcome visitors each holiday season.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Briggs Trees</title>
+      <link>http://localhost:1313/farms/briggs-trees/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/farms/briggs-trees/</guid>
+      <description>&lt;p&gt;Briggs Tree Farm is a family-owned and operated farm that has been growing and selling Christmas trees to the Ottawa community for over 40 years. Nestled within a beautiful 100-acre woodland, the farm offers a traditional and memorable holiday experience where visitors can stroll through the forest to find their perfect tree.&#xA;The farm features a variety of trees ideal for Christmas, including Scotch Pine, Balsam Fir, White Spruce, and Norway Spruce. Each tree is carefully trimmed to maintain a natural shape, with a range of sizes and fullness to suit every home and holiday style.&#xA;Visitors are invited to enjoy a walk through the scenic woods, cut their own spruce, balsam, or scotch pine tree, and select a handcrafted natural Christmas wreath—making Briggs Tree Farm a festive destination for families year after year.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Calgary Christmas Tree</title>
       <link>http://localhost:1313/farms/calgary-christmas-tree/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -76,9 +76,27 @@ class FarmWebhookHandler {
 
   parseCategories(categoryArray) {
     if (!categoryArray) return [];
-    const categories = Array.isArray(categoryArray) ? categoryArray : [categoryArray];
+    
+    let categories;
+    
+    // Handle different data types from Zoho (same logic as parseArray)
+    if (Array.isArray(categoryArray)) {
+      // If it's already an array, process each item and split any comma-separated values
+      categories = categoryArray.flatMap(item => 
+        String(item).split(',').map(subItem => subItem.trim()).filter(subItem => subItem)
+      );
+    } else if (typeof categoryArray === 'object' && categoryArray !== null) {
+      // If it's an object (common from Zoho), convert to string and split
+      const stringValue = String(categoryArray);
+      categories = stringValue.split(',').map(item => item.trim()).filter(item => item);
+    } else {
+      // If it's a string, split by comma and trim each item
+      categories = String(categoryArray).split(',').map(item => item.trim()).filter(item => item);
+    }
+    
+    // Convert to lowercase and replace spaces with hyphens
     return categories.map(cat => 
-      String(cat).trim().toLowerCase().replace(/\s+/g, '-')
+      cat.toLowerCase().replace(/\s+/g, '-')
     );
   }
 
