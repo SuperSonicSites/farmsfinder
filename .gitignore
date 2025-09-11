@@ -62,3 +62,7 @@ yarn-error.log*
 # Hugo modules
 go.mod
 go.sum
+
+# Local development and testing files
+zoho_field_inspector.js
+test-local.js

@@ -12,13 +12,13 @@
     "watch:css": "npx tailwindcss -i ./themes/farmfinders/assets/css/input.css -o ./themes/farmfinders/assets/css/output.css --watch"
   },
   "dependencies": {
-    "csv-parser": "3.0.0",
-    "js-yaml": "4.1.0",
-    "tailwindcss": "^3.4.13",
+    "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/forms": "^0.5.10"
+    "csv-parser": "3.0.0",
+    "dotenv": "^17.2.2",
+    "js-yaml": "4.1.0",
+    "tailwindcss": "^3.4.13"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
