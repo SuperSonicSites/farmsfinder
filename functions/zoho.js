@@ -8,6 +8,11 @@ class FarmWebhookHandler {
     this.githubToken = config.githubToken;
     this.githubRepo = config.githubRepo;
     this.accessToken = null;
+    
+    // Debug logging
+    console.log('Handler initialized with repo:', this.githubRepo);
+    console.log('GitHub token present:', !!this.githubToken);
+    console.log('Token length:', this.githubToken ? this.githubToken.length : 0);
   }
 
   async getZohoAccessToken() {
@@ -24,9 +29,11 @@ class FarmWebhookHandler {
       body: body.toString()
     });
 
+    console.log('Zoho auth response status:', response.status);
     const data = await response.json();
     
     if (!data.access_token) {
+      console.error('Zoho auth failed:', JSON.stringify(data));
       throw new Error(`Zoho auth failed: ${JSON.stringify(data)}`);
     }
 
@@ -46,9 +53,11 @@ class FarmWebhookHandler {
       }
     });
 
+    console.log('Zoho fetch response status:', response.status);
     const data = await response.json();
     
     if (!data.data || data.data.length === 0) {
+      console.error('Account not found:', accountId);
       throw new Error(`Account ${accountId} not found in Zoho`);
     }
 
@@ -62,7 +71,7 @@ class FarmWebhookHandler {
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
-      .trim('-');
+      .replace(/^-+|-+$/g, ''); // Fixed trim syntax
   }
 
   parseCategories(categoryArray) {
@@ -127,7 +136,7 @@ class FarmWebhookHandler {
       place_id: account.PlaceID || '',
       phone: account.Phone || '',
       email: account.Email || '',
-      status: 'active' // Default status for soft deletes
+      status: 'active'
     };
 
     // Add social media if present
@@ -174,7 +183,10 @@ class FarmWebhookHandler {
 
   async getGitHubFile(filepath) {
     try {
-      const response = await fetch(`https://api.github.com/repos/${this.githubRepo}/contents/${filepath}`, {
+      const url = `https://api.github.com/repos/${this.githubRepo}/contents/${filepath}`;
+      console.log('Checking for existing file at:', url);
+      
+      const response = await fetch(url, {
         headers: {
           'Authorization': `token ${this.githubToken}`,
           'User-Agent': 'Farm-Webhook-Handler'
@@ -186,7 +198,8 @@ class FarmWebhookHandler {
       }
       return null;
     } catch (error) {
-      return null; // File doesn't exist
+      console.log('File does not exist (this is normal for new files)');
+      return null;
     }
   }
 
@@ -196,15 +209,23 @@ class FarmWebhookHandler {
     
     const requestBody = {
       message: commitMessage,
-      content: btoa(unescape(encodeURIComponent(content))) // Handle UTF-8 encoding
+      content: btoa(unescape(encodeURIComponent(content)))
     };
 
     // Include SHA if updating existing file
     if (existingFile && existingFile.sha) {
       requestBody.sha = existingFile.sha;
+      console.log('Updating existing file with SHA:', existingFile.sha);
+    } else {
+      console.log('Creating new file');
     }
 
-    const response = await fetch(`https://api.github.com/repos/${this.githubRepo}/contents/${filepath}`, {
+    const url = `https://api.github.com/repos/${this.githubRepo}/contents/${filepath}`;
+    console.log('Committing to:', url);
+    console.log('Using repo:', this.githubRepo);
+    console.log('Token present:', !!this.githubToken);
+    
+    const response = await fetch(url, {
       method: 'PUT',
       headers: {
         'Authorization': `token ${this.githubToken}`,
@@ -214,9 +235,14 @@ class FarmWebhookHandler {
       body: JSON.stringify(requestBody)
     });
 
+    console.log('GitHub API response status:', response.status);
+    
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(`GitHub API error: ${error.message}`);
+      const errorText = await response.text();
+      console.error('GitHub API full error:', errorText);
+      console.error('Request URL was:', url);
+      console.error('Repo value was:', this.githubRepo);
+      throw new Error(`GitHub API error: ${response.statusText}`);
     }
 
     return await response.json();
@@ -276,6 +302,46 @@ export async function onRequest(context) {
     const body = await request.json();
     console.log('Webhook received:', JSON.stringify(body));
 
+    // DEBUG MODE - Check environment variables
+    if (body.debug === true) {
+      return new Response(JSON.stringify({
+        env_check: {
+          has_github_token: !!context.env.GITHUB_TOKEN,
+          github_token_length: context.env.GITHUB_TOKEN ? context.env.GITHUB_TOKEN.length : 0,
+          github_token_starts: context.env.GITHUB_TOKEN ? context.env.GITHUB_TOKEN.substring(0, 10) + '...' : 'NOT_SET',
+          github_repo: context.env.GITHUB_REPO || 'NOT_SET',
+          has_zoho_client_id: !!context.env.ZOHO_CLIENT_ID,
+          has_zoho_secret: !!context.env.ZOHO_CLIENT_SECRET,
+          has_zoho_token: !!context.env.ZOHO_REFRESH_TOKEN,
+          all_env_keys: Object.keys(context.env)
+        }
+      }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // TEST MODE - Test GitHub connection directly
+    if (body.test_github === true) {
+      const testUrl = `https://api.github.com/repos/${context.env.GITHUB_REPO}`;
+      const testResponse = await fetch(testUrl, {
+        headers: {
+          'Authorization': `token ${context.env.GITHUB_TOKEN}`,
+          'User-Agent': 'Farm-Webhook-Test'
+        }
+      });
+      
+      return new Response(JSON.stringify({
+        github_test: {
+          url_tested: testUrl,
+          status: testResponse.status,
+          success: testResponse.ok,
+          repo_value: context.env.GITHUB_REPO
+        }
+      }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     // Extract record ID from various possible field names
     const accountId = body.recordId || body.accountId || body.id || body.record_id;
     
@@ -283,7 +349,8 @@ export async function onRequest(context) {
       console.error('Missing account ID in payload:', body);
       return new Response(JSON.stringify({
         success: false,
-        error: 'Missing account ID in webhook payload'
+        error: 'Missing account ID in webhook payload',
+        received_fields: Object.keys(body)
       }), { 
         status: 400,
         headers: { 'Content-Type': 'application/json' }
@@ -298,7 +365,12 @@ export async function onRequest(context) {
       console.error('Missing environment variables:', missingVars);
       return new Response(JSON.stringify({
         success: false,
-        error: `Missing environment variables: ${missingVars.join(', ')}`
+        error: `Missing environment variables: ${missingVars.join(', ')}`,
+        debug: {
+          required: requiredEnvVars,
+          missing: missingVars,
+          present: requiredEnvVars.filter(v => context.env[v])
+        }
       }), { 
         status: 500,
         headers: { 'Content-Type': 'application/json' }
@@ -313,6 +385,8 @@ export async function onRequest(context) {
       githubToken: context.env.GITHUB_TOKEN,
       githubRepo: context.env.GITHUB_REPO
     };
+
+    console.log('Config initialized with repo:', config.githubRepo);
 
     const handler = new FarmWebhookHandler(config);
     
@@ -342,6 +416,7 @@ export async function onRequest(context) {
     return new Response(JSON.stringify({
       success: false,
       error: error.message,
+      stack: error.stack,
       processingTimeMs: processingTime
     }), {
       status: 500,
