@@ -84,11 +84,30 @@ class FarmWebhookHandler {
 
   parseArray(arrayData) {
     if (!arrayData) return [];
+    
+    let result;
+    
+    // Handle different data types from Zoho
     if (Array.isArray(arrayData)) {
-      return arrayData.map(item => String(item).trim()).filter(item => item);
+      // If it's already an array, process each item and split any comma-separated values
+      result = arrayData.flatMap(item => 
+        String(item).split(',').map(subItem => subItem.trim()).filter(subItem => subItem)
+      );
+    } else if (typeof arrayData === 'object' && arrayData !== null) {
+      // If it's an object (common from Zoho), convert to string and split
+      const stringValue = String(arrayData);
+      result = stringValue.split(',').map(item => item.trim()).filter(item => item);
+    } else {
+      // If it's a string, split by comma and trim each item
+      result = String(arrayData).split(',').map(item => item.trim()).filter(item => item);
     }
-    // Split by comma and trim each item
-    return String(arrayData).split(',').map(item => item.trim()).filter(item => item);
+    
+    // Debug logging
+    console.log('parseArray input type:', typeof arrayData);
+    console.log('parseArray input:', arrayData);
+    console.log('parseArray output:', result);
+    
+    return result;
   }
 
   parseHours(account) {
