@@ -193,6 +193,12 @@
           </div>
         {{ end }}
       </section>
+
+      {{/* Add FAQs section only for top-level category pages */}}
+      {{ if eq (len $pathParts) 1 }}
+        {{ $categorySlug := index $pathParts 0 }}
+        {{ partial "faqs.html" (dict "categorySlug" $categorySlug) }}
+      {{ end }}
     </article>
   </div>
 {{ end }}

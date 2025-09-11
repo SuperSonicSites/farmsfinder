@@ -53,6 +53,10 @@
       
         
           
+        
+      
+        
+          
             
           
         
@@ -126,10 +130,22 @@
             "@type": "ItemList",
             "name": "Christmas Tree Farms Directory",
             "description": "Complete directory of christmas tree farms across Canada with location-based filtering",
-            "numberOfItems":  9 ,
+            "numberOfItems":  10 ,
             "itemListElement": [
               
               
+              {
+                "@type": "LocalBusiness",
+                "name": "Bachner Family Christmas Tree Farm",
+                "url": "http:\/\/localhost:1313\/farms\/bachner-family-christmas-tree-farm\/",
+                "category": "Christmas Tree Farm",
+                "addressLocality": "St Thomas",
+                "addressRegion": "Ontario",
+                "addressCountry": "CA",
+                "isAccessibleForFree": true
+              }
+              
+              ,
               {
                 "@type": "LocalBusiness",
                 "name": "Blitzen Estate",
@@ -156,8 +172,8 @@
               ,
               {
                 "@type": "LocalBusiness",
-                "name": "Boat Harbour Farm Nanaimo - Closed till 2025 Christmas season!",
-                "url": "http:\/\/localhost:1313\/farms\/boat-harbour-farm-nanaimo-closed-till-2025-christmas-season\/",
+                "name": "Boat Harbour Farm Nanaimo",
+                "url": "http:\/\/localhost:1313\/farms\/boat-harbour-farm-nanaimo\/",
                 "category": "Christmas Tree Farm",
                 "addressLocality": "Nanaimo",
                 "addressRegion": "British Columbia",
@@ -404,6 +420,14 @@ function initRegionalMap() {
   
   const farms = [
     {
+      name: "\"Bachner Family Christmas Tree Farm\"",
+      lat:  42.7130201 ,
+      lng:  -81.1669202 ,
+      url: "\"/farms/bachner-family-christmas-tree-farm/\"",
+      address: "\"St Thomas, Ontario\"",
+      phone: "\"+1 905-933-0791\""
+    },
+    {
       name: "\"Blitzen Estate\"",
       lat:  44.8301506 ,
       lng:  -75.9749634 ,
@@ -420,10 +444,10 @@ function initRegionalMap() {
       phone: "\"+1 519-410-6766\""
     },
     {
-      name: "\"Boat Harbour Farm Nanaimo - Closed till 2025 Christmas season!\"",
+      name: "\"Boat Harbour Farm Nanaimo\"",
       lat:  49.097616 ,
       lng:  -123.805292 ,
-      url: "\"/farms/boat-harbour-farm-nanaimo-closed-till-2025-christmas-season/\"",
+      url: "\"/farms/boat-harbour-farm-nanaimo/\"",
       address: "\"Nanaimo, British Columbia\"",
       phone: "\"+1 250-722-2177\""
     },
@@ -616,6 +640,13 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
               
                 <li>
+                      <a href="/farms/bachner-family-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Bachner Family Christmas Tree Farm</a>
+                    
+                    <p class="text-gray-600 font-light">St Thomas, Ontario</p>
+                  
+                </li>
+              
+                <li>
                       <a href="/farms/blitzen-estate/" class="hover:text-gray-700 transition-colors">Blitzen Estate</a>
                     
                     <p class="text-gray-600 font-light">Jasper, Ontario</p>
@@ -630,7 +661,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 </li>
               
                 <li>
-                      <a href="/farms/boat-harbour-farm-nanaimo-closed-till-2025-christmas-season/" class="hover:text-gray-700 transition-colors">Boat Harbour Farm Nanaimo - Closed till 2025 Christmas season!</a>
+                      <a href="/farms/boat-harbour-farm-nanaimo/" class="hover:text-gray-700 transition-colors">Boat Harbour Farm Nanaimo</a>
                     
                     <p class="text-gray-600 font-light">Nanaimo, British Columbia</p>
                   
@@ -682,6 +713,207 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           </div>
         
       </section>
+
+      
+      
+        
+        <section aria-labelledby="faq-heading" class="space-y-8 mt-16">
+  <div class="text-left space-y-4">
+    <h2 id="faq-heading" class="text-4xl font-light text-gray-800 tracking-wide">Christmas Tree FAQs</h2>
+    <p class="text-lg text-gray-600 font-light">Common questions about Christmas tree farms in Canada</p>
+  </div>
+  
+  <div class="max-w-3xl mx-auto">
+    <dl class="space-y-4"><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <dt>
+          <button 
+            class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
+            aria-expanded="false"
+            aria-controls="faq-answer-0"
+            onclick="toggleFAQ( 0 )"
+          >
+            <span class="text-lg font-medium text-gray-900 pr-4">When is the best time to cut a Christmas tree?</span>
+            <svg 
+              class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
+              id="faq-icon-0"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </dt>
+        <dd 
+          class="hidden px-6 pb-4"
+          id="faq-answer-0"
+        >
+          <div class="prose prose-gray max-w-none">
+            <p class="leading-relaxed">In Canada, the best time to cut your Christmas tree is usually from late November through early December, so it stays fresh through the holidays. Most farms open for the season at the end of November, though exact dates vary by region. If cutting on Crown land, a permit may be required.</p>
+          </div>
+        </dd>
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <dt>
+          <button 
+            class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
+            aria-expanded="false"
+            aria-controls="faq-answer-1"
+            onclick="toggleFAQ( 1 )"
+          >
+            <span class="text-lg font-medium text-gray-900 pr-4">How do I keep my Christmas tree fresh longer?</span>
+            <svg 
+              class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
+              id="faq-icon-1"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </dt>
+        <dd 
+          class="hidden px-6 pb-4"
+          id="faq-answer-1"
+        >
+          <div class="prose prose-gray max-w-none">
+            <p class="leading-relaxed">Make a fresh cut of 1–2 cm from the trunk before placing it in water, and ensure the stand always has water — trees can drink several litres in the first days. Keep the tree away from fireplaces, heating vents, and direct sunlight. Lower indoor temperatures and added humidity also help prevent needle drop. A tree will generally last 4–6 weeks indoors.</p>
+          </div>
+        </dd>
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <dt>
+          <button 
+            class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
+            aria-expanded="false"
+            aria-controls="faq-answer-2"
+            onclick="toggleFAQ( 2 )"
+          >
+            <span class="text-lg font-medium text-gray-900 pr-4">What&#39;s the difference between tree varieties?</span>
+            <svg 
+              class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
+              id="faq-icon-2"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </dt>
+        <dd 
+          class="hidden px-6 pb-4"
+          id="faq-answer-2"
+        >
+          <div class="prose prose-gray max-w-none">
+            <p class="leading-relaxed">Popular Canadian varieties include Balsam Fir (classic scent, good needle retention), Fraser Fir (excellent needle retention, strong branches), White Spruce (dense foliage, sharper needles, moderate retention), and Scots Pine (long-lasting, sturdy branches). Each has different strengths in fragrance, branch strength, and how long needles stay on the tree.</p>
+          </div>
+        </dd>
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <dt>
+          <button 
+            class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
+            aria-expanded="false"
+            aria-controls="faq-answer-3"
+            onclick="toggleFAQ( 3 )"
+          >
+            <span class="text-lg font-medium text-gray-900 pr-4">Can I bring my own saw?</span>
+            <svg 
+              class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
+              id="faq-icon-3"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </dt>
+        <dd 
+          class="hidden px-6 pb-4"
+          id="faq-answer-3"
+        >
+          <div class="prose prose-gray max-w-none">
+            <p class="leading-relaxed">Most tree farms provide saws and cutting tools, and many do not allow chainsaws for safety reasons. Some farms let you bring your own hand saw, but always call ahead to confirm their policy. If cutting on public land, check local rules and permit requirements.</p>
+          </div>
+        </dd>
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <dt>
+          <button 
+            class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
+            aria-expanded="false"
+            aria-controls="faq-answer-4"
+            onclick="toggleFAQ( 4 )"
+          >
+            <span class="text-lg font-medium text-gray-900 pr-4">Do Christmas tree farms offer other activities?</span>
+            <svg 
+              class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
+              id="faq-icon-4"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </dt>
+        <dd 
+          class="hidden px-6 pb-4"
+          id="faq-answer-4"
+        >
+          <div class="prose prose-gray max-w-none">
+            <p class="leading-relaxed">Many Canadian Christmas tree farms offer extra activities such as wagon or sleigh rides, hot chocolate, holiday markets, wreath making, gift shops, and visits with Santa. Some also provide tree wrapping or delivery. Check individual farm websites for details.</p>
+          </div>
+        </dd>
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+        <dt>
+          <button 
+            class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
+            aria-expanded="false"
+            aria-controls="faq-answer-5"
+            onclick="toggleFAQ( 5 )"
+          >
+            <span class="text-lg font-medium text-gray-900 pr-4">How much does a Christmas tree typically cost?</span>
+            <svg 
+              class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
+              id="faq-icon-5"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </dt>
+        <dd 
+          class="hidden px-6 pb-4"
+          id="faq-answer-5"
+        >
+          <div class="prose prose-gray max-w-none">
+            <p class="leading-relaxed">Prices vary by province, size, and variety. In Canada, a 6–8 foot tree typically costs $40–100. Premium species like Fraser Fir may cost more, while Scots Pine or spruce are often more affordable. Some farms charge by the foot, while others use flat rates. Additional services like wrapping or delivery may add cost.</p>
+          </div>
+        </dd>
+      </div></dl>
+  </div>
+</section>
+
+<script>
+function toggleFAQ(index) {
+  const answer = document.getElementById(`faq-answer-${index}`);
+  const icon = document.getElementById(`faq-icon-${index}`);
+  const button = answer.previousElementSibling.querySelector('button');
+  
+  if (answer.classList.contains('hidden')) {
+    answer.classList.remove('hidden');
+    icon.style.transform = 'rotate(180deg)';
+    button.setAttribute('aria-expanded', 'true');
+  } else {
+    answer.classList.add('hidden');
+    icon.style.transform = 'rotate(0deg)';
+    button.setAttribute('aria-expanded', 'false');
+  }
+}
+</script>
+      
     </article>
   </div>
 

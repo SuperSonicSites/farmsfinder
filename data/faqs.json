@@ -1,0 +1,63 @@
+{
+    "christmas-tree": {
+      "title": "Christmas Tree FAQs",
+      "description": "Common questions about Christmas tree farms in Canada",
+      "faqs": [
+        {
+          "question": "When is the best time to cut a Christmas tree?",
+          "answer": "In Canada, the best time to cut your Christmas tree is usually from late November through early December, so it stays fresh through the holidays. Most farms open for the season at the end of November, though exact dates vary by region. If cutting on Crown land, a permit may be required."
+        },
+        {
+          "question": "How do I keep my Christmas tree fresh longer?",
+          "answer": "Make a fresh cut of 1–2 cm from the trunk before placing it in water, and ensure the stand always has water — trees can drink several litres in the first days. Keep the tree away from fireplaces, heating vents, and direct sunlight. Lower indoor temperatures and added humidity also help prevent needle drop. A tree will generally last 4–6 weeks indoors."
+        },
+        {
+          "question": "What's the difference between tree varieties?",
+          "answer": "Popular Canadian varieties include Balsam Fir (classic scent, good needle retention), Fraser Fir (excellent needle retention, strong branches), White Spruce (dense foliage, sharper needles, moderate retention), and Scots Pine (long-lasting, sturdy branches). Each has different strengths in fragrance, branch strength, and how long needles stay on the tree."
+        },
+        {
+          "question": "Can I bring my own saw?",
+          "answer": "Most tree farms provide saws and cutting tools, and many do not allow chainsaws for safety reasons. Some farms let you bring your own hand saw, but always call ahead to confirm their policy. If cutting on public land, check local rules and permit requirements."
+        },
+        {
+          "question": "Do Christmas tree farms offer other activities?",
+          "answer": "Many Canadian Christmas tree farms offer extra activities such as wagon or sleigh rides, hot chocolate, holiday markets, wreath making, gift shops, and visits with Santa. Some also provide tree wrapping or delivery. Check individual farm websites for details."
+        },
+        {
+          "question": "How much does a Christmas tree typically cost?",
+          "answer": "Prices vary by province, size, and variety. In Canada, a 6–8 foot tree typically costs $40–100. Premium species like Fraser Fir may cost more, while Scots Pine or spruce are often more affordable. Some farms charge by the foot, while others use flat rates. Additional services like wrapping or delivery may add cost."
+        }
+      ]
+    },
+    "sugar-shack": {
+      "title": "Sugar Shack & Maple Syrup FAQs",
+      "description": "Everything you need to know about maple syrup and sugar shacks in Canada",
+      "faqs": [
+        {
+          "question": "When is maple syrup season?",
+          "answer": "Maple syrup season in Canada usually runs from late February through early April. The sap flows best when nights are below freezing and days are above freezing. The exact timing depends on the region and yearly weather."
+        },
+        {
+          "question": "How much sap does it take to make maple syrup?",
+          "answer": "It takes about 35–50 litres of maple sap to make 1 litre of pure maple syrup. Sap averages around 2% sugar, and it must be boiled until it reaches about 66% sugar content."
+        },
+        {
+          "question": "What are the different grades of maple syrup?",
+          "answer": "Since 2016, Canada grades syrup as Grade A (for retail) and Processing Grade (for industrial use). Grade A syrup is sold in four colour classes: Golden (Delicate Taste), Amber (Rich Taste), Dark (Robust Taste), and Very Dark (Strong Taste). Lighter syrup is made earlier in the season, while darker syrup comes later."
+        },
+        {
+          "question": "Can I watch the syrup-making process?",
+          "answer": "Yes, many sugar shacks in Canada welcome visitors during maple season to watch the sap boiling process, taste fresh syrup, and learn about production. Some also offer guided tours, meals, and maple taffy on snow. Always check visiting hours and whether reservations are needed."
+        },
+        {
+          "question": "What other maple products are available?",
+          "answer": "Besides maple syrup, sugar shacks often make maple butter, maple cream, maple sugar, maple candy, and maple taffy on snow. Some also offer maple cookies, popcorn, ice cream, and beverages."
+        },
+        {
+          "question": "How should I store maple syrup?",
+          "answer": "Unopened maple syrup can be stored in a cool, dark place for up to 2 years. Once opened, it should be refrigerated and will keep for about a year. Syrup can also be frozen for longer storage. If mold appears, it is safest to discard it, though some boil and filter to reuse."
+        }
+      ]
+    }
+  }
+  

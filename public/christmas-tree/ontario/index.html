@@ -54,6 +54,10 @@
         
       
         
+          
+        
+      
+        
       
         
           
@@ -101,10 +105,20 @@
         "mainEntity": {
           "@type": "ItemList",
           "name": "Christmas Tree Farms in Ontario",
-          "numberOfItems":  6 ,
+          "numberOfItems":  7 ,
           "itemListElement": [
             
             
+            {
+              "@type": "LocalBusiness",
+              "name": "Bachner Family Christmas Tree Farm",
+              "url": "http:\/\/localhost:1313\/farms\/bachner-family-christmas-tree-farm\/",
+              "addressLocality": "St Thomas",
+              "addressRegion": "Ontario",
+              "addressCountry": "CA"
+            }
+            
+            ,
             {
               "@type": "LocalBusiness",
               "name": "Blitzen Estate",
@@ -354,6 +368,10 @@ document.addEventListener('DOMContentLoaded', function() {
           
         
           
+            
+          
+        
+          
         
           
             
@@ -389,6 +407,14 @@ document.addEventListener('DOMContentLoaded', function() {
 function initRegionalMap() {
   
   const farms = [
+    {
+      name: "\"Bachner Family Christmas Tree Farm\"",
+      lat:  42.7130201 ,
+      lng:  -81.1669202 ,
+      url: "\"/farms/bachner-family-christmas-tree-farm/\"",
+      address: "\"St Thomas, Ontario\"",
+      phone: "\"+1 905-933-0791\""
+    },
     {
       name: "\"Blitzen Estate\"",
       lat:  44.8301506 ,
@@ -578,6 +604,13 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
               
                 <li>
+                      <a href="/farms/bachner-family-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Bachner Family Christmas Tree Farm</a>
+                    
+                    <p class="text-gray-600 font-light">St Thomas, Ontario</p>
+                  
+                </li>
+              
+                <li>
                       <a href="/farms/blitzen-estate/" class="hover:text-gray-700 transition-colors">Blitzen Estate</a>
                     
                     <p class="text-gray-600 font-light">Jasper, Ontario</p>
@@ -623,6 +656,9 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           </div>
         
       </section>
+
+      
+      
     </article>
   </div>
 
