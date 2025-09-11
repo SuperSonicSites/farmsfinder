@@ -1,4 +1,4 @@
-baseURL = "https://farmfinders.ca"
+baseURL = "https://farmsfinder.ca"
 languageCode = "en-ca"
 title = "Farms Finder"
 theme= "farmfinders"
