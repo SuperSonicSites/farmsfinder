@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
   <div class="max-w-3xl mx-auto py-16">
     <article class="space-y-16">
+      
       <header class="text-left space-y-8">
         <h1 class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight">Find Local Farms Near You!</h1>
         <div class="prose prose-xl prose-gray">
@@ -185,8 +186,12 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </header>
       
-      <section aria-labelledby="categories-heading" class="space-y-12">
-        <h2 id="categories-heading" class="text-3xl font-light text-gray-800 tracking-wide">Browse by Category</h2>
+      
+      <section aria-labelledby="categories-heading" class="space-y-8">
+        <div class=" space-y-4">
+          <h2 id="categories-heading" class="text-3xl font-light text-gray-800 tracking-wide">Browse Local Farms by Category</h2>
+          <p class="text-lg text-gray-600">Find fresh, seasonal produce and authentic farm experiences across Canada. All farm information is verified annually.</p>
+        </div>
         
         
         
@@ -238,13 +243,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
         <nav aria-label="Farm categories" class="flex justify-center">
-          <ul style="padding-left: 0;"class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl w-full">
+          <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
             
               
               
               <li>
                 <a href="/christmas-tree/" 
-                   class="block p-8 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
+                   class="block bg-white border border-gray-200 rounded-xl p-8 text-center hover:shadow-lg hover:border-gray-300 transition-all duration-300 group shadow-sm">
                   <span class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide">
                     Christmas Tree
                   </span>
@@ -255,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
               
               <li>
                 <a href="/sugar-shack/" 
-                   class="block p-8 text-center border border-gray-150 rounded-2xl hover:border-gray-250 hover:shadow-lg transition-all duration-300 group bg-white">
+                   class="block bg-white border border-gray-200 rounded-xl p-8 text-center hover:shadow-lg hover:border-gray-300 transition-all duration-300 group shadow-sm">
                   <span class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide">
                     Sugar Shack
                   </span>
@@ -265,6 +270,70 @@ document.addEventListener('DOMContentLoaded', function() {
           </ul>
         </nav>
       </section>
+
+      
+      <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
+        <section aria-labelledby="benefits-heading" class="space-y-8">
+          <div class="space-y-4">
+            <h2 id="benefits-heading" class="text-3xl font-light text-gray-800 tracking-wide">Why Choose Local Farms Near You?</h2>
+            <p class="text-lg">Support your community while enjoying the freshest seasonal experiences.</p>
+          </div>
+          <div class="grid grid-cols-1 gap-2">
+            <div class="bg-gray-50 rounded-lg p-8 space-y-3">
+              <div class="w-12 h-12 bg-green-100 rounded-lg mx-auto flex">
+                <span class="text-green-600 text-xl">🌱</span>
+              </div>
+              <h3 class="text-2xl font-light text-gray-800">Farm Fresh Quality</h3>
+              <p class="leading-relaxed text-lg">Get the freshest seasonal produce picked at peak ripeness, straight from local Canadian farms.</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-8 space-y-3">
+              <div class="w-12 h-12 bg-blue-100 rounded-lg mx-auto flex">
+                <span class="text-xl">🏘️</span>
+              </div>
+              <h3 class="text-2xl text-gray-800">Support Local Economy</h3>
+              <p class="leading-relaxed text-lg">Keep your money in the community while supporting family-owned farms across Canada.</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-8 space-y-3">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg mx-auto flex">
+                <span class="text-xl">🎯</span>
+              </div>
+              <h3 class="text-2xl font-light text-gray-800">Authentic Experiences</h3>
+              <p class="leading-relaxed text-lg">Create lasting memories with pick-your-own activities, farm tours, and seasonal celebrations.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+<div class="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
+  <section aria-labelledby="accuracy-heading" class="space-y-8">
+    <div class="space-y-4">
+      <h2 id="accuracy-heading" class="text-3xl font-light text-gray-800 tracking-wide">Always Current Farm Information</h2>
+      <p class="text-lg text-gray-600">Tired of driving to farms only to find they're closed or prices have changed? We actively contact every farm annually to ensure hours, pricing, and availability are accurate.</p>
+    </div>
+    <div class="bg-green-50 border border-green-100 rounded-lg p-8 space-y-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+          <span class="text-white text-xs">✓</span>
+        </div>
+        <span class="text-green-800 font-light text-lg">Verified farm hours and contact information</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+          <span class="text-white text-xs">✓</span>
+        </div>
+        <span class="text-green-800 font-light text-lg">Current pricing and seasonal availability</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+          <span class="text-white text-xs">✓</span>
+        </div>
+        <span class="text-green-800 font-light text-lg">No more outdated or scattered information</span>
+      </div>
+    </div>
+  </section>
+</div>
+
     </article>
   </div>
 
