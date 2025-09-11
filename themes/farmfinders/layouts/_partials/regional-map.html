@@ -36,14 +36,14 @@ Renders a Google Map with farm pins for a specific region
 {{- range site.Pages }}
   {{- if and (eq .Section "farms") .Params.coordinates }}
     {{- if and .Params.categories .Params.address }}
-      {{- $farmRegion := lower .Params.address.province }}
+      {{- $farmRegion := lower .Params.address.province | replace " " "-" }}
       {{- $farmLat := .Params.coordinates.latitude }}
       {{- $farmLng := .Params.coordinates.longitude }}
       
       {{- $matchesCategory := in .Params.categories $category }}
       {{- $matchesRegion := true }}
       {{- if ne $region "canada" }}
-        {{- $matchesRegion = eq $farmRegion $region }}
+        {{- $matchesRegion = eq (.Params.address.province | urlize) $region }}
       {{- end }}
       
       {{- $matchesCity := true }}

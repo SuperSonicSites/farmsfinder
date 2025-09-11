@@ -78,7 +78,7 @@
         {{ $province = $province | lower }}
         {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
         {{ range $categoryFarms }}
-          {{ if eq (.Params.address.province | lower) $province }}
+          {{ if eq (.Params.address.province | urlize) $province }}
             {{ $filteredFarms = $filteredFarms | append . }}
           {{ end }}
         {{ end }}
