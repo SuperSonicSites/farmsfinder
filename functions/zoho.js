@@ -1,4 +1,4 @@
-const yaml = require('js-yaml');
+import yaml from 'js-yaml';
 
 class FarmWebhookHandler {
   constructor(config) {
@@ -127,7 +127,7 @@ class FarmWebhookHandler {
       place_id: account.PlaceID || '',
       phone: account.Phone || '',
       email: account.Email || '',
-      status: 'active'
+      status: 'active' // Default status for soft deletes
     };
 
     // Add social media if present
@@ -174,9 +174,6 @@ class FarmWebhookHandler {
 
   async getGitHubFile(filepath) {
     try {
-      console.log(`Checking if file exists: ${filepath}`);
-      console.log(`GitHub API URL: https://api.github.com/repos/${this.githubRepo}/contents/${filepath}`);
-      
       const response = await fetch(`https://api.github.com/repos/${this.githubRepo}/contents/${filepath}`, {
         headers: {
           'Authorization': `token ${this.githubToken}`,
@@ -184,55 +181,29 @@ class FarmWebhookHandler {
         }
       });
 
-      console.log(`GitHub file check response status: ${response.status}`);
-      
       if (response.ok) {
-        const result = await response.json();
-        console.log(`File exists, SHA: ${result.sha}`);
-        return result;
+        return await response.json();
       }
-      
-      if (response.status === 404) {
-        console.log('File does not exist (404) - will create new file');
-        return null;
-      }
-      
-      // Other error
-      const errorData = await response.json();
-      console.error(`GitHub file check error: ${response.status}`, errorData);
       return null;
-      
     } catch (error) {
-      console.error('Error checking GitHub file:', error.message);
-      return null;
+      return null; // File doesn't exist
     }
   }
 
   async commitFileToGit(filepath, content, commitMessage) {
-    console.log(`Starting GitHub commit process:`);
-    console.log(`  Repository: ${this.githubRepo}`);
-    console.log(`  File path: ${filepath}`);
-    console.log(`  GitHub token starts with: ${this.githubToken.substring(0, 10)}...`);
-    console.log(`  Commit message: ${commitMessage}`);
-    
     // Check if file exists to get SHA
     const existingFile = await this.getGitHubFile(filepath);
     
     const requestBody = {
       message: commitMessage,
-      content: btoa(unescape(encodeURIComponent(content)))
+      content: btoa(unescape(encodeURIComponent(content))) // Handle UTF-8 encoding
     };
 
     // Include SHA if updating existing file
     if (existingFile && existingFile.sha) {
       requestBody.sha = existingFile.sha;
-      console.log(`Updating existing file with SHA: ${existingFile.sha}`);
-    } else {
-      console.log('Creating new file');
     }
 
-    console.log(`Making GitHub API call to create/update file...`);
-    
     const response = await fetch(`https://api.github.com/repos/${this.githubRepo}/contents/${filepath}`, {
       method: 'PUT',
       headers: {
@@ -243,48 +214,35 @@ class FarmWebhookHandler {
       body: JSON.stringify(requestBody)
     });
 
-    console.log(`GitHub commit response status: ${response.status}`);
-
     if (!response.ok) {
       const error = await response.json();
-      console.error('GitHub commit error details:', error);
-      throw new Error(`GitHub API error: ${error.message || 'Unknown error'}`);
+      throw new Error(`GitHub API error: ${error.message}`);
     }
 
-    const result = await response.json();
-    console.log(`GitHub commit successful:`, result.commit.sha);
-    return result;
+    return await response.json();
   }
 
   async processRecord(accountId) {
-    console.log(`\n=== Processing Zoho account: ${accountId} ===`);
-    console.log(`Configuration check:`);
-    console.log(`  Zoho Client ID: ${this.zohoClientId.substring(0, 10)}...`);
-    console.log(`  GitHub repo: ${this.githubRepo}`);
-    console.log(`  GitHub token configured: ${this.githubToken ? 'Yes' : 'No'}`);
+    console.log(`Processing Zoho account: ${accountId}`);
 
     try {
       // Fetch account data from Zoho
-      console.log(`\n--- Step 1: Fetching from Zoho CRM ---`);
       const account = await this.fetchAccountFromZoho(accountId);
       const businessName = account.Account_Name;
 
-      console.log(`Successfully fetched farm: ${businessName}`);
+      console.log(`Processing farm: ${businessName}`);
 
       // Generate markdown content
-      console.log(`\n--- Step 2: Generating markdown content ---`);
       const markdownContent = this.generateMarkdownContent(account);
-      console.log(`Generated ${markdownContent.length} characters of markdown`);
 
       // Use record ID as filename for reliability
       const filepath = `content/farms/${accountId}.md`;
       const commitMessage = `Update farm: ${businessName} (${accountId})`;
 
-      console.log(`\n--- Step 3: Committing to GitHub ---`);
       // Commit to GitHub
       await this.commitFileToGit(filepath, markdownContent, commitMessage);
 
-      console.log(`\n=== SUCCESS: ${businessName} processed ===`);
+      console.log(`Successfully processed: ${businessName} -> ${filepath}`);
 
       return {
         success: true,
@@ -295,33 +253,28 @@ class FarmWebhookHandler {
       };
 
     } catch (error) {
-      console.error(`\n=== ERROR processing account ${accountId} ===`);
-      console.error(`Error: ${error.message}`);
-      console.error(`Stack: ${error.stack}`);
+      console.error(`Error processing account ${accountId}:`, error.message);
       throw error;
     }
   }
 }
 
 // Cloudflare Pages Function handler
-exports.onRequest = async function(context) {
+export async function onRequest(context) {
   const startTime = Date.now();
   
   try {
-    console.log('\n========== WEBHOOK STARTED ==========');
-    
     // Parse request
     const request = context.request;
     
     // Handle different HTTP methods
     if (request.method !== 'POST') {
-      console.log(`Rejected ${request.method} request - only POST allowed`);
       return new Response('Method not allowed', { status: 405 });
     }
 
     // Parse JSON body
     const body = await request.json();
-    console.log('Webhook payload received:', JSON.stringify(body, null, 2));
+    console.log('Webhook received:', JSON.stringify(body));
 
     // Extract record ID from various possible field names
     const accountId = body.recordId || body.accountId || body.id || body.record_id;
@@ -336,8 +289,6 @@ exports.onRequest = async function(context) {
         headers: { 'Content-Type': 'application/json' }
       });
     }
-
-    console.log(`Processing account ID: ${accountId}`);
 
     // Validate environment variables
     const requiredEnvVars = ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN', 'GITHUB_TOKEN', 'GITHUB_REPO'];
@@ -354,8 +305,6 @@ exports.onRequest = async function(context) {
       });
     }
 
-    console.log('All environment variables present');
-
     // Initialize handler
     const config = {
       zohoClientId: context.env.ZOHO_CLIENT_ID,
@@ -371,7 +320,7 @@ exports.onRequest = async function(context) {
     const result = await handler.processRecord(accountId);
     
     const processingTime = Date.now() - startTime;
-    console.log(`\n========== WEBHOOK COMPLETED (${processingTime}ms) ==========`);
+    console.log(`Webhook completed in ${processingTime}ms:`, result);
 
     return new Response(JSON.stringify({
       success: true,
@@ -388,9 +337,7 @@ exports.onRequest = async function(context) {
 
   } catch (error) {
     const processingTime = Date.now() - startTime;
-    console.error(`\n========== WEBHOOK FAILED (${processingTime}ms) ==========`);
-    console.error(`Error: ${error.message}`);
-    console.error(`Stack: ${error.stack}`);
+    console.error(`Webhook failed after ${processingTime}ms:`, error);
     
     return new Response(JSON.stringify({
       success: false,
@@ -401,4 +348,4 @@ exports.onRequest = async function(context) {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-};
+}
