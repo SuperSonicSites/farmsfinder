@@ -29,36 +29,73 @@ title: "${title}"
   }
 }
 
+function createCityPage(filePath, city, province, category) {
+  const cityTitle = formatTitle(city);
+  const provinceTitle = formatTitle(province);
+  const categoryTitle = formatTitle(category);
+  
+  const content = `---
+title: "${cityTitle} ${categoryTitle} Farms"
+description: "Find the best ${categoryTitle} farms in ${cityTitle}, ${provinceTitle}. Discover local farms, their offerings, and plan your visit."
+layout: section
+category: ${category}
+province: ${province}
+city: ${city}
+---
+
+# ${cityTitle} ${categoryTitle} Farms
+
+Discover the best ${categoryTitle} farms in ${cityTitle}, ${provinceTitle}. Explore local farms, their unique offerings, and plan your visit today.
+
+## Featured Farms in ${cityTitle}
+
+<!-- Farm listings will be automatically generated here -->
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log(`Created city page: ${filePath}`);
+}
+
 function generateCategoryStructure() {
   const farms = fs.readdirSync(farmsDir)
     .filter(file => file.endsWith('.md'))
     .map(file => {
       const content = fs.readFileSync(path.join(farmsDir, file), 'utf8');
       const frontmatter = content.split('---')[1];
-      return yaml.load(frontmatter);
+      return { 
+        ...yaml.load(frontmatter),
+        _file: file
+      };
     });
 
   const structures = new Set();
+  const cityFarms = new Map(); // Track farms by city
 
   console.log(`Processing ${farms.length} farms...`);
 
+  // First pass: collect all structures and organize farms by city
   farms.forEach(farm => {
-    // Updated to use nested address structure
     if (farm.categories && farm.address && farm.address.province && farm.address.city) {
       console.log(`Processing farm: ${farm.title} - ${farm.address.city}, ${farm.address.province}`);
       
       farm.categories.forEach(category => {
-        // Use the category name as-is for folder names
         const categoryFolder = category;
         const provinceFolder = farm.address.province.toLowerCase().replace(/\s+/g, '-');
         const cityFolder = farm.address.city.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '-');
+        const cityKey = `${category}/${provinceFolder}/${cityFolder}`;
 
         // Add to structures set
-        structures.add(`${categoryFolder}`);
+        structures.add(categoryFolder);
         structures.add(`${categoryFolder}/${provinceFolder}`);
-        structures.add(`${categoryFolder}/${provinceFolder}/${cityFolder}`);
+        structures.add(cityKey);
         
-        console.log(`  Added: ${categoryFolder}/${provinceFolder}/${cityFolder}`);
+        // Add farm to city's farm list
+        if (!cityFarms.has(cityKey)) {
+          cityFarms.set(cityKey, []);
+        }
+        cityFarms.get(cityKey).push(farm);
+        
+        console.log(`  Added to: ${cityKey}`);
       });
     } else {
       console.log(`Skipping farm: ${farm.title || 'Unknown'} - missing required data`);
@@ -81,14 +118,16 @@ function generateCategoryStructure() {
     ensureDirectoryExists(dirPath);
 
     if (parts.length === 1) {
-      // Category level - use formatTitle to handle hyphens properly
+      // Category level
       createIndexFile(indexPath, formatTitle(parts[0]));
     } else if (parts.length === 2) {
       // Province level
-      createIndexFile(indexPath, formatTitle(parts[1]));
+      createIndexFile(indexPath, `${formatTitle(parts[1])} ${formatTitle(parts[0])} Farms`);
     } else if (parts.length === 3) {
-      // City level
-      createIndexFile(indexPath, formatTitle(parts[2]));
+      // City level - create a more detailed page
+      const cityKey = structure;
+      const [category, province, city] = parts;
+      createCityPage(indexPath, city, province, category);
     }
   });
 
