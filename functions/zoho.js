@@ -175,7 +175,12 @@ class FarmWebhookHandler {
       indent: 2,
       lineWidth: -1,
       noRefs: true,
-      quotingType: '"'
+      quotingType: '"',
+      flowLevel: 2,
+      forceQuotes: false,
+      styles: {
+        '!!seq': 'flow'
+      }
     });
 
     const description = account.Description || '';

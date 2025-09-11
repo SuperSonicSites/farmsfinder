@@ -55,6 +55,12 @@
       
         
           
+            
+          
+        
+      
+        
+          
         
       
       [
@@ -98,10 +104,22 @@
             "@type": "ItemList",
             "name": "Christmas Tree Farms Directory",
             "description": "Complete directory of christmas tree farms across Canada with location-based filtering",
-            "numberOfItems":  3 ,
+            "numberOfItems":  4 ,
             "itemListElement": [
               
               
+              {
+                "@type": "LocalBusiness",
+                "name": "Calgary Christmas Tree",
+                "url": "http:\/\/localhost:1313\/farms\/calgary-christmas-tree\/",
+                "category": "Christmas Tree Farm",
+                "addressLocality": "Calgary",
+                "addressRegion": "Alberta",
+                "addressCountry": "CA",
+                "isAccessibleForFree": true
+              }
+              
+              ,
               {
                 "@type": "LocalBusiness",
                 "name": "Carole\u0027s Christmas Tree Farm",
@@ -312,6 +330,14 @@ document.addEventListener('DOMContentLoaded', function() {
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
               
                 <li>
+                  <a href="/christmas-tree/alberta/">
+                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Alberta
+                    </span>
+                  </a>
+                </li>
+              
+                <li>
                   <a href="/christmas-tree/nova-scotia/">
                     <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
                       Nova Scotia
@@ -337,6 +363,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
           <div class="flex">
             <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+              
+                <li>
+                      <a href="/farms/calgary-christmas-tree/" class="hover:text-gray-700 transition-colors">Calgary Christmas Tree</a>
+                    
+                    <p class="text-gray-600 font-light">Calgary, Alberta</p>
+                  
+                </li>
               
                 <li>
                       <a href="/farms/caroles-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Carole&#39;s Christmas Tree Farm</a>
