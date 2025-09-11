@@ -23,8 +23,8 @@
               {{ end }}
               {{ if and .Params.address .Params.address.city }}
                 Farm in 
-                {{ $province := .Params.address.province | lower }}
-                {{ $city := .Params.address.city | lower }}
+                {{ $province := .Params.address.province | lower | replaceRE " +" "-" }}
+                {{ $city := .Params.address.city | lower | replaceRE "[^a-zA-Z0-9]+" "-" }}
                 {{ $categorySlug := index .Params.categories 0 }}
                 {{ $cityPath := printf "/%s/%s/%s/" $categorySlug $province $city }}
                 <a href="{{ $cityPath }}" class="text-blue-600 hover:text-blue-800 font-light">{{ .Params.address.city }}</a>
