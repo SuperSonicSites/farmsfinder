@@ -63,7 +63,7 @@
    "@type": "ItemList",
    "@id": "http:\/\/localhost:1313\/christmas-tree\/ontario\/#list",
    "itemListOrder": "https://schema.org/ItemListUnordered",
-   "numberOfItems":  11 
+   "numberOfItems":  12 
  }
 }
 </script>
@@ -319,6 +319,12 @@ document.addEventListener('DOMContentLoaded', function() {
           
         
           
+            
+          
+        
+          
+        
+          
         
         
         
@@ -423,6 +429,14 @@ function initRegionalMap() {
       address: "\"Pakenham, Ontario\"",
       phone: "\"+1 613-256-3029\""
     },
+    {
+      name: "\"Dawson Christmas Tree Farm\"",
+      lat:  44.123942 ,
+      lng:  -78.5018576 ,
+      url: "\"/farms/dawson-christmas-tree-farm/\"",
+      address: "\"Millbrook, Ontario\"",
+      phone: "\"+1 905-261-7415\""
+    },
   ];
 
   if (farms.length === 0) return;
@@ -511,7 +525,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
         <meta itemprop="name" content="Locations listed on this page" />
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="10" />
+        <meta itemprop="numberOfItems" content="11" />
 
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -570,6 +584,17 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           </li>
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/millbrook/">
+              <a itemprop="url" href="/christmas-tree/ontario/millbrook/">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  Millbrook
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="6" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
             <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/navan/">
               <a itemprop="url" href="/christmas-tree/ontario/navan/">
                 <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
@@ -577,7 +602,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 </span>
               </a>
             </span>
-            <meta itemprop="position" content="6" />
+            <meta itemprop="position" content="7" />
           </li>
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -588,7 +613,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 </span>
               </a>
             </span>
-            <meta itemprop="position" content="7" />
+            <meta itemprop="position" content="8" />
           </li>
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -599,7 +624,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 </span>
               </a>
             </span>
-            <meta itemprop="position" content="8" />
+            <meta itemprop="position" content="9" />
           </li>
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -610,7 +635,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 </span>
               </a>
             </span>
-            <meta itemprop="position" content="9" />
+            <meta itemprop="position" content="10" />
           </li>
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -621,7 +646,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 </span>
               </a>
             </span>
-            <meta itemprop="position" content="10" />
+            <meta itemprop="position" content="11" />
           </li>
         
       </ul>
@@ -640,7 +665,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
         <meta itemprop="name" content="Farms listed on this page" />
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="11" />
+        <meta itemprop="numberOfItems" content="12" />
 
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -905,6 +930,30 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             </span>
 
             <meta itemprop="position" content="11" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/dawson-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/dawson-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Dawson Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Millbrook</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="12" />
           </li>
         
       </ul>

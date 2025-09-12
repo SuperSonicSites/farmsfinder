@@ -376,6 +376,22 @@ function initRegionalMap() {
       phone: "\"+1 613-256-3029\""
     },
     {
+      name: "\"Dawson Christmas Tree Farm\"",
+      lat:  44.123942 ,
+      lng:  -78.5018576 ,
+      url: "\"/farms/dawson-christmas-tree-farm/\"",
+      address: "\"Millbrook, Ontario\"",
+      phone: "\"+1 905-261-7415\""
+    },
+    {
+      name: "\"Domaine Clovis\"",
+      lat:  46.067998 ,
+      lng:  -72.9929219 ,
+      url: "\"/farms/domaine-clovis/\"",
+      address: "\"Sorel-Tracy, Quebec\"",
+      phone: "\"+1 450-742-0495\""
+    },
+    {
       name: "\"Downey Trees\"",
       lat:  45.3676429 ,
       lng:  -71.7691089 ,
@@ -572,7 +588,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
         <meta itemprop="name" content="Farms listed on this page" />
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="18" />
+        <meta itemprop="numberOfItems" content="20" />
 
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -986,6 +1002,54 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
             <span itemprop="item"
                   itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/dawson-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/dawson-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Dawson Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Millbrook</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="18" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/domaine-clovis/#business">
+
+              <a itemprop="url"
+                 href="/farms/domaine-clovis/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Domaine Clovis</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Sorel-Tracy</span>, <span itemprop="addressRegion">Quebec</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="19" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
                   itemid="http://localhost:1313/farms/downey-trees/#business">
 
               <a itemprop="url"
@@ -1004,7 +1068,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
               </p>
             </span>
 
-            <meta itemprop="position" content="18" />
+            <meta itemprop="position" content="20" />
           </li>
         
       </ul>
