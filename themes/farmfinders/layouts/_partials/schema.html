@@ -1,251 +1,481 @@
-{{/* LocalBusiness PRIMARY. Farm via additionalType. Event nested via subjectOf. */}}
-{{- $isFarmPage := and .IsPage (or (eq .Section "farms") (eq .Type "farms") (in .File.Path "/farms/")) -}}
-{{- if $isFarmPage -}}
+{{/* ===============================
+  Farm Schema Markup (farm detail pages)
+  - WebPage -> mainEntity = Business
+  - Business is primary (LocalBusiness)
+  - Seasonal Event via subjectOf (Business stays primary)
+  - Boilerplate description (no content scrape)
+================================== */}}
+
+{{ if and .Params.title (or .Params.categories .Params.type) }}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+ "@context": "https://schema.org",
+ "@graph": [
 
-    {  /* WebPage → points to Business as primary */
-      "@type": "WebPage",
-      "@id": "{{ .Permalink }}",
-      "url": "{{ .Permalink }}",
-      "name": "{{ .Title }}",
-      "mainEntity": { "@id": "{{ .Permalink }}#business" }
-    },
+   {  /* WebPage → points to Business as primary */
+     "@type": "WebPage",
+     "@id": "{{ .Permalink }}",
+     "url": "{{ .Permalink }}",
+     "name": {{ .Title | plainify | jsonify }},
+     "mainEntity": { "@id": "{{ .Permalink }}#business" }
+   },
 
-    {  /* PRIMARY: Business */
-      "@type": [
-        "LocalBusiness"
-        {{- if or (in .Params.categories "christmas-tree") (in .Params.categories "pumpkin") (in .Params.categories "sunflower") (in .Params.categories "petting-zoo") }}, "TouristAttraction"{{- end -}}
-        {{- if in .Params.categories "christmas-tree" }}, "Store"{{- end -}}
-      ],
-      "@id": "{{ .Permalink }}#business",
-      "name": "{{ .Title }}",
-      "url": "{{ .Permalink }}",
-      "mainEntityOfPage": { "@id": "{{ .Permalink }}" },
-      {{ with .Content }}"description": {{ . | plainify | truncate 160 | jsonify }},{{ end }}
+   {  /* PRIMARY: Business */
+     "@type": [
+       "LocalBusiness"
+       {{- if or (in .Params.categories "christmas-tree") (in .Params.categories "pumpkin") (in .Params.categories "sunflower") (in .Params.categories "petting-zoo") }}, "TouristAttraction"{{- end -}}
+       {{- if in .Params.categories "christmas-tree" }}, "Store"{{- end -}}
+     ],
+     "@id": "{{ .Permalink }}#business",
+     "name": {{ .Title | plainify | jsonify }},
+     "url": "{{ .Permalink }}",
+     "mainEntityOfPage": { "@id": "{{ .Permalink }}" },
 
-      {{/* Images (front matter or first 3 resources) */}}
-      {{- $images := slice -}}
-      {{- with .Params.images -}} {{- $images = . -}}
-      {{- else -}}
-        {{- with .Resources.ByType "image" -}}
-          {{- range first 3 . -}}{{- $images = $images | append .Permalink -}}{{- end -}}
-        {{- end -}}
-      {{- end -}}
-      {{- if gt (len $images) 0 -}}
-      "image": {{ $images | jsonify | safeJS }},
-      {{- end }}
+     {{/* ---------- Boilerplate description ---------- */}}
+     {{- $catNames := slice -}}
+     {{- with .Params.categories -}}
+       {{- range . -}}
+         {{- $catNames = $catNames | append (replaceRE "-" " " . | title) -}}
+       {{- end -}}
+     {{- end -}}
+     {{- $catList := "" -}}
+     {{- if gt (len $catNames) 0 -}}
+       {{- $catList = delimit $catNames ", " " and " -}}
+     {{- end -}}
 
-      {{ with .Params.phone }}"telephone": "{{ . }}",{{ end }}
-      {{ with .Params.email }}"email": "{{ . }}",{{ end }}
+     {{- /* Province code mapping for short form like "BC", "ON" */ -}}
+     {{- $provMap := dict
+         "alberta" "AB" "british-columbia" "BC" "manitoba" "MB" "new-brunswick" "NB"
+         "newfoundland-and-labrador" "NL" "newfoundland-&-labrador" "NL" "nova-scotia" "NS"
+         "ontario" "ON" "prince-edward-island" "PE" "quebec" "QC" "québec" "QC"
+         "saskatchewan" "SK" "yukon" "YT" "northwest-territories" "NT" "nunavut" "NU"
+     -}}
+     {{- $provName := .Params.address.province | default "" -}}
+     {{- $provKey := $provName | urlize | lower -}}
+     {{- $provCode := (index $provMap $provKey) | default $provName -}}
+     {{- $city := .Params.address.city | default "" -}}
 
-      {{/* sameAs as a real array (no quotes) */}}
-      {{- $sameAs := slice -}}
-      {{- with .Params.website -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
-      {{- with .Params.social.facebook -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
-      {{- with .Params.social.instagram -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
-      {{- if gt (len $sameAs) 0 -}}
-      "sameAs": {{ $sameAs | jsonify | safeJS }},
-      {{- end }}
+     {{- $loc := "" -}}
+     {{- if and $city $provCode -}}
+       {{- $loc = printf "%s, %s" $city $provCode -}}
+     {{- else if $provCode -}}
+       {{- $loc = $provCode -}}
+     {{- else -}}
+       {{- $loc = "Canada" -}}
+     {{- end -}}
 
-      {{ if .Params.address }}
-      "address": {
-        "@type": "PostalAddress"{{ with .Params.address.street }},
-        "streetAddress": "{{ . }}"{{ end }}{{ with .Params.address.city }},
-        "addressLocality": "{{ . }}"{{ end }}{{ with .Params.address.province }},
-        "addressRegion": "{{ . }}"{{ end }}{{ with .Params.address.postal_code }},
-        "postalCode": "{{ . }}"{{ end }},
-        "addressCountry": "CA"
-      },
-      {{ end }}
+     {{- $desc := "" -}}
+     {{- if and (ne $catList "") (ne $loc "") -}}
+       {{- $desc = printf "Learn more about %s. %s Farm in %s. See hours, prices, amenities, directions and seasonal dates." .Title $catList $loc -}}
+     {{- else if ne $catList "" -}}
+       {{- $desc = printf "Learn more about %s. %s Farm. See hours, prices, amenities and directions." .Title $catList -}}
+     {{- else if ne $loc "" -}}
+       {{- $desc = printf "Learn more about %s, a local farm in %s. See hours, prices, amenities and directions." .Title $loc -}}
+     {{- else -}}
+       {{- $desc = printf "Learn more about %s. See hours, prices, amenities and directions." .Title -}}
+     {{- end -}}
+     "description": {{ $desc | plainify | jsonify }},
 
-      {{ if and .Params.coordinates.latitude .Params.coordinates.longitude }}
-      "geo": { "@type": "GeoCoordinates", "latitude": {{ .Params.coordinates.latitude }}, "longitude": {{ .Params.coordinates.longitude }} },
-      {{ end }}
+     {{/* ---------- Images (front matter or first 3 resources) ---------- */}}
+     {{- $images := slice -}}
+     {{- with .Params.images -}} {{- $images = . -}}
+     {{- else -}}
+       {{- with .Resources.ByType "image" -}}
+         {{- range first 3 . -}}{{- $images = $images | append .Permalink -}}{{- end -}}
+       {{- end -}}
+     {{- end -}}
+     {{- if gt (len $images) 0 -}}
+     "image": {{ $images | jsonify | safeJS }},
+     {{- end }}
 
-      {{- if .Params.place_id -}}
-      "hasMap": "https://www.google.com/maps/place/?q=place_id:{{ .Params.place_id }}",
-      "identifier": "{{ .Params.place_id }}",
-      {{- else if .Params.location_link -}}
-      "hasMap": "{{ .Params.location_link }}",
-      {{- end }}
+     {{ with .Params.phone }}"telephone": "{{ . }}",{{ end }}
+     {{ with .Params.email }}"email": "{{ . }}",{{ end }}
 
-      {{ with .Params.price_range }}"priceRange": "{{ . }}",{{ end }}
-      {{ with .Params.established }}"foundingDate": "{{ . }}",{{ end }}
-      {{ with .Params.payment_methods }}"paymentAccepted": {{ . | jsonify | safeJS }},{{ end }}
+     {{/* sameAs as a real array (no quotes) */}}
+     {{- $sameAs := slice -}}
+     {{- with .Params.website -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
+     {{- with .Params.social.facebook -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
+     {{- with .Params.social.instagram -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
+     {{- if gt (len $sameAs) 0 -}}
+     "sameAs": {{ $sameAs | jsonify | safeJS }},
+     {{- end }}
 
-      "additionalType": [
-        "https://schema.org/Farm"
-        {{ if .Params.categories }},
-        {{- range $i, $cat := .Params.categories -}}{{ if gt $i 0 }},{{ end -}}
-          {{- if eq $cat "christmas-tree" -}}"https://schema.org/GardenStore"
-          {{- else if eq $cat "pumpkin" -}}"https://schema.org/TouristAttraction"
-          {{- else if eq $cat "winery" -}}"https://schema.org/Winery"
-          {{- else if eq $cat "brewery" -}}"https://schema.org/Brewery"
-          {{- else if eq $cat "petting-zoo" -}}"https://schema.org/Zoo"
-          {{- else if eq $cat "flower" -}}"https://schema.org/Florist"
-          {{- else if eq $cat "meat" -}}"https://schema.org/ButcherShop"
-          {{- else -}}"https://schema.org/Farm"{{- end -}}
-        {{- end -}}
-        {{ end }}
-      ],
+     {{ if .Params.address }}
+     "address": {
+       "@type": "PostalAddress"{{ with .Params.address.street }},
+       "streetAddress": "{{ . }}"{{ end }}{{ with .Params.address.city }},
+       "addressLocality": "{{ . }}"{{ end }}{{ with .Params.address.province }},
+       "addressRegion": "{{ . }}"{{ end }}{{ with .Params.address.postal_code }},
+       "postalCode": "{{ . }}"{{ end }},
+       "addressCountry": "CA"
+     },
+     {{ end }}
 
-      {{ if .Params.categories }}"knowsAbout": {{ .Params.categories | jsonify | safeJS }},{{ end }}
-      {{ with .Params.type }}"slogan": "{{ . }}",{{ end }}
+     {{ if and .Params.coordinates.latitude .Params.coordinates.longitude }}
+     "geo": { "@type": "GeoCoordinates", "latitude": {{ .Params.coordinates.latitude }}, "longitude": {{ .Params.coordinates.longitude }} },
+     {{ end }}
 
-      {{/* Amenities incl. pet friendly as a feature (no petsAllowed warning) */}}
-      {{- $amenities := .Params.amenities | default (slice) -}}
-      {{- if .Params.pet_friendly -}}
-        {{- $amenities = $amenities | append "Pet Friendly" -}}
-      {{- end -}}
-      {{- if gt (len $amenities) 0 -}}
-      "amenityFeature": [
-        {{- range $i, $a := $amenities -}}{{ if gt $i 0 }},{{ end -}}
-        { "@type": "LocationFeatureSpecification", "name": "{{ $a }}", "value": true }
-        {{- end -}}
-      ],
-      {{- end }}
+     {{- if .Params.place_id -}}
+     "hasMap": "https://www.google.com/maps/place/?q=place_id:{{ .Params.place_id }}",
+     "identifier": "{{ .Params.place_id }}",
+     {{- else if .Params.location_link -}}
+     "hasMap": "{{ .Params.location_link }}",
+     {{- end }}
 
-      {{ with .Params.varieties }}
-      "makesOffer": [
-        {{- range $i, $variety := . -}}{{ if gt $i 0 }},{{ end -}}
-        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "{{ $variety }}" } }
-        {{- end -}}
-      ],
-      {{ end }}
+     {{ with .Params.price_range }}"priceRange": "{{ . }}",{{ end }}
+     {{ with .Params.established }}"foundingDate": "{{ . }}",{{ end }}
+     {{ with .Params.payment_methods }}"paymentAccepted": {{ . | jsonify | safeJS }},{{ end }}
 
-      {{/* Opening Hours (AM/PM → 24h) with seasonal validFrom/validThrough */}}
-      {{ if .Params.hours }}
-      {{- $daysMap := dict "monday" "Monday" "tuesday" "Tuesday" "wednesday" "Wednesday" "thursday" "Thursday" "friday" "Friday" "saturday" "Saturday" "sunday" "Sunday" -}}
-      {{- $defaultOpen := (cond (in .Params.categories "christmas-tree") "2025-11-15" (cond (in .Params.categories "pumpkin") "2025-09-01" (cond (in .Params.categories "sunflower") "2025-07-01" "2025-01-01"))) -}}
-      {{- $defaultClose := (cond (in .Params.categories "christmas-tree") "2025-12-24" (cond (in .Params.categories "pumpkin") "2025-10-31" (cond (in .Params.categories "sunflower") "2025-08-31" "2025-12-31"))) -}}
-      {{- $validFrom := .Params.opening_date | default $defaultOpen -}}
-      {{- $validThrough := .Params.closing_date | default $defaultClose -}}
-      "openingHoursSpecification": [
-        {{- $comma := false -}}
-        {{- range $day, $hours := .Params.hours -}}
-          {{- $dayName := index $daysMap $day -}}
-          {{- if and $hours (ne $hours "Closed") (ne $hours "By appointment") -}}
-            {{- if $comma }},{{ end -}}{{- $comma = true -}}
-            {{- $h := $hours | replaceRE "Dark" "20:00" | replaceRE "untill" "to" | replaceRE "Noon" "12:00" -}}
-            {{- $open := (index (split $h " to ") 0) | strings.TrimSpace -}}
-            {{- $close := (index (split $h " to ") 1) | strings.TrimSpace -}}
+     "additionalType": [
+       "https://schema.org/Farm"
+       {{ if .Params.categories }},
+       {{- range $i, $cat := .Params.categories -}}{{ if gt $i 0 }},{{ end -}}
+         {{- if eq $cat "christmas-tree" -}}"https://schema.org/GardenStore"
+         {{- else if eq $cat "pumpkin" -}}"https://schema.org/TouristAttraction"
+         {{- else if eq $cat "winery" -}}"https://schema.org/Winery"
+         {{- else if eq $cat "brewery" -}}"https://schema.org/Brewery"
+         {{- else if eq $cat "petting-zoo" -}}"https://schema.org/Zoo"
+         {{- else if eq $cat "flower" -}}"https://schema.org/Florist"
+         {{- else if eq $cat "meat" -}}"https://schema.org/ButcherShop"
+         {{- else -}}"https://schema.org/Farm"{{- end -}}
+       {{- end -}}
+       {{ end }}
+     ],
 
-            {{/* OPEN → 24h */}}
-            {{- if in $open "PM" -}}
-              {{- $openClean := $open | replaceRE "PM" "" | strings.TrimSpace -}}
-              {{- if in $openClean ":" -}}
-                {{- $parts := split $openClean ":" -}}
-                {{- $hour := (index $parts 0) | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
-                {{- $open = printf "%02d:%s" $hour (index $parts 1) -}}
-              {{- else -}}
-                {{- $hour := $openClean | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
-                {{- $open = printf "%02d:00" $hour -}}
-              {{- end -}}
-            {{- else if in $open "AM" -}}
-              {{- $openClean := $open | replaceRE "AM" "" | strings.TrimSpace -}}
-              {{- if in $openClean ":" -}}
-                {{- $parts := split $openClean ":" -}}
-                {{- $hour := (index $parts 0) | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
-                {{- $open = printf "%02d:%s" $hour (index $parts 1) -}}
-              {{- else -}}
-                {{- $hour := $openClean | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
-                {{- $open = printf "%02d:00" $hour -}}
-              {{- end -}}
-            {{- else if not (in $open ":") -}}
-              {{- $open = printf "%s:00" $open -}}
-            {{- end -}}
+     {{ if .Params.categories }}"knowsAbout": {{ .Params.categories | jsonify | safeJS }},{{ end }}
+     {{ with .Params.type }}"slogan": "{{ . }}",{{ end }}
 
-            {{/* CLOSE → 24h */}}
-            {{- if in $close "PM" -}}
-              {{- $closeClean := $close | replaceRE "PM" "" | strings.TrimSpace -}}
-              {{- if in $closeClean ":" -}}
-                {{- $parts := split $closeClean ":" -}}
-                {{- $hour := (index $parts 0) | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
-                {{- $close = printf "%02d:%s" $hour (index $parts 1) -}}
-              {{- else -}}
-                {{- $hour := $closeClean | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
-                {{- $close = printf "%02d:00" $hour -}}
-              {{- end -}}
-            {{- else if in $close "AM" -}}
-              {{- $closeClean := $close | replaceRE "AM" "" | strings.TrimSpace -}}
-              {{- if in $closeClean ":" -}}
-                {{- $parts := split $closeClean ":" -}}
-                {{- $hour := (index $parts 0) | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
-                {{- $close = printf "%02d:%s" $hour (index $parts 1) -}}
-              {{- else -}}
-                {{- $hour := $closeClean | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
-                {{- $close = printf "%02d:00" $hour -}}
-              {{- end -}}
-            {{- else if not (in $close ":") -}}
-              {{- $close = printf "%s:00" $close -}}
-            {{- end -}}
+     {{/* Amenities incl. pet friendly as a feature (no petsAllowed warning) */}}
+     {{- $amenities := .Params.amenities | default (slice) -}}
+     {{- if .Params.pet_friendly -}}
+       {{- $amenities = $amenities | append "Pet Friendly" -}}
+     {{- end -}}
+     {{- if gt (len $amenities) 0 -}}
+     "amenityFeature": [
+       {{- range $i, $a := $amenities -}}{{ if gt $i 0 }},{{ end -}}
+       { "@type": "LocationFeatureSpecification", "name": "{{ $a }}", "value": true }
+       {{- end -}}
+     ],
+     {{- end }}
 
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "https://schema.org/{{ $dayName }}",
-          "opens": "{{ $open }}",
-          "closes": "{{ $close }}",
-          "validFrom": "{{ $validFrom }}",
-          "validThrough": "{{ $validThrough }}"
-        }
-          {{- end -}}
-        {{- end -}}
-      ],
-      {{ end }}
+     {{ with .Params.varieties }}
+     "makesOffer": [
+       {{- range $i, $variety := . -}}{{ if gt $i 0 }},{{ end -}}
+       { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "{{ $variety }}" } }
+       {{- end -}}
+     ],
+     {{ end }}
 
-      "publicAccess": true,
-      "isAccessibleForFree": {{ if or (in .Params.amenities "Free Admission") (eq .Params.price_range "Free") }}true{{ else }}false{{ end }},
-      {{ with .Params.zoho_id }}"alternateName": "{{ . }}",{{ end }}
+     {{/* Opening Hours (AM/PM → 24h) with seasonal validFrom/validThrough */}}
+     {{ if .Params.hours }}
+     {{- $daysMap := dict "monday" "Monday" "tuesday" "Tuesday" "wednesday" "Wednesday" "thursday" "Thursday" "friday" "Friday" "saturday" "Saturday" "sunday" "Sunday" -}}
+     {{- $defaultOpen := (cond (in .Params.categories "christmas-tree") "2025-11-15" (cond (in .Params.categories "pumpkin") "2025-09-01" (cond (in .Params.categories "sunflower") "2025-07-01" "2025-01-01"))) -}}
+     {{- $defaultClose := (cond (in .Params.categories "christmas-tree") "2025-12-24" (cond (in .Params.categories "pumpkin") "2025-10-31" (cond (in .Params.categories "sunflower") "2025-08-31" "2025-12-31"))) -}}
+     {{- $validFrom := .Params.opening_date | default $defaultOpen -}}
+     {{- $validThrough := .Params.closing_date | default $defaultClose -}}
+     "openingHoursSpecification": [
+       {{- $comma := false -}}
+       {{- range $day, $hours := .Params.hours -}}
+         {{- $dayName := index $daysMap $day -}}
+         {{- if and $hours (ne $hours "Closed") (ne $hours "By appointment") -}}
+           {{- if $comma }},{{ end -}}{{- $comma = true -}}
+           {{- $h := $hours | replaceRE "Dark" "20:00" | replaceRE "untill" "to" | replaceRE "Noon" "12:00" -}}
+           {{- $open := (index (split $h " to ") 0) | strings.TrimSpace -}}
+           {{- $close := (index (split $h " to ") 1) | strings.TrimSpace -}}
 
-      {{/* SECONDARY: seasonal Event nested so Business stays primary */}}
-      {{- $showEvent := or .Params.opening_date (in .Params.categories "christmas-tree") (in .Params.categories "pumpkin") (in .Params.categories "sunflower") -}}
-      {{- if $showEvent -}}
-      "subjectOf": {
-        "@type": "Event",
-        "@id": "{{ .Permalink }}#season-{{ now.Format "2006" }}",
-        "name": "{{ .Title }} {{ now.Format "2006" }} Season",
-        "description": "Visit {{ .Title }} for {{ with .Params.categories }}{{ delimit . ", " " and " | replaceRE "-" " " }}{{ else }}seasonal{{ end }} experiences",
-        {{- $eventStart := .Params.opening_date | default (cond (in .Params.categories "christmas-tree") "2025-11-15" (cond (in .Params.categories "pumpkin") "2025-09-01" (cond (in .Params.categories "sunflower") "2025-07-01" "2025-06-01"))) -}}
-        {{- $eventEnd := .Params.closing_date | default (cond (in .Params.categories "christmas-tree") "2025-12-24" (cond (in .Params.categories "pumpkin") "2025-10-31" (cond (in .Params.categories "sunflower") "2025-08-31" "2025-12-31"))) -}}
-        "startDate": "{{ $eventStart }}",
-        "endDate": "{{ $eventEnd }}",
-        "url": "{{ .Params.website | default .Permalink }}",
-        {{- if gt (len $images) 0 -}}"image": {{ $images | jsonify | safeJS }},{{ end }}
-        "location": { "@id": "{{ .Permalink }}#business" },
-        "organizer": { "@id": "{{ .Permalink }}#business" },
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventScheduled",
-        "isAccessibleForFree": {{ if or (in .Params.amenities "Free Admission") (eq .Params.price_range "Free") }}true{{ else }}false{{ end }}
-        {{- $nums := findRE `[0-9]+(?:\.[0-9]+)?` (.Params.price_range | default "") -}}
-        {{- if ge (len $nums) 1 -}},
-        "offers": {
-          "@type": "AggregateOffer",
-          "lowPrice": {{ index $nums 0 }},
-          "highPrice": {{ if ge (len $nums) 2 }}{{ index $nums 1 }}{{ else }}{{ index $nums 0 }}{{ end }},
-          "priceCurrency": "CAD",
-          "availability": "https://schema.org/InStock",
-          "url": "{{ .Params.website | default .Permalink }}",
-          "validFrom": "{{ .Params.opening_date | default (cond (in .Params.categories "christmas-tree") "2025-09-01" (cond (in .Params.categories "pumpkin") "2025-08-15" (cond (in .Params.categories "sunflower") "2025-06-15" "2025-06-01"))) }}"
-        }
-        {{- end }}
-      },
-      {{- end }}
+           {{- /* OPEN → 24h */ -}}
+           {{- if in $open "PM" -}}
+             {{- $openClean := $open | replaceRE "PM" "" | strings.TrimSpace -}}
+             {{- if in $openClean ":" -}}
+               {{- $parts := split $openClean ":" -}}
+               {{- $hour := (index $parts 0) | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
+               {{- $open = printf "%02d:%s" $hour (index $parts 1) -}}
+             {{- else -}}
+               {{- $hour := $openClean | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
+               {{- $open = printf "%02d:00" $hour -}}
+             {{- end -}}
+           {{- else if in $open "AM" -}}
+             {{- $openClean := $open | replaceRE "AM" "" | strings.TrimSpace -}}
+             {{- if in $openClean ":" -}}
+               {{- $parts := split $openClean ":" -}}
+               {{- $hour := (index $parts 0) | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
+               {{- $open = printf "%02d:%s" $hour (index $parts 1) -}}
+             {{- else -}}
+               {{- $hour := $openClean | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
+               {{- $open = printf "%02d:00" $hour -}}
+             {{- end -}}
+           {{- else if not (in $open ":") -}}
+             {{- $open = printf "%s:00" $open -}}
+           {{- end -}}
 
-      "potentialAction": {
-        "@type": "ReserveAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "{{ .Params.website | default .Params.location_link }}",
-          "actionPlatform": ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"]
-        },
-        "result": { "@type": "Reservation", "name": "Farm Visit" }
-      }
-    }
+           {{- /* CLOSE → 24h */ -}}
+           {{- if in $close "PM" -}}
+             {{- $closeClean := $close | replaceRE "PM" "" | strings.TrimSpace -}}
+             {{- if in $closeClean ":" -}}
+               {{- $parts := split $closeClean ":" -}}
+               {{- $hour := (index $parts 0) | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
+               {{- $close = printf "%02d:%s" $hour (index $parts 1) -}}
+             {{- else -}}
+               {{- $hour := $closeClean | int -}}{{- if ne $hour 12 }}{{ $hour = add $hour 12 }}{{ end -}}
+               {{- $close = printf "%02d:00" $hour -}}
+             {{- end -}}
+           {{- else if in $close "AM" -}}
+             {{- $closeClean := $close | replaceRE "AM" "" | strings.TrimSpace -}}
+             {{- if in $closeClean ":" -}}
+               {{- $parts := split $closeClean ":" -}}
+               {{- $hour := (index $parts 0) | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
+               {{- $close = printf "%02d:%s" $hour (index $parts 1) -}}
+             {{- else -}}
+               {{- $hour := $closeClean | int -}}{{- if eq $hour 12 }}{{ $hour = 0 }}{{ end -}}
+               {{- $close = printf "%02d:00" $hour -}}
+             {{- end -}}
+           {{- else if not (in $close ":") -}}
+             {{- $close = printf "%s:00" $close -}}
+           {{- end -}}
 
-  ]
+       {
+         "@type": "OpeningHoursSpecification",
+         "dayOfWeek": "https://schema.org/{{ $dayName }}",
+         "opens": "{{ $open }}",
+         "closes": "{{ $close }}",
+         "validFrom": "{{ $validFrom }}",
+         "validThrough": "{{ $validThrough }}"
+       }
+         {{- end -}}
+       {{- end -}}
+     ],
+     {{ end }}
+
+     "publicAccess": true,
+     "isAccessibleForFree": {{ if or (in .Params.amenities "Free Admission") (eq .Params.price_range "Free") }}true{{ else }}false{{ end }},
+     {{ with .Params.zoho_id }}"alternateName": "{{ . }}",{{ end }}
+
+     {{/* SECONDARY: seasonal Event nested so Business stays primary */}}
+     {{- $showEvent := or .Params.opening_date (in .Params.categories "christmas-tree") (in .Params.categories "pumpkin") (in .Params.categories "sunflower") -}}
+     {{- if $showEvent -}}
+     "subjectOf": {
+       "@type": "Event",
+       "@id": "{{ .Permalink }}#season-{{ now.Format "2006" }}",
+       "name": "{{ .Title }} {{ now.Format "2006" }} Season",
+       "description": "Visit {{ .Title }} for {{ with .Params.categories }}{{ delimit . ", " " and " | replaceRE "-" " " }}{{ else }}seasonal{{ end }} experiences",
+       {{- $eventStart := .Params.opening_date | default (cond (in .Params.categories "christmas-tree") "2025-11-15" (cond (in .Params.categories "pumpkin") "2025-09-01" (cond (in .Params.categories "sunflower") "2025-07-01" "2025-06-01"))) -}}
+       {{- $eventEnd := .Params.closing_date | default (cond (in .Params.categories "christmas-tree") "2025-12-24" (cond (in .Params.categories "pumpkin") "2025-10-31" (cond (in .Params.categories "sunflower") "2025-08-31" "2025-12-31"))) -}}
+       "startDate": "{{ $eventStart }}",
+       "endDate": "{{ $eventEnd }}",
+       "url": "{{ .Params.website | default .Permalink }}",
+       {{- if gt (len $images) 0 -}}"image": {{ $images | jsonify | safeJS }},{{ end }}
+       "location": { "@id": "{{ .Permalink }}#business" },
+       "organizer": { "@id": "{{ .Permalink }}#business" },
+       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+       "eventStatus": "https://schema.org/EventScheduled",
+       "isAccessibleForFree": {{ if or (in .Params.amenities "Free Admission") (eq .Params.price_range "Free") }}true{{ else }}false{{ end }}
+       {{- $nums := findRE `[0-9]+(?:\.[0-9]+)?` (.Params.price_range | default "") -}}
+       {{- if ge (len $nums) 1 -}},
+       "offers": {
+         "@type": "AggregateOffer",
+         "lowPrice": {{ index $nums 0 }},
+         "highPrice": {{ if ge (len $nums) 2 }}{{ index $nums 1 }}{{ else }}{{ index $nums 0 }}{{ end }},
+         "priceCurrency": "CAD",
+         "availability": "https://schema.org/InStock",
+         "url": "{{ .Params.website | default .Permalink }}",
+         "validFrom": "{{ .Params.opening_date | default (cond (in .Params.categories "christmas-tree") "2025-09-01" (cond (in .Params.categories "pumpkin") "2025-08-15" (cond (in .Params.categories "sunflower") "2025-06-15" "2025-06-01"))) }}"
+       }
+       {{- end }}
+     },
+     {{- end }}
+
+     "potentialAction": {
+       "@type": "ReserveAction",
+       "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "{{ .Params.website | default .Params.location_link }}",
+         "actionPlatform": ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"]
+       },
+       "result": { "@type": "Reservation", "name": "Farm Visit" }
+     }
+   }
+
+ ]
 }
 </script>
+{{ end }}
+
+{{/* =========================================
+  LOCATION PAGES (category / province / city)
+  JSON-LD (dynamic name & description; no item duplication)
+  Put this in layouts/_partials/schema.html
+========================================= */}}
+
+{{- $parts := split (trim .RelPermalink "/") "/" -}}
+{{- $depth := len $parts -}}
+
+{{- if and (gt $depth 0) (ne .Section "farms") -}}
+
+ {{/* Resolve human-readable titles like your section.html */}}
+ {{- $categorySlug := index $parts 0 -}}
+ {{- $categoryPath := printf "/%s/" $categorySlug -}}
+ {{- $categoryPage := site.GetPage $categoryPath -}}
+ {{- $category := cond $categoryPage $categoryPage.Title ($categorySlug | replace "-" " " | title) -}}
+
+ {{- $province := "" -}}
+ {{- $provinceSlug := "" -}}
+ {{- if ge $depth 2 -}}
+   {{- $provinceSlug = index $parts 1 -}}
+   {{- $provincePath := printf "/%s/%s/" $categorySlug $provinceSlug -}}
+   {{- $provincePage := site.GetPage $provincePath -}}
+   {{- $province = cond $provincePage $provincePage.Title ($provinceSlug | replace "-" " " | title) -}}
+ {{- end -}}
+
+ {{- $city := "" -}}
+ {{- $citySlug := "" -}}
+ {{- if ge $depth 3 -}}
+   {{- $citySlug = index $parts 2 -}}
+   {{- $cityPath := printf "/%s/%s/%s/" $categorySlug $provinceSlug $citySlug -}}
+   {{- $cityPage := site.GetPage $cityPath -}}
+   {{- $city = cond $cityPage $cityPage.Title ($citySlug | replace "-" " " | title) -}}
+ {{- end -}}
+
+ {{/* Province code mapping (ISO 3166-2:CA) for addressRegion */}}
+ {{- $provMap := dict
+     "alberta" "AB" "british-columbia" "BC" "manitoba" "MB" "new-brunswick" "NB"
+     "newfoundland-and-labrador" "NL" "newfoundland-&-labrador" "NL" "nova-scotia" "NS"
+     "ontario" "ON" "prince-edward-island" "PE" "quebec" "QC" "québec" "QC"
+     "saskatchewan" "SK" "yukon" "YT" "northwest-territories" "NT" "nunavut" "NU"
+ -}}
+ {{- $provKey := (cond (ge $depth 2) ($provinceSlug | urlize | lower) "") -}}
+ {{- $provinceCode := (index $provMap $provKey) | default $province -}}
+
+ {{/* Count items + optional city centroid (matches your map logic) */}}
+ {{- $farmsAll := where site.RegularPages "Section" "farms" -}}
+ {{- $count := 0 -}}
+ {{- $cityLat := 0.0 -}}
+ {{- $cityLng := 0.0 -}}
+
+ {{- if eq $depth 1 -}}
+   {{- $count = len .Pages -}}
+ {{- else if eq $depth 2 -}}
+   {{- $catFarms := where $farmsAll "Params.categories" "intersect" (slice $categorySlug) -}}
+   {{- $scratch := newScratch -}}{{- $scratch.Set "count" 0 -}}
+   {{- range $catFarms -}}
+     {{- if and .Params.address .Params.address.province -}}
+       {{- if eq (.Params.address.province | urlize | lower) ($provinceSlug | lower) -}}
+         {{- $scratch.Add "count" 1 -}}
+       {{- end -}}
+     {{- end -}}
+   {{- end -}}
+   {{- $count = $scratch.Get "count" -}}
+ {{- else if eq $depth 3 -}}
+   {{- $catFarms := where $farmsAll "Params.categories" "intersect" (slice $categorySlug) -}}
+
+   {{/* City center: prefer page coords, else first farm in city */}}
+   {{- if and .Params.coordinates .Params.location_type -}}
+     {{- $cityLat = .Params.coordinates.latitude -}}
+     {{- $cityLng = .Params.coordinates.longitude -}}
+   {{- else -}}
+     {{- range $catFarms -}}
+       {{- if and .Params.coordinates .Params.address -}}
+         {{- if eq (lower .Params.address.city) ($citySlug | replace "-" " " | lower) -}}
+           {{- $cityLat = .Params.coordinates.latitude -}}
+           {{- $cityLng = .Params.coordinates.longitude -}}
+           {{- break -}}
+         {{- end -}}
+       {{- end -}}
+     {{- end -}}
+   {{- end -}}
+
+   {{/* Count exact-city or within 80km */}}
+   {{- $scratch := newScratch -}}{{- $scratch.Set "count" 0 -}}
+   {{- range $catFarms -}}
+     {{- if and .Params.coordinates .Params.address -}}
+       {{- $farmCity := lower .Params.address.city -}}
+       {{- $farmProv := lower .Params.address.province -}}
+       {{- $exact := or (eq $farmCity ($citySlug | replace "-" " " | lower)) (eq (replace $farmCity " " "-") ($citySlug | lower)) -}}
+       {{- $near := false -}}
+       {{- if and (not $exact) (gt $cityLat 0) (gt $cityLng 0) -}}
+         {{- $lat1 := math.Mul $cityLat 0.017453292519943295 -}}
+         {{- $lat2 := math.Mul .Params.coordinates.latitude 0.017453292519943295 -}}
+         {{- $dLat := math.Mul (math.Sub .Params.coordinates.latitude $cityLat) 0.017453292519943295 -}}
+         {{- $dLng := math.Mul (math.Sub .Params.coordinates.longitude $cityLng) 0.017453292519943295 -}}
+         {{- $a := math.Add (math.Mul (math.Sin (math.Div $dLat 2)) (math.Sin (math.Div $dLat 2)))
+                          (math.Mul (math.Mul (math.Cos $lat1) (math.Cos $lat2))
+                          (math.Mul (math.Sin (math.Div $dLng 2)) (math.Sin (math.Div $dLng 2)))) -}}
+         {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) -}}
+         {{- $km := math.Mul 6371 $c -}}
+         {{- $near = le $km 80 -}}
+       {{- end -}}
+       {{- if and (eq $farmProv ($provinceSlug | lower)) (or $exact $near) -}}
+         {{- $scratch.Add "count" 1 -}}
+       {{- end -}}
+     {{- end -}}
+   {{- end -}}
+   {{- $count = $scratch.Get "count" -}}
+ {{- end -}}
+
+ {{/* Dynamic name & description (matches your H1 style) */}}
+ {{- $pageName := cond (eq $depth 1)
+                     (printf "%s Farms in Canada" $category)
+                     (cond (eq $depth 2)
+                           (printf "%s Farms in %s" $category $province)
+                           (printf "%s Farms near %s, %s" $category $city $province)) -}}
+ {{- $pageDesc := cond (eq $depth 1)
+                     (printf "Browse %s farms across Canada. See hours, prices, amenities, and directions." ($category | lower))
+                     (cond (eq $depth 2)
+                           (printf "Browse %s farms in %s. See hours, prices, amenities, and directions." ($category | lower) $province)
+                           (printf "Browse %s farms near %s, %s. See hours, prices, amenities, and directions." ($category | lower) $city $province)) -}}
+
+ {{- $lang := .Site.Language.Lang | default "en-CA" -}}
+ {{- $dateMod := .Lastmod | default .Date -}}
+ {{- $websiteId := printf "%s#website" .Site.BaseURL -}}
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": ["WebPage","CollectionPage"],
+ "@id": "{{ .Permalink }}#webpage",
+ "url": "{{ .Permalink }}",
+ "name": {{ $pageName | plainify | jsonify }},
+ "description": {{ $pageDesc | plainify | jsonify }},
+ "inLanguage": "{{ $lang }}",
+ "isPartOf": { "@id": "{{ $websiteId }}" },
+ {{ with $dateMod }}"dateModified": "{{ .Format "2006-01-02" }}",{{ end }}
+ {{ with .PublishDate }}"datePublished": "{{ .Format "2006-01-02" }}",{{ end }}
+
+ "about": {
+   "@type": "Place",
+   "name": {{- if eq $depth 3 -}}
+             {{ printf "%s, %s" $city $province | jsonify }}
+           {{- else if eq $depth 2 -}}
+             {{ $province | jsonify }}
+           {{- else -}}
+             {{ printf "%s farms in Canada" $category | jsonify }}
+           {{- end -}},
+   "address": {
+     "@type": "PostalAddress"
+     {{- if eq $depth 1 -}}
+       ,"addressCountry": "CA"
+     {{- else -}}
+       ,"addressRegion": {{ $provinceCode | jsonify }},
+       "addressCountry": "CA"
+     {{- end -}}
+   }
+   {{- if and (eq $depth 3) (gt $cityLat 0) (gt $cityLng 0) -}},
+   "geo": {
+     "@type": "GeoCircle",
+     "geoMidpoint": { "@type": "GeoCoordinates", "latitude": {{ $cityLat }}, "longitude": {{ $cityLng }} },
+     "geoRadius": 80000
+   }
+   {{- end }}
+ },
+
+ "mainEntity": {
+   "@type": "ItemList",
+   "@id": "{{ .Permalink }}#list",
+   "itemListOrder": "https://schema.org/ItemListUnordered",
+   "numberOfItems": {{ $count }}
+ }
+}
+</script>
+
 {{- end -}}
+
+
