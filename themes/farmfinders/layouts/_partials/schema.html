@@ -1,12 +1,12 @@
-{{/* LocalBusiness PRIMARY. Farm signaled via additionalType. Event nested via subjectOf. */}}
-{{ if and .Params.title (or .Params.categories .Params.type) }}
+{{/* LocalBusiness PRIMARY. Farm via additionalType. Event nested via subjectOf. */}}
+{{- $isFarmPage := and .IsPage (or (eq .Section "farms") (eq .Type "farms") (in .File.Path "/farms/")) -}}
+{{- if $isFarmPage -}}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
 
-    {{/* 1) WebPage node helps indicate the primary entity of the page */}}
-    {
+    {  /* WebPage → points to Business as primary */
       "@type": "WebPage",
       "@id": "{{ .Permalink }}",
       "url": "{{ .Permalink }}",
@@ -14,8 +14,7 @@
       "mainEntity": { "@id": "{{ .Permalink }}#business" }
     },
 
-    {{/* 2) PRIMARY: Business node */}}
-    {
+    {  /* PRIMARY: Business */
       "@type": [
         "LocalBusiness"
         {{- if or (in .Params.categories "christmas-tree") (in .Params.categories "pumpkin") (in .Params.categories "sunflower") (in .Params.categories "petting-zoo") }}, "TouristAttraction"{{- end -}}
@@ -27,7 +26,7 @@
       "mainEntityOfPage": { "@id": "{{ .Permalink }}" },
       {{ with .Content }}"description": {{ . | plainify | truncate 160 | jsonify }},{{ end }}
 
-      {{/* Images (front matter list or first 3 page images) */}}
+      {{/* Images (front matter or first 3 resources) */}}
       {{- $images := slice -}}
       {{- with .Params.images -}} {{- $images = . -}}
       {{- else -}}
@@ -36,19 +35,19 @@
         {{- end -}}
       {{- end -}}
       {{- if gt (len $images) 0 -}}
-      "image": {{ $images | jsonify }},
+      "image": {{ $images | jsonify | safeJS }},
       {{- end }}
 
       {{ with .Params.phone }}"telephone": "{{ . }}",{{ end }}
       {{ with .Params.email }}"email": "{{ . }}",{{ end }}
 
-      {{/* sameAs MUST be an array (no surrounding quotes) */}}
+      {{/* sameAs as a real array (no quotes) */}}
       {{- $sameAs := slice -}}
       {{- with .Params.website -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
       {{- with .Params.social.facebook -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
       {{- with .Params.social.instagram -}}{{ $sameAs = $sameAs | append . }}{{- end -}}
       {{- if gt (len $sameAs) 0 -}}
-      "sameAs": {{ $sameAs | jsonify }},
+      "sameAs": {{ $sameAs | jsonify | safeJS }},
       {{- end }}
 
       {{ if .Params.address }}
@@ -75,9 +74,8 @@
 
       {{ with .Params.price_range }}"priceRange": "{{ . }}",{{ end }}
       {{ with .Params.established }}"foundingDate": "{{ . }}",{{ end }}
-      {{ with .Params.payment_methods }}"paymentAccepted": {{ . | jsonify }},{{ end }}
+      {{ with .Params.payment_methods }}"paymentAccepted": {{ . | jsonify | safeJS }},{{ end }}
 
-      {{/* Always Farm; add nuance by category */}}
       "additionalType": [
         "https://schema.org/Farm"
         {{ if .Params.categories }},
@@ -94,16 +92,21 @@
         {{ end }}
       ],
 
-      {{ if .Params.categories }}"knowsAbout": {{ .Params.categories | jsonify }},{{ end }}
+      {{ if .Params.categories }}"knowsAbout": {{ .Params.categories | jsonify | safeJS }},{{ end }}
       {{ with .Params.type }}"slogan": "{{ . }}",{{ end }}
 
-      {{ with .Params.amenities }}
+      {{/* Amenities incl. pet friendly as a feature (no petsAllowed warning) */}}
+      {{- $amenities := .Params.amenities | default (slice) -}}
+      {{- if .Params.pet_friendly -}}
+        {{- $amenities = $amenities | append "Pet Friendly" -}}
+      {{- end -}}
+      {{- if gt (len $amenities) 0 -}}
       "amenityFeature": [
-        {{- range $i, $amenity := . -}}{{ if gt $i 0 }},{{ end -}}
-        { "@type": "LocationFeatureSpecification", "name": "{{ $amenity }}", "value": true }
+        {{- range $i, $a := $amenities -}}{{ if gt $i 0 }},{{ end -}}
+        { "@type": "LocationFeatureSpecification", "name": "{{ $a }}", "value": true }
         {{- end -}}
       ],
-      {{ end }}
+      {{- end }}
 
       {{ with .Params.varieties }}
       "makesOffer": [
@@ -196,7 +199,6 @@
       "publicAccess": true,
       "isAccessibleForFree": {{ if or (in .Params.amenities "Free Admission") (eq .Params.price_range "Free") }}true{{ else }}false{{ end }},
       {{ with .Params.zoho_id }}"alternateName": "{{ . }}",{{ end }}
-      {{ with .Params.pet_friendly }}"petsAllowed": {{ . }},{{ end }}
 
       {{/* SECONDARY: seasonal Event nested so Business stays primary */}}
       {{- $showEvent := or .Params.opening_date (in .Params.categories "christmas-tree") (in .Params.categories "pumpkin") (in .Params.categories "sunflower") -}}
@@ -211,13 +213,13 @@
         "startDate": "{{ $eventStart }}",
         "endDate": "{{ $eventEnd }}",
         "url": "{{ .Params.website | default .Permalink }}",
-        {{- if gt (len $images) 0 -}}"image": {{ $images | jsonify }},{{ end }}
+        {{- if gt (len $images) 0 -}}"image": {{ $images | jsonify | safeJS }},{{ end }}
         "location": { "@id": "{{ .Permalink }}#business" },
         "organizer": { "@id": "{{ .Permalink }}#business" },
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "eventStatus": "https://schema.org/EventScheduled",
-        {{- $nums := findRE `[0-9]+(?:\.[0-9]+)?` (.Params.price_range | default "") -}}
         "isAccessibleForFree": {{ if or (in .Params.amenities "Free Admission") (eq .Params.price_range "Free") }}true{{ else }}false{{ end }}
+        {{- $nums := findRE `[0-9]+(?:\.[0-9]+)?` (.Params.price_range | default "") -}}
         {{- if ge (len $nums) 1 -}},
         "offers": {
           "@type": "AggregateOffer",
@@ -232,7 +234,6 @@
       },
       {{- end }}
 
-      {{/* Keep a final property with no trailing comma to avoid JSON errors */}}
       "potentialAction": {
         "@type": "ReserveAction",
         "target": {
@@ -247,4 +248,4 @@
   ]
 }
 </script>
-{{ end }}
+{{- end -}}
