@@ -1,8 +1,8 @@
 {{ define "title" }}{{ .Title }}{{ if .Parent }} - {{ .Parent.Title }}{{ end }} | {{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-  <div class="max-w-3xl mx-auto py-16">
-    <article class="space-y-16">
+  <div class="max-w-3xl mx-auto py-8">
+    <article class="space-y-8">
       {{ partial "breadcrumb.html" . }}
       
       <header class="text-left space-y-8">
@@ -22,7 +22,7 @@
           {{ end }}
           
           {{ if eq (len $pathParts) 1 }}
-            {{ $h1Text = printf "Find a %s farm near you" $category }}
+            {{ $h1Text = printf "All %s farms in Canada " $category }}
             
             <!-- Canada-wide Map for Category Pages -->
             {{ $categorySlug := index $pathParts 0 }}
@@ -59,7 +59,7 @@
           {{ end }}
         {{ end }}
         
-        <h1 class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight capitalize">{{ $h1Text }}</h1>
+        <h1 class="text-4xl md:text-5xl font-light text-gray-900 tracking-tight capitalize">{{ $h1Text }}</h1>
         <div class="prose prose-xl prose-gray">
           {{ .Content }}
         </div>

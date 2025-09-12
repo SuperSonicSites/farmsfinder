@@ -62,7 +62,7 @@
    "@type": "ItemList",
    "@id": "http:\/\/localhost:1313\/christmas-tree\/#list",
    "itemListOrder": "https://schema.org/ItemListUnordered",
-   "numberOfItems":  5 
+   "numberOfItems":  6 
  }
 }
 </script>
@@ -174,8 +174,8 @@ document.addEventListener('DOMContentLoaded', function() {
   </header>
   <main class="flex-1 mx-6">
     
-  <div class="max-w-3xl mx-auto py-16">
-    <article class="space-y-16">
+  <div class="max-w-3xl mx-auto py-8">
+    <article class="space-y-8">
       
 
 
@@ -229,7 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
 <div class="mb-8">
   <h2 class="text-2xl font-light text-gray-800 mb-4">
-      Farm Locations
   </h2>
   <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
 </div>
@@ -368,6 +367,22 @@ function initRegionalMap() {
       address: "\"St Thomas, Ontario\"",
       phone: "\"+1 226-240-0343\""
     },
+    {
+      name: "\"Cedar Hill Christmas Tree Farm\"",
+      lat:  45.2881149 ,
+      lng:  -76.3170522 ,
+      url: "\"/farms/cedar-hill-christmas-tree-farm/\"",
+      address: "\"Pakenham, Ontario\"",
+      phone: "\"+1 613-256-3029\""
+    },
+    {
+      name: "\"Downey Trees\"",
+      lat:  45.3676429 ,
+      lng:  -71.7691089 ,
+      url: "\"/farms/downey-trees/\"",
+      address: "\"Cookshire-Eaton, Quebec\"",
+      phone: "\"+1 888-512-8733\""
+    },
   ];
 
   if (farms.length === 0) return;
@@ -444,7 +459,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           
         
         
-        <h1 class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight capitalize">Find a Christmas Tree farm near you</h1>
+        <h1 class="text-4xl md:text-5xl font-light text-gray-900 tracking-tight capitalize">All Christmas Tree farms in Canada </h1>
         <div class="prose prose-xl prose-gray">
           
         </div>
@@ -472,7 +487,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
         <meta itemprop="name" content="Locations listed on this page" />
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="5" />
+        <meta itemprop="numberOfItems" content="6" />
 
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -530,6 +545,17 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             <meta itemprop="position" content="5" />
           </li>
         
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/quebec/">
+              <a itemprop="url" href="/christmas-tree/quebec/">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  Quebec
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="6" />
+          </li>
+        
       </ul>
     </nav>
   </section>
@@ -546,7 +572,7 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
         <meta itemprop="name" content="Farms listed on this page" />
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="16" />
+        <meta itemprop="numberOfItems" content="18" />
 
         
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -931,6 +957,54 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             </span>
 
             <meta itemprop="position" content="16" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/cedar-hill-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/cedar-hill-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Cedar Hill Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Pakenham</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="17" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/downey-trees/#business">
+
+              <a itemprop="url"
+                 href="/farms/downey-trees/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Downey Trees</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Cookshire-Eaton</span>, <span itemprop="addressRegion">Quebec</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="18" />
           </li>
         
       </ul>

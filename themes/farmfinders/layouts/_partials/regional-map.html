@@ -72,11 +72,6 @@ Renders a Google Map with farm pins for a specific region
 {{- if $farms }}
 <div class="mb-8">
   <h2 class="text-2xl font-light text-gray-800 mb-4">
-    {{- if $city }}
-      Farms within 1 hour of {{ $city | title }}
-    {{- else }}
-      Farm Locations
-    {{- end }}
   </h2>
   <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
 </div>

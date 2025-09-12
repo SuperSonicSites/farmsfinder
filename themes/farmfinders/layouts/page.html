@@ -1,14 +1,14 @@
 {{ define "main" }}
-  <div class="max-w-3xl mx-auto pt-16 pb-32">
+  <div div class="max-w-3xl mx-auto py-8">
     {{ if eq .Section "farms" }}
       {{ partial "breadcrumb.html" . }}
     {{ end }}
 
-    <article class="space-y-4">
+    <article class="">
       {{ if eq .Section "farms" }}
         <!-- Title -->
         <header class="text-left space-y-6">
-          <h1 class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
+          <h1 class="text-4xl md:text-5xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
           <!-- Category -->
            
           {{ if .Params.categories }}
@@ -35,6 +35,25 @@
               {{ end }}
             </div>
           {{ end }}
+          <section class="border-t border-gray-200 py-4">
+            <!-- Google Maps Embed -->
+            {{ if .Params.place_id }}
+              <div class="">
+                
+                <div class="w-full rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    width="100%"
+                    height="500px"
+                    frameborder="0"
+                    style="border:0"
+                    src="https://www.google.com/maps/embed/v1/place?key={{ .Site.Params.googleMapsApiKey }}&q=place_id:{{ .Params.place_id }}"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+            {{ end }}
+          
+          </section>
           <!-- Opening Date -->
         {{ if .Params.opening_date }}
           <section class="">
@@ -43,16 +62,92 @@
         {{ end }}
           <!-- Website URL-->
         {{ if .Params.website }}
-          <section class="space-y-2">
-            <div>
-            <a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="text-xl text-blue-600 hover:text-blue-800 font-light">🔗 <span class="underline">Visit Website</span></a><br>
+          <section class="grid grid grid-cols-2 gap-2">
+            <div class="col-span-1">
+            <a href="{{ .Params.website }}" target="_blank" rel="noopener noreferrer" class="text-xl block bg-white border border-gray-200 rounded-xl p-2 text-center hover:shadow-lg hover:border-gray-300 transition-all duration-300 group shadow-sm">🔗 Visit Website</span></a><br>
           </div>
-          <div>
-            <a href="{{ .Params.location_link }}" target="_blank" rel="noopener noreferrer" class="text-xl text-blue-600 hover:text-blue-800 font-light">📍 <span class="underline">Get directions</span></a>
+          <div class="col-span-1">
+            <a href="{{ .Params.location_link }}" target="_blank" rel="noopener noreferrer" class="text-xl block bg-white border border-gray-200 rounded-xl p-2 text-center hover:shadow-lg hover:border-gray-300 transition-all duration-300 group shadow-sm">📍 Get directions</span></a>
           </div>
           </section>
         {{ end }}
+<!-- Hours -->
+{{ if or .Params.hours.friday .Params.hours.saturday .Params.hours.sunday .Params.hours.monday .Params.hours.tuesday .Params.hours.wednesday .Params.hours.thursday }}
+<section class="space-y-2 border-t border-gray-200 py-4">
+  <h2 class="text-2xl font-light text-gray-800">Hours</h2>
+  
+  <!-- Desktop Table (horizontal) -->
+  <div class="hidden md:block">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="border-b border-gray-200 bg-blue-50">
+          <th class="text-left py-3 px-2 font-medium text-gray-700">Monday</th>
+          <th class="text-left py-3 px-2 font-medium text-gray-700">Tuesday</th>
+          <th class="text-left py-3 px-2 font-medium text-gray-700">Wednesday</th>
+          <th class="text-left py-3 px-2 font-medium text-gray-700">Thursday</th>
+          <th class="text-left py-3 px-2 font-medium text-gray-700">Friday</th>
+          <th class="text-left py-3 px-2 font-medium text-gray-700">Saturday</th>
+          <th class="text-left py-3 px-2 font-medium text-gray-700">Sunday</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="py-3 px-2 text-gray-600">{{ .Params.hours.monday }}</td>
+          <td class="py-3 px-2 text-gray-600">{{ .Params.hours.tuesday }}</td>
+          <td class="py-3 px-2 text-gray-600">{{ .Params.hours.wednesday }}</td>
+          <td class="py-3 px-2 text-gray-600">{{ .Params.hours.thursday }}</td>
+          <td class="py-3 px-2 text-gray-600">{{ .Params.hours.friday }}</td>
+          <td class="py-3 px-2 text-gray-600">{{ .Params.hours.saturday }}</td>
+          <td class="py-3 px-2 text-gray-600">{{ .Params.hours.sunday }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
+  <!-- Mobile Table (vertical) -->
+  <div class="md:hidden">
+    <div class="space-y-2">
+      
+        <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+          <span class="font-medium text-gray-700">Monday</span>
+          <span class="text-gray-600">{{ .Params.hours.monday }}</span>
+        </div>
+      
+      
+        <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+          <span class="font-medium text-gray-700">Tuesday</span>
+          <span class="text-gray-600">{{ .Params.hours.tuesday }}</span>
+        </div>
+     
+        <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+          <span class="font-medium text-gray-700">Wednesday</span>
+          <span class="text-gray-600">{{ .Params.hours.wednesday }}</span>
+        </div>
+      
+        <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+          <span class="font-medium text-gray-700">Thursday</span>
+          <span class="text-gray-600">{{ .Params.hours.thursday }}</span>
+        </div>
+      
+        <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+          <span class="font-medium text-gray-700">Friday</span>
+          <span class="text-gray-600">{{ .Params.hours.friday }}</span>
+        </div>
+     
+        <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+          <span class="font-medium text-gray-700">Saturday</span>
+          <span class="text-gray-600">{{ .Params.hours.saturday }}</span>
+        </div>
+      
+        <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
+          <span class="font-medium text-gray-700">Sunday</span>
+          <span class="text-gray-600">{{ .Params.hours.sunday }}</span>
+        </div>
+      
+    </div>
+  </div>
+</section>
+{{ end }}
            <!-- Additional Content -->
             
         {{ if .Content }}
@@ -66,83 +161,7 @@
           
         </header>
 
-        <!-- Hours -->
-        {{ if or .Params.hours.friday .Params.hours.saturday .Params.hours.sunday .Params.hours.monday .Params.hours.tuesday .Params.hours.wednesday .Params.hours.thursday }}
-          <section class="space-y-2 border-t border-gray-200 py-4">
-            <h2 class="text-2xl font-light text-gray-800">Hours</h2>
-            
-            <!-- Desktop Table (horizontal) -->
-            <div class="hidden md:block">
-              <table class="w-full border-collapse">
-                <thead>
-                  <tr class="border-b border-gray-200 bg-blue-50">
-                    <th class="text-left py-3 px-2 font-medium text-gray-700">Monday</th>
-                    <th class="text-left py-3 px-2 font-medium text-gray-700">Tuesday</th>
-                    <th class="text-left py-3 px-2 font-medium text-gray-700">Wednesday</th>
-                    <th class="text-left py-3 px-2 font-medium text-gray-700">Thursday</th>
-                    <th class="text-left py-3 px-2 font-medium text-gray-700">Friday</th>
-                    <th class="text-left py-3 px-2 font-medium text-gray-700">Saturday</th>
-                    <th class="text-left py-3 px-2 font-medium text-gray-700">Sunday</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.monday }}</td>
-                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.tuesday }}</td>
-                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.wednesday }}</td>
-                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.thursday }}</td>
-                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.friday }}</td>
-                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.saturday }}</td>
-                    <td class="py-3 px-2 text-gray-600">{{ .Params.hours.sunday }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Mobile Table (vertical) -->
-            <div class="md:hidden">
-              <div class="space-y-2">
-                
-                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
-                    <span class="font-medium text-gray-700">Monday</span>
-                    <span class="text-gray-600">{{ .Params.hours.monday }}</span>
-                  </div>
-                
-                
-                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
-                    <span class="font-medium text-gray-700">Tuesday</span>
-                    <span class="text-gray-600">{{ .Params.hours.tuesday }}</span>
-                  </div>
-               
-                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
-                    <span class="font-medium text-gray-700">Wednesday</span>
-                    <span class="text-gray-600">{{ .Params.hours.wednesday }}</span>
-                  </div>
-                
-                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
-                    <span class="font-medium text-gray-700">Thursday</span>
-                    <span class="text-gray-600">{{ .Params.hours.thursday }}</span>
-                  </div>
-                
-                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
-                    <span class="font-medium text-gray-700">Friday</span>
-                    <span class="text-gray-600">{{ .Params.hours.friday }}</span>
-                  </div>
-               
-                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
-                    <span class="font-medium text-gray-700">Saturday</span>
-                    <span class="text-gray-600">{{ .Params.hours.saturday }}</span>
-                  </div>
-                
-                  <div class="flex justify-between py-2 px-4 bg-gray-50 rounded">
-                    <span class="font-medium text-gray-700">Sunday</span>
-                    <span class="text-gray-600">{{ .Params.hours.sunday }}</span>
-                  </div>
-                
-              </div>
-            </div>
-          </section>
-        {{ end }}
+        
 
         <!-- Amenities -->
         {{ if .Params.amenities }}
@@ -197,25 +216,7 @@
 
         
         
-          <section class="border-t border-gray-200 py-4">
-            <!-- Google Maps Embed -->
-            {{ if .Params.place_id }}
-              <div class="mb-6">
-                <h2 class="text-2xl font-light text-gray-800 mb-4">Location</h2>
-                <div class="w-full rounded-lg overflow-hidden shadow-lg">
-                  <iframe
-                    width="100%"
-                    height="500px"
-                    frameborder="0"
-                    style="border:0"
-                    src="https://www.google.com/maps/embed/v1/place?key={{ .Site.Params.googleMapsApiKey }}&q=place_id:{{ .Params.place_id }}"
-                    allowfullscreen>
-                  </iframe>
-                </div>
-              </div>
-            {{ end }}
           
-          </section>
         
 
         <!-- Nearby Farms Recommendations -->

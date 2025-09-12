@@ -1,5 +1,5 @@
 ---
-title: "Find Local Farms Near You!"
+title: "Local Farms Near You In Canada"
 ---
 Discover fresh, local farms across Canada offering everything from Christmas trees and apple orchards to pumpkin patches and berry picking. Connect directly with family-owned farms in your area for the freshest seasonal produce, pick-your-own experiences, and authentic farm-to-table goodness.
 

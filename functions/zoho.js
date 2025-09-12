@@ -151,6 +151,7 @@ class FarmWebhookHandler {
       type: this.parseArray(account.Services_Type).join(', '),
       established: account.Year_Established || '',
       opening_date: account.Open_Date || '',
+      closing_date: account.Close_Date || '',
       amenities: this.parseArray(account.Amenities),
       varieties: this.parseArray(account.Varieties),
       pet_friendly: account.Pet_Friendly === 'TRUE',

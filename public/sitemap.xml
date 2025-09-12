@@ -60,15 +60,21 @@
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/casselman/</loc>
   </url><url>
-    <loc>http://localhost:1313/sugar-shack/ontario/casselman/</loc>
+    <loc>http://localhost:1313/maple-syrup/ontario/casselman/</loc>
   </url><url>
     <loc>http://localhost:1313/farms/catfish-creek-christmas-tree-farm/</loc>
+  </url><url>
+    <loc>http://localhost:1313/farms/cedar-hill-christmas-tree-farm/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/cobourg/</loc>
   </url><url>
+    <loc>http://localhost:1313/christmas-tree/quebec/cookshire-eaton/</loc>
+  </url><url>
     <loc>http://localhost:1313/corn/</loc>
+  </url><url>
+    <loc>http://localhost:1313/farms/downey-trees/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/essex/</loc>
   </url><url>
@@ -90,6 +96,8 @@
   </url><url>
     <loc>http://localhost:1313/christmas-tree/british-columbia/maple-ridge/</loc>
   </url><url>
+    <loc>http://localhost:1313/maple-syrup/</loc>
+  </url><url>
     <loc>http://localhost:1313/christmas-tree/british-columbia/nanaimo/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/navan/</loc>
@@ -102,16 +110,22 @@
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/</loc>
   </url><url>
-    <loc>http://localhost:1313/sugar-shack/ontario/</loc>
+    <loc>http://localhost:1313/maple-syrup/ontario/</loc>
+  </url><url>
+    <loc>http://localhost:1313/pumpkin/ontario/</loc>
+  </url><url>
+    <loc>http://localhost:1313/christmas-tree/ontario/pakenham/</loc>
+  </url><url>
+    <loc>http://localhost:1313/pumpkin/ontario/pakenham/</loc>
   </url><url>
     <loc>http://localhost:1313/petting-zoo/</loc>
   </url><url>
     <loc>http://localhost:1313/pumpkin/</loc>
   </url><url>
+    <loc>http://localhost:1313/christmas-tree/quebec/</loc>
+  </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/simcoe/</loc>
   </url><url>
     <loc>http://localhost:1313/christmas-tree/ontario/st-thomas/</loc>
-  </url><url>
-    <loc>http://localhost:1313/sugar-shack/</loc>
   </url>
 </urlset>
