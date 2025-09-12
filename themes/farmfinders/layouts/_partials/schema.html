@@ -34,7 +34,7 @@
 </script>
 {{ end }}
 {{/* ABOUT PAGE: AboutPage + Organization */}}
-{{ $isAbout := or (eq (lower .File.BaseFileName) "about") (in (lower .RelPermalink) "/about/") }}
+{{ $isAbout := and .File (or (eq (lower .File.BaseFileName) "about") (in (lower .RelPermalink) "/about/")) }}
 {{ if $isAbout }}
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
 </script>
 {{ end }}
 {{/* CONTACT PAGE: ContactPage + Organization.contactPoint */}}
-{{ $isContact := or (eq (lower .File.BaseFileName) "contact") (in (lower .RelPermalink) "/contact/") }}
+{{ $isContact := and .File (or (eq (lower .File.BaseFileName) "contact") (in (lower .RelPermalink) "/contact/")) }}
 {{ if $isContact }}
 <script type="application/ld+json">
 {
@@ -578,5 +578,3 @@
 </script>
 
 {{- end -}}
-
-
