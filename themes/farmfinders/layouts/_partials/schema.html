@@ -1,3 +1,104 @@
+{{/* HOMEPAGE: WebSite + Organization + WebPage */}}
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://farmsfinder.ca/#website",
+      "url": "https://farmsfinder.ca/",
+      "name": "FarmsFinder",
+      "alternateName": "Farms Finder Canada",
+      "description": "Helping consumers discover and connect with direct-to-consumer farms across Canada.",
+      "inLanguage": "en-CA"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://farmsfinder.ca/#org",
+      "name": "FarmsFinder",
+      "url": "https://farmsfinder.ca/",
+      "logo": { "@type": "ImageObject", "url": "https://farmsfinder.ca/images/farmfinders.webp" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://farmsfinder.ca/#webpage",
+      "url": "https://farmsfinder.ca/",
+      "name": "FarmsFinder — Find farms near you",
+      "isPartOf": { "@id": "https://farmsfinder.ca/#website" },
+      "mainEntity": { "@id": "https://farmsfinder.ca/#org" },
+      "inLanguage": "en-CA"
+    }
+  ]
+}
+</script>
+{{ end }}
+{{/* ABOUT PAGE: AboutPage + Organization */}}
+{{ $isAbout := or (eq (lower .File.BaseFileName) "about") (in (lower .RelPermalink) "/about/") }}
+{{ if $isAbout }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["WebPage","AboutPage"],
+      "@id": "https://farmsfinder.ca/about/#webpage",
+      "url": "https://farmsfinder.ca/about/",
+      "name": "About FarmsFinder",
+      "description": "Learn about FarmsFinder’s mission to connect Canadians with local, direct-to-consumer farms.",
+      "isPartOf": { "@id": "https://farmsfinder.ca/#website" },
+      "about": { "@id": "https://farmsfinder.ca/#org" },
+      "inLanguage": "en-CA"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://farmsfinder.ca/#org",
+      "name": "FarmsFinder",
+      "url": "https://farmsfinder.ca/",
+      "logo": { "@type": "ImageObject", "url": "https://farmsfinder.ca/images/farmfinders.webp" }
+    }
+  ]
+}
+</script>
+{{ end }}
+{{/* CONTACT PAGE: ContactPage + Organization.contactPoint */}}
+{{ $isContact := or (eq (lower .File.BaseFileName) "contact") (in (lower .RelPermalink) "/contact/") }}
+{{ if $isContact }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["WebPage","ContactPage"],
+      "@id": "https://farmsfinder.ca/contact/#webpage",
+      "url": "https://farmsfinder.ca/contact/",
+      "name": "Contact FarmsFinder",
+      "description": "Get in touch with FarmsFinder for partnerships, support, or general inquiries.",
+      "isPartOf": { "@id": "https://farmsfinder.ca/#website" },
+      "mainEntity": { "@id": "https://farmsfinder.ca/#org" },
+      "inLanguage": "en-CA"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://farmsfinder.ca/#org",
+      "name": "FarmsFinder",
+      "url": "https://farmsfinder.ca/",
+      "logo": { "@type": "ImageObject", "url": "https://farmsfinder.ca/images/farmfinders.webp" },
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "hello@farmsfinder.ca",
+        "telephone": "+1-819-219-0502",
+        "areaServed": "CA",
+        "availableLanguage": ["en-CA","fr-CA"]
+      }]
+    }
+  ]
+}
+</script>
+{{ end }}
+
+
 {{/* ===============================
   Farm Schema Markup (farm detail pages)
   - WebPage -> mainEntity = Business
