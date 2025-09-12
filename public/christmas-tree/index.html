@@ -193,6 +193,8 @@ document.addEventListener('DOMContentLoaded', function() {
   <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
 </div>
 
+
+
 <script>
 function initRegionalMap() {
   
@@ -417,178 +419,484 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
       
       
       
-        <section aria-labelledby="locations-heading" class="space-y-12">
-          <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
-          <nav aria-label="Location filters" class="flex justify-center">
-            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
-              
-                <li>
-                  <a href="/christmas-tree/alberta/">
-                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                      Alberta
-                    </span>
-                  </a>
-                </li>
-              
-                <li>
-                  <a href="/christmas-tree/british-columbia/">
-                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                      British Columbia
-                    </span>
-                  </a>
-                </li>
-              
-                <li>
-                  <a href="/christmas-tree/new-brunswick/">
-                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                      New Brunswick
-                    </span>
-                  </a>
-                </li>
-              
-                <li>
-                  <a href="/christmas-tree/nova-scotia/">
-                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                      Nova Scotia
-                    </span>
-                  </a>
-                </li>
-              
-                <li>
-                  <a href="/christmas-tree/ontario/">
-                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                      Ontario
-                    </span>
-                  </a>
-                </li>
-              
-            </ul>
-          </nav>
-        </section>
-      
-      
-      <section aria-labelledby="farms-heading" class="space-y-12">
-        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
+  
+  
+
+  <section aria-labelledby="locations-heading" class="space-y-12">
+    <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
+
+    <nav aria-label="Location filters" class="flex justify-center">
+      <ul itemscope itemtype="https://schema.org/ItemList"
+          style="padding-left: 0;"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
+        <meta itemprop="name" content="Locations listed on this page" />
+        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+        <meta itemprop="numberOfItems" content="5" />
+
         
-          <div class="flex">
-            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
-              
-                <li>
-                      <a href="/farms/aldor-acres-christmas-trees/" class="hover:text-gray-700 transition-colors">Aldor Acres Christmas Trees</a>
-                    
-                    <p class="text-gray-600 font-light">Langley Twp, British Columbia</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/alouette-tree-farm-ltd/" class="hover:text-gray-700 transition-colors">Alouette Tree Farm Ltd</a>
-                    
-                    <p class="text-gray-600 font-light">Maple Ridge, British Columbia</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/bachner-family-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Bachner Family Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">St Thomas, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/balsam-ridge-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Balsam Ridge Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Burtts Corner, New Brunswick</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/barretts-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Barrett&#39;s Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Cobourg, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/bastien-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Bastien Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Essex, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/bellyacres-tree-farm/" class="hover:text-gray-700 transition-colors">BellyAcres Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Niagara-on-the-Lake, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/blitzen-estate/" class="hover:text-gray-700 transition-colors">Blitzen Estate</a>
-                    
-                    <p class="text-gray-600 font-light">Jasper, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/blue-harvest-farm/" class="hover:text-gray-700 transition-colors">Blue Harvest Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Simcoe, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/boat-harbour-farm/" class="hover:text-gray-700 transition-colors">Boat Harbour Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Nanaimo, British Columbia</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/bois-brabant/" class="hover:text-gray-700 transition-colors">Boisé Brabant</a>
-                    
-                    <p class="text-gray-600 font-light">Casselman, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/briggs-trees/" class="hover:text-gray-700 transition-colors">Briggs Trees</a>
-                    
-                    <p class="text-gray-600 font-light">Navan, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/calgary-christmas-tree/" class="hover:text-gray-700 transition-colors">Calgary Christmas Tree</a>
-                    
-                    <p class="text-gray-600 font-light">Calgary, Alberta</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/caroles-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Carole&#39;s Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Greater Napanee, Ontario</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/carr-family-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Carr Family Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">Guysborough, Nova Scotia</p>
-                  
-                </li>
-              
-                <li>
-                      <a href="/farms/catfish-creek-christmas-tree-farm/" class="hover:text-gray-700 transition-colors">Catfish Creek Christmas Tree Farm</a>
-                    
-                    <p class="text-gray-600 font-light">St Thomas, Ontario</p>
-                  
-                </li>
-              
-            </ul>
-          </div>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/alberta/">
+              <a itemprop="url" href="/christmas-tree/alberta/">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  Alberta
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="1" />
+          </li>
         
-      </section>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/british-columbia/">
+              <a itemprop="url" href="/christmas-tree/british-columbia/">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  British Columbia
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="2" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/new-brunswick/">
+              <a itemprop="url" href="/christmas-tree/new-brunswick/">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  New Brunswick
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="3" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/nova-scotia/">
+              <a itemprop="url" href="/christmas-tree/nova-scotia/">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  Nova Scotia
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="4" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/">
+              <a itemprop="url" href="/christmas-tree/ontario/">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  Ontario
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="5" />
+          </li>
+        
+      </ul>
+    </nav>
+  </section>
+
+
+      
+<section aria-labelledby="farms-heading" class="space-y-12">
+  <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
+
+  
+    <div class="flex">
+      <ul itemscope itemtype="https://schema.org/ItemList"
+          style="padding-left: 0;"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+        <meta itemprop="name" content="Farms listed on this page" />
+        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+        <meta itemprop="numberOfItems" content="16" />
+
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/aldor-acres-christmas-trees/#business">
+
+              <a itemprop="url"
+                 href="/farms/aldor-acres-christmas-trees/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Aldor Acres Christmas Trees</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Langley Twp</span>, <span itemprop="addressRegion">British Columbia</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="1" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/alouette-tree-farm-ltd/#business">
+
+              <a itemprop="url"
+                 href="/farms/alouette-tree-farm-ltd/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Alouette Tree Farm Ltd</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Maple Ridge</span>, <span itemprop="addressRegion">British Columbia</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="2" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/bachner-family-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/bachner-family-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Bachner Family Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">St Thomas</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="3" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/balsam-ridge-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/balsam-ridge-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Balsam Ridge Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Burtts Corner</span>, <span itemprop="addressRegion">New Brunswick</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="4" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/barretts-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/barretts-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Barrett&#39;s Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Cobourg</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="5" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/bastien-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/bastien-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Bastien Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Essex</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="6" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/bellyacres-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/bellyacres-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">BellyAcres Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Niagara-on-the-Lake</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="7" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/blitzen-estate/#business">
+
+              <a itemprop="url"
+                 href="/farms/blitzen-estate/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Blitzen Estate</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Jasper</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="8" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/blue-harvest-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/blue-harvest-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Blue Harvest Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Simcoe</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="9" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/boat-harbour-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/boat-harbour-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Boat Harbour Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Nanaimo</span>, <span itemprop="addressRegion">British Columbia</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="10" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/bois-brabant/#business">
+
+              <a itemprop="url"
+                 href="/farms/bois-brabant/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Boisé Brabant</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Casselman</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="11" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/briggs-trees/#business">
+
+              <a itemprop="url"
+                 href="/farms/briggs-trees/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Briggs Trees</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Navan</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="12" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/calgary-christmas-tree/#business">
+
+              <a itemprop="url"
+                 href="/farms/calgary-christmas-tree/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Calgary Christmas Tree</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Calgary</span>, <span itemprop="addressRegion">Alberta</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="13" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/caroles-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/caroles-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Carole&#39;s Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Greater Napanee</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="14" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/carr-family-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/carr-family-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Carr Family Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Guysborough</span>, <span itemprop="addressRegion">Nova Scotia</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="15" />
+          </li>
+        
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="http://localhost:1313/farms/catfish-creek-christmas-tree-farm/#business">
+
+              <a itemprop="url"
+                 href="/farms/catfish-creek-christmas-tree-farm/"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">Catfish Creek Christmas Tree Farm</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">St Thomas</span>, <span itemprop="addressRegion">Ontario</span>
+                    
+                  </span>
+                
+              </p>
+            </span>
+
+            <meta itemprop="position" content="16" />
+          </li>
+        
+      </ul>
+    </div>
+  
+</section>
+
 
       
       

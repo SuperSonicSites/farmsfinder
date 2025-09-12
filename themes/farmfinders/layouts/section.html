@@ -154,45 +154,89 @@
       {{ end }}
       
       {{ if .Pages }}
-        <section aria-labelledby="locations-heading" class="space-y-12">
-          <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
-          <nav aria-label="Location filters" class="flex justify-center">
-            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
-              {{ range .Pages }}
-                <li>
-                  <a href="{{ .RelPermalink }}">
-                    <span class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                      {{ .LinkTitle }}
-                    </span>
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
-          </nav>
-        </section>
-      {{ end }}
-      
-      <section aria-labelledby="farms-heading" class="space-y-12">
-        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
-        {{ if $filteredFarms }}
-          <div class="flex">
-            <ul style="padding-left: 0;" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
-              {{ range $filteredFarms }}
-                <li>
-                      <a href="{{ .RelPermalink }}" class="hover:text-gray-700 transition-colors">{{ .LinkTitle }}</a>
-                    
-                    <p class="text-gray-600 font-light">{{ .Params.address.city }}, {{ .Params.address.province }}</p>
-                  
-                </li>
-              {{ end }}
-            </ul>
-          </div>
-        {{ else }}
-          <div class="text-center py-12">
-            <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
-          </div>
+  {{/* Use the current list of child pages (cities) as-is */}}
+  {{ $items := .Pages }}
+
+  <section aria-labelledby="locations-heading" class="space-y-12">
+    <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
+
+    <nav aria-label="Location filters" class="flex justify-center">
+      <ul itemscope itemtype="https://schema.org/ItemList"
+          style="padding-left: 0;"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
+        <meta itemprop="name" content="Locations listed on this page" />
+        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+        <meta itemprop="numberOfItems" content="{{ len $items }}" />
+
+        {{ range $i, $p := $items }}
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="{{ $p.Permalink }}">
+              <a itemprop="url" href="{{ $p.RelPermalink }}">
+                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                  {{ $p.LinkTitle }}
+                </span>
+              </a>
+            </span>
+            <meta itemprop="position" content="{{ add $i 1 }}" />
+          </li>
         {{ end }}
-      </section>
+      </ul>
+    </nav>
+  </section>
+{{ end }}
+
+      
+<section aria-labelledby="farms-heading" class="space-y-12">
+  <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
+
+  {{ if $filteredFarms }}
+    <div class="flex">
+      <ul itemscope itemtype="https://schema.org/ItemList"
+          style="padding-left: 0;"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+        <meta itemprop="name" content="Farms listed on this page" />
+        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+        <meta itemprop="numberOfItems" content="{{ len $filteredFarms }}" />
+
+        {{ range $i, $farm := $filteredFarms }}
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item"
+                  itemscope itemtype="https://schema.org/LocalBusiness"
+                  itemid="{{ $farm.Permalink }}#business">
+
+              <a itemprop="url"
+                 href="{{ $farm.RelPermalink }}"
+                 class="hover:text-gray-700 transition-colors">
+                <span itemprop="name">{{ $farm.LinkTitle }}</span>
+              </a>
+
+              <p class="text-gray-600 font-light">
+                {{ with $farm.Params.address }}
+                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">{{ .city }}</span>, <span itemprop="addressRegion">{{ .province }}</span>
+                    {{/* Optional: include country if you want
+                    {{ with .country }}<meta itemprop="addressCountry" content="{{ . }}">{{ end }}
+                    */}}
+                  </span>
+                {{ else }}
+                  {{/* Fallback if address missing (no microdata) */}}
+                  {{ $farm.Params.address.city }}, {{ $farm.Params.address.province }}
+                {{ end }}
+              </p>
+            </span>
+
+            <meta itemprop="position" content="{{ add $i 1 }}" />
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ else }}
+    <div class="text-center py-12">
+      <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
+    </div>
+  {{ end }}
+</section>
+
 
       {{/* Add FAQs section only for top-level category pages */}}
       {{ if eq (len $pathParts) 1 }}

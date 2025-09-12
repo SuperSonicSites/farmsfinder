@@ -80,6 +80,21 @@ Renders a Google Map with farm pins for a specific region
   </h2>
   <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
 </div>
+{{ if $city }}
+  {{/* Microdata: the 80km search area as a Place with a GeoCircle */}}
+  <div class="sr-only" aria-hidden="true"
+       itemscope itemtype="https://schema.org/Place">
+    <meta itemprop="name" content="{{ $city | title }}, {{ $region | title }}" />
+    <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCircle">
+      <div itemprop="geoMidpoint" itemscope itemtype="https://schema.org/GeoCoordinates">
+        <meta itemprop="latitude" content="{{ $cityLat }}">
+        <meta itemprop="longitude" content="{{ $cityLng }}">
+      </div>
+      <meta itemprop="geoRadius" content="80000">
+    </div>
+  </div>
+{{ end }}
+
 
 <script>
 function initRegionalMap() {
