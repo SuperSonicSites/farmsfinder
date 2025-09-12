@@ -2,7 +2,7 @@
 {{- $faqData := index site.Data.faqs $categorySlug -}}
 
 {{- if $faqData -}}
-<section aria-labelledby="faq-heading" class="space-y-8 mt-16">
+<section aria-labelledby="faq-heading" class="space-y-8 mt-16" itemscope itemtype="https://schema.org/FAQPage">
   <div class="text-left space-y-4">
     <h2 id="faq-heading" class="text-4xl font-light text-gray-800 tracking-wide">{{ $faqData.title }}</h2>
     <p class="text-lg text-gray-600 font-light">{{ $faqData.description }}</p>
@@ -11,7 +11,10 @@
   <div class="max-w-3xl mx-auto">
     <dl class="space-y-4">
       {{- range $index, $faq := $faqData.faqs -}}
-      <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+      <div class="bg-white border border-gray-200 rounded-lg shadow-sm"
+           itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
+           {{/* Optional, stable anchors for IDs */}}
+           id="faq-q-{{ $index }}">
         <dt>
           <button 
             class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
@@ -19,13 +22,16 @@
             aria-controls="faq-answer-{{ $index }}"
             onclick="toggleFAQ({{ $index }})"
           >
-            <span class="text-lg font-medium text-gray-900 pr-4">{{ $faq.question }}</span>
+            <span class="text-lg font-medium text-gray-900 pr-4" itemprop="name">
+              {{ $faq.question }}
+            </span>
             <svg 
               class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
               id="faq-icon-{{ $index }}"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -34,8 +40,9 @@
         <dd 
           class="hidden px-6 pb-4"
           id="faq-answer-{{ $index }}"
+          itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         >
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-gray max-w-none" itemprop="text">
             <p class="leading-relaxed">{{ $faq.answer }}</p>
           </div>
         </dd>
@@ -45,12 +52,33 @@
   </div>
 </section>
 
+{{/* JSON-LD: mirrors the same FAQ content for Google rich results */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{- range $i, $faq := $faqData.faqs -}}
+      {{- if gt $i 0 }},{{ end -}}
+      {
+        "@type": "Question",
+        "name": {{ $faq.question | plainify | jsonify }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ $faq.answer | plainify | jsonify }}
+        }
+      }
+    {{- end -}}
+  ]
+}
+</script>
+
 <script>
 function toggleFAQ(index) {
   const answer = document.getElementById(`faq-answer-${index}`);
   const icon = document.getElementById(`faq-icon-${index}`);
   const button = answer.previousElementSibling.querySelector('button');
-  
+
   if (answer.classList.contains('hidden')) {
     answer.classList.remove('hidden');
     icon.style.transform = 'rotate(180deg)';

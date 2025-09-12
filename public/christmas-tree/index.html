@@ -932,14 +932,17 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
       
       
         
-        <section aria-labelledby="faq-heading" class="space-y-8 mt-16">
+        <section aria-labelledby="faq-heading" class="space-y-8 mt-16" itemscope itemtype="https://schema.org/FAQPage">
   <div class="text-left space-y-4">
     <h2 id="faq-heading" class="text-4xl font-light text-gray-800 tracking-wide">Christmas Tree FAQs</h2>
     <p class="text-lg text-gray-600 font-light">Common questions about Christmas tree farms in Canada</p>
   </div>
   
   <div class="max-w-3xl mx-auto">
-    <dl class="space-y-4"><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+    <dl class="space-y-4"><div class="bg-white border border-gray-200 rounded-lg shadow-sm"
+           itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
+           
+           id="faq-q-0">
         <dt>
           <button 
             class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
@@ -947,13 +950,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             aria-controls="faq-answer-0"
             onclick="toggleFAQ( 0 )"
           >
-            <span class="text-lg font-medium text-gray-900 pr-4">When is the best time to cut a Christmas tree?</span>
+            <span class="text-lg font-medium text-gray-900 pr-4" itemprop="name">
+              When is the best time to cut a Christmas tree?
+            </span>
             <svg 
               class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
               id="faq-icon-0"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -962,12 +968,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         <dd 
           class="hidden px-6 pb-4"
           id="faq-answer-0"
+          itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         >
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-gray max-w-none" itemprop="text">
             <p class="leading-relaxed">In Canada, the best time to cut your Christmas tree is usually from late November through early December, so it stays fresh through the holidays. Most farms open for the season at the end of November, though exact dates vary by region. If cutting on Crown land, a permit may be required.</p>
           </div>
         </dd>
-      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm"
+           itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
+           
+           id="faq-q-1">
         <dt>
           <button 
             class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
@@ -975,13 +985,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             aria-controls="faq-answer-1"
             onclick="toggleFAQ( 1 )"
           >
-            <span class="text-lg font-medium text-gray-900 pr-4">How do I keep my Christmas tree fresh longer?</span>
+            <span class="text-lg font-medium text-gray-900 pr-4" itemprop="name">
+              How do I keep my Christmas tree fresh longer?
+            </span>
             <svg 
               class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
               id="faq-icon-1"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -990,12 +1003,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         <dd 
           class="hidden px-6 pb-4"
           id="faq-answer-1"
+          itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         >
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-gray max-w-none" itemprop="text">
             <p class="leading-relaxed">Make a fresh cut of 1–2 cm from the trunk before placing it in water, and ensure the stand always has water — trees can drink several litres in the first days. Keep the tree away from fireplaces, heating vents, and direct sunlight. Lower indoor temperatures and added humidity also help prevent needle drop. A tree will generally last 4–6 weeks indoors.</p>
           </div>
         </dd>
-      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm"
+           itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
+           
+           id="faq-q-2">
         <dt>
           <button 
             class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
@@ -1003,13 +1020,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             aria-controls="faq-answer-2"
             onclick="toggleFAQ( 2 )"
           >
-            <span class="text-lg font-medium text-gray-900 pr-4">What&#39;s the difference between tree varieties?</span>
+            <span class="text-lg font-medium text-gray-900 pr-4" itemprop="name">
+              What&#39;s the difference between tree varieties?
+            </span>
             <svg 
               class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
               id="faq-icon-2"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -1018,12 +1038,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         <dd 
           class="hidden px-6 pb-4"
           id="faq-answer-2"
+          itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         >
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-gray max-w-none" itemprop="text">
             <p class="leading-relaxed">Popular Canadian varieties include Balsam Fir (classic scent, good needle retention), Fraser Fir (excellent needle retention, strong branches), White Spruce (dense foliage, sharper needles, moderate retention), and Scots Pine (long-lasting, sturdy branches). Each has different strengths in fragrance, branch strength, and how long needles stay on the tree.</p>
           </div>
         </dd>
-      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm"
+           itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
+           
+           id="faq-q-3">
         <dt>
           <button 
             class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
@@ -1031,13 +1055,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             aria-controls="faq-answer-3"
             onclick="toggleFAQ( 3 )"
           >
-            <span class="text-lg font-medium text-gray-900 pr-4">Can I bring my own saw?</span>
+            <span class="text-lg font-medium text-gray-900 pr-4" itemprop="name">
+              Can I bring my own saw?
+            </span>
             <svg 
               class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
               id="faq-icon-3"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -1046,12 +1073,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         <dd 
           class="hidden px-6 pb-4"
           id="faq-answer-3"
+          itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         >
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-gray max-w-none" itemprop="text">
             <p class="leading-relaxed">Most tree farms provide saws and cutting tools, and many do not allow chainsaws for safety reasons. Some farms let you bring your own hand saw, but always call ahead to confirm their policy. If cutting on public land, check local rules and permit requirements.</p>
           </div>
         </dd>
-      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm"
+           itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
+           
+           id="faq-q-4">
         <dt>
           <button 
             class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
@@ -1059,13 +1090,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             aria-controls="faq-answer-4"
             onclick="toggleFAQ( 4 )"
           >
-            <span class="text-lg font-medium text-gray-900 pr-4">Do Christmas tree farms offer other activities?</span>
+            <span class="text-lg font-medium text-gray-900 pr-4" itemprop="name">
+              Do Christmas tree farms offer other activities?
+            </span>
             <svg 
               class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
               id="faq-icon-4"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -1074,12 +1108,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         <dd 
           class="hidden px-6 pb-4"
           id="faq-answer-4"
+          itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         >
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-gray max-w-none" itemprop="text">
             <p class="leading-relaxed">Many Canadian Christmas tree farms offer extra activities such as wagon or sleigh rides, hot chocolate, holiday markets, wreath making, gift shops, and visits with Santa. Some also provide tree wrapping or delivery. Check individual farm websites for details.</p>
           </div>
         </dd>
-      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+      </div><div class="bg-white border border-gray-200 rounded-lg shadow-sm"
+           itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
+           
+           id="faq-q-5">
         <dt>
           <button 
             class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none rounded-lg"
@@ -1087,13 +1125,16 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
             aria-controls="faq-answer-5"
             onclick="toggleFAQ( 5 )"
           >
-            <span class="text-lg font-medium text-gray-900 pr-4">How much does a Christmas tree typically cost?</span>
+            <span class="text-lg font-medium text-gray-900 pr-4" itemprop="name">
+              How much does a Christmas tree typically cost?
+            </span>
             <svg 
               class="flex-shrink-0 w-5 h-5 text-gray-500 transform transition-transform duration-200" 
               id="faq-icon-5"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -1102,8 +1143,9 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         <dd 
           class="hidden px-6 pb-4"
           id="faq-answer-5"
+          itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         >
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-gray max-w-none" itemprop="text">
             <p class="leading-relaxed">Prices vary by province, size, and variety. In Canada, a 6–8 foot tree typically costs $40–100. Premium species like Fraser Fir may cost more, while Scots Pine or spruce are often more affordable. Some farms charge by the foot, while others use flat rates. Additional services like wrapping or delivery may add cost.</p>
           </div>
         </dd>
@@ -1111,12 +1153,63 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
   </div>
 </section>
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+        "@type": "Question",
+        "name": "\"When is the best time to cut a Christmas tree?\"",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"In Canada, the best time to cut your Christmas tree is usually from late November through early December, so it stays fresh through the holidays. Most farms open for the season at the end of November, though exact dates vary by region. If cutting on Crown land, a permit may be required.\""
+        }
+      },{
+        "@type": "Question",
+        "name": "\"How do I keep my Christmas tree fresh longer?\"",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Make a fresh cut of 1–2 cm from the trunk before placing it in water, and ensure the stand always has water — trees can drink several litres in the first days. Keep the tree away from fireplaces, heating vents, and direct sunlight. Lower indoor temperatures and added humidity also help prevent needle drop. A tree will generally last 4–6 weeks indoors.\""
+        }
+      },{
+        "@type": "Question",
+        "name": "\"What's the difference between tree varieties?\"",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Popular Canadian varieties include Balsam Fir (classic scent, good needle retention), Fraser Fir (excellent needle retention, strong branches), White Spruce (dense foliage, sharper needles, moderate retention), and Scots Pine (long-lasting, sturdy branches). Each has different strengths in fragrance, branch strength, and how long needles stay on the tree.\""
+        }
+      },{
+        "@type": "Question",
+        "name": "\"Can I bring my own saw?\"",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Most tree farms provide saws and cutting tools, and many do not allow chainsaws for safety reasons. Some farms let you bring your own hand saw, but always call ahead to confirm their policy. If cutting on public land, check local rules and permit requirements.\""
+        }
+      },{
+        "@type": "Question",
+        "name": "\"Do Christmas tree farms offer other activities?\"",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Many Canadian Christmas tree farms offer extra activities such as wagon or sleigh rides, hot chocolate, holiday markets, wreath making, gift shops, and visits with Santa. Some also provide tree wrapping or delivery. Check individual farm websites for details.\""
+        }
+      },{
+        "@type": "Question",
+        "name": "\"How much does a Christmas tree typically cost?\"",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Prices vary by province, size, and variety. In Canada, a 6–8 foot tree typically costs $40–100. Premium species like Fraser Fir may cost more, while Scots Pine or spruce are often more affordable. Some farms charge by the foot, while others use flat rates. Additional services like wrapping or delivery may add cost.\""
+        }
+      }]
+}
+</script>
+
 <script>
 function toggleFAQ(index) {
   const answer = document.getElementById(`faq-answer-${index}`);
   const icon = document.getElementById(`faq-icon-${index}`);
   const button = answer.previousElementSibling.querySelector('button');
-  
+
   if (answer.classList.contains('hidden')) {
     answer.classList.remove('hidden');
     icon.style.transform = 'rotate(180deg)';
