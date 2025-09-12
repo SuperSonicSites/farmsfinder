@@ -47,7 +47,9 @@ function generateCategoryStructure() {
     if (farm.categories && farm.address && farm.address.province && farm.address.city) {
       console.log(`Processing farm: ${farm.title} - ${farm.address.city}, ${farm.address.province}`);
       
-      farm.categories.forEach(category => {
+      farm.categories
+        .filter(category => category === 'christmas-tree')
+        .forEach(category => {
         // Use the category name as-is for folder names
         const categoryFolder = category;
         const provinceFolder = farm.address.province.toLowerCase().replace(/\s+/g, '-');
