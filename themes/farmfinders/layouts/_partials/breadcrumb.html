@@ -3,11 +3,26 @@
 
 {{ if gt (len $pathParts) 0 }}
 <nav aria-label="breadcrumb" class="mb-6">
-  <ol style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem; align-items: center;">
-    <li style="position: relative;"><a href="/">Home</a><span style="margin-left: 0.5rem;">></span></li>
-    
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList"
+      style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem; align-items: center;">
+
+    <!-- Home -->
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="position: relative;">
+      <a itemprop="item" href="/"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+      <span aria-hidden="true" style="margin-left: 0.5rem;">&gt;</span>
+    </li>
+
     {{ if eq (len $pathParts) 1 }}
-      <li aria-current="page">{{ if .Title }}{{ .Title }}{{ else }}{{ index $pathParts 0 | replace "-" " " | title }}{{ end }}</li>
+      <!-- Current page -->
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        {{ $title := "" }}
+        {{ if .Title }}{{ $title = .Title }}{{ else }}{{ $title = index $pathParts 0 | replace "-" " " | title }}{{ end }}
+        <span itemprop="name">{{ $title }}</span>
+        <meta itemprop="item" content="{{ .Permalink }}" />
+        <meta itemprop="position" content="2" />
+      </li>
+
     {{ else if eq (len $pathParts) 2 }}
       {{ $parentPath := printf "/%s/" (index $pathParts 0) }}
       {{ $parentPage := site.GetPage $parentPath }}
@@ -17,31 +32,65 @@
       {{ else }}
         {{ $parentTitle = index $pathParts 0 | replace "-" " " | title }}
       {{ end }}
-      <li style="position: relative;"><a href="{{ $parentPath }}">{{ $parentTitle }}</a><span style="margin-left: 0.5rem;">></span></li>
-      <li aria-current="page">{{ if .Title }}{{ .Title }}{{ else }}{{ index $pathParts 1 | replace "-" " " | title }}{{ end }}</li>
+
+      <!-- Parent -->
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="position: relative;">
+        <a itemprop="item" href="{{ $parentPath }}"><span itemprop="name">{{ $parentTitle }}</span></a>
+        <meta itemprop="position" content="2" />
+        <span aria-hidden="true" style="margin-left: 0.5rem;">&gt;</span>
+      </li>
+
+      <!-- Current page -->
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        {{ $title := "" }}
+        {{ if .Title }}{{ $title = .Title }}{{ else }}{{ $title = index $pathParts 1 | replace "-" " " | title }}{{ end }}
+        <span itemprop="name">{{ $title }}</span>
+        <meta itemprop="item" content="{{ .Permalink }}" />
+        <meta itemprop="position" content="3" />
+      </li>
+
     {{ else if eq (len $pathParts) 3 }}
       {{ $grandparentPath := printf "/%s/" (index $pathParts 0) }}
       {{ $parentPath := printf "/%s/%s/" (index $pathParts 0) (index $pathParts 1) }}
       {{ $grandparentPage := site.GetPage $grandparentPath }}
       {{ $parentPage := site.GetPage $parentPath }}
-      
+
       {{ $grandparentTitle := "" }}
       {{ if $grandparentPage }}
         {{ $grandparentTitle = $grandparentPage.Title }}
       {{ else }}
         {{ $grandparentTitle = index $pathParts 0 | replace "-" " " | title }}
       {{ end }}
-      
+
       {{ $parentTitle := "" }}
       {{ if $parentPage }}
         {{ $parentTitle = $parentPage.Title }}
       {{ else }}
         {{ $parentTitle = index $pathParts 1 | replace "-" " " | title }}
       {{ end }}
-      
-      <li style="position: relative;"><a href="{{ $grandparentPath }}">{{ $grandparentTitle }}</a><span style="margin-left: 0.5rem;">></span></li>
-      <li style="position: relative;"><a href="{{ $parentPath }}">{{ $parentTitle }}</a><span style="margin-left: 0.5rem;">></span></li>
-      <li aria-current="page">{{ if .Title }}{{ .Title }}{{ else }}{{ index $pathParts 2 | replace "-" " " | title }}{{ end }}</li>
+
+      <!-- Grandparent -->
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="position: relative;">
+        <a itemprop="item" href="{{ $grandparentPath }}"><span itemprop="name">{{ $grandparentTitle }}</span></a>
+        <meta itemprop="position" content="2" />
+        <span aria-hidden="true" style="margin-left: 0.5rem;">&gt;</span>
+      </li>
+
+      <!-- Parent -->
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="position: relative;">
+        <a itemprop="item" href="{{ $parentPath }}"><span itemprop="name">{{ $parentTitle }}</span></a>
+        <meta itemprop="position" content="3" />
+        <span aria-hidden="true" style="margin-left: 0.5rem;">&gt;</span>
+      </li>
+
+      <!-- Current page -->
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        {{ $title := "" }}
+        {{ if .Title }}{{ $title = .Title }}{{ else }}{{ $title = index $pathParts 2 | replace "-" " " | title }}{{ end }}
+        <span itemprop="name">{{ $title }}</span>
+        <meta itemprop="item" content="{{ .Permalink }}" />
+        <meta itemprop="position" content="4" />
+      </li>
     {{ end }}
   </ol>
 </nav>

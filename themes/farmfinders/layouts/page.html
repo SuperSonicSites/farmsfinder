@@ -4,11 +4,11 @@
       {{ partial "breadcrumb.html" . }}
     {{ end }}
 
-    <article{{ if eq .Section "farms" }} itemscope itemtype="https://schema.org/LocalBusiness"{{ end }} class="space-y-4">
+    <article class="space-y-4">
       {{ if eq .Section "farms" }}
         <!-- Title -->
         <header class="text-left space-y-6">
-          <h1 itemprop="name" class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
+          <h1 class="text-4xl md:text-6xl font-light text-gray-900 tracking-tight">{{ .Title }}</h1>
           <!-- Category -->
            
           {{ if .Params.categories }}
