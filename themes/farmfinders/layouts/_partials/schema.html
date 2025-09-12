@@ -25,7 +25,6 @@
       "https://www.linkedin.com/company/farms-finder/",
       "https://www.youtube.com/channel/UCwwqjfxgCsGaleVkvBWX4HQ"
     ]
-  },
     },
     {
       "@type": "WebPage",
@@ -249,7 +248,7 @@
      "additionalType": [
        "https://schema.org/Farm"
        {{ if .Params.categories }},
-       {{- range $i, $cat := .Params.categories -}}{{ if gt $i 0 }},{{ end -}}
+       {{- range $i, $cat := .Params.categories -}}{{ if gt $i 0 }},{{- end -}}
          {{- if eq $cat "christmas-tree" -}}"https://schema.org/GardenStore"
          {{- else if eq $cat "pumpkin" -}}"https://schema.org/TouristAttraction"
          {{- else if eq $cat "winery" -}}"https://schema.org/Winery"
