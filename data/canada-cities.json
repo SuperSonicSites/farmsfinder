@@ -1,0 +1,1087 @@
+{
+  "metadata": {
+    "totalProvinces": 12,
+    "totalCities": 109,
+    "generatedAt": "2025-09-15T12:27:27.780Z",
+    "description": "Canadian cities organized by province with GPS coordinates"
+  },
+  "provinces": {
+    "ontario": {
+      "name": "Ontario",
+      "slug": "ontario",
+      "cities": [
+        {
+          "name": "Toronto",
+          "slug": "toronto",
+          "population": 2794356,
+          "coordinates": {
+            "latitude": 43.653226,
+            "longitude": -79.3831843
+          }
+        },
+        {
+          "name": "Ottawa",
+          "slug": "ottawa",
+          "population": 1017449,
+          "coordinates": {
+            "latitude": 45.4200572,
+            "longitude": -75.7003397
+          }
+        },
+        {
+          "name": "Mississauga",
+          "slug": "mississauga",
+          "population": 717961,
+          "coordinates": {
+            "latitude": 43.5852972,
+            "longitude": -79.64498379999999
+          }
+        },
+        {
+          "name": "Brampton",
+          "slug": "brampton",
+          "population": 656480,
+          "coordinates": {
+            "latitude": 43.7315479,
+            "longitude": -79.7624177
+          }
+        },
+        {
+          "name": "Hamilton",
+          "slug": "hamilton",
+          "population": 569353,
+          "coordinates": {
+            "latitude": 43.2557206,
+            "longitude": -79.8711024
+          }
+        },
+        {
+          "name": "London",
+          "slug": "london",
+          "population": 422324,
+          "coordinates": {
+            "latitude": 42.9849233,
+            "longitude": -81.2452768
+          }
+        },
+        {
+          "name": "Markham",
+          "slug": "markham",
+          "population": 338503,
+          "coordinates": {
+            "latitude": 43.8599076,
+            "longitude": -79.3349945
+          }
+        },
+        {
+          "name": "Vaughan",
+          "slug": "vaughan",
+          "population": 323103,
+          "coordinates": {
+            "latitude": 43.82622809999999,
+            "longitude": -79.5561668
+          }
+        },
+        {
+          "name": "Kitchener",
+          "slug": "kitchener",
+          "population": 256885,
+          "coordinates": {
+            "latitude": 43.4510934,
+            "longitude": -80.4925804
+          }
+        },
+        {
+          "name": "Windsor",
+          "slug": "windsor",
+          "population": 229660,
+          "coordinates": {
+            "latitude": 42.3141129,
+            "longitude": -83.03675059999999
+          }
+        },
+        {
+          "name": "Oakville",
+          "slug": "oakville",
+          "population": 213759,
+          "coordinates": {
+            "latitude": 43.467517,
+            "longitude": -79.6876659
+          }
+        },
+        {
+          "name": "Richmond Hill",
+          "slug": "richmond-hill",
+          "population": 202022,
+          "coordinates": {
+            "latitude": 43.8688079,
+            "longitude": -79.41371529999999
+          }
+        },
+        {
+          "name": "Burlington",
+          "slug": "burlington",
+          "population": 186948,
+          "coordinates": {
+            "latitude": 43.3255196,
+            "longitude": -79.7990319
+          }
+        },
+        {
+          "name": "Oshawa",
+          "slug": "oshawa",
+          "population": 175383,
+          "coordinates": {
+            "latitude": 43.8975974,
+            "longitude": -78.8635999
+          }
+        },
+        {
+          "name": "Greater Sudbury",
+          "slug": "greater-sudbury",
+          "population": 166004,
+          "coordinates": {
+            "latitude": 46.4917317,
+            "longitude": -80.99302899999999
+          }
+        },
+        {
+          "name": "Barrie",
+          "slug": "barrie",
+          "population": 147829,
+          "coordinates": {
+            "latitude": 44.38935559999999,
+            "longitude": -79.6903316
+          }
+        },
+        {
+          "name": "Guelph",
+          "slug": "guelph",
+          "population": 143740,
+          "coordinates": {
+            "latitude": 43.5448048,
+            "longitude": -80.24816659999999
+          }
+        },
+        {
+          "name": "Whitby",
+          "slug": "whitby",
+          "population": 138501,
+          "coordinates": {
+            "latitude": 43.8997643,
+            "longitude": -78.9400809
+          }
+        },
+        {
+          "name": "Cambridge",
+          "slug": "cambridge",
+          "population": 138479,
+          "coordinates": {
+            "latitude": 43.3616211,
+            "longitude": -80.3144276
+          }
+        },
+        {
+          "name": "St. Catharines",
+          "slug": "st-catharines",
+          "population": 136803,
+          "coordinates": {
+            "latitude": 43.1599795,
+            "longitude": -79.2470299
+          }
+        },
+        {
+          "name": "Milton",
+          "slug": "milton",
+          "population": 132979,
+          "coordinates": {
+            "latitude": 43.5182991,
+            "longitude": -79.8774042
+          }
+        },
+        {
+          "name": "Kingston",
+          "slug": "kingston",
+          "population": 132485,
+          "coordinates": {
+            "latitude": 44.2334401,
+            "longitude": -76.49302949999999
+          }
+        },
+        {
+          "name": "Ajax",
+          "slug": "ajax",
+          "population": 126666,
+          "coordinates": {
+            "latitude": 43.8611288,
+            "longitude": -79.0259267
+          }
+        },
+        {
+          "name": "Waterloo",
+          "slug": "waterloo",
+          "population": 121436,
+          "coordinates": {
+            "latitude": 43.4642578,
+            "longitude": -80.5204096
+          }
+        },
+        {
+          "name": "Thunder Bay",
+          "slug": "thunder-bay",
+          "population": 108843,
+          "coordinates": {
+            "latitude": 48.3808951,
+            "longitude": -89.2476823
+          }
+        },
+        {
+          "name": "Brantford",
+          "slug": "brantford",
+          "population": 104688,
+          "coordinates": {
+            "latitude": 43.1394191,
+            "longitude": -80.263623
+          }
+        },
+        {
+          "name": "Chatham-Kent",
+          "slug": "chatham-kent",
+          "population": 103988,
+          "coordinates": {
+            "latitude": 42.4078419,
+            "longitude": -82.1910374
+          }
+        },
+        {
+          "name": "Clarington",
+          "slug": "clarington",
+          "population": 101427,
+          "coordinates": {
+            "latitude": 43.9345347,
+            "longitude": -78.6000336
+          }
+        },
+        {
+          "name": "Pickering",
+          "slug": "pickering",
+          "population": 99186,
+          "coordinates": {
+            "latitude": 43.83841839999999,
+            "longitude": -79.086902
+          }
+        },
+        {
+          "name": "Niagara Falls",
+          "slug": "niagara-falls",
+          "population": 94415,
+          "coordinates": {
+            "latitude": 43.0895577,
+            "longitude": -79.0849436
+          }
+        },
+        {
+          "name": "Newmarket",
+          "slug": "newmarket",
+          "population": 87942,
+          "coordinates": {
+            "latitude": 44.05918700000001,
+            "longitude": -79.46125599999999
+          }
+        },
+        {
+          "name": "Peterborough",
+          "slug": "peterborough",
+          "population": 83651,
+          "coordinates": {
+            "latitude": 44.3047061,
+            "longitude": -78.3199606
+          }
+        },
+        {
+          "name": "Kawartha Lakes",
+          "slug": "kawartha-lakes",
+          "population": 79247,
+          "coordinates": {
+            "latitude": 44.359798,
+            "longitude": -78.7433799
+          }
+        },
+        {
+          "name": "Caledon",
+          "slug": "caledon",
+          "population": 76581,
+          "coordinates": {
+            "latitude": 43.8701204,
+            "longitude": -79.8670882
+          }
+        },
+        {
+          "name": "Sault Ste. Marie",
+          "slug": "sault-ste-marie",
+          "population": 72051,
+          "coordinates": {
+            "latitude": 46.5136494,
+            "longitude": -84.33575259999999
+          }
+        },
+        {
+          "name": "Sarnia",
+          "slug": "sarnia",
+          "population": 72047,
+          "coordinates": {
+            "latitude": 42.974536,
+            "longitude": -82.4065901
+          }
+        },
+        {
+          "name": "Norfolk County",
+          "slug": "norfolk-county",
+          "population": 67490,
+          "coordinates": {
+            "latitude": 42.7967232,
+            "longitude": -80.4136271
+          }
+        },
+        {
+          "name": "Halton Hills",
+          "slug": "halton-hills",
+          "population": 62951,
+          "coordinates": {
+            "latitude": 43.65027250000001,
+            "longitude": -79.9036321
+          }
+        },
+        {
+          "name": "Aurora",
+          "slug": "aurora",
+          "population": 62057,
+          "coordinates": {
+            "latitude": 44.00648,
+            "longitude": -79.450396
+          }
+        },
+        {
+          "name": "Welland",
+          "slug": "welland",
+          "population": 55750,
+          "coordinates": {
+            "latitude": 42.9921579,
+            "longitude": -79.2482555
+          }
+        },
+        {
+          "name": "Belleville",
+          "slug": "belleville",
+          "population": 55071,
+          "coordinates": {
+            "latitude": 44.1627589,
+            "longitude": -77.3832315
+          }
+        },
+        {
+          "name": "North Bay",
+          "slug": "north-bay",
+          "population": 52662,
+          "coordinates": {
+            "latitude": 46.3091152,
+            "longitude": -79.4608204
+          }
+        },
+        {
+          "name": "Timmins",
+          "slug": "timmins",
+          "population": 42000,
+          "coordinates": {
+            "latitude": 48.4758208,
+            "longitude": -81.3304953
+          }
+        },
+        {
+          "name": "Leamington",
+          "slug": "leamington",
+          "population": 28000,
+          "coordinates": {
+            "latitude": 42.0530892,
+            "longitude": -82.59980019999999
+          }
+        },
+        {
+          "name": "Niagara-on-the-Lake",
+          "slug": "niagara-on-the-lake",
+          "population": 17000,
+          "coordinates": {
+            "latitude": 43.2549988,
+            "longitude": -79.0772616
+          }
+        }
+      ],
+      "totalCities": 45,
+      "totalPopulation": 11016155
+    },
+    "quebec": {
+      "name": "Quebec",
+      "slug": "quebec",
+      "cities": [
+        {
+          "name": "Montreal",
+          "slug": "montreal",
+          "population": 1762949,
+          "coordinates": {
+            "latitude": 45.5018869,
+            "longitude": -73.56739189999999
+          }
+        },
+        {
+          "name": "Quebec City",
+          "slug": "quebec-city",
+          "population": 549459,
+          "coordinates": {
+            "latitude": 46.8130816,
+            "longitude": -71.20745959999999
+          }
+        },
+        {
+          "name": "Laval",
+          "slug": "laval",
+          "population": 438366,
+          "coordinates": {
+            "latitude": 45.6066487,
+            "longitude": -73.712409
+          }
+        },
+        {
+          "name": "Gatineau",
+          "slug": "gatineau",
+          "population": 291041,
+          "coordinates": {
+            "latitude": 45.4765446,
+            "longitude": -75.7012723
+          }
+        },
+        {
+          "name": "Longueuil",
+          "slug": "longueuil",
+          "population": 254483,
+          "coordinates": {
+            "latitude": 45.5135059,
+            "longitude": -73.4329187
+          }
+        },
+        {
+          "name": "Sherbrooke",
+          "slug": "sherbrooke",
+          "population": 172950,
+          "coordinates": {
+            "latitude": 45.4042669,
+            "longitude": -71.89367399999999
+          }
+        },
+        {
+          "name": "Lévis",
+          "slug": "lvis",
+          "population": 149683,
+          "coordinates": {
+            "latitude": 46.7582576,
+            "longitude": -71.2397151
+          }
+        },
+        {
+          "name": "Saguenay",
+          "slug": "saguenay",
+          "population": 144723,
+          "coordinates": {
+            "latitude": 48.4276054,
+            "longitude": -71.0600102
+          }
+        },
+        {
+          "name": "Trois-Rivières",
+          "slug": "trois-rivires",
+          "population": 139163,
+          "coordinates": {
+            "latitude": 46.34298200000001,
+            "longitude": -72.5420716
+          }
+        },
+        {
+          "name": "Terrebonne",
+          "slug": "terrebonne",
+          "population": 119944,
+          "coordinates": {
+            "latitude": 45.6929818,
+            "longitude": -73.63311019999999
+          }
+        },
+        {
+          "name": "Saint-Jean-sur-Richelieu",
+          "slug": "saint-jean-sur-richelieu",
+          "population": 97873,
+          "coordinates": {
+            "latitude": 45.305771,
+            "longitude": -73.2544903
+          }
+        },
+        {
+          "name": "Brossard",
+          "slug": "brossard",
+          "population": 91525,
+          "coordinates": {
+            "latitude": 45.4514357,
+            "longitude": -73.4619103
+          }
+        },
+        {
+          "name": "Repentigny",
+          "slug": "repentigny",
+          "population": 86100,
+          "coordinates": {
+            "latitude": 45.7532854,
+            "longitude": -73.4400814
+          }
+        },
+        {
+          "name": "Saint-Jérôme",
+          "slug": "saint-jrme",
+          "population": 80213,
+          "coordinates": {
+            "latitude": 45.775357,
+            "longitude": -74.004948
+          }
+        },
+        {
+          "name": "Drummondville",
+          "slug": "drummondville",
+          "population": 79258,
+          "coordinates": {
+            "latitude": 45.8811739,
+            "longitude": -72.4847355
+          }
+        },
+        {
+          "name": "Granby",
+          "slug": "granby",
+          "population": 69025,
+          "coordinates": {
+            "latitude": 45.40322889999999,
+            "longitude": -72.7340662
+          }
+        },
+        {
+          "name": "Mirabel",
+          "slug": "mirabel",
+          "population": 61108,
+          "coordinates": {
+            "latitude": 45.65189590000001,
+            "longitude": -74.09016960000001
+          }
+        },
+        {
+          "name": "Blainville",
+          "slug": "blainville",
+          "population": 59819,
+          "coordinates": {
+            "latitude": 45.6688961,
+            "longitude": -73.8728751
+          }
+        },
+        {
+          "name": "Saint-Hyacinthe",
+          "slug": "saint-hyacinthe",
+          "population": 57239,
+          "coordinates": {
+            "latitude": 45.6306875,
+            "longitude": -72.9563391
+          }
+        }
+      ],
+      "totalCities": 19,
+      "totalPopulation": 4704921
+    },
+    "british-columbia": {
+      "name": "British Columbia",
+      "slug": "british-columbia",
+      "cities": [
+        {
+          "name": "Vancouver",
+          "slug": "vancouver",
+          "population": 662248,
+          "coordinates": {
+            "latitude": 49.2827291,
+            "longitude": -123.1207375
+          }
+        },
+        {
+          "name": "Surrey",
+          "slug": "surrey",
+          "population": 568322,
+          "coordinates": {
+            "latitude": 49.1913466,
+            "longitude": -122.8490125
+          }
+        },
+        {
+          "name": "Burnaby",
+          "slug": "burnaby",
+          "population": 249125,
+          "coordinates": {
+            "latitude": 49.2488091,
+            "longitude": -122.9805104
+          }
+        },
+        {
+          "name": "Richmond",
+          "slug": "richmond",
+          "population": 209937,
+          "coordinates": {
+            "latitude": 49.1665898,
+            "longitude": -123.133569
+          }
+        },
+        {
+          "name": "Abbotsford",
+          "slug": "abbotsford",
+          "population": 153524,
+          "coordinates": {
+            "latitude": 49.0504377,
+            "longitude": -122.3044697
+          }
+        },
+        {
+          "name": "Coquitlam",
+          "slug": "coquitlam",
+          "population": 148625,
+          "coordinates": {
+            "latitude": 49.2837626,
+            "longitude": -122.7932065
+          }
+        },
+        {
+          "name": "Kelowna",
+          "slug": "kelowna",
+          "population": 144576,
+          "coordinates": {
+            "latitude": 49.8863235,
+            "longitude": -119.4965917
+          }
+        },
+        {
+          "name": "Langley",
+          "slug": "langley",
+          "population": 132603,
+          "coordinates": {
+            "latitude": 49.1041779,
+            "longitude": -122.6603519
+          }
+        },
+        {
+          "name": "Saanich",
+          "slug": "saanich",
+          "population": 117735,
+          "coordinates": {
+            "latitude": 48.4527784,
+            "longitude": -123.3754551
+          }
+        },
+        {
+          "name": "Delta",
+          "slug": "delta",
+          "population": 108455,
+          "coordinates": {
+            "latitude": 49.09521549999999,
+            "longitude": -123.0264759
+          }
+        },
+        {
+          "name": "Nanaimo",
+          "slug": "nanaimo",
+          "population": 99863,
+          "coordinates": {
+            "latitude": 49.1658836,
+            "longitude": -123.9400647
+          }
+        },
+        {
+          "name": "Kamloops",
+          "slug": "kamloops",
+          "population": 97902,
+          "coordinates": {
+            "latitude": 50.674522,
+            "longitude": -120.3272674
+          }
+        },
+        {
+          "name": "Chilliwack",
+          "slug": "chilliwack",
+          "population": 93203,
+          "coordinates": {
+            "latitude": 49.1579401,
+            "longitude": -121.9514666
+          }
+        },
+        {
+          "name": "Victoria",
+          "slug": "victoria",
+          "population": 91867,
+          "coordinates": {
+            "latitude": 48.4284207,
+            "longitude": -123.3656444
+          }
+        },
+        {
+          "name": "Maple Ridge",
+          "slug": "maple-ridge",
+          "population": 90990,
+          "coordinates": {
+            "latitude": 49.2193226,
+            "longitude": -122.598398
+          }
+        },
+        {
+          "name": "North Vancouver",
+          "slug": "north-vancouver",
+          "population": 88168,
+          "coordinates": {
+            "latitude": 49.3199816,
+            "longitude": -123.0724139
+          }
+        },
+        {
+          "name": "New Westminster",
+          "slug": "new-westminster",
+          "population": 78916,
+          "coordinates": {
+            "latitude": 49.2057179,
+            "longitude": -122.910956
+          }
+        },
+        {
+          "name": "Prince George",
+          "slug": "prince-george",
+          "population": 76708,
+          "coordinates": {
+            "latitude": 53.9170641,
+            "longitude": -122.7496693
+          }
+        },
+        {
+          "name": "Port Coquitlam",
+          "slug": "port-coquitlam",
+          "population": 61498,
+          "coordinates": {
+            "latitude": 49.2628382,
+            "longitude": -122.7810708
+          }
+        },
+        {
+          "name": "North Vancouver",
+          "slug": "north-vancouver",
+          "population": 58120,
+          "coordinates": {
+            "latitude": 49.3199816,
+            "longitude": -123.0724139
+          }
+        },
+        {
+          "name": "Whistler",
+          "slug": "whistler",
+          "population": 12000,
+          "coordinates": {
+            "latitude": 50.11616859999999,
+            "longitude": -122.9535117
+          }
+        }
+      ],
+      "totalCities": 21,
+      "totalPopulation": 3344385
+    },
+    "alberta": {
+      "name": "Alberta",
+      "slug": "alberta",
+      "cities": [
+        {
+          "name": "Calgary",
+          "slug": "calgary",
+          "population": 1306784,
+          "coordinates": {
+            "latitude": 51.04473309999999,
+            "longitude": -114.0718831
+          }
+        },
+        {
+          "name": "Edmonton",
+          "slug": "edmonton",
+          "population": 1010899,
+          "coordinates": {
+            "latitude": 53.5460983,
+            "longitude": -113.4937266
+          }
+        },
+        {
+          "name": "Red Deer",
+          "slug": "red-deer",
+          "population": 100844,
+          "coordinates": {
+            "latitude": 52.2690328,
+            "longitude": -113.8114955
+          }
+        },
+        {
+          "name": "Strathcona County",
+          "slug": "strathcona-county",
+          "population": 99225,
+          "coordinates": {
+            "latitude": 53.53267760000001,
+            "longitude": -113.1553199
+          }
+        },
+        {
+          "name": "Lethbridge",
+          "slug": "lethbridge",
+          "population": 98406,
+          "coordinates": {
+            "latitude": 49.6956181,
+            "longitude": -112.8451067
+          }
+        },
+        {
+          "name": "Airdrie",
+          "slug": "airdrie",
+          "population": 74100,
+          "coordinates": {
+            "latitude": 51.29269679999999,
+            "longitude": -114.0134113
+          }
+        },
+        {
+          "name": "Wood Buffalo",
+          "slug": "wood-buffalo",
+          "population": 72326,
+          "coordinates": {
+            "latitude": 57.6066083,
+            "longitude": -111.6495855
+          }
+        },
+        {
+          "name": "St. Albert",
+          "slug": "st-albert",
+          "population": 68232,
+          "coordinates": {
+            "latitude": 53.6539037,
+            "longitude": -113.6292701
+          }
+        },
+        {
+          "name": "Grande Prairie",
+          "slug": "grande-prairie",
+          "population": 64141,
+          "coordinates": {
+            "latitude": 55.170691,
+            "longitude": -118.7884808
+          }
+        },
+        {
+          "name": "Medicine Hat",
+          "slug": "medicine-hat",
+          "population": 63271,
+          "coordinates": {
+            "latitude": 50.0290218,
+            "longitude": -110.7031976
+          }
+        },
+        {
+          "name": "Canmore",
+          "slug": "canmore",
+          "population": 15000,
+          "coordinates": {
+            "latitude": 51.08836660000001,
+            "longitude": -115.3479101
+          }
+        }
+      ],
+      "totalCities": 11,
+      "totalPopulation": 2973228
+    },
+    "manitoba": {
+      "name": "Manitoba",
+      "slug": "manitoba",
+      "cities": [
+        {
+          "name": "Winnipeg",
+          "slug": "winnipeg",
+          "population": 749607,
+          "coordinates": {
+            "latitude": 49.8954221,
+            "longitude": -97.1385145
+          }
+        },
+        {
+          "name": "Steinbach",
+          "slug": "steinbach",
+          "population": 17000,
+          "coordinates": {
+            "latitude": 49.5303097,
+            "longitude": -96.69120509999999
+          }
+        }
+      ],
+      "totalCities": 2,
+      "totalPopulation": 766607
+    },
+    "nova-scotia": {
+      "name": "Nova Scotia",
+      "slug": "nova-scotia",
+      "cities": [
+        {
+          "name": "Halifax",
+          "slug": "halifax",
+          "population": 439819,
+          "coordinates": {
+            "latitude": 44.8857087,
+            "longitude": -63.1005273
+          }
+        },
+        {
+          "name": "Cape Breton",
+          "slug": "cape-breton",
+          "population": 93694,
+          "coordinates": {
+            "latitude": 46.2486851,
+            "longitude": -60.851817
+          }
+        }
+      ],
+      "totalCities": 2,
+      "totalPopulation": 533513
+    },
+    "saskatchewan": {
+      "name": "Saskatchewan",
+      "slug": "saskatchewan",
+      "cities": [
+        {
+          "name": "Saskatoon",
+          "slug": "saskatoon",
+          "population": 266141,
+          "coordinates": {
+            "latitude": 52.157902,
+            "longitude": -106.6701577
+          }
+        },
+        {
+          "name": "Regina",
+          "slug": "regina",
+          "population": 226404,
+          "coordinates": {
+            "latitude": 50.4452112,
+            "longitude": -104.6188944
+          }
+        }
+      ],
+      "totalCities": 2,
+      "totalPopulation": 492545
+    },
+    "new-brunswick": {
+      "name": "New Brunswick",
+      "slug": "new-brunswick",
+      "cities": [
+        {
+          "name": "Moncton",
+          "slug": "moncton",
+          "population": 79470,
+          "coordinates": {
+            "latitude": 46.0878165,
+            "longitude": -64.7782313
+          }
+        },
+        {
+          "name": "Saint John",
+          "slug": "saint-john",
+          "population": 69895,
+          "coordinates": {
+            "latitude": 45.2733153,
+            "longitude": -66.0633081
+          }
+        },
+        {
+          "name": "Fredericton",
+          "slug": "fredericton",
+          "population": 63116,
+          "coordinates": {
+            "latitude": 45.9635895,
+            "longitude": -66.6431151
+          }
+        }
+      ],
+      "totalCities": 3,
+      "totalPopulation": 212481
+    },
+    "newfoundland-and-labrador": {
+      "name": "Newfoundland and Labrador",
+      "slug": "newfoundland-and-labrador",
+      "cities": [
+        {
+          "name": "St. John's",
+          "slug": "st-johns",
+          "population": 110525,
+          "coordinates": {
+            "latitude": 47.5556097,
+            "longitude": -52.7452511
+          }
+        }
+      ],
+      "totalCities": 1,
+      "totalPopulation": 110525
+    },
+    "prince-edward-island": {
+      "name": "Prince Edward Island",
+      "slug": "prince-edward-island",
+      "cities": [
+        {
+          "name": "Charlottetown",
+          "slug": "charlottetown",
+          "population": 38000,
+          "coordinates": {
+            "latitude": 46.23824,
+            "longitude": -63.13107040000001
+          }
+        }
+      ],
+      "totalCities": 1,
+      "totalPopulation": 38000
+    },
+    "yukon": {
+      "name": "Yukon",
+      "slug": "yukon",
+      "cities": [
+        {
+          "name": "Whitehorse",
+          "slug": "whitehorse",
+          "population": 28000,
+          "coordinates": {
+            "latitude": 60.7197137,
+            "longitude": -135.0522761
+          }
+        }
+      ],
+      "totalCities": 1,
+      "totalPopulation": 28000
+    },
+    "northwest-territories": {
+      "name": "Northwest Territories",
+      "slug": "northwest-territories",
+      "cities": [
+        {
+          "name": "Yellowknife",
+          "slug": "yellowknife",
+          "population": 20000,
+          "coordinates": {
+            "latitude": 62.4539717,
+            "longitude": -114.3717886
+          }
+        }
+      ],
+      "totalCities": 1,
+      "totalPopulation": 20000
+    }
+  }
+}
