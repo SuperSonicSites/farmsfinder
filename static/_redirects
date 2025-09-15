@@ -1,0 +1,20 @@
+# Redirect common variations and old URLs
+/robots.txt /robots.txt 200
+/sitemap.xml /sitemap.xml 200
+
+# Redirect www to non-www (if needed)
+https://www.farmsfinder.ca/* https://farmsfinder.ca/:splat 301!
+
+# Redirect HTTP to HTTPS
+http://farmsfinder.ca/* https://farmsfinder.ca/:splat 301!
+http://www.farmsfinder.ca/* https://farmsfinder.ca/:splat 301!
+
+# Handle trailing slashes consistently
+/*/index.html /:splat/ 301!
+
+# API endpoints for functions
+/api/webhook /functions/zoho 200
+/webhook /functions/zoho 200
+
+# 404 fallback - serve Hugo's 404 page
+/* /404.html 404

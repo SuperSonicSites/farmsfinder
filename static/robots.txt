@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and function paths
+Disallow: /admin/
+Disallow: /functions/
+Disallow: /_redirects
+Disallow: /.*
+
+# Allow common crawlers to access sitemap
+Sitemap: https://farmsfinder.ca/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
