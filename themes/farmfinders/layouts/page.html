@@ -12,7 +12,7 @@
           <!-- Category -->
            
           {{ if .Params.categories }}
-          <div class="text-xl text-gray-600">
+          <div class="text-gray-600">
             {{ range $i, $category := .Params.categories }}
               {{ if gt $i 0 }}, {{ end }}
               {{ $categoryPath := printf "/%s/" ($category | urlize) }}

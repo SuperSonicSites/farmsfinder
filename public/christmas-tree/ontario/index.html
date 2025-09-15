@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <nav aria-label="breadcrumb" class="mb-6">
   <ol itemscope itemtype="https://schema.org/BreadcrumbList"
-      style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem; align-items: center;">
+      style="display: flex; list-style: none; padding: 0; margin: 0; gap: 0.5rem; align-items: center;" class="text-sm">
 
     
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="position: relative;">
@@ -1028,29 +1028,41 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
       
       
       <section aria-labelledby="farms-heading" class="space-y-12">
-        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
+        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">List of Christmas Tree Farms</h2>
 
         
-          <ul itemscope itemtype="https://schema.org/ItemList"
+          <ol itemscope itemtype="https://schema.org/ItemList"
               style="padding-left: 0;"
               class="space-y-4">
             <meta itemprop="name" content="Farms listed on this page" />
-            <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+            <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrdered" />
             <meta itemprop="numberOfItems" content="16" />
 
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/bachner-family-christmas-tree-farm/#business">
+                <a href="/farms/bachner-family-christmas-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/bachner-family-christmas-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Bachner Family Christmas Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Bachner Family Christmas Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in St Thomas
+                      </h4>
+                    
                     
                     
                     
@@ -1063,37 +1075,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/bachner-family-christmas-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="1" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/barretts-christmas-tree-farm/#business">
+                <a href="/farms/barretts-christmas-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/barretts-christmas-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Barrett&#39;s Christmas Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Barrett&#39;s Christmas Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Cobourg
+                      </h4>
+                    
                     
                     
                     
@@ -1106,37 +1123,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/barretts-christmas-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="2" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/bastien-christmas-tree-farm/#business">
+                <a href="/farms/bastien-christmas-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/bastien-christmas-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Bastien Christmas Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Bastien Christmas Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Essex
+                      </h4>
+                    
                     
                     
                     
@@ -1149,37 +1171,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/bastien-christmas-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="3" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/bellyacres-tree-farm/#business">
+                <a href="/farms/bellyacres-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/bellyacres-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      BellyAcres Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        BellyAcres Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Niagara-on-the-Lake
+                      </h4>
+                    
                     
                     
                     
@@ -1192,37 +1219,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/bellyacres-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="4" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/blitzen-estate/#business">
+                <a href="/farms/blitzen-estate/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/blitzen-estate/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Blitzen Estate
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Blitzen Estate
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Jasper
+                      </h4>
+                    
                     
                     
                     
@@ -1235,37 +1267,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/blitzen-estate/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="5" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/blue-harvest-farm/#business">
+                <a href="/farms/blue-harvest-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/blue-harvest-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Blue Harvest Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Blue Harvest Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Simcoe
+                      </h4>
+                    
                     
                     
                     
@@ -1278,37 +1315,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/blue-harvest-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="6" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/bois-brabant/#business">
+                <a href="/farms/bois-brabant/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/bois-brabant/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Boisé Brabant
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Boisé Brabant
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree, maple syrup Farm in Casselman
+                      </h4>
+                    
                     
                     
                     
@@ -1321,37 +1363,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/bois-brabant/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="7" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/briggs-trees/#business">
+                <a href="/farms/briggs-trees/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/briggs-trees/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Briggs Trees
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Briggs Trees
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Navan
+                      </h4>
+                    
                     
                     
                     
@@ -1364,37 +1411,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/briggs-trees/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="8" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/caroles-christmas-tree-farm/#business">
+                <a href="/farms/caroles-christmas-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/caroles-christmas-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Carole&#39;s Christmas Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Carole&#39;s Christmas Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Greater Napanee
+                      </h4>
+                    
                     
                     
                     
@@ -1407,37 +1459,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/caroles-christmas-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="9" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/catfish-creek-christmas-tree-farm/#business">
+                <a href="/farms/catfish-creek-christmas-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/catfish-creek-christmas-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Catfish Creek Christmas Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Catfish Creek Christmas Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in St Thomas
+                      </h4>
+                    
                     
                     
                     
@@ -1450,37 +1507,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/catfish-creek-christmas-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="10" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/cedar-hill-christmas-tree-farm/#business">
+                <a href="/farms/cedar-hill-christmas-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/cedar-hill-christmas-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Cedar Hill Christmas Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Cedar Hill Christmas Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree, pumpkin Farm in Pakenham
+                      </h4>
+                    
                     
                     
                     
@@ -1493,37 +1555,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/cedar-hill-christmas-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="11" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/chickadee-christmas-trees/#business">
+                <a href="/farms/chickadee-christmas-trees/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/chickadee-christmas-trees/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Chickadee Christmas Trees
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Chickadee Christmas Trees
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Cambridge
+                      </h4>
+                    
                     
                     
                     
@@ -1536,37 +1603,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/chickadee-christmas-trees/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="12" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/copeman-tree-farms/#business">
+                <a href="/farms/copeman-tree-farms/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/copeman-tree-farms/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Copeman Tree Farms
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Copeman Tree Farms
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Sundridge
+                      </h4>
+                    
                     
                     
                     
@@ -1579,37 +1651,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/copeman-tree-farms/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="13" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/country-christmas-trees/#business">
+                <a href="/farms/country-christmas-trees/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/country-christmas-trees/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Country Christmas Trees
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Country Christmas Trees
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Dorchester
+                      </h4>
+                    
                     
                     
                     
@@ -1622,37 +1699,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/country-christmas-trees/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="14" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/crones-tree-farm/#business">
+                <a href="/farms/crones-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/crones-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Crone&#39;s Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Crone&#39;s Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Mount Albert
+                      </h4>
+                    
                     
                     
                     
@@ -1665,37 +1747,42 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/crones-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="15" />
               </li>
             
               <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <div class="w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                     itemprop="item"
-                     itemscope itemtype="https://schema.org/LocalBusiness"
-                     itemid="http://localhost:1313/farms/dawson-christmas-tree-farm/#business">
+                <a href="/farms/dawson-christmas-tree-farm/" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="http://localhost:1313/farms/dawson-christmas-tree-farm/#business">
                   
-                  <div class="flex flex-row space-y-3">
+                  <div class="space-y-3">
                     
-                     
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      Dawson Christmas Tree Farm
-                    </h3>
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        Dawson Christmas Tree Farm
+                      </h3>
+                      
+                      
+                      
+                    </div>
+                    
+                    
+                    
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        christmas tree Farm in Millbrook
+                      </h4>
+                    
                     
                     
                     
@@ -1708,26 +1795,19 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                     
                     
                     
-                    
-                    
-                    
-                    <div class="pt-2">
-                      <a href="/farms/dawson-christmas-tree-farm/" 
-                         class="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-200"
-                         itemprop="url">
-                        Learn more
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </a>
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                </a>
                 
                 <meta itemprop="position" content="16" />
               </li>
             
-          </ul>
+          </ol>
         
       </section>
 

@@ -765,7 +765,7 @@ h2 {
 
 h3 {
   margin-bottom: 0.5rem;
-  font-size: 1.25rem;
+  font-size: 1.10rem;
   line-height: 1.75rem;
   font-weight: 300;
 }
@@ -1925,10 +1925,6 @@ a.block,
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -2452,11 +2448,6 @@ a.block,
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-green-700:hover {
-  --tw-text-opacity: 1;
-  color: rgb(21 128 61 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-pink-600:hover {

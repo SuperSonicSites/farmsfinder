@@ -93,6 +93,7 @@
         {{/* Filter farms by distance if we have city coordinates */}}
         {{ if and (ne $cityLat 0.0) (ne $cityLng 0.0) }}
           {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
+          {{ $farmsWithDistance := slice }}
           
           {{ range $categoryFarms }}
             {{ if and .Params.coordinates .Params.address }}
@@ -109,11 +110,18 @@
               {{ $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
               {{ $distance := math.Mul 6371 $c }}
               
-              {{/* Include farms within 100km */}}
+              {{/* Include farms within 100km and store with distance */}}
               {{ if le $distance 100 }}
-                {{ $filteredFarms = $filteredFarms | append . }}
+                {{ $farmWithDistance := dict "farm" . "distance" $distance }}
+                {{ $farmsWithDistance = $farmsWithDistance | append $farmWithDistance }}
               {{ end }}
             {{ end }}
+          {{ end }}
+          
+          {{/* Sort farms by distance */}}
+          {{ $sortedFarms := sort $farmsWithDistance "distance" }}
+          {{ range $sortedFarms }}
+            {{ $filteredFarms = $filteredFarms | append .farm }}
           {{ end }}
         {{ end }}
         
@@ -151,14 +159,14 @@
       {{ end }}
       
       <section aria-labelledby="farms-heading" class="space-y-12">
-        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
+        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">List of {{ $category | title }} Farms</h2>
 
         {{ if $filteredFarms }}
-          <ul itemscope itemtype="https://schema.org/ItemList"
+          <ol itemscope itemtype="https://schema.org/ItemList"
               style="padding-left: 0;"
               class="space-y-4">
             <meta itemprop="name" content="Farms listed on this page" />
-            <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+            <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrdered" />
             <meta itemprop="numberOfItems" content="{{ len $filteredFarms }}" />
 
             {{ range $i, $farm := $filteredFarms }}
@@ -170,10 +178,52 @@
                    itemid="{{ $farm.Permalink }}#business">
                   
                   <div class="space-y-3">
-                    <!-- Farm Name -->
-                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
-                      {{ $farm.LinkTitle }}
-                    </h3>
+                    <!-- Farm Name and Drive Time Row -->
+                    <div class="flex justify-between items-start">
+                      <h3 class="md:text-xl font-semibold text-gray-900" itemprop="name">
+                        {{ $farm.LinkTitle }}
+                      </h3>
+                      
+                      <!-- Driving Time (for city pages) -->
+                      {{ if eq (len $pathParts) 3 }}
+                        {{ if and $farm.Params.coordinates (ne $cityLat 0.0) (ne $cityLng 0.0) }}
+                          {{ $farmLat := $farm.Params.coordinates.latitude }}
+                          {{ $farmLng := $farm.Params.coordinates.longitude }}
+                          
+                          {{/* Calculate distance using Haversine formula */}}
+                          {{ $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
+                          {{ $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
+                          {{ $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
+                          {{ $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+                          
+                          {{ $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+                          {{ $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+                          {{ $distance := math.Mul 6371 $c }}
+                          
+                          {{/* Estimate driving time (assuming average 60 km/h) */}}
+                          {{ $drivingTimeHours := math.Div $distance 60 }}
+                          {{ $drivingTimeMinutes := math.Mul $drivingTimeHours 60 }}
+                          
+                          <p class="text-sm text-blue-600 font-medium flex items-center">
+                            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ if lt $drivingTimeMinutes 60 }}
+                              {{ printf "%.0f min" $drivingTimeMinutes }}
+                            {{ else }}
+                              {{ $hours := math.Floor $drivingTimeHours }}
+                              {{ $totalMinutes := math.Floor $drivingTimeMinutes }}
+                              {{ $remainingMinutes := math.Sub $totalMinutes (math.Mul $hours 60) }}
+                              {{ if eq $remainingMinutes 0 }}
+                                {{ printf "%.0fh" $hours }}
+                              {{ else }}
+                                {{ printf "%.0fh %.0fm" $hours $remainingMinutes }}
+                              {{ end }}
+                            {{ end }}
+                          </p>
+                        {{ end }}
+                      {{ end }}
+                    </div>
                     
                     <!-- Farm Categories -->
                     {{ if $farm.Params.categories }}
@@ -192,46 +242,6 @@
                       </p>
                     {{ end }}
                     
-                    <!-- Driving Time (for city pages) -->
-                    {{ if eq (len $pathParts) 3 }}
-                      {{ if and $farm.Params.coordinates (ne $cityLat 0.0) (ne $cityLng 0.0) }}
-                        {{ $farmLat := $farm.Params.coordinates.latitude }}
-                        {{ $farmLng := $farm.Params.coordinates.longitude }}
-                        
-                        {{/* Calculate distance using Haversine formula */}}
-                        {{ $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
-                        {{ $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
-                        {{ $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
-                        {{ $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
-                        
-                        {{ $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
-                        {{ $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
-                        {{ $distance := math.Mul 6371 $c }}
-                        
-                        {{/* Estimate driving time (assuming average 60 km/h) */}}
-                        {{ $drivingTimeHours := math.Div $distance 60 }}
-                        {{ $drivingTimeMinutes := math.Mul $drivingTimeHours 60 }}
-                        
-                        <p class="text-sm text-blue-600 font-medium">
-                          <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                          </svg>
-                          {{ if lt $drivingTimeMinutes 60 }}
-                            {{ printf "%.0f minutes drive" $drivingTimeMinutes }}
-                          {{ else }}
-                            {{ $hours := math.Floor $drivingTimeHours }}
-                            {{ $totalMinutes := math.Floor $drivingTimeMinutes }}
-                            {{ $remainingMinutes := math.Sub $totalMinutes (math.Mul $hours 60) }}
-                            {{ if eq $remainingMinutes 0 }}
-                              {{ printf "%.0f hour drive" $hours }}
-                            {{ else }}
-                              {{ printf "%.0f hour %.0f minutes drive" $hours $remainingMinutes }}
-                            {{ end }}
-                          {{ end }}
-                        </p>
-                      {{ end }}
-                    {{ end }}
-                    
                     <!-- Learn More Visual Indicator -->
                     <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
                       <span>Learn more</span>
@@ -245,7 +255,7 @@
                 <meta itemprop="position" content="{{ add $i 1 }}" />
               </li>
             {{ end }}
-          </ul>
+          </ol>
         {{ else }}
           <div class="text-center py-12">
             <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
