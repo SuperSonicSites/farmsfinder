@@ -8,6 +8,10 @@
       {{ $farms := where site.RegularPages "Section" "farms" }}
       {{ $filteredFarms := slice }}
       
+      {{/* Initialize city coordinates variables */}}
+      {{ $cityLat := 0.0 }}
+      {{ $cityLng := 0.0 }}
+      
       <header class="text-left space-y-8">
         {{ $currentPath := .RelPermalink }}
         {{ $pathParts := split (trim $currentPath "/") "/" }}
@@ -43,8 +47,6 @@
             {{ $province := index $pathParts 1 }}
             {{ $city := index $pathParts 2 }}
             
-
-            
             {{ $h1Text = printf "Find a %s farm near %s, %s" $category $city $province }}
           {{ end }}
         {{ end }}
@@ -77,33 +79,22 @@
         {{ partial "regional-map.html" (dict "page" . "region" $province "category" $categorySlug) }}
         
       {{ else if eq (len $pathParts) 3 }}
-        {{/* City pages - show farms within 80km */}}
+        {{/* City pages - show farms within 100km */}}
         {{ $categorySlug := index $pathParts 0 }}
         {{ $province := index $pathParts 1 }}
         {{ $city := index $pathParts 2 }}
         
         {{/* Get city coordinates */}}
-        {{ $cityLat := 0.0 }}
-        {{ $cityLng := 0.0 }}
-        
-        
-        
         {{ if .Params.coordinates }}
           {{ $cityLat = .Params.coordinates.latitude }}
           {{ $cityLng = .Params.coordinates.longitude }}
         {{ end }}
         
-        
-        
         {{/* Filter farms by distance if we have city coordinates */}}
         {{ if and (ne $cityLat 0.0) (ne $cityLng 0.0) }}
           {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
           
-         
-          
           {{ range $categoryFarms }}
-            
-            
             {{ if and .Params.coordinates .Params.address }}
               {{ $farmLat := .Params.coordinates.latitude }}
               {{ $farmLng := .Params.coordinates.longitude }}
@@ -118,23 +109,12 @@
               {{ $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
               {{ $distance := math.Mul 6371 $c }}
               
-              
-              
-              {{/* Include farms within 80km */}}
-              {{ if le $distance 80 }}
+              {{/* Include farms within 100km */}}
+              {{ if le $distance 100 }}
                 {{ $filteredFarms = $filteredFarms | append . }}
-                
-              {{ else }}
-                
               {{ end }}
-            {{ else }}
-              
             {{ end }}
           {{ end }}
-          
-          
-        {{ else }}
-
         {{ end }}
         
         {{ partial "regional-map.html" (dict "page" . "region" $province "category" $categorySlug "city" $city) }}
@@ -174,40 +154,98 @@
         <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
 
         {{ if $filteredFarms }}
-          <div class="flex">
-            <ul itemscope itemtype="https://schema.org/ItemList"
-                style="padding-left: 0;"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
-              <meta itemprop="name" content="Farms listed on this page" />
-              <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-              <meta itemprop="numberOfItems" content="{{ len $filteredFarms }}" />
+          <ul itemscope itemtype="https://schema.org/ItemList"
+              style="padding-left: 0;"
+              class="space-y-4">
+            <meta itemprop="name" content="Farms listed on this page" />
+            <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+            <meta itemprop="numberOfItems" content="{{ len $filteredFarms }}" />
 
-              {{ range $i, $farm := $filteredFarms }}
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                  <span itemprop="item"
-                        itemscope itemtype="https://schema.org/LocalBusiness"
-                        itemid="{{ $farm.Permalink }}#business">
-
-                    <a itemprop="url"
-                       href="{{ $farm.RelPermalink }}"
-                       class="hover:text-gray-700 transition-colors">
-                      <span itemprop="name">{{ $farm.LinkTitle }}</span>
-                    </a>
-
-                    <p class="text-gray-600 font-light">
-                      {{ with $farm.Params.address }}
-                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                          <span itemprop="addressLocality">{{ .city }}</span>, <span itemprop="addressRegion">{{ .province }}</span>
-                        </span>
+            {{ range $i, $farm := $filteredFarms }}
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a href="{{ $farm.RelPermalink }}" 
+                   class="block w-full bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                   itemprop="item"
+                   itemscope itemtype="https://schema.org/LocalBusiness"
+                   itemid="{{ $farm.Permalink }}#business">
+                  
+                  <div class="space-y-3">
+                    <!-- Farm Name -->
+                    <h3 class="text-xl font-semibold text-gray-900" itemprop="name">
+                      {{ $farm.LinkTitle }}
+                    </h3>
+                    
+                    <!-- Farm Categories -->
+                    {{ if $farm.Params.categories }}
+                      <h4 class="text-sm font-medium text-gray-600 capitalize">
+                        {{ delimit (apply $farm.Params.categories "replace" "." "-" " ") ", " }} Farm in {{ .Params.address.city }}
+                      </h4>
+                    {{ end }}
+                    
+                    <!-- Full Address -->
+                    {{ with $farm.Params.address }}
+                      <p class="text-xs text-gray-600" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">{{ .street }}</span>{{ if .street }}, {{ end }}
+                        <span itemprop="addressLocality">{{ .city }}</span>, 
+                        <span itemprop="addressRegion">{{ .province }}</span>
+                        {{ if .postal_code }}<span itemprop="postalCode"> {{ .postal_code }}</span>{{ end }}
+                      </p>
+                    {{ end }}
+                    
+                    <!-- Driving Time (for city pages) -->
+                    {{ if eq (len $pathParts) 3 }}
+                      {{ if and $farm.Params.coordinates (ne $cityLat 0.0) (ne $cityLng 0.0) }}
+                        {{ $farmLat := $farm.Params.coordinates.latitude }}
+                        {{ $farmLng := $farm.Params.coordinates.longitude }}
+                        
+                        {{/* Calculate distance using Haversine formula */}}
+                        {{ $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
+                        {{ $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
+                        {{ $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
+                        {{ $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+                        
+                        {{ $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+                        {{ $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+                        {{ $distance := math.Mul 6371 $c }}
+                        
+                        {{/* Estimate driving time (assuming average 60 km/h) */}}
+                        {{ $drivingTimeHours := math.Div $distance 60 }}
+                        {{ $drivingTimeMinutes := math.Mul $drivingTimeHours 60 }}
+                        
+                        <p class="text-sm text-blue-600 font-medium">
+                          <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          </svg>
+                          {{ if lt $drivingTimeMinutes 60 }}
+                            {{ printf "%.0f minutes drive" $drivingTimeMinutes }}
+                          {{ else }}
+                            {{ $hours := math.Floor $drivingTimeHours }}
+                            {{ $totalMinutes := math.Floor $drivingTimeMinutes }}
+                            {{ $remainingMinutes := math.Sub $totalMinutes (math.Mul $hours 60) }}
+                            {{ if eq $remainingMinutes 0 }}
+                              {{ printf "%.0f hour drive" $hours }}
+                            {{ else }}
+                              {{ printf "%.0f hour %.0f minutes drive" $hours $remainingMinutes }}
+                            {{ end }}
+                          {{ end }}
+                        </p>
                       {{ end }}
-                    </p>
-                  </span>
-
-                  <meta itemprop="position" content="{{ add $i 1 }}" />
-                </li>
-              {{ end }}
-            </ul>
-          </div>
+                    {{ end }}
+                    
+                    <!-- Learn More Visual Indicator -->
+                    <div class="pt-2 flex items-center text-green-600 font-medium text-sm">
+                      <span>Learn more</span>
+                      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <meta itemprop="position" content="{{ add $i 1 }}" />
+              </li>
+            {{ end }}
+          </ul>
         {{ else }}
           <div class="text-center py-12">
             <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
