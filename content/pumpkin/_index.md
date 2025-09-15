@@ -1,3 +1,3 @@
 ---
-title: "Pumpkin"
+title: Pumpkin
 ---

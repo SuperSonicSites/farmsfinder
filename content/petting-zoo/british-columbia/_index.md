@@ -1,3 +1,3 @@
 ---
-title: "British Columbia"
+title: British Columbia
 ---

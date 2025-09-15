@@ -1,3 +1,3 @@
 ---
-title: "Corn"
+title: Corn
 ---

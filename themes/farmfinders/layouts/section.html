@@ -5,6 +5,9 @@
     <article class="space-y-8">
       {{ partial "breadcrumb.html" . }}
       
+      {{ $farms := where site.RegularPages "Section" "farms" }}
+      {{ $filteredFarms := slice }}
+      
       <header class="text-left space-y-8">
         {{ $currentPath := .RelPermalink }}
         {{ $pathParts := split (trim $currentPath "/") "/" }}
@@ -24,10 +27,6 @@
           {{ if eq (len $pathParts) 1 }}
             {{ $h1Text = printf "All %s farms in Canada " $category }}
             
-            <!-- Canada-wide Map for Category Pages -->
-            {{ $categorySlug := index $pathParts 0 }}
-            {{ partial "regional-map.html" (dict "page" . "region" "canada" "category" $categorySlug) }}
-            
           {{ else if eq (len $pathParts) 2 }}
             {{ $province := index $pathParts 1 }}
             {{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}
@@ -38,23 +37,14 @@
               {{ $province = $province | replace "-" " " | title }}
             {{ end }}
             {{ $h1Text = printf "Find a %s farm in %s" $category $province }}
+            
           {{ else if eq (len $pathParts) 3 }}
+            {{ $categorySlug := index $pathParts 0 }}
             {{ $province := index $pathParts 1 }}
-            {{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}
-            {{ $provincePage := site.GetPage $provincePath }}
-            {{ if $provincePage }}
-              {{ $province = $provincePage.Title }}
-            {{ else }}
-              {{ $province = $province | replace "-" " " | title }}
-            {{ end }}
             {{ $city := index $pathParts 2 }}
-            {{ $cityPath := printf "/%s/%s/%s/" (index $pathParts 0) (index $pathParts 1) $city }}
-            {{ $cityPage := site.GetPage $cityPath }}
-            {{ if $cityPage }}
-              {{ $city = $cityPage.Title }}
-            {{ else }}
-              {{ $city = $city | replace "-" " " | title }}
-            {{ end }}
+            
+
+            
             {{ $h1Text = printf "Find a %s farm near %s, %s" $category $city $province }}
           {{ end }}
         {{ end }}
@@ -65,14 +55,15 @@
         </div>
       </header>
       
-      {{ $farms := where site.RegularPages "Section" "farms" }}
-      {{ $filteredFarms := slice }}
-      
       {{ if eq (len $pathParts) 1 }}
+        {{/* Category pages - show all farms in category */}}
         {{ $categorySlug := index $pathParts 0 }}
         {{ $filteredFarms = where $farms "Params.categories" "intersect" (slice $categorySlug) }}
         
+        {{ partial "regional-map.html" (dict "page" . "region" "canada" "category" $categorySlug) }}
+        
       {{ else if eq (len $pathParts) 2 }}
+        {{/* Province pages - show farms in province */}}
         {{ $categorySlug := index $pathParts 0 }}
         {{ $province := index $pathParts 1 }}
         {{ $province = $province | lower }}
@@ -83,160 +74,146 @@
           {{ end }}
         {{ end }}
         
-        <!-- Regional Map for Provincial Pages -->
         {{ partial "regional-map.html" (dict "page" . "region" $province "category" $categorySlug) }}
         
       {{ else if eq (len $pathParts) 3 }}
+        {{/* City pages - show farms within 80km */}}
         {{ $categorySlug := index $pathParts 0 }}
         {{ $province := index $pathParts 1 }}
-        {{ $province = $province | lower }}
         {{ $city := index $pathParts 2 }}
-        {{ $city = $city | lower }}
         
-        {{- /* Get city center coordinates - same logic as regional-map.html */ -}}
-        {{- $cityLat := 0.0 }}
-        {{- $cityLng := 0.0 }}
-        {{- /* First try current page coordinates */ -}}
-        {{- if and .Params.coordinates .Params.location_type }}
-          {{- $cityLat = .Params.coordinates.latitude }}
-          {{- $cityLng = .Params.coordinates.longitude }}
-        {{- else }}
-          {{- /* Fallback: get coordinates from any farm in that city */ -}}
-          {{- range site.Pages }}
-            {{- if and (eq .Section "farms") .Params.coordinates .Params.address }}
-              {{- if eq (lower .Params.address.city) $city }}
-                {{- $cityLat = .Params.coordinates.latitude }}
-                {{- $cityLng = .Params.coordinates.longitude }}
-                {{- break }}
-              {{- end }}
-            {{- end }}
-          {{- end }}
-        {{- end }}
+        {{/* Get city coordinates */}}
+        {{ $cityLat := 0.0 }}
+        {{ $cityLng := 0.0 }}
         
-        {{- /* Filter farms using same logic as regional-map.html */ -}}
-        {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
-        {{ range $categoryFarms }}
-          {{- if and .Params.coordinates .Params.address }}
-            {{- $farmRegion := lower .Params.address.province }}
-            {{- $farmCity := lower .Params.address.city }}
-            {{- $farmLat := .Params.coordinates.latitude }}
-            {{- $farmLng := .Params.coordinates.longitude }}
-            
-            {{- $matchesCategory := in .Params.categories $categorySlug }}
-            {{- $matchesRegion := eq $farmRegion $province }}
-            
-            {{- /* Check for exact city match first */ -}}
-            {{- $exactCityMatch := eq $farmCity $city | or (eq (replace $farmCity " " "-") $city) }}
-            
-            {{- /* Calculate distance for nearby farms */ -}}
-            {{- $matchesCity := $exactCityMatch }}
-            {{- if and (not $exactCityMatch) (gt $cityLat 0) (gt $cityLng 0) }}
-              {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
-              {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
-              {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
-              {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
-              {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
-              {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
-              {{- $distance := math.Mul 6371 $c }}
-              {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
-              {{- $matchesCity = le $distance 80 }}
-            {{- end }}
-            
-            {{- if and $matchesCategory $matchesRegion $matchesCity }}
-              {{ $filteredFarms = $filteredFarms | append . }}
-            {{- end }}
-          {{- end }}
+        
+        
+        {{ if .Params.coordinates }}
+          {{ $cityLat = .Params.coordinates.latitude }}
+          {{ $cityLng = .Params.coordinates.longitude }}
         {{ end }}
         
-        <!-- Regional Map for City Pages -->
+        
+        
+        {{/* Filter farms by distance if we have city coordinates */}}
+        {{ if and (ne $cityLat 0.0) (ne $cityLng 0.0) }}
+          {{ $categoryFarms := where $farms "Params.categories" "intersect" (slice $categorySlug) }}
+          
+         
+          
+          {{ range $categoryFarms }}
+            
+            
+            {{ if and .Params.coordinates .Params.address }}
+              {{ $farmLat := .Params.coordinates.latitude }}
+              {{ $farmLng := .Params.coordinates.longitude }}
+              
+              {{/* Calculate distance using Haversine formula */}}
+              {{ $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
+              {{ $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
+              {{ $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
+              {{ $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+              
+              {{ $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+              {{ $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+              {{ $distance := math.Mul 6371 $c }}
+              
+              
+              
+              {{/* Include farms within 80km */}}
+              {{ if le $distance 80 }}
+                {{ $filteredFarms = $filteredFarms | append . }}
+                
+              {{ else }}
+                
+              {{ end }}
+            {{ else }}
+              
+            {{ end }}
+          {{ end }}
+          
+          
+        {{ else }}
+
+        {{ end }}
+        
         {{ partial "regional-map.html" (dict "page" . "region" $province "category" $categorySlug "city" $city) }}
         
       {{ end }}
       
       {{ if .Pages }}
-  {{/* Use the current list of child pages (cities) as-is */}}
-  {{ $items := .Pages }}
+      <section aria-labelledby="locations-heading" class="space-y-12">
+        <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
 
-  <section aria-labelledby="locations-heading" class="space-y-12">
-    <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
+        <nav aria-label="Location filters" class="flex justify-center">
+          <ul itemscope itemtype="https://schema.org/ItemList"
+              style="padding-left: 0;"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
+            <meta itemprop="name" content="Locations listed on this page" />
+            <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+            <meta itemprop="numberOfItems" content="{{ len .Pages }}" />
 
-    <nav aria-label="Location filters" class="flex justify-center">
-      <ul itemscope itemtype="https://schema.org/ItemList"
-          style="padding-left: 0;"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
-        <meta itemprop="name" content="Locations listed on this page" />
-        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="{{ len $items }}" />
-
-        {{ range $i, $p := $items }}
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="{{ $p.Permalink }}">
-              <a itemprop="url" href="{{ $p.RelPermalink }}">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  {{ $p.LinkTitle }}
+            {{ range $i, $p := .Pages }}
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="{{ $p.Permalink }}">
+                  <a itemprop="url" href="{{ $p.RelPermalink }}">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      {{ $p.LinkTitle }}
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="{{ add $i 1 }}" />
-          </li>
-        {{ end }}
-      </ul>
-    </nav>
-  </section>
-{{ end }}
-
+                <meta itemprop="position" content="{{ add $i 1 }}" />
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </section>
+      {{ end }}
       
-<section aria-labelledby="farms-heading" class="space-y-12">
-  <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
+      <section aria-labelledby="farms-heading" class="space-y-12">
+        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
 
-  {{ if $filteredFarms }}
-    <div class="flex">
-      <ul itemscope itemtype="https://schema.org/ItemList"
-          style="padding-left: 0;"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
-        <meta itemprop="name" content="Farms listed on this page" />
-        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="{{ len $filteredFarms }}" />
+        {{ if $filteredFarms }}
+          <div class="flex">
+            <ul itemscope itemtype="https://schema.org/ItemList"
+                style="padding-left: 0;"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+              <meta itemprop="name" content="Farms listed on this page" />
+              <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+              <meta itemprop="numberOfItems" content="{{ len $filteredFarms }}" />
 
-        {{ range $i, $farm := $filteredFarms }}
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="{{ $farm.Permalink }}#business">
+              {{ range $i, $farm := $filteredFarms }}
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="{{ $farm.Permalink }}#business">
 
-              <a itemprop="url"
-                 href="{{ $farm.RelPermalink }}"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">{{ $farm.LinkTitle }}</span>
-              </a>
+                    <a itemprop="url"
+                       href="{{ $farm.RelPermalink }}"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">{{ $farm.LinkTitle }}</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                {{ with $farm.Params.address }}
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">{{ .city }}</span>, <span itemprop="addressRegion">{{ .province }}</span>
-                    {{/* Optional: include country if you want
-                    {{ with .country }}<meta itemprop="addressCountry" content="{{ . }}">{{ end }}
-                    */}}
+                    <p class="text-gray-600 font-light">
+                      {{ with $farm.Params.address }}
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">{{ .city }}</span>, <span itemprop="addressRegion">{{ .province }}</span>
+                        </span>
+                      {{ end }}
+                    </p>
                   </span>
-                {{ else }}
-                  {{/* Fallback if address missing (no microdata) */}}
-                  {{ $farm.Params.address.city }}, {{ $farm.Params.address.province }}
-                {{ end }}
-              </p>
-            </span>
 
-            <meta itemprop="position" content="{{ add $i 1 }}" />
-          </li>
+                  <meta itemprop="position" content="{{ add $i 1 }}" />
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ else }}
+          <div class="text-center py-12">
+            <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
+          </div>
         {{ end }}
-      </ul>
-    </div>
-  {{ else }}
-    <div class="text-center py-12">
-      <p class="text-lg font-light text-gray-600">No farms found in this category/location.</p>
-    </div>
-  {{ end }}
-</section>
-
+      </section>
 
       {{/* Add FAQs section only for top-level category pages */}}
       {{ if eq (len $pathParts) 1 }}

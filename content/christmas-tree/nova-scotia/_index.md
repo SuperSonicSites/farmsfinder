@@ -1,3 +1,3 @@
 ---
-title: "Nova Scotia"
+title: Nova Scotia
 ---

@@ -1,3 +1,3 @@
 ---
-title: "Maple Syrup"
+title: Maple Syrup
 ---

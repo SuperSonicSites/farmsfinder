@@ -12,29 +12,112 @@
           <!-- Category -->
            
           {{ if .Params.categories }}
-            <div class="text-xl text-gray-600">
-              {{ range $i, $category := .Params.categories }}
-                {{ if gt $i 0 }}, {{ end }}
-                {{ $categoryPath := printf "/%s/" ($category | urlize) }}
-                {{ $categoryPage := site.GetPage $categoryPath }}
-                <a href="{{ $categoryPath }}" class="text-blue-600 hover:text-blue-800 font-light">
-                  {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $category | title }}{{ end }}
-                </a>
+          <div class="text-xl text-gray-600">
+            {{ range $i, $category := .Params.categories }}
+              {{ if gt $i 0 }}, {{ end }}
+              {{ $categoryPath := printf "/%s/" ($category | urlize) }}
+              {{ $categoryPage := site.GetPage $categoryPath }}
+              <a href="{{ $categoryPath }}" class="text-blue-600 hover:text-blue-800 font-light">
+                {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $category | title }}{{ end }}
+              </a>
+            {{ end }}
+            
+            {{ if and .Params.address .Params.address.city .Params.coordinates }}
+              Farm 
+              {{ $farmLat := .Params.coordinates.latitude }}
+              {{ $farmLng := .Params.coordinates.longitude }}
+              {{ $province := .Params.address.province | lower | replaceRE " +" "-" }}
+              {{ $actualCity := .Params.address.city }}
+              {{ $categorySlug := index .Params.categories 0 }}
+              
+              {{/* Find the nearest city with an actual page */}}
+              {{ $nearestCity := "" }}
+              {{ $nearestCityPath := "" }}
+              {{ $nearestDistance := 1000.0 }}
+              {{ $exactMatch := false }}
+              
+              {{/* First check if there's an exact match for the farm's city */}}
+              {{ $exactCitySlug := $actualCity | lower | replaceRE "[^a-zA-Z0-9]+" "-" }}
+              {{ $exactCityPath := printf "/%s/%s/%s/" $categorySlug $province $exactCitySlug }}
+              {{ $exactCityPage := site.GetPage $exactCityPath }}
+              
+              {{ if $exactCityPage }}
+                {{/* Exact city match found */}}
+                {{ $nearestCity = $actualCity }}
+                {{ $nearestCityPath = $exactCityPath }}
+                {{ $exactMatch = true }}
+              {{ else }}
+                {{/* No exact match, find nearest city with a page */}}
+                {{ $categoryProvincePath := printf "/%s/%s/" $categorySlug $province }}
+                {{ $categoryProvincePage := site.GetPage $categoryProvincePath }}
+                
+                {{ if $categoryProvincePage }}
+                  {{ range $categoryProvincePage.Pages }}
+                    {{ if and .Params.coordinates .Params.location_type }}
+                      {{/* This is a city page with coordinates */}}
+                      {{ $cityLat := .Params.coordinates.latitude }}
+                      {{ $cityLng := .Params.coordinates.longitude }}
+                      
+                      {{/* Calculate distance using Haversine formula */}}
+                      {{ $lat1Rad := math.Mul $farmLat 0.017453292519943295 }}
+                      {{ $lat2Rad := math.Mul $cityLat 0.017453292519943295 }}
+                      {{ $deltaLatRad := math.Mul (math.Sub $cityLat $farmLat) 0.017453292519943295 }}
+                      {{ $deltaLngRad := math.Mul (math.Sub $cityLng $farmLng) 0.017453292519943295 }}
+                      
+                      {{ $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+                      {{ $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+                      {{ $distance := math.Mul 6371 $c }}
+                      
+                      {{ if lt $distance $nearestDistance }}
+                        {{ $nearestDistance = $distance }}
+                        {{ $nearestCity = .Title }}
+                        {{ $nearestCityPath = .RelPermalink }}
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
               {{ end }}
-              {{ if and .Params.address .Params.address.city }}
-                Farm in 
-                {{ $province := .Params.address.province | lower | replaceRE " +" "-" }}
-                {{ $city := .Params.address.city | lower | replaceRE "[^a-zA-Z0-9]+" "-" }}
-                {{ $categorySlug := index .Params.categories 0 }}
-                {{ $cityPath := printf "/%s/%s/%s/" $categorySlug $province $city }}
+              
+              {{/* Display the result */}}
+              {{ if $nearestCityPath }}
+                {{ if $exactMatch }}
+                  in 
+                  <a href="{{ $nearestCityPath }}" class="text-blue-600 hover:text-blue-800 font-light">{{ $nearestCity }}</a>
+                {{ else if lt $nearestDistance 80 }}
+                  near 
+                  <a href="{{ $nearestCityPath }}" class="text-blue-600 hover:text-blue-800 font-light">{{ $nearestCity }}</a>
+                  {{ if lt $nearestDistance 20 }}
+                    <span class="text-sm text-gray-500">({{ printf "%.0f" $nearestDistance }}km)</span>
+                  {{ end }}
+                {{ else }}
+                  in {{ $actualCity }}
+                {{ end }}
+              {{ else }}
+                {{/* No city pages found, just show the actual city */}}
+                in {{ $actualCity }}
+              {{ end }}
+            {{ else if and .Params.address .Params.address.city }}
+              {{/* Farm has no coordinates, fall back to original behavior */}}
+              Farm in 
+              {{ $province := .Params.address.province | lower | replaceRE " +" "-" }}
+              {{ $city := .Params.address.city | lower | replaceRE "[^a-zA-Z0-9]+" "-" }}
+              {{ $categorySlug := index .Params.categories 0 }}
+              {{ $cityPath := printf "/%s/%s/%s/" $categorySlug $province $city }}
+              {{ $cityPage := site.GetPage $cityPath }}
+              {{ if $cityPage }}
                 <a href="{{ $cityPath }}" class="text-blue-600 hover:text-blue-800 font-light">{{ .Params.address.city }}</a>
+              {{ else }}
+                {{ .Params.address.city }}
               {{ end }}
-              <!-- Established -->
-              {{ if .Params.established }}
-                {{ if and .Params.address .Params.address.city }} • {{ end }}Established in {{ .Params.established }}
-              {{ end }}
-            </div>
+            {{ end }}
+            
+            <!-- Established -->
+            {{ if .Params.established }}
+              {{ if and .Params.address .Params.address.city }} • {{ end }}Established in {{ .Params.established }}
+            {{ end }}
+          </div>
           {{ end }}
+        </header>
           <section class="border-t border-gray-200 py-4">
             <!-- Google Maps Embed -->
             {{ if .Params.place_id }}
@@ -174,7 +257,7 @@
         </section>
       {{ end }}
           
-        </header>
+        
 
         
 

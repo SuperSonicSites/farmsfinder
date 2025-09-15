@@ -479,7 +479,7 @@
         },
         {
           "name": "Lévis",
-          "slug": "lvis",
+          "slug": "levis",
           "population": 149683,
           "coordinates": {
             "latitude": 46.7582576,
@@ -497,7 +497,7 @@
         },
         {
           "name": "Trois-Rivières",
-          "slug": "trois-rivires",
+          "slug": "trois-rivieres",
           "population": 139163,
           "coordinates": {
             "latitude": 46.34298200000001,
@@ -542,7 +542,7 @@
         },
         {
           "name": "Saint-Jérôme",
-          "slug": "saint-jrme",
+          "slug": "saint-jerome",
           "population": 80213,
           "coordinates": {
             "latitude": 45.775357,

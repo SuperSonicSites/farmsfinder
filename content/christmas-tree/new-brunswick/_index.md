@@ -1,3 +1,3 @@
 ---
-title: "New Brunswick"
+title: New Brunswick
 ---

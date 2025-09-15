@@ -1,3 +1,3 @@
 ---
-title: "Petting Zoo"
+title: Petting Zoo
 ---

@@ -19,15 +19,10 @@ Renders a Google Map with farm pins for a specific region
 {{- $cityLat := 0.0 }}
 {{- $cityLng := 0.0 }}
 {{- if $city }}
-  {{- range site.Pages }}
-    {{- if and (eq .Section "farms") .Params.coordinates .Params.address }}
-      {{- $farmCity := lower .Params.address.city }}
-      {{- if eq $farmCity $city | or (eq (replace $farmCity " " "-") $city) }}
-        {{- $cityLat = .Params.coordinates.latitude }}
-        {{- $cityLng = .Params.coordinates.longitude }}
-        {{- break }}
-      {{- end }}
-    {{- end }}
+  {{- /* Use the current page's coordinates if it's a city page */ -}}
+  {{- if $page.Params.coordinates }}
+    {{- $cityLat = $page.Params.coordinates.latitude }}
+    {{- $cityLng = $page.Params.coordinates.longitude }}
   {{- end }}
 {{- end }}
 
@@ -48,18 +43,24 @@ Renders a Google Map with farm pins for a specific region
       
       {{- $matchesCity := true }}
       {{- if $city }}
-        {{- /* Calculate approximate distance using Haversine formula */ -}}
-        {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
-        {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
-        {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
-        {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
-        
-        {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
-        {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
-        {{- $distance := math.Mul 6371 $c }}
-        
-        {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
-        {{- $matchesCity = le $distance 80 }}
+        {{- /* Only filter by distance if we have valid city coordinates */ -}}
+        {{- if and (ne $cityLat 0.0) (ne $cityLng 0.0) }}
+          {{- /* Calculate approximate distance using Haversine formula */ -}}
+          {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
+          {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
+          {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
+          {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+          
+          {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+          {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+          {{- $distance := math.Mul 6371 $c }}
+          
+          {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
+          {{- $matchesCity = le $distance 80 }}
+        {{- else }}
+          {{- /* Fallback to no city filtering if coordinates are missing */ -}}
+          {{- $matchesCity = true }}
+        {{- end }}
       {{- end }}
       
       {{- if and $matchesCategory $matchesRegion $matchesCity }}

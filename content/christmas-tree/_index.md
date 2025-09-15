@@ -1,3 +1,3 @@
 ---
-title: "Christmas Tree"
+title: Christmas Tree
 ---

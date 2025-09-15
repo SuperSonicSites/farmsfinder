@@ -63,7 +63,7 @@
    "@type": "ItemList",
    "@id": "http:\/\/localhost:1313\/christmas-tree\/ontario\/#list",
    "itemListOrder": "https://schema.org/ItemListUnordered",
-   "numberOfItems":  12 
+   "numberOfItems":  16 
  }
 }
 </script>
@@ -222,6 +222,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
       
+      
+      
+      
       <header class="text-left space-y-8">
         
         
@@ -244,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
               
             
             
+            
           
         
         
@@ -254,9 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </header>
       
       
-      
-      
-      
+        
         
         
         
@@ -323,9 +325,28 @@ document.addEventListener('DOMContentLoaded', function() {
           
         
           
+            
+          
+        
+          
+            
+          
         
           
         
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
         
         
         
@@ -430,6 +451,38 @@ function initRegionalMap() {
       phone: "\"+1 613-256-3029\""
     },
     {
+      name: "\"Chickadee Christmas Trees\"",
+      lat:  43.4434374 ,
+      lng:  -80.2596268 ,
+      url: "\"/farms/chickadee-christmas-trees/\"",
+      address: "\"Cambridge, Ontario\"",
+      phone: "\"+1 519-654-2029\""
+    },
+    {
+      name: "\"Copeman Tree Farms\"",
+      lat:  45.7381112 ,
+      lng:  -79.474441 ,
+      url: "\"/farms/copeman-tree-farms/\"",
+      address: "\"Sundridge, Ontario\"",
+      phone: "\"+1 705-492-4950\""
+    },
+    {
+      name: "\"Country Christmas Trees\"",
+      lat:  42.9792993 ,
+      lng:  -81.0138272 ,
+      url: "\"/farms/country-christmas-trees/\"",
+      address: "\"Dorchester, Ontario\"",
+      phone: "\"+1 519-268-0865\""
+    },
+    {
+      name: "\"Crone's Tree Farm\"",
+      lat:  44.1166623 ,
+      lng:  -79.2997281 ,
+      url: "\"/farms/crones-tree-farm/\"",
+      address: "\"Mount Albert, Ontario\"",
+      phone: "\"\""
+    },
+    {
       name: "\"Dawson Christmas Tree Farm\"",
       lat:  44.123942 ,
       lng:  -78.5018576 ,
@@ -513,454 +566,848 @@ if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
       
       
       
-  
-  
+      <section aria-labelledby="locations-heading" class="space-y-12">
+        <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
 
-  <section aria-labelledby="locations-heading" class="space-y-12">
-    <h2 id="locations-heading" class="text-3xl font-light text-gray-800 tracking-wide">Filter by Location</h2>
+        <nav aria-label="Location filters" class="flex justify-center">
+          <ul itemscope itemtype="https://schema.org/ItemList"
+              style="padding-left: 0;"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
+            <meta itemprop="name" content="Locations listed on this page" />
+            <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+            <meta itemprop="numberOfItems" content="40" />
 
-    <nav aria-label="Location filters" class="flex justify-center">
-      <ul itemscope itemtype="https://schema.org/ItemList"
-          style="padding-left: 0;"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl w-full">
-        <meta itemprop="name" content="Locations listed on this page" />
-        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="11" />
-
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/casselman/">
-              <a itemprop="url" href="/christmas-tree/ontario/casselman/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Casselman
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/ajax/">
+                  <a itemprop="url" href="/christmas-tree/ontario/ajax/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Ajax
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="1" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/cobourg/">
-              <a itemprop="url" href="/christmas-tree/ontario/cobourg/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Cobourg
+                <meta itemprop="position" content="1" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/aurora/">
+                  <a itemprop="url" href="/christmas-tree/ontario/aurora/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Aurora
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="2" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/essex/">
-              <a itemprop="url" href="/christmas-tree/ontario/essex/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Essex
+                <meta itemprop="position" content="2" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/barrie/">
+                  <a itemprop="url" href="/christmas-tree/ontario/barrie/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Barrie
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="3" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/greater-napanee/">
-              <a itemprop="url" href="/christmas-tree/ontario/greater-napanee/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Greater Napanee
+                <meta itemprop="position" content="3" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/belleville/">
+                  <a itemprop="url" href="/christmas-tree/ontario/belleville/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Belleville
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="4" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/jasper/">
-              <a itemprop="url" href="/christmas-tree/ontario/jasper/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Jasper
+                <meta itemprop="position" content="4" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/brampton/">
+                  <a itemprop="url" href="/christmas-tree/ontario/brampton/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Brampton
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="5" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/millbrook/">
-              <a itemprop="url" href="/christmas-tree/ontario/millbrook/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Millbrook
+                <meta itemprop="position" content="5" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/brantford/">
+                  <a itemprop="url" href="/christmas-tree/ontario/brantford/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Brantford
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="6" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/navan/">
-              <a itemprop="url" href="/christmas-tree/ontario/navan/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Navan
+                <meta itemprop="position" content="6" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/burlington/">
+                  <a itemprop="url" href="/christmas-tree/ontario/burlington/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Burlington
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="7" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/niagara-on-the-lake/">
-              <a itemprop="url" href="/christmas-tree/ontario/niagara-on-the-lake/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Niagara On The Lake
+                <meta itemprop="position" content="7" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/caledon/">
+                  <a itemprop="url" href="/christmas-tree/ontario/caledon/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Caledon
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="8" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/pakenham/">
-              <a itemprop="url" href="/christmas-tree/ontario/pakenham/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Pakenham
+                <meta itemprop="position" content="8" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/cambridge/">
+                  <a itemprop="url" href="/christmas-tree/ontario/cambridge/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Cambridge
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="9" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/simcoe/">
-              <a itemprop="url" href="/christmas-tree/ontario/simcoe/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  Simcoe
+                <meta itemprop="position" content="9" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/chatham-kent/">
+                  <a itemprop="url" href="/christmas-tree/ontario/chatham-kent/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Chatham-Kent
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="10" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/st-thomas/">
-              <a itemprop="url" href="/christmas-tree/ontario/st-thomas/">
-                <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
-                  St Thomas
+                <meta itemprop="position" content="10" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/clarington/">
+                  <a itemprop="url" href="/christmas-tree/ontario/clarington/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Clarington
+                    </span>
+                  </a>
                 </span>
-              </a>
-            </span>
-            <meta itemprop="position" content="11" />
-          </li>
-        
-      </ul>
-    </nav>
-  </section>
-
-
+                <meta itemprop="position" content="11" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/guelph/">
+                  <a itemprop="url" href="/christmas-tree/ontario/guelph/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Guelph
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="12" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/halton-hills/">
+                  <a itemprop="url" href="/christmas-tree/ontario/halton-hills/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Halton Hills
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="13" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/hamilton/">
+                  <a itemprop="url" href="/christmas-tree/ontario/hamilton/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Hamilton
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="14" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/kawartha-lakes/">
+                  <a itemprop="url" href="/christmas-tree/ontario/kawartha-lakes/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Kawartha Lakes
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="15" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/kingston/">
+                  <a itemprop="url" href="/christmas-tree/ontario/kingston/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Kingston
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="16" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/kitchener/">
+                  <a itemprop="url" href="/christmas-tree/ontario/kitchener/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Kitchener
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="17" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/leamington/">
+                  <a itemprop="url" href="/christmas-tree/ontario/leamington/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Leamington
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="18" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/london/">
+                  <a itemprop="url" href="/christmas-tree/ontario/london/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      London
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="19" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/markham/">
+                  <a itemprop="url" href="/christmas-tree/ontario/markham/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Markham
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="20" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/milton/">
+                  <a itemprop="url" href="/christmas-tree/ontario/milton/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Milton
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="21" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/mississauga/">
+                  <a itemprop="url" href="/christmas-tree/ontario/mississauga/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Mississauga
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="22" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/newmarket/">
+                  <a itemprop="url" href="/christmas-tree/ontario/newmarket/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Newmarket
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="23" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/niagara-falls/">
+                  <a itemprop="url" href="/christmas-tree/ontario/niagara-falls/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Niagara Falls
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="24" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/niagara-on-the-lake/">
+                  <a itemprop="url" href="/christmas-tree/ontario/niagara-on-the-lake/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Niagara-on-the-Lake
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="25" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/norfolk-county/">
+                  <a itemprop="url" href="/christmas-tree/ontario/norfolk-county/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Norfolk County
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="26" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/north-bay/">
+                  <a itemprop="url" href="/christmas-tree/ontario/north-bay/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      North Bay
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="27" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/oakville/">
+                  <a itemprop="url" href="/christmas-tree/ontario/oakville/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Oakville
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="28" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/oshawa/">
+                  <a itemprop="url" href="/christmas-tree/ontario/oshawa/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Oshawa
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="29" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/ottawa/">
+                  <a itemprop="url" href="/christmas-tree/ontario/ottawa/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Ottawa
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="30" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/peterborough/">
+                  <a itemprop="url" href="/christmas-tree/ontario/peterborough/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Peterborough
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="31" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/pickering/">
+                  <a itemprop="url" href="/christmas-tree/ontario/pickering/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Pickering
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="32" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/richmond-hill/">
+                  <a itemprop="url" href="/christmas-tree/ontario/richmond-hill/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Richmond Hill
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="33" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/st-catharines/">
+                  <a itemprop="url" href="/christmas-tree/ontario/st-catharines/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      St. Catharines
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="34" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/toronto/">
+                  <a itemprop="url" href="/christmas-tree/ontario/toronto/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Toronto
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="35" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/vaughan/">
+                  <a itemprop="url" href="/christmas-tree/ontario/vaughan/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Vaughan
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="36" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/waterloo/">
+                  <a itemprop="url" href="/christmas-tree/ontario/waterloo/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Waterloo
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="37" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/welland/">
+                  <a itemprop="url" href="/christmas-tree/ontario/welland/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Welland
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="38" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/whitby/">
+                  <a itemprop="url" href="/christmas-tree/ontario/whitby/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Whitby
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="39" />
+              </li>
+            
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item" itemscope itemtype="https://schema.org/Place" itemid="http://localhost:1313/christmas-tree/ontario/windsor/">
+                  <a itemprop="url" href="/christmas-tree/ontario/windsor/">
+                    <span itemprop="name" class="text-center font-light group-hover:text-gray-900 tracking-wide hover:underline">
+                      Windsor
+                    </span>
+                  </a>
+                </span>
+                <meta itemprop="position" content="40" />
+              </li>
+            
+          </ul>
+        </nav>
+      </section>
       
-<section aria-labelledby="farms-heading" class="space-y-12">
-  <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
-
-  
-    <div class="flex">
-      <ul itemscope itemtype="https://schema.org/ItemList"
-          style="padding-left: 0;"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
-        <meta itemprop="name" content="Farms listed on this page" />
-        <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
-        <meta itemprop="numberOfItems" content="12" />
+      
+      <section aria-labelledby="farms-heading" class="space-y-12">
+        <h2 id="farms-heading" class="text-3xl font-light text-gray-800 tracking-wide">Farms</h2>
 
         
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/bachner-family-christmas-tree-farm/#business">
+          <div class="flex">
+            <ul itemscope itemtype="https://schema.org/ItemList"
+                style="padding-left: 0;"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+              <meta itemprop="name" content="Farms listed on this page" />
+              <meta itemprop="itemListOrder" content="https://schema.org/ItemListUnordered" />
+              <meta itemprop="numberOfItems" content="16" />
 
-              <a itemprop="url"
-                 href="/farms/bachner-family-christmas-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Bachner Family Christmas Tree Farm</span>
-              </a>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/bachner-family-christmas-tree-farm/#business">
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">St Thomas</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <a itemprop="url"
+                       href="/farms/bachner-family-christmas-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Bachner Family Christmas Tree Farm</span>
+                    </a>
+
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">St Thomas</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="1" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/barretts-christmas-tree-farm/#business">
+                  <meta itemprop="position" content="1" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/barretts-christmas-tree-farm/#business">
 
-              <a itemprop="url"
-                 href="/farms/barretts-christmas-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Barrett&#39;s Christmas Tree Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/barretts-christmas-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Barrett&#39;s Christmas Tree Farm</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Cobourg</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Cobourg</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="2" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/bastien-christmas-tree-farm/#business">
+                  <meta itemprop="position" content="2" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/bastien-christmas-tree-farm/#business">
 
-              <a itemprop="url"
-                 href="/farms/bastien-christmas-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Bastien Christmas Tree Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/bastien-christmas-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Bastien Christmas Tree Farm</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Essex</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Essex</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="3" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/bellyacres-tree-farm/#business">
+                  <meta itemprop="position" content="3" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/bellyacres-tree-farm/#business">
 
-              <a itemprop="url"
-                 href="/farms/bellyacres-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">BellyAcres Tree Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/bellyacres-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">BellyAcres Tree Farm</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Niagara-on-the-Lake</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Niagara-on-the-Lake</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="4" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/blitzen-estate/#business">
+                  <meta itemprop="position" content="4" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/blitzen-estate/#business">
 
-              <a itemprop="url"
-                 href="/farms/blitzen-estate/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Blitzen Estate</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/blitzen-estate/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Blitzen Estate</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Jasper</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Jasper</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="5" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/blue-harvest-farm/#business">
+                  <meta itemprop="position" content="5" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/blue-harvest-farm/#business">
 
-              <a itemprop="url"
-                 href="/farms/blue-harvest-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Blue Harvest Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/blue-harvest-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Blue Harvest Farm</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Simcoe</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Simcoe</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="6" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/bois-brabant/#business">
+                  <meta itemprop="position" content="6" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/bois-brabant/#business">
 
-              <a itemprop="url"
-                 href="/farms/bois-brabant/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Boisé Brabant</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/bois-brabant/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Boisé Brabant</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Casselman</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Casselman</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="7" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/briggs-trees/#business">
+                  <meta itemprop="position" content="7" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/briggs-trees/#business">
 
-              <a itemprop="url"
-                 href="/farms/briggs-trees/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Briggs Trees</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/briggs-trees/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Briggs Trees</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Navan</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Navan</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="8" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/caroles-christmas-tree-farm/#business">
+                  <meta itemprop="position" content="8" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/caroles-christmas-tree-farm/#business">
 
-              <a itemprop="url"
-                 href="/farms/caroles-christmas-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Carole&#39;s Christmas Tree Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/caroles-christmas-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Carole&#39;s Christmas Tree Farm</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Greater Napanee</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Greater Napanee</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="9" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/catfish-creek-christmas-tree-farm/#business">
+                  <meta itemprop="position" content="9" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/catfish-creek-christmas-tree-farm/#business">
 
-              <a itemprop="url"
-                 href="/farms/catfish-creek-christmas-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Catfish Creek Christmas Tree Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/catfish-creek-christmas-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Catfish Creek Christmas Tree Farm</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">St Thomas</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">St Thomas</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="10" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/cedar-hill-christmas-tree-farm/#business">
+                  <meta itemprop="position" content="10" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/cedar-hill-christmas-tree-farm/#business">
 
-              <a itemprop="url"
-                 href="/farms/cedar-hill-christmas-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Cedar Hill Christmas Tree Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/cedar-hill-christmas-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Cedar Hill Christmas Tree Farm</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Pakenham</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Pakenham</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="11" />
-          </li>
-        
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item"
-                  itemscope itemtype="https://schema.org/LocalBusiness"
-                  itemid="http://localhost:1313/farms/dawson-christmas-tree-farm/#business">
+                  <meta itemprop="position" content="11" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/chickadee-christmas-trees/#business">
 
-              <a itemprop="url"
-                 href="/farms/dawson-christmas-tree-farm/"
-                 class="hover:text-gray-700 transition-colors">
-                <span itemprop="name">Dawson Christmas Tree Farm</span>
-              </a>
+                    <a itemprop="url"
+                       href="/farms/chickadee-christmas-trees/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Chickadee Christmas Trees</span>
+                    </a>
 
-              <p class="text-gray-600 font-light">
-                
-                  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Millbrook</span>, <span itemprop="addressRegion">Ontario</span>
-                    
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Cambridge</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
                   </span>
-                
-              </p>
-            </span>
 
-            <meta itemprop="position" content="12" />
-          </li>
+                  <meta itemprop="position" content="12" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/copeman-tree-farms/#business">
+
+                    <a itemprop="url"
+                       href="/farms/copeman-tree-farms/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Copeman Tree Farms</span>
+                    </a>
+
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Sundridge</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
+                  </span>
+
+                  <meta itemprop="position" content="13" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/country-christmas-trees/#business">
+
+                    <a itemprop="url"
+                       href="/farms/country-christmas-trees/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Country Christmas Trees</span>
+                    </a>
+
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Dorchester</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
+                  </span>
+
+                  <meta itemprop="position" content="14" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/crones-tree-farm/#business">
+
+                    <a itemprop="url"
+                       href="/farms/crones-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Crone&#39;s Tree Farm</span>
+                    </a>
+
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Mount Albert</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
+                  </span>
+
+                  <meta itemprop="position" content="15" />
+                </li>
+              
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                  <span itemprop="item"
+                        itemscope itemtype="https://schema.org/LocalBusiness"
+                        itemid="http://localhost:1313/farms/dawson-christmas-tree-farm/#business">
+
+                    <a itemprop="url"
+                       href="/farms/dawson-christmas-tree-farm/"
+                       class="hover:text-gray-700 transition-colors">
+                      <span itemprop="name">Dawson Christmas Tree Farm</span>
+                    </a>
+
+                    <p class="text-gray-600 font-light">
+                      
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="addressLocality">Millbrook</span>, <span itemprop="addressRegion">Ontario</span>
+                        </span>
+                      
+                    </p>
+                  </span>
+
+                  <meta itemprop="position" content="16" />
+                </li>
+              
+            </ul>
+          </div>
         
-      </ul>
-    </div>
-  
-</section>
-
+      </section>
 
       
       
