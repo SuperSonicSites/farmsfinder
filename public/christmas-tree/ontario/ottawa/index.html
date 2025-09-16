@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<title>Find a Christmas Tree farm near Ottawa, Ontario - Farms Finder</title>
+<title>Find a Christmas Tree Farm near Ottawa, Ontario</title>
 <meta name="description" content="Discover our curated list of direct to consumer Christmas Tree Farms near Ottawa, Ontario">
 
 
@@ -13,7 +13,7 @@
 <link rel="canonical" href="http://localhost:1313/christmas-tree/ontario/ottawa/">
 
 
-<meta property="og:title" content="Find a Christmas Tree farm near Ottawa, Ontario - Farms Finder">
+<meta property="og:title" content="Find a Christmas Tree Farm near Ottawa, Ontario">
 <meta property="og:description" content="Discover our curated list of direct to consumer Christmas Tree Farms near Ottawa, Ontario">
 <meta property="og:type" content="website">
 <meta property="og:url" content="http://localhost:1313/christmas-tree/ontario/ottawa/">
@@ -21,7 +21,7 @@
 
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Find a Christmas Tree farm near Ottawa, Ontario - Farms Finder">
+<meta name="twitter:title" content="Find a Christmas Tree Farm near Ottawa, Ontario">
 <meta name="twitter:description" content="Discover our curated list of direct to consumer Christmas Tree Farms near Ottawa, Ontario">
 
 
@@ -785,147 +785,141 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
         
-<div class="mb-8">
-  <h2 class="text-2xl font-light text-gray-800 mb-4">
-  </h2>
-  <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
-</div>
-
-  
-  <div class="sr-only" aria-hidden="true"
-       itemscope itemtype="https://schema.org/Place">
-    <meta itemprop="name" content="Ottawa, Ontario" />
-    <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCircle">
-      <div itemprop="geoMidpoint" itemscope itemtype="https://schema.org/GeoCoordinates">
-        <meta itemprop="latitude" content="45.4200572">
-        <meta itemprop="longitude" content="-75.7003397">
-      </div>
-      <meta itemprop="geoRadius" content="80000">
-    </div>
+  <div class="mb-8">
+    <h2 class="text-2xl font-light text-gray-800 mb-4">
+    </h2>
+    <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
   </div>
-
-
-
-<script>
-function initRegionalMap() {
   
-  const farms = [
-    {
-      name: "\"Blitzen Estate\"",
-      lat:  44.8301506 ,
-      lng:  -75.9749634 ,
-      url: "\"/farms/blitzen-estate/\"",
-      address: "\"Jasper, Ontario\"",
-      phone: "\"+1 613-880-4110\""
-    },
-    {
-      name: "\"Boisé Brabant\"",
-      lat:  45.3636898 ,
-      lng:  -75.1224471 ,
-      url: "\"/farms/bois-brabant/\"",
-      address: "\"Casselman, Ontario\"",
-      phone: "\"+1 613-913-6576\""
-    },
-    {
-      name: "\"Briggs Trees\"",
-      lat:  45.4100519 ,
-      lng:  -75.3803301 ,
-      url: "\"/farms/briggs-trees/\"",
-      address: "\"Navan, Ontario\"",
-      phone: "\"+1 613-835-2955\""
-    },
-    {
-      name: "\"Cedar Hill Christmas Tree Farm\"",
-      lat:  45.2881149 ,
-      lng:  -76.3170522 ,
-      url: "\"/farms/cedar-hill-christmas-tree-farm/\"",
-      address: "\"Pakenham, Ontario\"",
-      phone: "\"+1 613-256-3029\""
-    },
-  ];
-
-  if (farms.length === 0) return;
-  
-  const centerLat =  45.4200572 ;
-  const centerLng =  -75.7003397 ;
-  const initialZoom = 8;
-
-  
-  const map = new google.maps.Map(document.getElementById('regional-map'), {
-    zoom: initialZoom,
-    center: { lat: centerLat, lng: centerLng },
-    mapTypeId: 'roadmap'
-  });
-  
-  const radiusCircle = new google.maps.Circle({
-    strokeColor: '#3B82F6',
-    strokeOpacity: 0.4,
-    strokeWeight: 2,
-    fillColor: '#3B82F6',
-    fillOpacity: 0.1,
-    map: map,
-    center: { lat: centerLat, lng: centerLng },
-    radius: 80000 
-  });
-
-  
-  farms.forEach(farm => {
-    const marker = new google.maps.Marker({
-      position: { lat: farm.lat, lng: farm.lng },
-      map: map,
-      title: farm.name
-    });
-
     
-    const infoContent = `
-      <div class="p-2">
-        <h3 class="font-medium text-lg mb-1">
-          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 farm-link" data-url="${farm.url}">${farm.name}</a>
-        </h3>
-        <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
-        ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
-        <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm farm-link" data-url="${farm.url}">View Details →</a>
+    <div class="sr-only" aria-hidden="true"
+         itemscope itemtype="https://schema.org/Place">
+      <meta itemprop="name" content="Ottawa, Ontario" />
+      <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCircle">
+        <div itemprop="geoMidpoint" itemscope itemtype="https://schema.org/GeoCoordinates">
+          <meta itemprop="latitude" content="45.4200572">
+          <meta itemprop="longitude" content="-75.7003397">
+        </div>
+        <meta itemprop="geoRadius" content="80000">
       </div>
-    `;
-
-    const infoWindow = new google.maps.InfoWindow({
-      content: infoContent
-    });
-
+    </div>
+  
+  
+  
+  <script>
+  function initRegionalMap() {
     
-    marker.addListener('click', () => {
-      infoWindow.open(map, marker);
-      
-      
-      setTimeout(() => {
-        const links = document.querySelectorAll('.farm-link');
-        links.forEach(link => {
-          link.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const url = e.target.getAttribute('data-url');
-            if (url) {
-              window.location.href = url;
-            }
-          });
-        });
-      }, 100);
+    const farms = [
+      {
+        name: "\"Blitzen Estate\"",
+        lat:  44.8301506 ,
+        lng:  -75.9749634 ,
+        url: "\"/farms/blitzen-estate/\"",
+        address: "\"Jasper, Ontario\"",
+        phone: "\"+1 613-880-4110\""
+      },
+      {
+        name: "\"Boisé Brabant\"",
+        lat:  45.3636898 ,
+        lng:  -75.1224471 ,
+        url: "\"/farms/bois-brabant/\"",
+        address: "\"Casselman, Ontario\"",
+        phone: "\"+1 613-913-6576\""
+      },
+      {
+        name: "\"Briggs Trees\"",
+        lat:  45.4100519 ,
+        lng:  -75.3803301 ,
+        url: "\"/farms/briggs-trees/\"",
+        address: "\"Navan, Ontario\"",
+        phone: "\"+1 613-835-2955\""
+      },
+      {
+        name: "\"Cedar Hill Christmas Tree Farm\"",
+        lat:  45.2881149 ,
+        lng:  -76.3170522 ,
+        url: "\"/farms/cedar-hill-christmas-tree-farm/\"",
+        address: "\"Pakenham, Ontario\"",
+        phone: "\"+1 613-256-3029\""
+      },
+    ];
+  
+    
+    farms.forEach(f => {
+      const unwrap = v => (typeof v === 'string' && v.startsWith('"') && v.endsWith('"')) ? JSON.parse(v) : v;
+      f.name = unwrap(f.name);
+      f.url = unwrap(f.url);
+      f.address = unwrap(f.address);
+      f.phone = unwrap(f.phone);
     });
-  });
-}
-
-
-if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE&callback=initRegionalMap`;
-  script.async = true;
-  script.defer = true;
-  document.head.appendChild(script);
-} else {
-  initRegionalMap();
-}
-</script>
-
+    
+  
+    if (farms.length === 0) return;
+    
+    const centerLat =  45.4200572 ;
+    const centerLng =  -75.7003397 ;
+    const initialZoom = 8;
+  
+    
+    const map = new google.maps.Map(document.getElementById('regional-map'), {
+      zoom: initialZoom,
+      center: { lat: centerLat, lng: centerLng },
+      mapTypeId: 'roadmap'
+    });
+    
+    const radiusCircle = new google.maps.Circle({
+      strokeColor: '#3B82F6',
+      strokeOpacity: 0.4,
+      strokeWeight: 2,
+      fillColor: '#3B82F6',
+      fillOpacity: 0.1,
+      map: map,
+      center: { lat: centerLat, lng: centerLng },
+      radius: 80000 
+    });
+  
+    
+    farms.forEach(farm => {
+      const marker = new google.maps.Marker({
+        position: { lat: farm.lat, lng: farm.lng },
+        map: map,
+        title: farm.name
+      });
+  
+      
+      const infoContent = `
+        <div class="p-2">
+          <h3 class="font-medium text-lg mb-1">
+            <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
+          </h3>
+          <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
+          ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
+          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
+        </div>
+      `;
+  
+      const infoWindow = new google.maps.InfoWindow({
+        content: infoContent
+      });
+  
+      marker.addListener('click', () => {
+        infoWindow.open(map, marker);
+      });
+    });
+  }
+  
+  
+  if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE&callback=initRegionalMap`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    initRegionalMap();
+  }
+  </script>
+  
         
       
       

@@ -1,0 +1,81 @@
+{{ define "title" }}Page Not Found - {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+  <div class="max-w-3xl mx-auto py-16">
+    <div class="text-center space-y-12">
+      <!-- 404 Hero -->
+      <div class="space-y-6">
+        <div class="text-8xl font-light text-green-600">404</div>
+        <h1 class="text-4xl md:text-5xl font-light text-gray-900 tracking-tight">Farm Not Found</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Looks like this page has moved to greener pastures! The page you're looking for doesn't exist.
+        </p>
+      </div>
+
+      <!-- Search Suggestions -->
+      <div class="bg-green-50 border border-green-100 rounded-xl p-8 space-y-6">
+        <h2 class="text-2xl font-light text-gray-800">Let's help you find what you're looking for:</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Browse Categories -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-medium text-gray-700">Browse by Category</h3>
+            {{ $categories := slice }}
+            {{ range where site.RegularPages "Section" "farms" }}
+              {{ range .Params.categories }}
+                {{ if not (in $categories .) }}
+                  {{ $categories = $categories | append . }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+            <ul class="space-y-2">
+              {{ range first 4 $categories }}
+                {{ $categoryPath := printf "/%s/" (. | urlize) }}
+                {{ $categoryPage := site.GetPage $categoryPath }}
+                <li>
+                  <a href="{{ $categoryPath }}" class="text-green-600 hover:text-green-700 hover:underline">
+                    {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ . | title }}{{ end }}
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+
+          <!-- Popular Locations -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-medium text-gray-700">Popular Locations</h3>
+            <ul class="space-y-2">
+              <li><a href="/ontario/" class="text-green-600 hover:text-green-700 hover:underline">Ontario Farms</a></li>
+              <li><a href="/british-columbia/" class="text-green-600 hover:text-green-700 hover:underline">British Columbia Farms</a></li>
+              <li><a href="/alberta/" class="text-green-600 hover:text-green-700 hover:underline">Alberta Farms</a></li>
+              <li><a href="/quebec/" class="text-green-600 hover:text-green-700 hover:underline">Quebec Farms</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" 
+           class="inline-flex items-center justify-center px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium">
+          🏠 Back to Home
+        </a>
+        <a href="/farms/" 
+           class="inline-flex items-center justify-center px-8 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium">
+          🚜 Browse All Farms
+        </a>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="text-center pt-8 border-t border-gray-200">
+        <p class="text-gray-600">
+          Still can't find what you're looking for? 
+          <a href="mailto:hello@farmsfinder.ca" class="text-green-600 hover:text-green-700 hover:underline">
+            Contact us
+          </a>
+          and we'll help you find the perfect farm.
+        </p>
+      </div>
+    </div>
+  </div>
+{{ end }}
