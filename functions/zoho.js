@@ -342,6 +342,43 @@ export async function onRequest(context) {
       return new Response('Method not allowed', { status: 405 });
     }
 
+    // --- Token Authentication ---
+    const auth = request.headers.get("authorization") || request.headers.get("Authorization");
+    const zohoToken = request.headers.get("X-Zoho-Webhook-Token");
+    
+    let token = null;
+    
+    // Check for token in multiple formats
+    if (auth?.startsWith("Bearer ")) {
+      token = auth.slice("Bearer ".length).trim();
+    } else if (auth) {
+      // Direct token in Authorization header (your format)
+      token = auth.trim();
+    } else if (zohoToken) {
+      // Token in X-Zoho-Webhook-Token header
+      token = zohoToken.trim();
+    }
+    
+    if (!token) {
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'Missing webhook token. Expected in Authorization header or X-Zoho-Webhook-Token header'
+      }), { 
+        status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
+    if (!context.env.ZOHO_WEBHOOK_TOKEN || token !== context.env.ZOHO_WEBHOOK_TOKEN) {
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'Invalid webhook token'
+      }), { 
+        status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     // Parse JSON body
     const body = await request.json();
     console.log('Webhook received:', JSON.stringify(body));
