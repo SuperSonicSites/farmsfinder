@@ -464,7 +464,7 @@ export async function onRequest(context) {
       zohoClientSecret: context.env.ZOHO_CLIENT_SECRET,
       zohoRefreshToken: context.env.ZOHO_REFRESH_TOKEN,
       githubToken: context.env.GITHUB_TOKEN,
-      githubRepo: context.env.GITHUB_REPO
+      githubRepo: context.env.GITHUB_REPO || 'SuperSonicSites/farmsfinder'
     };
 
     console.log('Config initialized with repo:', config.githubRepo);
