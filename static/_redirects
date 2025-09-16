@@ -2,6 +2,12 @@
 /robots.txt /robots.txt 200
 /sitemap.xml /sitemap.xml 200
 
+# Domain-level redirects (must come before path-based redirects)
+https://www.farmsfinder.ca/ https://farmsfinder.ca/ 301!
+https://www.farmsfinder.ca/* https://farmsfinder.ca/:splat 301!
+http://www.farmsfinder.ca/ https://farmsfinder.ca/ 301!
+http://www.farmsfinder.ca/* https://farmsfinder.ca/:splat 301!
+http://farmsfinder.ca/* https://farmsfinder.ca/:splat 301!
 
 # Handle trailing slashes consistently
 /*/index.html /:splat/ 301!
