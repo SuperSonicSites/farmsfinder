@@ -1,0 +1,91 @@
+{{- if .IsHome -}}
+  Connect directly with family-owned farms in your area for the freshest seasonal produce, pick-your-own experiences, and authentic farm-to-table goodness.
+{{- else if eq .Section "farms" -}}
+  {{- $description := printf "Learn more about %s." .Title -}}
+  
+  {{- /* Add categories */ -}}
+  {{- if .Params.categories -}}
+    {{- $categoryNames := slice -}}
+    {{- range .Params.categories -}}
+      {{- $categoryPath := printf "/%s/" (. | urlize) -}}
+      {{- $categoryPage := site.GetPage $categoryPath -}}
+      {{- if $categoryPage -}}
+        {{- $categoryNames = $categoryNames | append $categoryPage.Title -}}
+      {{- else -}}
+        {{- $categoryNames = $categoryNames | append (. | replace "-" " " | title) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $description = printf "%s %s Farm" $description (delimit $categoryNames ", ") -}}
+  {{- end -}}
+  
+  {{- /* Add location */ -}}
+  {{- if or .Params.address.city .Params.address.province -}}
+    {{- $description = printf "%s near" $description -}}
+    {{- if .Params.address.city -}}
+      {{- $description = printf "%s %s" $description .Params.address.city -}}
+    {{- end -}}
+    {{- if and .Params.address.city .Params.address.province -}}
+      {{- $description = printf "%s," $description -}}
+    {{- end -}}
+    {{- if .Params.address.province -}}
+      {{- $description = printf "%s %s" $description .Params.address.province -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* Add established year */ -}}
+  {{- if .Params.established -}}
+    {{- $description = printf "%s • Established in %s." $description .Params.established -}}
+  {{- end -}}
+  
+  {{- /* Add call to action */ -}}
+  {{- $description = printf "%s Opening date, opening hours, amenities and varieties. Learn more here." $description -}}
+  
+  {{- $description -}}
+{{- else -}}
+  {{- /* Handle category/province/city pages */ -}}
+  {{- $currentPath := .RelPermalink -}}
+  {{- $pathParts := split (trim $currentPath "/") "/" -}}
+  
+  {{- if gt (len $pathParts) 0 -}}
+    {{- $category := index $pathParts 0 -}}
+    {{- $categoryPath := printf "/%s/" $category -}}
+    {{- $categoryPage := site.GetPage $categoryPath -}}
+    {{- if $categoryPage -}}
+      {{- $category = $categoryPage.Title -}}
+    {{- else -}}
+      {{- $category = $category | replace "-" " " | title -}}
+    {{- end -}}
+    
+    {{- if eq (len $pathParts) 1 -}}
+      {{- printf "Discover our curated list of direct to consumer %s Farms across Canada" $category -}}
+    {{- else if eq (len $pathParts) 2 -}}
+      {{- $province := index $pathParts 1 -}}
+      {{- $provincePath := printf "/%s/%s/" (index $pathParts 0) $province -}}
+      {{- $provincePage := site.GetPage $provincePath -}}
+      {{- if $provincePage -}}
+        {{- $province = $provincePage.Title -}}
+      {{- else -}}
+        {{- $province = $province | replace "-" " " | title -}}
+      {{- end -}}
+      {{- printf "Discover our curated list of direct to consumer %s Farms in %s" $category $province -}}
+    {{- else if eq (len $pathParts) 3 -}}
+      {{- $provinceSlug := index $pathParts 1 -}}
+      {{- $citySlug := index $pathParts 2 -}}
+      {{- $cityPath := printf "/%s/%s/%s/" (index $pathParts 0) $provinceSlug $citySlug -}}
+      {{- $cityPage := site.GetPage $cityPath -}}
+      {{- if $cityPage -}}
+        {{- $city := $cityPage.Title -}}
+        {{- $province := $cityPage.Parent.Title -}}
+        {{- printf "Discover our curated list of direct to consumer %s Farms near %s, %s" $category $city $province -}}
+      {{- else -}}
+        {{- $province := $provinceSlug | replace "-" " " | title -}}
+        {{- $city := $citySlug | replace "-" " " | title -}}
+        {{- printf "Discover our curated list of direct to consumer %s Farms near %s, %s" $category $city $province -}}
+      {{- end -}}
+    {{- else -}}
+      {{- with .Description -}}{{ . }}{{- else -}}{{ .Site.Params.description }}{{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- with .Description -}}{{ . }}{{- else -}}{{ .Site.Params.description }}{{- end -}}
+  {{- end -}}
+{{- end -}}

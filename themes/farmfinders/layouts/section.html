@@ -1,4 +1,43 @@
-{{ define "title" }}{{ .Title }}{{ if .Parent }} - {{ .Parent.Title }}{{ end }} | {{ .Site.Title }}{{ end }}
+{{ define "title" }}
+  {{- $currentPath := .RelPermalink -}}
+  {{- $pathParts := split (trim $currentPath "/") "/" -}}
+  {{- $title := "" -}}
+  
+  {{- if gt (len $pathParts) 0 -}}
+    {{- $category := index $pathParts 0 -}}
+    {{- $categoryPath := printf "/%s/" $category -}}
+    {{- $categoryPage := site.GetPage $categoryPath -}}
+    {{- if $categoryPage -}}
+      {{- $category = $categoryPage.Title -}}
+    {{- else -}}
+      {{- $category = $category | replace "-" " " | title -}}
+    {{- end -}}
+    
+    {{- if eq (len $pathParts) 1 -}}
+      {{- $title = printf "%s Farms in Canada - %s" $category .Site.Title -}}
+    {{- else if eq (len $pathParts) 2 -}}
+      {{- $province := index $pathParts 1 -}}
+      {{- $provincePath := printf "/%s/%s/" (index $pathParts 0) $province -}}
+      {{- $provincePage := site.GetPage $provincePath -}}
+      {{- if $provincePage -}}
+        {{- $province = $provincePage.Title -}}
+      {{- else -}}
+        {{- $province = $province | replace "-" " " | title -}}
+      {{- end -}}
+      {{- $title = printf "%s Farms in %s - %s" $category $province .Site.Title -}}
+    {{- else if eq (len $pathParts) 3 -}}
+      {{- $province := index $pathParts 1 -}}
+      {{- $city := index $pathParts 2 -}}
+      {{- $province = $province | replace "-" " " | title -}}
+      {{- $city = $city | replace "-" " " | title -}}
+      {{- $title = printf "%s Farms near %s, %s - %s" $category $city $province .Site.Title -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $title = printf "%s | %s" .Title .Site.Title -}}
+  {{- end -}}
+  
+  {{- $title -}}
+{{ end }}
 
 {{ define "main" }}
   <div class="max-w-3xl mx-auto py-8">

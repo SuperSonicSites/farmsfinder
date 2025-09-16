@@ -2,24 +2,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Title and Description -->
-<title>{{ if eq .Section "farms" }}Find Local Farms in Canada | {{ .Site.Title }}{{ else }}{{ partial "page-title.html" . }}{{ end }}</title>
-{{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+<title>{{ if .IsHome }}The Canadian Directory Of Direct-To-Consumer Farms{{ else if eq .Section "farms" }}{{ if .IsPage }}Learn more about {{ .Title }} - {{ .Site.Title }}{{ else }}Find Local Farms in Canada | {{ .Site.Title }}{{ end }}{{ else }}{{ partial "page-title.html" . }}{{ end }}</title>
+<meta name="description" content="{{ partial "farm-description.html" . }}">
 {{ with .Params.keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ .Permalink }}">
 
 <!-- Open Graph -->
-<meta property="og:title" content="{{ if eq .Section "farms" }}Find Local Farms in Canada | {{ .Site.Title }}{{ else }}{{ partial "page-title.html" . }}{{ end }}">
-<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}The Canadian Directory Of Direct-To-Consumer Farms{{ else if eq .Section "farms" }}{{ if .IsPage }}Learn more about {{ .Title }} - {{ .Site.Title }}{{ else }}Find Local Farms in Canada | {{ .Site.Title }}{{ end }}{{ else }}{{ partial "page-title.html" . }}{{ end }}">
+<meta property="og:description" content="{{ partial "farm-description.html" . }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ if eq .Section "farms" }}Find Local Farms in Canada | {{ .Site.Title }}{{ else }}{{ partial "page-title.html" . }}{{ end }}">
-<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="twitter:title" content="{{ if .IsHome }}The Canadian Directory Of Direct-To-Consumer Farms{{ else if eq .Section "farms" }}{{ if .IsPage }}Learn more about {{ .Title }} - {{ .Site.Title }}{{ else }}Find Local Farms in Canada | {{ .Site.Title }}{{ end }}{{ else }}{{ partial "page-title.html" . }}{{ end }}">
+<meta name="twitter:description" content="{{ partial "farm-description.html" . }}">
 
 {{ partial "schema.html" . }}
 

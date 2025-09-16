@@ -765,7 +765,7 @@ h2 {
 
 h3 {
   margin-bottom: 0.5rem;
-  font-size: 1.10rem;
+  font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 300;
 }
@@ -1929,6 +1929,10 @@ a.block,
   flex-wrap: wrap;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
 }
@@ -2527,6 +2531,11 @@ a.block,
   .md\:text-5xl {
     font-size: 3rem;
     line-height: 1;
+  }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 

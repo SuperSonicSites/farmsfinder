@@ -1,1 +1,47 @@
-{{ if eq .Section "farms" }}{{ .Title }} | {{ if .Params.categories }}{{ $firstCategory := index .Params.categories 0 }}{{ $categoryPath := printf "/%s/" ($firstCategory | urlize) }}{{ $categoryPage := site.GetPage $categoryPath }}{{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $firstCategory | replace "-" " " | title }}{{ end }} Farm{{ else }}Farm{{ end }}{{ if or .Params.address.city .Params.address.province }} In {{ end }}{{ if .Params.address.city }}{{ .Params.address.city }}{{ end }}{{ if and .Params.address.city .Params.address.province }}, {{ end }}{{ if .Params.address.province }}{{ .Params.address.province }}{{ end }}{{ else if or (eq .Section "christmas-tree") (eq .Section "tulip") }}{{ $currentPath := .RelPermalink }}{{ $pathParts := split (trim $currentPath "/") "/" }}{{ $category := "" }}{{ if gt (len $pathParts) 0 }}{{ $category = index $pathParts 0 }}{{ $categoryPath := printf "/%s/" $category }}{{ $categoryPage := site.GetPage $categoryPath }}{{ if $categoryPage }}{{ $category = $categoryPage.Title }}{{ else }}{{ $category = $category | replace "-" " " | title }}{{ end }}{{ end }}{{ if eq (len $pathParts) 1 }}Find A {{ $category }} Farm Near You{{ else if eq (len $pathParts) 2 }}{{ $province := index $pathParts 1 }}{{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}{{ $provincePage := site.GetPage $provincePath }}{{ if $provincePage }}{{ $province = $provincePage.Title }}{{ else }}{{ $province = $province | replace "-" " " | title }}{{ end }}Find {{ $category }} Farms In {{ $province }}{{ else if eq (len $pathParts) 3 }}{{ $province := index $pathParts 1 }}{{ $provincePath := printf "/%s/%s/" (index $pathParts 0) $province }}{{ $provincePage := site.GetPage $provincePath }}{{ if $provincePage }}{{ $province = $provincePage.Title }}{{ else }}{{ $province = $province | replace "-" " " | title }}{{ end }}{{ $city := index $pathParts 2 }}{{ $cityPath := printf "/%s/%s/%s/" (index $pathParts 0) (index $pathParts 1) $city }}{{ $cityPage := site.GetPage $cityPath }}{{ if $cityPage }}{{ $city = $cityPage.Title }}{{ else }}{{ $city = $city | replace "-" " " | title }}{{ end }}Find A {{ $category }} Farm In {{ $city }}, {{ $province }}{{ end }}{{ else }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}
+{{- if eq .Section "farms" -}}
+  {{ .Title }} | {{ if .Params.categories }}{{ $firstCategory := index .Params.categories 0 }}{{ $categoryPath := printf "/%s/" ($firstCategory | urlize) }}{{ $categoryPage := site.GetPage $categoryPath }}{{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ $firstCategory | replace "-" " " | title }}{{ end }} Farm{{ else }}Farm{{ end }}{{ if or .Params.address.city .Params.address.province }} In {{ end }}{{ if .Params.address.city }}{{ .Params.address.city }}{{ end }}{{ if and .Params.address.city .Params.address.province }}, {{ end }}{{ if .Params.address.province }}{{ .Params.address.province }}{{ end }}
+{{- else -}}
+  {{- $currentPath := .RelPermalink -}}
+  {{- $pathParts := split (trim $currentPath "/") "/" -}}
+  
+  {{- if gt (len $pathParts) 0 -}}
+    {{- $category := index $pathParts 0 -}}
+    {{- $categoryPath := printf "/%s/" $category -}}
+    {{- $categoryPage := site.GetPage $categoryPath -}}
+    {{- if $categoryPage -}}
+      {{- $category = $categoryPage.Title -}}
+    {{- else -}}
+      {{- $category = $category | replace "-" " " | title -}}
+    {{- end -}}
+    
+    {{- if eq (len $pathParts) 1 -}}
+      All {{ $category }} Farms in Canada - {{ .Site.Title }}
+    {{- else if eq (len $pathParts) 2 -}}
+      {{- $province := index $pathParts 1 -}}
+      {{- $provincePath := printf "/%s/%s/" (index $pathParts 0) $province -}}
+      {{- $provincePage := site.GetPage $provincePath -}}
+      {{- if $provincePage -}}
+        {{- $province = $provincePage.Title -}}
+      {{- else -}}
+        {{- $province = $province | replace "-" " " | title -}}
+      {{- end -}}
+      Find a {{ $category }} farm in {{ $province }} - {{ .Site.Title }}
+    {{- else if eq (len $pathParts) 3 -}}
+      {{- $provinceSlug := index $pathParts 1 -}}
+      {{- $citySlug := index $pathParts 2 -}}
+      {{- $cityPath := printf "/%s/%s/%s/" (index $pathParts 0) $provinceSlug $citySlug -}}
+      {{- $cityPage := site.GetPage $cityPath -}}
+      {{- if $cityPage -}}
+        {{- $city := $cityPage.Title -}}
+        {{- $province := $cityPage.Parent.Title -}}
+        Find a {{ $category }} farm near {{ $city }}, {{ $province }} - {{ .Site.Title }}
+      {{- else -}}
+        {{- $province := $provinceSlug | replace "-" " " | title -}}
+        {{- $city := $citySlug | replace "-" " " | title -}}
+        Find a {{ $category }} farm near {{ $city }}, {{ $province }} - {{ .Site.Title }}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{ .Title }} | {{ .Site.Title }}
+  {{- end -}}
+{{- end -}}
