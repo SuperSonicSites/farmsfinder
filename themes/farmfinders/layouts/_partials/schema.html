@@ -278,12 +278,21 @@
      {{- end }}
 
      {{ with .Params.varieties }}
-     "makesOffer": [
-       {{- range $i, $variety := . -}}{{ if gt $i 0 }},{{ end -}}
-       { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "{{ $variety }}" } }
-       {{- end -}}
-     ],
-     {{ end }}
+    "makesOffer": [
+      {{- range $i, $variety := . -}}{{ if gt $i 0 }},{{ end -}}
+      { 
+        "@type": "Offer", 
+        "itemOffered": { "@type": "Product", "name": "{{ $variety }}" },
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "CAD"
+        {{- $nums := findRE `[0-9]+(?:\.[0-9]+)?` ($.Params.price_range | default "") -}}
+        {{- if ge (len $nums) 1 -}},
+        "price": {{ index $nums 0 }}
+        {{- end }}
+      }
+      {{- end -}}
+    ],
+    {{ end }}
 
      {{/* Opening Hours (AM/PM → 24h) with seasonal validFrom/validThrough */}}
      {{ if .Params.hours }}
