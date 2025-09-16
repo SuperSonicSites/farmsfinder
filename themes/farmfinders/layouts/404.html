@@ -16,10 +16,10 @@
       <div class="bg-green-50 border border-green-100 rounded-xl p-8 space-y-6">
         <h2 class="text-2xl font-light text-gray-800">Let's help you find what you're looking for:</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="block">
           <!-- Browse Categories -->
           <div class="space-y-4">
-            <h3 class="text-lg font-medium text-gray-700">Browse by Category</h3>
+            <h3 class="text-lg font-medium text-gray-700">Find what you are looking for</h3>
             {{ $categories := slice }}
             {{ range where site.RegularPages "Section" "farms" }}
               {{ range .Params.categories }}
@@ -41,16 +41,6 @@
             </ul>
           </div>
 
-          <!-- Popular Locations -->
-          <div class="space-y-4">
-            <h3 class="text-lg font-medium text-gray-700">Popular Locations</h3>
-            <ul class="space-y-2">
-              <li><a href="/ontario/" class="text-green-600 hover:text-green-700 hover:underline">Ontario Farms</a></li>
-              <li><a href="/british-columbia/" class="text-green-600 hover:text-green-700 hover:underline">British Columbia Farms</a></li>
-              <li><a href="/alberta/" class="text-green-600 hover:text-green-700 hover:underline">Alberta Farms</a></li>
-              <li><a href="/quebec/" class="text-green-600 hover:text-green-700 hover:underline">Quebec Farms</a></li>
-            </ul>
-          </div>
         </div>
       </div>
 
