@@ -19,7 +19,6 @@
         <div class="block">
           <!-- Browse Categories -->
           <div class="space-y-4">
-            <h3 class="text-lg font-medium text-gray-700">Find what you are looking for</h3>
             {{ $categories := slice }}
             {{ range where site.RegularPages "Section" "farms" }}
               {{ range .Params.categories }}
