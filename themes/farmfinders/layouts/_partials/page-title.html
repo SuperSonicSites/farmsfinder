@@ -15,7 +15,7 @@
     {{- end -}}
     
     {{- if eq (len $pathParts) 1 -}}
-      All {{ $category }} Farms in Canada - {{ .Site.Title }}
+      All {{ $category }} Farms in Canada
     {{- else if eq (len $pathParts) 2 -}}
       {{- $province := index $pathParts 1 -}}
       {{- $provincePath := printf "/%s/%s/" (index $pathParts 0) $province -}}
@@ -25,7 +25,7 @@
       {{- else -}}
         {{- $province = $province | replace "-" " " | title -}}
       {{- end -}}
-      Find a {{ $category }} farm in {{ $province }} - {{ .Site.Title }}
+      Find a {{ $category }} Farm in {{ $province }}
     {{- else if eq (len $pathParts) 3 -}}
       {{- $provinceSlug := index $pathParts 1 -}}
       {{- $citySlug := index $pathParts 2 -}}
@@ -34,11 +34,11 @@
       {{- if $cityPage -}}
         {{- $city := $cityPage.Title -}}
         {{- $province := $cityPage.Parent.Title -}}
-        Find a {{ $category }} farm near {{ $city }}, {{ $province }} - {{ .Site.Title }}
+        Find a {{ $category }} Farm near {{ $city }}, {{ $province }}
       {{- else -}}
         {{- $province := $provinceSlug | replace "-" " " | title -}}
         {{- $city := $citySlug | replace "-" " " | title -}}
-        Find a {{ $category }} farm near {{ $city }}, {{ $province }} - {{ .Site.Title }}
+        Find a {{ $category }} Farm near {{ $city }}, {{ $province }}
       {{- end -}}
     {{- end -}}
   {{- else -}}

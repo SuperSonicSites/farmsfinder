@@ -1,205 +1,216 @@
 {{- /*
-Renders a Google Map with farm pins for a specific region
-
-@context {page} page The current page context
-@context {string} region The region to filter farms (e.g., "ontario")
-@context {string} category The farm category (e.g., "christmas-tree")
-@context {string} city Optional city to filter farms (e.g., "navan")
-
-@example: {{ partial "regional-map.html" (dict "page" . "region" "ontario" "category" "christmas-tree") }}
-@example: {{ partial "regional-map.html" (dict "page" . "region" "ontario" "category" "christmas-tree" "city" "navan") }}
-*/}}
-
-{{- $page := .page }}
-{{- $region := .region }}
-{{- $category := .category }}
-{{- $city := .city }}
-
-{{- /* Get city center coordinates if filtering by city */ -}}
-{{- $cityLat := 0.0 }}
-{{- $cityLng := 0.0 }}
-{{- if $city }}
-  {{- /* Use the current page's coordinates if it's a city page */ -}}
-  {{- if $page.Params.coordinates }}
-    {{- $cityLat = $page.Params.coordinates.latitude }}
-    {{- $cityLng = $page.Params.coordinates.longitude }}
+  Renders a Google Map with farm pins for a specific region
+  
+  @context {page} page The current page context
+  @context {string} region The region to filter farms (e.g., "ontario")
+  @context {string} category The farm category (e.g., "christmas-tree")
+  @context {string} city Optional city to filter farms (e.g., "navan")
+  
+  @example: {{ partial "regional-map.html" (dict "page" . "region" "ontario" "category" "christmas-tree") }}
+  @example: {{ partial "regional-map.html" (dict "page" . "region" "ontario" "category" "christmas-tree" "city" "navan") }}
+  */}}
+  
+  {{- $page := .page }}
+  {{- $region := .region }}
+  {{- $category := .category }}
+  {{- $city := .city }}
+  
+  {{- /* Get city center coordinates if filtering by city */ -}}
+  {{- $cityLat := 0.0 }}
+  {{- $cityLng := 0.0 }}
+  {{- if $city }}
+    {{- /* Use the current page's coordinates if it's a city page */ -}}
+    {{- if $page.Params.coordinates }}
+      {{- $cityLat = $page.Params.coordinates.latitude }}
+      {{- $cityLng = $page.Params.coordinates.longitude }}
+    {{- end }}
   {{- end }}
-{{- end }}
-
-{{- /* Collect farms in this region */ -}}
-{{- $farms := slice }}
-{{- range site.Pages }}
-  {{- if and (eq .Section "farms") .Params.coordinates }}
-    {{- if and .Params.categories .Params.address }}
-      {{- $farmRegion := lower .Params.address.province | replace " " "-" }}
-      {{- $farmLat := .Params.coordinates.latitude }}
-      {{- $farmLng := .Params.coordinates.longitude }}
-      
-      {{- $matchesCategory := in .Params.categories $category }}
-      {{- $matchesRegion := true }}
-      {{- if ne $region "canada" }}
-        {{- $matchesRegion = eq (.Params.address.province | urlize) $region }}
-      {{- end }}
-      
-      {{- $matchesCity := true }}
-      {{- if $city }}
-        {{- /* Only filter by distance if we have valid city coordinates */ -}}
-        {{- if and (ne $cityLat 0.0) (ne $cityLng 0.0) }}
-          {{- /* Calculate approximate distance using Haversine formula */ -}}
-          {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
-          {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
-          {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
-          {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
-          
-          {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
-          {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
-          {{- $distance := math.Mul 6371 $c }}
-          
-          {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
-          {{- $matchesCity = le $distance 80 }}
-        {{- else }}
-          {{- /* Fallback to no city filtering if coordinates are missing */ -}}
-          {{- $matchesCity = true }}
+  
+  {{- /* Collect farms in this region */ -}}
+  {{- $farms := slice }}
+  {{- range site.Pages }}
+    {{- if and (eq .Section "farms") .Params.coordinates }}
+      {{- if and .Params.categories .Params.address }}
+        {{- $farmRegion := lower .Params.address.province | replace " " "-" }}
+        {{- $farmLat := .Params.coordinates.latitude }}
+        {{- $farmLng := .Params.coordinates.longitude }}
+        
+        {{- $matchesCategory := in .Params.categories $category }}
+        {{- $matchesRegion := true }}
+        {{- if ne $region "canada" }}
+          {{- $matchesRegion = eq (.Params.address.province | urlize) $region }}
+        {{- end }}
+        
+        {{- $matchesCity := true }}
+        {{- if $city }}
+          {{- /* Only filter by distance if we have valid city coordinates */ -}}
+          {{- if and (ne $cityLat 0.0) (ne $cityLng 0.0) }}
+            {{- /* Calculate approximate distance using Haversine formula */ -}}
+            {{- $lat1Rad := math.Mul $cityLat 0.017453292519943295 }}
+            {{- $lat2Rad := math.Mul $farmLat 0.017453292519943295 }}
+            {{- $deltaLatRad := math.Mul (math.Sub $farmLat $cityLat) 0.017453292519943295 }}
+            {{- $deltaLngRad := math.Mul (math.Sub $farmLng $cityLng) 0.017453292519943295 }}
+            
+            {{- $a := math.Add (math.Mul (math.Sin (math.Div $deltaLatRad 2)) (math.Sin (math.Div $deltaLatRad 2))) (math.Mul (math.Mul (math.Cos $lat1Rad) (math.Cos $lat2Rad)) (math.Mul (math.Sin (math.Div $deltaLngRad 2)) (math.Sin (math.Div $deltaLngRad 2)))) }}
+            {{- $c := math.Mul 2 (math.Atan2 (math.Sqrt $a) (math.Sqrt (math.Sub 1 $a))) }}
+            {{- $distance := math.Mul 6371 $c }}
+            
+            {{- /* Include farms within 80km (approximately 1 hour drive) */ -}}
+            {{- $matchesCity = le $distance 80 }}
+          {{- else }}
+            {{- /* Fallback to no city filtering if coordinates are missing */ -}}
+            {{- $matchesCity = true }}
+          {{- end }}
+        {{- end }}
+        
+        {{- if and $matchesCategory $matchesRegion $matchesCity }}
+          {{- $farms = $farms | append . }}
         {{- end }}
       {{- end }}
-      
-      {{- if and $matchesCategory $matchesRegion $matchesCity }}
-        {{- $farms = $farms | append . }}
-      {{- end }}
     {{- end }}
   {{- end }}
-{{- end }}
-
-{{- if $farms }}
-<div class="mb-8">
-  <h2 class="text-2xl font-light text-gray-800 mb-4">
-  </h2>
-  <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
-</div>
-{{ if $city }}
-  {{/* Microdata: the 80km search area as a Place with a GeoCircle */}}
-  <div class="sr-only" aria-hidden="true"
-       itemscope itemtype="https://schema.org/Place">
-    <meta itemprop="name" content="{{ $city | title }}, {{ $region | title }}" />
-    <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCircle">
-      <div itemprop="geoMidpoint" itemscope itemtype="https://schema.org/GeoCoordinates">
-        <meta itemprop="latitude" content="{{ $cityLat }}">
-        <meta itemprop="longitude" content="{{ $cityLng }}">
-      </div>
-      <meta itemprop="geoRadius" content="80000">
-    </div>
+  
+  {{- if $farms }}
+  <div class="mb-8">
+    <h2 class="text-2xl font-light text-gray-800 mb-4">
+    </h2>
+    <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
   </div>
-{{ end }}
-
-
-<script>
-function initRegionalMap() {
-  // Farm data
-  const farms = [
-    {{- range $farms }}
-    {
-      name: {{ .Title | jsonify }},
-      lat: {{ .Params.coordinates.latitude }},
-      lng: {{ .Params.coordinates.longitude }},
-      url: {{ .RelPermalink | jsonify }},
-      address: {{ printf "%s, %s" .Params.address.city .Params.address.province | jsonify }},
-      phone: {{ .Params.phone | default "" | jsonify }}
-    },
-    {{- end }}
-  ];
-
-  if (farms.length === 0) return;
-
-  {{- if $city }}
-  // Use city center for city searches
-  const centerLat = {{ $cityLat }};
-  const centerLng = {{ $cityLng }};
-  const initialZoom = 8;
-  {{- else }}
-  // Calculate center point for regional searches
-  const centerLat = farms.reduce((sum, farm) => sum + farm.lat, 0) / farms.length;
-  const centerLng = farms.reduce((sum, farm) => sum + farm.lng, 0) / farms.length;
-  const initialZoom = farms.length === 1 ? 14 : 9;
-  {{- end }}
-
-  // Initialize map
-  const map = new google.maps.Map(document.getElementById('regional-map'), {
-    zoom: initialZoom,
-    center: { lat: centerLat, lng: centerLng },
-    mapTypeId: 'roadmap'
-  });
-
-  {{- if $city }}
-  // Add radius circle for city searches
-  const radiusCircle = new google.maps.Circle({
-    strokeColor: '#3B82F6',
-    strokeOpacity: 0.4,
-    strokeWeight: 2,
-    fillColor: '#3B82F6',
-    fillOpacity: 0.1,
-    map: map,
-    center: { lat: centerLat, lng: centerLng },
-    radius: 80000 // 80km in meters
-  });
-  {{- end }}
-
-  // Add markers for each farm
-  farms.forEach(farm => {
-    const marker = new google.maps.Marker({
-      position: { lat: farm.lat, lng: farm.lng },
-      map: map,
-      title: farm.name
-    });
-
-    // Info window content
-    const infoContent = `
-      <div class="p-2">
-        <h3 class="font-medium text-lg mb-1">
-          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
-        </h3>
-        <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
-        ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
-        <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
+  {{ if $city }}
+    {{/* Microdata: the 80km search area as a Place with a GeoCircle */}}
+    <div class="sr-only" aria-hidden="true"
+         itemscope itemtype="https://schema.org/Place">
+      <meta itemprop="name" content="{{ $city | title }}, {{ $region | title }}" />
+      <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCircle">
+        <div itemprop="geoMidpoint" itemscope itemtype="https://schema.org/GeoCoordinates">
+          <meta itemprop="latitude" content="{{ $cityLat }}">
+          <meta itemprop="longitude" content="{{ $cityLng }}">
+        </div>
+        <meta itemprop="geoRadius" content="80000">
       </div>
-    `;
-
-    const infoWindow = new google.maps.InfoWindow({
-      content: infoContent
+    </div>
+  {{ end }}
+  
+  
+  <script>
+  function initRegionalMap() {
+    // Farm data
+    const farms = [
+      {{- range $farms }}
+      {
+        name: {{ .Title | jsonify }},
+        lat: {{ .Params.coordinates.latitude }},
+        lng: {{ .Params.coordinates.longitude }},
+        url: {{ .RelPermalink | jsonify }},
+        address: {{ printf "%s, %s" .Params.address.city .Params.address.province | jsonify }},
+        phone: {{ .Params.phone | default "" | jsonify }}
+      },
+      {{- end }}
+    ];
+  
+    // --- FIX: unwrap JSON-encoded strings that ended up double-quoted ---
+    farms.forEach(f => {
+      const unwrap = v => (typeof v === 'string' && v.startsWith('"') && v.endsWith('"')) ? JSON.parse(v) : v;
+      f.name = unwrap(f.name);
+      f.url = unwrap(f.url);
+      f.address = unwrap(f.address);
+      f.phone = unwrap(f.phone);
     });
-
-    marker.addListener('click', () => {
-      infoWindow.open(map, marker);
+    // --------------------------------------------------------------------
+  
+    if (farms.length === 0) return;
+  
+    {{- if $city }}
+    // Use city center for city searches
+    const centerLat = {{ $cityLat }};
+    const centerLng = {{ $cityLng }};
+    const initialZoom = 8;
+    {{- else }}
+    // Calculate center point for regional searches
+    const centerLat = farms.reduce((sum, farm) => sum + farm.lat, 0) / farms.length;
+    const centerLng = farms.reduce((sum, farm) => sum + farm.lng, 0) / farms.length;
+    const initialZoom = farms.length === 1 ? 14 : 9;
+    {{- end }}
+  
+    // Initialize map
+    const map = new google.maps.Map(document.getElementById('regional-map'), {
+      zoom: initialZoom,
+      center: { lat: centerLat, lng: centerLng },
+      mapTypeId: 'roadmap'
     });
-  });
-
-  {{- if not $city }}
-  // Adjust bounds to fit all markers for regional searches
-  if (farms.length > 1) {
-    const bounds = new google.maps.LatLngBounds();
+  
+    {{- if $city }}
+    // Add radius circle for city searches
+    const radiusCircle = new google.maps.Circle({
+      strokeColor: '#3B82F6',
+      strokeOpacity: 0.4,
+      strokeWeight: 2,
+      fillColor: '#3B82F6',
+      fillOpacity: 0.1,
+      map: map,
+      center: { lat: centerLat, lng: centerLng },
+      radius: 80000 // 80km in meters
+    });
+    {{- end }}
+  
+    // Add markers for each farm
     farms.forEach(farm => {
-      bounds.extend(new google.maps.LatLng(farm.lat, farm.lng));
+      const marker = new google.maps.Marker({
+        position: { lat: farm.lat, lng: farm.lng },
+        map: map,
+        title: farm.name
+      });
+  
+      // Info window content
+      const infoContent = `
+        <div class="p-2">
+          <h3 class="font-medium text-lg mb-1">
+            <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
+          </h3>
+          <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
+          ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
+          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
+        </div>
+      `;
+  
+      const infoWindow = new google.maps.InfoWindow({
+        content: infoContent
+      });
+  
+      marker.addListener('click', () => {
+        infoWindow.open(map, marker);
+      });
     });
-    map.fitBounds(bounds);
-    
-    // Ensure minimum zoom level
-    google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
-      if (map.getZoom() > 12) {
-        map.setZoom(12);
-      }
-    });
+  
+    {{- if not $city }}
+    // Adjust bounds to fit all markers for regional searches
+    if (farms.length > 1) {
+      const bounds = new google.maps.LatLngBounds();
+      farms.forEach(farm => {
+        bounds.extend(new google.maps.LatLng(farm.lat, farm.lng));
+      });
+      map.fitBounds(bounds);
+      
+      // Ensure minimum zoom level
+      google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+        if (map.getZoom() > 12) {
+          map.setZoom(12);
+        }
+      });
+    }
+    {{- end }}
   }
+  
+  // Load Google Maps API if not already loaded
+  if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key={{ site.Params.googleMapsApiKey }}&callback=initRegionalMap`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    initRegionalMap();
+  }
+  </script>
   {{- end }}
-}
-
-// Load Google Maps API if not already loaded
-if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key={{ site.Params.googleMapsApiKey }}&callback=initRegionalMap`;
-  script.async = true;
-  script.defer = true;
-  document.head.appendChild(script);
-} else {
-  initRegionalMap();
-}
-</script>
-{{- end }}
+  

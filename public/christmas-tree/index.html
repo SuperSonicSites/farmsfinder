@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<title>All Christmas Tree Farms in Canada - Farms Finder</title>
+<title>All Christmas Tree Farms in Canada</title>
 <meta name="description" content="Discover our curated list of direct to consumer Christmas Tree Farms across Canada">
 
 
@@ -13,7 +13,7 @@
 <link rel="canonical" href="http://localhost:1313/christmas-tree/">
 
 
-<meta property="og:title" content="All Christmas Tree Farms in Canada - Farms Finder">
+<meta property="og:title" content="All Christmas Tree Farms in Canada">
 <meta property="og:description" content="Discover our curated list of direct to consumer Christmas Tree Farms across Canada">
 <meta property="og:type" content="website">
 <meta property="og:url" content="http://localhost:1313/christmas-tree/">
@@ -21,7 +21,7 @@
 
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="All Christmas Tree Farms in Canada - Farms Finder">
+<meta name="twitter:title" content="All Christmas Tree Farms in Canada">
 <meta name="twitter:description" content="Discover our curated list of direct to consumer Christmas Tree Farms across Canada">
 
 
@@ -246,298 +246,308 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
         
-<div class="mb-8">
-  <h2 class="text-2xl font-light text-gray-800 mb-4">
-  </h2>
-  <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
-</div>
-
-
-
-<script>
-function initRegionalMap() {
+  <div class="mb-8">
+    <h2 class="text-2xl font-light text-gray-800 mb-4">
+    </h2>
+    <div id="regional-map" class="w-full h-96 rounded-lg shadow-lg"></div>
+  </div>
   
-  const farms = [
-    {
-      name: "\"Aldor Acres Christmas Trees\"",
-      lat:  49.1521504 ,
-      lng:  -122.5256467 ,
-      url: "\"/farms/aldor-acres-christmas-trees/\"",
-      address: "\"Langley Twp, British Columbia\"",
-      phone: "\"+1 604-888-4483\""
-    },
-    {
-      name: "\"Alouette Tree Farm Ltd\"",
-      lat:  49.2448335 ,
-      lng:  -122.5829552 ,
-      url: "\"/farms/alouette-tree-farm-ltd/\"",
-      address: "\"Maple Ridge, British Columbia\"",
-      phone: "\"+1 604-467-0100\""
-    },
-    {
-      name: "\"Bachner Family Christmas Tree Farm\"",
-      lat:  42.7130201 ,
-      lng:  -81.1669202 ,
-      url: "\"/farms/bachner-family-christmas-tree-farm/\"",
-      address: "\"St Thomas, Ontario\"",
-      phone: "\"+1 905-933-0791\""
-    },
-    {
-      name: "\"Balsam Ridge Christmas Tree Farm\"",
-      lat:  46.0939753 ,
-      lng:  -66.8372483 ,
-      url: "\"/farms/balsam-ridge-christmas-tree-farm/\"",
-      address: "\"Burtts Corner, New Brunswick\"",
-      phone: "\"+1 506-363-4187\""
-    },
-    {
-      name: "\"Barrett's Christmas Tree Farm\"",
-      lat:  44.0181448 ,
-      lng:  -78.2346297 ,
-      url: "\"/farms/barretts-christmas-tree-farm/\"",
-      address: "\"Cobourg, Ontario\"",
-      phone: "\"+1 905-342-2622\""
-    },
-    {
-      name: "\"Bastien Christmas Tree Farm\"",
-      lat:  42.163715 ,
-      lng:  -82.94904 ,
-      url: "\"/farms/bastien-christmas-tree-farm/\"",
-      address: "\"Essex, Ontario\"",
-      phone: "\"+1 519-726-0679\""
-    },
-    {
-      name: "\"BellyAcres Tree Farm\"",
-      lat:  43.2116558 ,
-      lng:  -79.2002116 ,
-      url: "\"/farms/bellyacres-tree-farm/\"",
-      address: "\"Niagara-on-the-Lake, Ontario\"",
-      phone: "\"+1 289-686-2563\""
-    },
-    {
-      name: "\"Blitzen Estate\"",
-      lat:  44.8301506 ,
-      lng:  -75.9749634 ,
-      url: "\"/farms/blitzen-estate/\"",
-      address: "\"Jasper, Ontario\"",
-      phone: "\"+1 613-880-4110\""
-    },
-    {
-      name: "\"Blue Harvest Farm\"",
-      lat:  42.8655976 ,
-      lng:  -80.1835812 ,
-      url: "\"/farms/blue-harvest-farm/\"",
-      address: "\"Simcoe, Ontario\"",
-      phone: "\"+1 519-410-6766\""
-    },
-    {
-      name: "\"Boat Harbour Farm\"",
-      lat:  49.097616 ,
-      lng:  -123.805292 ,
-      url: "\"/farms/boat-harbour-farm/\"",
-      address: "\"Nanaimo, British Columbia\"",
-      phone: "\"+1 250-722-2177\""
-    },
-    {
-      name: "\"Boisé Brabant\"",
-      lat:  45.3636898 ,
-      lng:  -75.1224471 ,
-      url: "\"/farms/bois-brabant/\"",
-      address: "\"Casselman, Ontario\"",
-      phone: "\"+1 613-913-6576\""
-    },
-    {
-      name: "\"Briggs Trees\"",
-      lat:  45.4100519 ,
-      lng:  -75.3803301 ,
-      url: "\"/farms/briggs-trees/\"",
-      address: "\"Navan, Ontario\"",
-      phone: "\"+1 613-835-2955\""
-    },
-    {
-      name: "\"Calgary Christmas Tree\"",
-      lat:  50.9423826 ,
-      lng:  -114.047266 ,
-      url: "\"/farms/calgary-christmas-tree/\"",
-      address: "\"Calgary, Alberta\"",
-      phone: "\"\""
-    },
-    {
-      name: "\"Carole's Christmas Tree Farm\"",
-      lat:  44.2452624 ,
-      lng:  -76.8968722 ,
-      url: "\"/farms/caroles-christmas-tree-farm/\"",
-      address: "\"Greater Napanee, Ontario\"",
-      phone: "\"+1 613-532-9627\""
-    },
-    {
-      name: "\"Carr Family Christmas Tree Farm\"",
-      lat:  45.4619343 ,
-      lng:  -61.6470153 ,
-      url: "\"/farms/carr-family-christmas-tree-farm/\"",
-      address: "\"Guysborough, Nova Scotia\"",
-      phone: "\"+1 902-318-3666\""
-    },
-    {
-      name: "\"Catfish Creek Christmas Tree Farm\"",
-      lat:  42.7505572 ,
-      lng:  -81.0563934 ,
-      url: "\"/farms/catfish-creek-christmas-tree-farm/\"",
-      address: "\"St Thomas, Ontario\"",
-      phone: "\"+1 226-240-0343\""
-    },
-    {
-      name: "\"Cedar Hill Christmas Tree Farm\"",
-      lat:  45.2881149 ,
-      lng:  -76.3170522 ,
-      url: "\"/farms/cedar-hill-christmas-tree-farm/\"",
-      address: "\"Pakenham, Ontario\"",
-      phone: "\"+1 613-256-3029\""
-    },
-    {
-      name: "\"Chickadee Christmas Trees\"",
-      lat:  43.4434374 ,
-      lng:  -80.2596268 ,
-      url: "\"/farms/chickadee-christmas-trees/\"",
-      address: "\"Cambridge, Ontario\"",
-      phone: "\"+1 519-654-2029\""
-    },
-    {
-      name: "\"Copeman Tree Farms\"",
-      lat:  45.7381112 ,
-      lng:  -79.474441 ,
-      url: "\"/farms/copeman-tree-farms/\"",
-      address: "\"Sundridge, Ontario\"",
-      phone: "\"+1 705-492-4950\""
-    },
-    {
-      name: "\"Country Christmas Trees\"",
-      lat:  42.9792993 ,
-      lng:  -81.0138272 ,
-      url: "\"/farms/country-christmas-trees/\"",
-      address: "\"Dorchester, Ontario\"",
-      phone: "\"+1 519-268-0865\""
-    },
-    {
-      name: "\"Coupez Votre Sapin S.E.N.C\"",
-      lat:  46.584712 ,
-      lng:  -71.042626 ,
-      url: "\"/farms/coupez-votre-sapin-senc/\"",
-      address: "\"Saint-Isidore, Quebec\"",
-      phone: "\"\""
-    },
-    {
-      name: "\"Crawford Family Christmas Tree Farms\"",
-      lat:  46.482309 ,
-      lng:  -67.770595 ,
-      url: "\"/farms/crawford-family-christmas-tree-farms/\"",
-      address: "\"Royalton, New Brunswick\"",
-      phone: "\"+1 506-276-4334\""
-    },
-    {
-      name: "\"Crone's Tree Farm\"",
-      lat:  44.1166623 ,
-      lng:  -79.2997281 ,
-      url: "\"/farms/crones-tree-farm/\"",
-      address: "\"Mount Albert, Ontario\"",
-      phone: "\"\""
-    },
-    {
-      name: "\"Dawson Christmas Tree Farm\"",
-      lat:  44.123942 ,
-      lng:  -78.5018576 ,
-      url: "\"/farms/dawson-christmas-tree-farm/\"",
-      address: "\"Millbrook, Ontario\"",
-      phone: "\"+1 905-261-7415\""
-    },
-    {
-      name: "\"Domaine Clovis\"",
-      lat:  46.067998 ,
-      lng:  -72.9929219 ,
-      url: "\"/farms/domaine-clovis/\"",
-      address: "\"Sorel-Tracy, Quebec\"",
-      phone: "\"+1 450-742-0495\""
-    },
-    {
-      name: "\"Downey Trees\"",
-      lat:  45.3676429 ,
-      lng:  -71.7691089 ,
-      url: "\"/farms/downey-trees/\"",
-      address: "\"Cookshire-Eaton, Quebec\"",
-      phone: "\"+1 888-512-8733\""
-    },
-  ];
-
-  if (farms.length === 0) return;
   
-  const centerLat = farms.reduce((sum, farm) => sum + farm.lat, 0) / farms.length;
-  const centerLng = farms.reduce((sum, farm) => sum + farm.lng, 0) / farms.length;
-  const initialZoom = farms.length === 1 ? 14 : 9;
-
   
-  const map = new google.maps.Map(document.getElementById('regional-map'), {
-    zoom: initialZoom,
-    center: { lat: centerLat, lng: centerLng },
-    mapTypeId: 'roadmap'
-  });
-
-  
-  farms.forEach(farm => {
-    const marker = new google.maps.Marker({
-      position: { lat: farm.lat, lng: farm.lng },
-      map: map,
-      title: farm.name
-    });
-
+  <script>
+  function initRegionalMap() {
     
-    const infoContent = `
-      <div class="p-2">
-        <h3 class="font-medium text-lg mb-1">
-          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
-        </h3>
-        <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
-        ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
-        <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
-      </div>
-    `;
-
-    const infoWindow = new google.maps.InfoWindow({
-      content: infoContent
-    });
-
-    marker.addListener('click', () => {
-      infoWindow.open(map, marker);
-    });
-  });
+    const farms = [
+      {
+        name: "\"Aldor Acres Christmas Trees\"",
+        lat:  49.1521504 ,
+        lng:  -122.5256467 ,
+        url: "\"/farms/aldor-acres-christmas-trees/\"",
+        address: "\"Langley Twp, British Columbia\"",
+        phone: "\"+1 604-888-4483\""
+      },
+      {
+        name: "\"Alouette Tree Farm Ltd\"",
+        lat:  49.2448335 ,
+        lng:  -122.5829552 ,
+        url: "\"/farms/alouette-tree-farm-ltd/\"",
+        address: "\"Maple Ridge, British Columbia\"",
+        phone: "\"+1 604-467-0100\""
+      },
+      {
+        name: "\"Bachner Family Christmas Tree Farm\"",
+        lat:  42.7130201 ,
+        lng:  -81.1669202 ,
+        url: "\"/farms/bachner-family-christmas-tree-farm/\"",
+        address: "\"St Thomas, Ontario\"",
+        phone: "\"+1 905-933-0791\""
+      },
+      {
+        name: "\"Balsam Ridge Christmas Tree Farm\"",
+        lat:  46.0939753 ,
+        lng:  -66.8372483 ,
+        url: "\"/farms/balsam-ridge-christmas-tree-farm/\"",
+        address: "\"Burtts Corner, New Brunswick\"",
+        phone: "\"+1 506-363-4187\""
+      },
+      {
+        name: "\"Barrett's Christmas Tree Farm\"",
+        lat:  44.0181448 ,
+        lng:  -78.2346297 ,
+        url: "\"/farms/barretts-christmas-tree-farm/\"",
+        address: "\"Cobourg, Ontario\"",
+        phone: "\"+1 905-342-2622\""
+      },
+      {
+        name: "\"Bastien Christmas Tree Farm\"",
+        lat:  42.163715 ,
+        lng:  -82.94904 ,
+        url: "\"/farms/bastien-christmas-tree-farm/\"",
+        address: "\"Essex, Ontario\"",
+        phone: "\"+1 519-726-0679\""
+      },
+      {
+        name: "\"BellyAcres Tree Farm\"",
+        lat:  43.2116558 ,
+        lng:  -79.2002116 ,
+        url: "\"/farms/bellyacres-tree-farm/\"",
+        address: "\"Niagara-on-the-Lake, Ontario\"",
+        phone: "\"+1 289-686-2563\""
+      },
+      {
+        name: "\"Blitzen Estate\"",
+        lat:  44.8301506 ,
+        lng:  -75.9749634 ,
+        url: "\"/farms/blitzen-estate/\"",
+        address: "\"Jasper, Ontario\"",
+        phone: "\"+1 613-880-4110\""
+      },
+      {
+        name: "\"Blue Harvest Farm\"",
+        lat:  42.8655976 ,
+        lng:  -80.1835812 ,
+        url: "\"/farms/blue-harvest-farm/\"",
+        address: "\"Simcoe, Ontario\"",
+        phone: "\"+1 519-410-6766\""
+      },
+      {
+        name: "\"Boat Harbour Farm\"",
+        lat:  49.097616 ,
+        lng:  -123.805292 ,
+        url: "\"/farms/boat-harbour-farm/\"",
+        address: "\"Nanaimo, British Columbia\"",
+        phone: "\"+1 250-722-2177\""
+      },
+      {
+        name: "\"Boisé Brabant\"",
+        lat:  45.3636898 ,
+        lng:  -75.1224471 ,
+        url: "\"/farms/bois-brabant/\"",
+        address: "\"Casselman, Ontario\"",
+        phone: "\"+1 613-913-6576\""
+      },
+      {
+        name: "\"Briggs Trees\"",
+        lat:  45.4100519 ,
+        lng:  -75.3803301 ,
+        url: "\"/farms/briggs-trees/\"",
+        address: "\"Navan, Ontario\"",
+        phone: "\"+1 613-835-2955\""
+      },
+      {
+        name: "\"Calgary Christmas Tree\"",
+        lat:  50.9423826 ,
+        lng:  -114.047266 ,
+        url: "\"/farms/calgary-christmas-tree/\"",
+        address: "\"Calgary, Alberta\"",
+        phone: "\"\""
+      },
+      {
+        name: "\"Carole's Christmas Tree Farm\"",
+        lat:  44.2452624 ,
+        lng:  -76.8968722 ,
+        url: "\"/farms/caroles-christmas-tree-farm/\"",
+        address: "\"Greater Napanee, Ontario\"",
+        phone: "\"+1 613-532-9627\""
+      },
+      {
+        name: "\"Carr Family Christmas Tree Farm\"",
+        lat:  45.4619343 ,
+        lng:  -61.6470153 ,
+        url: "\"/farms/carr-family-christmas-tree-farm/\"",
+        address: "\"Guysborough, Nova Scotia\"",
+        phone: "\"+1 902-318-3666\""
+      },
+      {
+        name: "\"Catfish Creek Christmas Tree Farm\"",
+        lat:  42.7505572 ,
+        lng:  -81.0563934 ,
+        url: "\"/farms/catfish-creek-christmas-tree-farm/\"",
+        address: "\"St Thomas, Ontario\"",
+        phone: "\"+1 226-240-0343\""
+      },
+      {
+        name: "\"Cedar Hill Christmas Tree Farm\"",
+        lat:  45.2881149 ,
+        lng:  -76.3170522 ,
+        url: "\"/farms/cedar-hill-christmas-tree-farm/\"",
+        address: "\"Pakenham, Ontario\"",
+        phone: "\"+1 613-256-3029\""
+      },
+      {
+        name: "\"Chickadee Christmas Trees\"",
+        lat:  43.4434374 ,
+        lng:  -80.2596268 ,
+        url: "\"/farms/chickadee-christmas-trees/\"",
+        address: "\"Cambridge, Ontario\"",
+        phone: "\"+1 519-654-2029\""
+      },
+      {
+        name: "\"Copeman Tree Farms\"",
+        lat:  45.7381112 ,
+        lng:  -79.474441 ,
+        url: "\"/farms/copeman-tree-farms/\"",
+        address: "\"Sundridge, Ontario\"",
+        phone: "\"+1 705-492-4950\""
+      },
+      {
+        name: "\"Country Christmas Trees\"",
+        lat:  42.9792993 ,
+        lng:  -81.0138272 ,
+        url: "\"/farms/country-christmas-trees/\"",
+        address: "\"Dorchester, Ontario\"",
+        phone: "\"+1 519-268-0865\""
+      },
+      {
+        name: "\"Coupez Votre Sapin S.E.N.C\"",
+        lat:  46.584712 ,
+        lng:  -71.042626 ,
+        url: "\"/farms/coupez-votre-sapin-senc/\"",
+        address: "\"Saint-Isidore, Quebec\"",
+        phone: "\"\""
+      },
+      {
+        name: "\"Crawford Family Christmas Tree Farms\"",
+        lat:  46.482309 ,
+        lng:  -67.770595 ,
+        url: "\"/farms/crawford-family-christmas-tree-farms/\"",
+        address: "\"Royalton, New Brunswick\"",
+        phone: "\"+1 506-276-4334\""
+      },
+      {
+        name: "\"Crone's Tree Farm\"",
+        lat:  44.1166623 ,
+        lng:  -79.2997281 ,
+        url: "\"/farms/crones-tree-farm/\"",
+        address: "\"Mount Albert, Ontario\"",
+        phone: "\"\""
+      },
+      {
+        name: "\"Dawson Christmas Tree Farm\"",
+        lat:  44.123942 ,
+        lng:  -78.5018576 ,
+        url: "\"/farms/dawson-christmas-tree-farm/\"",
+        address: "\"Millbrook, Ontario\"",
+        phone: "\"+1 905-261-7415\""
+      },
+      {
+        name: "\"Domaine Clovis\"",
+        lat:  46.067998 ,
+        lng:  -72.9929219 ,
+        url: "\"/farms/domaine-clovis/\"",
+        address: "\"Sorel-Tracy, Quebec\"",
+        phone: "\"+1 450-742-0495\""
+      },
+      {
+        name: "\"Downey Trees\"",
+        lat:  45.3676429 ,
+        lng:  -71.7691089 ,
+        url: "\"/farms/downey-trees/\"",
+        address: "\"Cookshire-Eaton, Quebec\"",
+        phone: "\"+1 888-512-8733\""
+      },
+    ];
   
-  if (farms.length > 1) {
-    const bounds = new google.maps.LatLngBounds();
+    
+    farms.forEach(f => {
+      const unwrap = v => (typeof v === 'string' && v.startsWith('"') && v.endsWith('"')) ? JSON.parse(v) : v;
+      f.name = unwrap(f.name);
+      f.url = unwrap(f.url);
+      f.address = unwrap(f.address);
+      f.phone = unwrap(f.phone);
+    });
+    
+  
+    if (farms.length === 0) return;
+    
+    const centerLat = farms.reduce((sum, farm) => sum + farm.lat, 0) / farms.length;
+    const centerLng = farms.reduce((sum, farm) => sum + farm.lng, 0) / farms.length;
+    const initialZoom = farms.length === 1 ? 14 : 9;
+  
+    
+    const map = new google.maps.Map(document.getElementById('regional-map'), {
+      zoom: initialZoom,
+      center: { lat: centerLat, lng: centerLng },
+      mapTypeId: 'roadmap'
+    });
+  
+    
     farms.forEach(farm => {
-      bounds.extend(new google.maps.LatLng(farm.lat, farm.lng));
+      const marker = new google.maps.Marker({
+        position: { lat: farm.lat, lng: farm.lng },
+        map: map,
+        title: farm.name
+      });
+  
+      
+      const infoContent = `
+        <div class="p-2">
+          <h3 class="font-medium text-lg mb-1">
+            <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
+          </h3>
+          <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
+          ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
+          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
+        </div>
+      `;
+  
+      const infoWindow = new google.maps.InfoWindow({
+        content: infoContent
+      });
+  
+      marker.addListener('click', () => {
+        infoWindow.open(map, marker);
+      });
     });
-    map.fitBounds(bounds);
     
-    
-    google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
-      if (map.getZoom() > 12) {
-        map.setZoom(12);
-      }
-    });
+    if (farms.length > 1) {
+      const bounds = new google.maps.LatLngBounds();
+      farms.forEach(farm => {
+        bounds.extend(new google.maps.LatLng(farm.lat, farm.lng));
+      });
+      map.fitBounds(bounds);
+      
+      
+      google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+        if (map.getZoom() > 12) {
+          map.setZoom(12);
+        }
+      });
+    }
   }
-}
-
-
-if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE&callback=initRegionalMap`;
-  script.async = true;
-  script.defer = true;
-  document.head.appendChild(script);
-} else {
-  initRegionalMap();
-}
-</script>
-
+  
+  
+  if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE&callback=initRegionalMap`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    initRegionalMap();
+  }
+  </script>
+  
         
       
       

@@ -6,7 +6,7 @@
 
 
 <title>Find a Christmas Tree farm near Ottawa, Ontario - Farms Finder</title>
-<meta name="description" content="">
+<meta name="description" content="Discover our curated list of direct to consumer Christmas Tree Farms near Ottawa, Ontario">
 
 
 
@@ -14,7 +14,7 @@
 
 
 <meta property="og:title" content="Find a Christmas Tree farm near Ottawa, Ontario - Farms Finder">
-<meta property="og:description" content="">
+<meta property="og:description" content="Discover our curated list of direct to consumer Christmas Tree Farms near Ottawa, Ontario">
 <meta property="og:type" content="website">
 <meta property="og:url" content="http://localhost:1313/christmas-tree/ontario/ottawa/">
 <meta property="og:site_name" content="Farms Finder">
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Find a Christmas Tree farm near Ottawa, Ontario - Farms Finder">
-<meta name="twitter:description" content="">
+<meta name="twitter:description" content="Discover our curated list of direct to consumer Christmas Tree Farms near Ottawa, Ontario">
 
 
 
@@ -880,11 +880,11 @@ function initRegionalMap() {
     const infoContent = `
       <div class="p-2">
         <h3 class="font-medium text-lg mb-1">
-          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800">${farm.name}</a>
+          <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 farm-link" data-url="${farm.url}">${farm.name}</a>
         </h3>
         <p class="text-gray-600 text-sm mb-1">${farm.address}</p>
         ${farm.phone ? `<p class="text-gray-600 text-sm">${farm.phone}</p>` : ''}
-        <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm">View Details →</a>
+        <a href="${farm.url}" class="text-blue-600 hover:text-blue-800 text-sm farm-link" data-url="${farm.url}">View Details →</a>
       </div>
     `;
 
@@ -892,8 +892,24 @@ function initRegionalMap() {
       content: infoContent
     });
 
+    
     marker.addListener('click', () => {
       infoWindow.open(map, marker);
+      
+      
+      setTimeout(() => {
+        const links = document.querySelectorAll('.farm-link');
+        links.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const url = e.target.getAttribute('data-url');
+            if (url) {
+              window.location.href = url;
+            }
+          });
+        });
+      }, 100);
     });
   });
 }

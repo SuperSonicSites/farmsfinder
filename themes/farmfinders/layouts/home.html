@@ -34,7 +34,7 @@
               {{ $categoryPage := site.GetPage $categoryPath }}
               <li>
                 <a href="{{ $categoryPath }}" 
-                   class="block bg-white border border-gray-200 rounded-xl p-8 text-center hover:shadow-lg hover:border-gray-300 transition-all duration-300 group shadow-sm">
+                   class="block bg-green-50 border border-gray-200 rounded-xl p-8 text-center hover:shadow-lg hover:border-gray-300 transition-all duration-300 group shadow-sm">
                   <span class="text-xl font-light text-gray-700 group-hover:text-gray-900 tracking-wide">
                     {{ if $categoryPage }}{{ $categoryPage.Title }}{{ else }}{{ . | title }}{{ end }}
                   </span>
